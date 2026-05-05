@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>iPhone × Claude × 集團工作流設定指南 | Setup Guide for Chairman</title>
+<meta name="description" content="楊董事長個人使用之 iPhone Claude 設定指南，整合瀚荃集團工作流情境與 Claude Workspace 跨裝置同步。" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+<style>
+  :root{--red:#E83A48;--red-d:#B0202A;--blue:#0085C2;--green:#10B981;--g9:#3D3A39;--g7:#595757;--g5:#999899;--purple:#7C3AED;--amber:#F59E0B;--orange:#F07810;--apple:#1F1F1F;}
+  body{font-family:'Century Gothic','Inter','Noto Sans TC',sans-serif;color:#1F1F1F;background:#F7F5F2;}
+  .font-display{font-family:'Noto Sans TC','Inter',sans-serif;letter-spacing:-0.01em;}
+  .red-bg{background:linear-gradient(135deg,#B0202A 0%,#E83A48 60%,#EB6363 100%);}
+  .magazine-cover{background:radial-gradient(ellipse at 15% 70%,rgba(232,58,72,.45),transparent 60%),radial-gradient(ellipse at 85% 30%,rgba(168,85,247,.25),transparent 60%),linear-gradient(135deg,#0a0a0a 0%,#2a0a0e 30%,#4a0a14 60%,#b0202a 100%);}
+  .red-edge{position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--red);}
+  .pill{display:inline-flex;align-items:center;gap:.4rem;padding:.25rem .75rem;font-size:.7rem;font-weight:700;letter-spacing:.05em;border-radius:9999px;}
+  .pill-red{background:rgba(232,58,72,.1);color:var(--red);border:1px solid rgba(232,58,72,.3);}
+  .pill-green{background:rgba(16,185,129,.1);color:#047857;border:1px solid rgba(16,185,129,.3);}
+  .pill-blue{background:rgba(0,133,194,.1);color:var(--blue);border:1px solid rgba(0,133,194,.3);}
+  .pill-amber{background:rgba(245,158,11,.15);color:#92400e;border:1px solid rgba(245,158,11,.4);}
+  .pill-grey{background:rgba(89,87,87,.1);color:var(--g7);border:1px solid rgba(89,87,87,.3);}
+  .verify-tag{font-size:.65rem;padding:.15rem .4rem;border-radius:4px;font-weight:600;}
+  .verify-fact{background:#D1FAE5;color:#065F46;}
+  .verify-inferred{background:#fef3c7;color:#92400e;}
+  .verify-unverified{background:#fee2e2;color:#991b1b;}
+  .step-num{width:36px;height:36px;border-radius:50%;background:var(--red);color:white;font-weight:bold;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;}
+  .iphone-mock{background:#1F1F1F;border-radius:36px;padding:8px;box-shadow:0 30px 60px -20px rgba(0,0,0,0.4);}
+  .iphone-screen{background:white;border-radius:30px;overflow:hidden;}
+  details>summary{list-style:none;cursor:pointer;}
+  details>summary::-webkit-details-marker{display:none;}
+  details[open] .chev{transform:rotate(90deg);}
+  .chev{transition:.2s;}
+  table.cis{width:100%;border-collapse:collapse;}
+  table.cis th{background:#1F1F1F;color:white;text-align:left;padding:.6rem .85rem;font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;font-weight:700;}
+  table.cis td{padding:.55rem .85rem;border-bottom:1px solid #e5e5e5;font-size:.85rem;vertical-align:top;background:white;}
+  table.cis tr:nth-child(even) td{background:#FAF8F5;}
+  .keyboard-key{display:inline-block;background:#fff;border:1px solid #d1d5db;border-radius:4px;padding:.15rem .4rem;font-size:.75rem;font-family:monospace;box-shadow:0 1px 2px rgba(0,0,0,.05);}
+  @media print{body{background:white;}}
+</style>
+</head>
+<body class="antialiased">
+
+<!-- ===== HERO ===== -->
+<section class="magazine-cover text-white py-12 px-6 relative overflow-hidden">
+  <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-red-700 via-red-500 to-red-300"></div>
+  <div class="max-w-6xl mx-auto relative">
+    <div class="grid lg:grid-cols-12 gap-10 items-center">
+      <div class="lg:col-span-8">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-10 h-10 rounded flex items-center justify-center text-white font-bold" style="background:var(--red)">瀚</div>
+          <div class="text-xs font-bold tracking-widest">FOR CHAIRMAN'S USE · 董事長個人指南</div>
+        </div>
+        <div class="text-[11px] text-red-200 tracking-[0.4em] mb-3">SETUP GUIDE · v1.0 · 2026-05-03</div>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-black font-display leading-[1.1] mb-4">
+          iPhone × Claude<br />
+          <span class="text-red-300">集團工作流設定指南</span>
+        </h1>
+        <p class="text-lg text-red-100 max-w-3xl mb-6">
+          給楊董事長：在 iPhone 上把 Claude 變成<strong>口袋級 AI 助手</strong>，整合瀚荃集團 Workspace、CIS 規範、Multi-Agent，隨時 / 隨地 / 一鍵呼叫。
+        </p>
+        <div class="grid grid-cols-3 gap-3 max-w-xl">
+          <div class="bg-white/10 backdrop-blur border border-white/20 rounded-xl p-3 text-center"><div class="text-2xl font-black text-red-300">6</div><div class="text-xs text-stone-300">設定步驟</div></div>
+          <div class="bg-white/10 backdrop-blur border border-white/20 rounded-xl p-3 text-center"><div class="text-2xl font-black text-red-300">5</div><div class="text-xs text-stone-300">使用情境</div></div>
+          <div class="bg-white/10 backdrop-blur border border-white/20 rounded-xl p-3 text-center"><div class="text-2xl font-black text-red-300">15</div><div class="text-xs text-stone-300">分鐘完成</div></div>
+        </div>
+      </div>
+      <div class="lg:col-span-4 flex justify-center">
+        <div class="iphone-mock w-56">
+          <div class="iphone-screen aspect-[9/19.5] flex items-center justify-center bg-gradient-to-br from-red-50 to-white">
+            <div class="text-center px-4">
+              <div class="w-16 h-16 mx-auto rounded-2xl flex items-center justify-center text-white text-3xl font-bold mb-3" style="background:linear-gradient(135deg,#1F1F1F,#000);">C</div>
+              <div class="font-bold text-stone-900">Claude</div>
+              <div class="text-xs text-stone-500 mt-1">Anthropic, PBC</div>
+              <div class="mt-4 text-[10px] text-stone-400">App Store</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Claude Dispatch 說明 ===== -->
+<section class="bg-white py-8 px-6 border-b-4 border-amber-400">
+  <div class="max-w-6xl mx-auto">
+    <div class="bg-amber-50 rounded-xl p-5 border-l-4 border-amber-400">
+      <div class="flex items-start gap-3">
+        <i data-lucide="info" class="w-6 h-6 mt-0.5 flex-shrink-0" style="color:#92400e"></i>
+        <div>
+          <div class="font-bold text-stone-900 mb-1">關於「Claude Dispatch」　<span class="verify-tag verify-unverified">未驗證</span></div>
+          <p class="text-sm text-stone-700 leading-relaxed mb-3">
+            您詢問的「Claude Dispatch」我於 2026-05-03 查 docs.claude.com 與 support.claude.com 後 <strong>未找到此名稱之官方功能</strong>。可能性：
+          </p>
+          <ul class="text-sm text-stone-700 space-y-1 list-disc list-inside ml-2 mb-3">
+            <li><strong>名稱混淆</strong>：可能您看到的是 <em>Claude Code</em> / <em>Claude in Chrome</em> / <em>Claude Tasks（Scheduled Tasks）</em>之一</li>
+            <li><strong>新功能</strong>：可能是仍在 Beta 或 Anthropic 內測中尚未公開</li>
+            <li><strong>第三方整合</strong>：可能是某個 MCP server 或第三方 App 之名稱</li>
+          </ul>
+          <p class="text-sm text-stone-700"><strong>建議您回頭確認來源</strong>（Email / 媒體 / 朋友推薦），告知我具體出處後我可進一步查證。本指南目前以 Anthropic 官方確認之 iPhone App 功能為主軸。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 6 步設定 ===== -->
+<section class="bg-stone-50 py-12 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-xs text-red-700 tracking-[0.3em] mb-3">SETUP STEPS · 6 步完成</div>
+    <h2 class="text-3xl font-black font-display mb-2">基本設定</h2>
+    <p class="text-stone-600 mb-8">15 分鐘可完成。所有功能皆 <span class="verify-tag verify-fact">已驗證</span> 之 Anthropic 官方支援項目。</p>
+
+    <!-- Step 1: 安裝 -->
+    <details class="bg-white rounded-xl border border-stone-200 mb-3 overflow-hidden" open>
+      <summary class="p-5 hover:bg-stone-50 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-4 flex-1"><div class="step-num">1</div><div><div class="text-xs text-stone-500 tracking-widest">STEP 1</div><h3 class="font-bold text-lg">下載 Claude for iOS</h3></div></div>
+        <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+      </summary>
+      <div class="p-5 pt-0 border-t border-stone-200">
+        <ol class="space-y-2 text-sm text-stone-700">
+          <li>1. 打開 iPhone 上的 <span class="keyboard-key">App Store</span></li>
+          <li>2. 搜尋 <strong>Claude</strong>（開發者：<strong>Anthropic, PBC</strong>）— 認準此開發者，避免下載到仿冒</li>
+          <li>3. 點選「取得」下載並安裝</li>
+          <li>4. 開啟 App，使用您現有 Anthropic 帳號登入（與電腦版同一帳號）</li>
+          <li>5. <strong>選擇登入方式</strong>：建議用「Sign in with Google」或公司 Email — 與後續 Workspace 整合一致</li>
+        </ol>
+        <div class="mt-3 bg-stone-50 p-3 rounded-lg text-xs text-stone-600">
+          <strong>📎 官方文件</strong>：<a href="https://support.claude.com/en/articles/9266462-installing-claude-for-ios" class="text-blue-600 hover:underline">support.claude.com/installing-claude-for-ios</a>
+        </div>
+      </div>
+    </details>
+
+    <!-- Step 2: Workspace 登入 -->
+    <details class="bg-white rounded-xl border border-stone-200 mb-3 overflow-hidden">
+      <summary class="p-5 hover:bg-stone-50 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-4 flex-1"><div class="step-num">2</div><div><div class="text-xs text-stone-500 tracking-widest">STEP 2</div><h3 class="font-bold text-lg">登入瀚荃集團 Workspace</h3></div></div>
+        <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+      </summary>
+      <div class="p-5 pt-0 border-t border-stone-200">
+        <p class="text-sm text-stone-700 mb-3">如集團已開通 <strong>Claude Team / Enterprise</strong>（依 Project_05 AI 轉型組企劃）：</p>
+        <ol class="space-y-2 text-sm text-stone-700">
+          <li>1. 在 App 中切換至「Workspace」帳號（左上角頭像 → Switch Workspace）</li>
+          <li>2. 用集團 SSO 登入（如已配置 Azure AD / Entra ID）</li>
+          <li>3. 確認可看見集團共用之 <strong>Projects</strong>（P01-P09）與 <strong>Skills</strong>（cvilux-brand-cis、enterprise-ai-platform-website 等）</li>
+          <li>4. <strong>個人 vs 公司分離</strong>：建議保留個人帳號處理私人事務，公司事務一律用 Workspace 帳號 — 對話歷史不混淆</li>
+        </ol>
+        <div class="mt-3 bg-amber-50 p-3 rounded-lg border border-amber-200 text-xs text-stone-700">
+          <strong>⚠️ 資安原則</strong>：公司資料（CIS、客戶名單、報價）一律走 Workspace；Workspace 預設「對話不用於模型訓練」，符合企業隱私要求。
+        </div>
+      </div>
+    </details>
+
+    <!-- Step 3: Action Button + Lock Screen -->
+    <details class="bg-white rounded-xl border border-stone-200 mb-3 overflow-hidden">
+      <summary class="p-5 hover:bg-stone-50 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-4 flex-1"><div class="step-num">3</div><div><div class="text-xs text-stone-500 tracking-widest">STEP 3 ★ 強烈建議</div><h3 class="font-bold text-lg">設定 Action Button + 鎖定畫面快捷</h3></div></div>
+        <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+      </summary>
+      <div class="p-5 pt-0 border-t border-stone-200">
+        <p class="text-sm text-stone-700 mb-3"><strong>iPhone 15 Pro / 16 / 17 系列</strong> 有 <strong>Action Button（動作按鈕）</strong>，可一鍵直接呼叫 Claude — 對董事長最有用！</p>
+        <ol class="space-y-2 text-sm text-stone-700">
+          <li>1. 開啟 <span class="keyboard-key">設定</span> → <span class="keyboard-key">動作按鈕</span></li>
+          <li>2. 滑到「<strong>捷徑</strong>」選項</li>
+          <li>3. 選擇「<strong>Claude</strong>」中的 <strong>New Conversation</strong>（開新對話）或 <strong>Voice Mode</strong>（語音模式）</li>
+          <li>4. 完成後，<strong>長按側面 Action Button</strong> 即可立即呼叫 Claude</li>
+        </ol>
+        <p class="text-sm text-stone-700 mt-4 mb-2"><strong>鎖定畫面 / 控制中心</strong>：</p>
+        <ol class="space-y-2 text-sm text-stone-700">
+          <li>1. 鎖定畫面長按 → 「自訂」 → 加入 Claude widget</li>
+          <li>2. 控制中心可加入 Claude 快捷（iOS 18+）</li>
+          <li>3. 不需解鎖手機即可開始對話（要確認權限）</li>
+        </ol>
+        <div class="mt-3 bg-stone-50 p-3 rounded-lg text-xs text-stone-600">
+          <strong>📎 官方文件</strong>：<a href="https://support.claude.com/en/articles/10302511-accessing-claude-app-on-ios-lock-screen-control-center-and-action-button" class="text-blue-600 hover:underline">Lock Screen, Control Center, Action Button</a>
+        </div>
+      </div>
+    </details>
+
+    <!-- Step 4: Voice Mode -->
+    <details class="bg-white rounded-xl border border-stone-200 mb-3 overflow-hidden">
+      <summary class="p-5 hover:bg-stone-50 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-4 flex-1"><div class="step-num">4</div><div><div class="text-xs text-stone-500 tracking-widest">STEP 4</div><h3 class="font-bold text-lg">啟用 Voice Mode 語音對話</h3></div></div>
+        <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+      </summary>
+      <div class="p-5 pt-0 border-t border-stone-200">
+        <p class="text-sm text-stone-700 mb-3">開車時、走路時、巡廠時直接「<strong>對 Claude 說話</strong>」，不用打字。</p>
+        <ol class="space-y-2 text-sm text-stone-700">
+          <li>1. 在 App 主畫面，點下方 <strong>麥克風 / Voice 圖示</strong></li>
+          <li>2. 第一次使用會請求麥克風權限 — 允許</li>
+          <li>3. 直接說話，Claude 會即時回答（含語音播放）</li>
+          <li>4. 語音對話結果會儲存於對話歷史，事後可閱讀文字</li>
+        </ol>
+        <p class="text-sm text-stone-700 mt-4 mb-2"><strong>另有 Dictation 聽寫功能</strong>（不開語音模式時）：</p>
+        <ul class="space-y-1 text-sm text-stone-700 list-disc list-inside ml-2">
+          <li>輸入欄位的麥克風圖示 → 邊說邊轉文字</li>
+          <li>適合會議中私下記錄、想到什麼立即口述</li>
+        </ul>
+        <div class="mt-3 bg-stone-50 p-3 rounded-lg text-xs text-stone-600">
+          <strong>📎 官方文件</strong>：<a href="https://support.claude.com/en/articles/11101966-using-voice-mode" class="text-blue-600 hover:underline">Voice Mode</a> · <a href="https://support.claude.com/en/articles/10065434-using-dictation-on-claude-mobile" class="text-blue-600 hover:underline">Dictation</a>
+        </div>
+      </div>
+    </details>
+
+    <!-- Step 5: Shortcuts & Widgets -->
+    <details class="bg-white rounded-xl border border-stone-200 mb-3 overflow-hidden">
+      <summary class="p-5 hover:bg-stone-50 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-4 flex-1"><div class="step-num">5</div><div><div class="text-xs text-stone-500 tracking-widest">STEP 5</div><h3 class="font-bold text-lg">設定 Siri 捷徑 + 主畫面 Widget</h3></div></div>
+        <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+      </summary>
+      <div class="p-5 pt-0 border-t border-stone-200">
+        <p class="text-sm text-stone-700 mb-3">把您常用的問題包裝成<strong>一句話 Siri 命令</strong>，例如：</p>
+        <ul class="space-y-1.5 text-sm text-stone-700">
+          <li>· 「Hey Siri, 開瀚荃 ESG 助手」 → 自動開 Claude + 預設提示「我是楊董，請以 ESG Agent 角色回答」</li>
+          <li>· 「Hey Siri, 翻譯英文簡報」 → 自動開語音模式</li>
+          <li>· 「Hey Siri, 查 CviLux 連接器規格」 → 預設搜尋 RAG</li>
+        </ul>
+        <p class="text-sm text-stone-700 mt-4 mb-2"><strong>設定方式</strong>：</p>
+        <ol class="space-y-2 text-sm text-stone-700">
+          <li>1. <span class="keyboard-key">設定</span> → <span class="keyboard-key">Siri</span> → <span class="keyboard-key">App 捷徑</span></li>
+          <li>2. 找到 Claude → 啟用「捷徑」與「<strong>App Intents</strong>」</li>
+          <li>3. 在「捷徑」App 中可建立自訂流程（如 + Claude 啟動 + 預填指令）</li>
+          <li>4. 主畫面長按空白 → 加入 Widget → 找 Claude → 選大小</li>
+        </ol>
+        <div class="mt-3 bg-stone-50 p-3 rounded-lg text-xs text-stone-600">
+          <strong>📎 官方文件</strong>：<a href="https://support.claude.com/en/articles/10263469-using-claude-app-intents-shortcuts-and-widgets-on-ios" class="text-blue-600 hover:underline">App Intents, Shortcuts and Widgets on iOS</a>
+        </div>
+      </div>
+    </details>
+
+    <!-- Step 6: Share Extension -->
+    <details class="bg-white rounded-xl border border-stone-200 mb-3 overflow-hidden">
+      <summary class="p-5 hover:bg-stone-50 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-4 flex-1"><div class="step-num">6</div><div><div class="text-xs text-stone-500 tracking-widest">STEP 6</div><h3 class="font-bold text-lg">啟用 Share / 分享給 Claude</h3></div></div>
+        <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+      </summary>
+      <div class="p-5 pt-0 border-t border-stone-200">
+        <p class="text-sm text-stone-700 mb-3">收到的 PDF、Email、新聞、相片可<strong>直接分享給 Claude 分析</strong>：</p>
+        <ol class="space-y-2 text-sm text-stone-700">
+          <li>1. 在任何 App（Safari / Mail / Files / Photos）點分享按鈕 <i data-lucide="share" class="w-4 h-4 inline"></i></li>
+          <li>2. 第一次使用點「更多」→ 加入「Claude」到分享清單</li>
+          <li>3. 之後可直接「分享 → Claude」 → Claude 開新對話並接收內容</li>
+          <li>4. <strong>應用情境</strong>：收到客戶 RFQ → 分享給 Claude → 「分析重點 + 建議回覆」</li>
+        </ol>
+        <div class="mt-3 bg-stone-50 p-3 rounded-lg text-xs text-stone-600">
+          <strong>📎 官方文件</strong>：<a href="https://support.claude.com/en/articles/11869619-using-claude-with-ios-apps" class="text-blue-600 hover:underline">Using Claude With iOS Apps</a>
+        </div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ===== 5 個董事長使用情境 ===== -->
+<section class="bg-white py-12 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-xs text-red-700 tracking-[0.3em] mb-3">USE CASES · 5 個董事長使用情境</div>
+    <h2 class="text-3xl font-black font-display mb-2">日常使用情境</h2>
+    <p class="text-stone-600 mb-6">配合您「董事長兼永續長」雙角色 — 主席 / 巡廠 / 出差 / IR 場景。</p>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <!-- 1. 巡廠 -->
+      <div class="bg-stone-50 rounded-xl p-5 border border-stone-200">
+        <div class="text-2xl mb-2">🏭</div>
+        <h3 class="font-bold mb-2">情境 1 · 巡廠檢視 IoT</h3>
+        <p class="text-sm text-stone-600 mb-3">在東莞 / 蘇州 / 越南廠走線時，看到 IoT 設備異常或想了解 OEE。</p>
+        <div class="bg-white rounded p-3 text-xs text-stone-700 border border-stone-200">
+          <div class="font-bold text-red-700 mb-1">操作步驟</div>
+          1. 拍照 / 錄影 → 分享給 Claude<br />
+          2. 語音問：「這台設備可能是什麼異常？」<br />
+          3. Claude 結合 sCMS Agent 給診斷與建議
+        </div>
+      </div>
+
+      <!-- 2. 開會 -->
+      <div class="bg-stone-50 rounded-xl p-5 border border-stone-200">
+        <div class="text-2xl mb-2">🗣</div>
+        <h3 class="font-bold mb-2">情境 2 · 主持會議</h3>
+        <p class="text-sm text-stone-600 mb-3">董事會、客戶簡報、員工大會等大型會議。</p>
+        <div class="bg-white rounded p-3 text-xs text-stone-700 border border-stone-200">
+          <div class="font-bold text-red-700 mb-1">操作步驟</div>
+          1. 開啟 Voice Mode 在桌上<br />
+          2. 會議結束說：「整理重點與行動項目」<br />
+          3. Claude 給 5 條結論 + 待辦清單
+        </div>
+      </div>
+
+      <!-- 3. 出差 -->
+      <div class="bg-stone-50 rounded-xl p-5 border border-stone-200">
+        <div class="text-2xl mb-2">✈️</div>
+        <h3 class="font-bold mb-2">情境 3 · 出差路上</h3>
+        <p class="text-sm text-stone-600 mb-3">機場 / 高鐵 / 計程車中，需要快速取得資料或回覆。</p>
+        <div class="bg-white rounded p-3 text-xs text-stone-700 border border-stone-200">
+          <div class="font-bold text-red-700 mb-1">操作步驟</div>
+          1. 長按 Action Button → Voice Mode<br />
+          2. 「給我 CviCloud sCMS 商模 4 方案重點」<br />
+          3. cvilux-brand-cis Skill 自動載入回答
+        </div>
+      </div>
+
+      <!-- 4. ESG / 法遵 -->
+      <div class="bg-stone-50 rounded-xl p-5 border border-stone-200">
+        <div class="text-2xl mb-2">🌱</div>
+        <h3 class="font-bold mb-2">情境 4 · ESG / CBAM 諮詢</h3>
+        <p class="text-sm text-stone-600 mb-3">永續長身份，需要快速回應 ESG / 法規問題。</p>
+        <div class="bg-white rounded p-3 text-xs text-stone-700 border border-stone-200">
+          <div class="font-bold text-red-700 mb-1">操作步驟</div>
+          1. Siri：「Hey Siri, 開 ESG 助手」<br />
+          2. 預設導向 ESG Agent + RAG（碳定價辦法、CBAM）<br />
+          3. 聽 / 看回答後可立即轉發給法務
+        </div>
+      </div>
+
+      <!-- 5. 媒體 / IR -->
+      <div class="bg-stone-50 rounded-xl p-5 border border-stone-200">
+        <div class="text-2xl mb-2">📰</div>
+        <h3 class="font-bold mb-2">情境 5 · 媒體訪談 / IR</h3>
+        <p class="text-sm text-stone-600 mb-3">記者來電 / 法說會 / 投資人問話。</p>
+        <div class="bg-white rounded p-3 text-xs text-stone-700 border border-stone-200">
+          <div class="font-bold text-red-700 mb-1">操作步驟</div>
+          1. 訪前：分享記者來信給 Claude → 預備答覆<br />
+          2. 訪中：偷偷 Dictation 輸入難題 → 即時建議用詞<br />
+          3. 訪後：請 Claude 整理為新聞稿草稿
+        </div>
+      </div>
+
+      <!-- 6. 個人助手 -->
+      <div class="bg-stone-50 rounded-xl p-5 border border-stone-200">
+        <div class="text-2xl mb-2">📅</div>
+        <h3 class="font-bold mb-2">情境 6 · 行程 / 任務管理</h3>
+        <p class="text-sm text-stone-600 mb-3">個人助理級別的支援。</p>
+        <div class="bg-white rounded p-3 text-xs text-stone-700 border border-stone-200">
+          <div class="font-bold text-red-700 mb-1">操作步驟</div>
+          1. 「整理我今天的行程」 + iCal 整合<br />
+          2. 「明天會議的 3 個重點」 + Project 文件 RAG<br />
+          3. 「記得提醒我下午 4 點...」
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 跨裝置同步 ===== -->
+<section class="bg-stone-50 py-12 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-xs text-red-700 tracking-[0.3em] mb-3">CROSS-DEVICE SYNC · 跨裝置同步</div>
+    <h2 class="text-3xl font-black font-display mb-6">桌機 ↔ iPhone ↔ iPad 同步</h2>
+
+    <div class="grid lg:grid-cols-3 gap-5 mb-6">
+      <div class="bg-white rounded-xl p-5 border border-stone-200">
+        <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-3" style="background:#1F1F1F;">
+          <i data-lucide="monitor" class="w-6 h-6 text-white"></i>
+        </div>
+        <h3 class="font-bold mb-2">桌機 / 筆電</h3>
+        <p class="text-sm text-stone-600">claude.ai 網頁 + Claude Desktop App + Claude Code</p>
+        <ul class="text-xs text-stone-700 mt-3 space-y-1">
+          <li>· 主要工作場景</li>
+          <li>· 完整 Workspace 管理</li>
+          <li>· 開檔案 / 寫文件</li>
+        </ul>
+      </div>
+      <div class="bg-white rounded-xl p-5 border-2" style="border-color:var(--red);">
+        <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-3" style="background:var(--red);">
+          <i data-lucide="smartphone" class="w-6 h-6 text-white"></i>
+        </div>
+        <h3 class="font-bold mb-2">iPhone（本指南）</h3>
+        <p class="text-sm text-stone-600">隨身、即時、語音、拍照</p>
+        <ul class="text-xs text-stone-700 mt-3 space-y-1">
+          <li>· 巡廠 / 出差場景</li>
+          <li>· Voice Mode 對話</li>
+          <li>· Action Button 一鍵</li>
+          <li>· Share 給 Claude</li>
+        </ul>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-stone-200">
+        <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-3" style="background:#1F1F1F;">
+          <i data-lucide="tablet" class="w-6 h-6 text-white"></i>
+        </div>
+        <h3 class="font-bold mb-2">iPad</h3>
+        <p class="text-sm text-stone-600">Claude for iPad（同 iOS App）+ Apple Pencil</p>
+        <ul class="text-xs text-stone-700 mt-3 space-y-1">
+          <li>· 出差簡報展示</li>
+          <li>· 手寫筆記</li>
+          <li>· 跟長文件</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bg-emerald-50 rounded-xl p-5 border border-emerald-200">
+      <div class="font-bold text-emerald-700 mb-2">✅ 自動同步項目（已驗證）</div>
+      <p class="text-sm text-stone-700">使用同一帳號登入時，下列項目自動跨裝置同步：</p>
+      <ul class="text-sm text-stone-700 mt-2 space-y-1 list-disc list-inside">
+        <li>對話歷史（在桌機開的對話，iPhone 上可看到並繼續）</li>
+        <li>Projects（專案資料夾）</li>
+        <li>Skills（共用智能技能）</li>
+        <li>Knowledge Base（專案內掛載文件）</li>
+        <li>訂閱方案（Pro / Team / Enterprise）</li>
+      </ul>
+      <p class="text-xs text-stone-600 mt-3 italic">⚠️ 注意：iOS App 上的 UI 為精簡版，部分管理員功能（如新增成員、Skills 編輯）仍需在桌機操作。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 安全與隱私 ===== -->
+<section class="bg-white py-12 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-xs text-red-700 tracking-[0.3em] mb-3">SECURITY · 安全與隱私</div>
+    <h2 class="text-3xl font-black font-display mb-6">8 條董事長必知資安建議</h2>
+
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="bg-rose-50 rounded-xl p-4 border border-rose-200">
+        <div class="text-xs font-bold text-red-700 mb-1">★ 必做 1</div>
+        <h4 class="font-bold mb-1">Face ID + 鎖屏</h4>
+        <p class="text-sm text-stone-700">確認 iPhone 鎖屏密碼複雜（≥ 6 位數字 + Face ID），避免遺失時資料外洩。</p>
+      </div>
+      <div class="bg-rose-50 rounded-xl p-4 border border-rose-200">
+        <div class="text-xs font-bold text-red-700 mb-1">★ 必做 2</div>
+        <h4 class="font-bold mb-1">App 內 Face ID 鎖</h4>
+        <p class="text-sm text-stone-700">設定 → Face ID → 加入 Claude → 每次開啟需 Face ID（避免他人借手機看到對話）。</p>
+      </div>
+      <div class="bg-rose-50 rounded-xl p-4 border border-rose-200">
+        <div class="text-xs font-bold text-red-700 mb-1">★ 必做 3</div>
+        <h4 class="font-bold mb-1">公私分離帳號</h4>
+        <p class="text-sm text-stone-700">公司事務一律 Workspace 帳號；個人用 Pro 帳號。雙帳號可在 App 內快速切換。</p>
+      </div>
+      <div class="bg-rose-50 rounded-xl p-4 border border-rose-200">
+        <div class="text-xs font-bold text-red-700 mb-1">★ 必做 4</div>
+        <h4 class="font-bold mb-1">商業機密不口述</h4>
+        <p class="text-sm text-stone-700">語音模式於公開場合（餐廳、會議室、車內）勿問商業機密問題（成本、客戶名）— 周邊人會聽到。</p>
+      </div>
+      <div class="bg-amber-50 rounded-xl p-4 border border-amber-200">
+        <div class="text-xs font-bold text-amber-700 mb-1">建議 5</div>
+        <h4 class="font-bold mb-1">大陸區使用</h4>
+        <p class="text-sm text-stone-700"><span class="verify-tag verify-inferred">推論</span> Claude 服務在大陸需 VPN；建議過境前先在台灣查詢好需要的資料，或使用集團 SSL VPN 連回台灣存取。</p>
+      </div>
+      <div class="bg-amber-50 rounded-xl p-4 border border-amber-200">
+        <div class="text-xs font-bold text-amber-700 mb-1">建議 6</div>
+        <h4 class="font-bold mb-1">客戶名單不外傳</h4>
+        <p class="text-sm text-stone-700">如要分析客戶資料，先用代號（A 公司、B 公司），避免完整客戶名 + 報價金額同時出現於對話。</p>
+      </div>
+      <div class="bg-amber-50 rounded-xl p-4 border border-amber-200">
+        <div class="text-xs font-bold text-amber-700 mb-1">建議 7</div>
+        <h4 class="font-bold mb-1">分享對話前審視</h4>
+        <p class="text-sm text-stone-700">分享對話連結給其他人前，先檢視整段對話是否含敏感資料（NDA / 客戶 / 內部成本）。</p>
+      </div>
+      <div class="bg-stone-100 rounded-xl p-4 border border-stone-200">
+        <div class="text-xs font-bold text-stone-700 mb-1">建議 8</div>
+        <h4 class="font-bold mb-1">遺失手機應對</h4>
+        <p class="text-sm text-stone-700">立即用其他裝置 Apple Find My 鎖機 + 遠端清除；同時通知 IT 撤銷 Workspace token。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 集團整合場景 ===== -->
+<section class="bg-stone-50 py-12 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-xs text-red-700 tracking-[0.3em] mb-3">GROUP INTEGRATION · 集團工作流整合</div>
+    <h2 class="text-3xl font-black font-display mb-2">手機如何配合集團 8 個 Project</h2>
+    <p class="text-stone-600 mb-6">您的 iPhone 不是替代桌機，而是「<strong>口袋級的集團 AI 助手</strong>」。</p>
+
+    <table class="cis">
+      <thead>
+        <tr>
+          <th>集團 Project</th>
+          <th>iPhone 主要用途</th>
+          <th>建議 Skill / 觸發</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>P01 AI 平台網站</strong></td><td>檢視原型、向訪客展示、Demo 訪客 RFQ 流程</td><td>「展示 CviLux AI 平台架構」</td></tr>
+        <tr><td><strong>P02 改造任務書</strong></td><td>查 7 階段進度 / 製造 AI 模型清單</td><td>「現在 Phase 1 進度多少？」</td></tr>
+        <tr><td><strong>P03 AI PoC 評估</strong></td><td>巡東莞時看 PoC#1 / FFC 線時查 PoC#2</td><td>「PoC#1 上週 KPI 表現」</td></tr>
+        <tr><td><strong>P04 會議 Hub</strong></td><td>會議中即時叫出議程、決策清單</td><td>「會議目前討論到哪一條決策」</td></tr>
+        <tr><td><strong>P05 AI 轉型組</strong></td><td>查 9 角色到位率、Sprint 進度</td><td>「AI 轉型組這週交付？」</td></tr>
+        <tr><td><strong>P06 雲端架構</strong></td><td>緊急議題決策（IT 副總請教 Fabric / Azure）</td><td>「Azure Fabric 我方立場是？」</td></tr>
+        <tr><td><strong>P07 雙網站融合</strong></td><td>對 CviCloud 主管說明 4 商模選擇</td><td>「sCMS 4 商模差異」</td></tr>
+        <tr><td><strong>P08 主執行計畫</strong></td><td>每月對董事會匯報前讀過一遍</td><td>「下季 KPI 重點」</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== 一頁速查卡 ===== -->
+<section class="red-bg text-white py-12 px-6">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-xs text-red-200 tracking-[0.4em] mb-3">QUICK REFERENCE CARD · 一頁速查卡</div>
+    <h2 class="text-3xl font-black font-display mb-6">最常用 5 個操作</h2>
+
+    <div class="bg-black/30 backdrop-blur rounded-2xl p-6 border border-white/20">
+      <div class="grid md:grid-cols-2 gap-5 text-sm">
+        <div>
+          <div class="text-amber-300 font-bold mb-2">🎤 語音呼叫 Claude</div>
+          <p class="text-red-100">長按 Action Button（iPhone 15 Pro+）<br />→ 自動進入 Voice Mode</p>
+        </div>
+        <div>
+          <div class="text-amber-300 font-bold mb-2">📷 拍照分析</div>
+          <p class="text-red-100">相簿/相機 → 分享 → Claude<br />→ 「這是什麼？建議怎麼處理？」</p>
+        </div>
+        <div>
+          <div class="text-amber-300 font-bold mb-2">📑 分析 PDF / Email</div>
+          <p class="text-red-100">Files / Mail → 分享 → Claude<br />→ 「整理重點 + 建議回覆」</p>
+        </div>
+        <div>
+          <div class="text-amber-300 font-bold mb-2">🗣 Siri 開特定 Agent</div>
+          <p class="text-red-100">「Hey Siri, 開 ESG 助手」<br />→ 預設帶入 cvilux-brand-cis Skill</p>
+        </div>
+        <div class="md:col-span-2">
+          <div class="text-amber-300 font-bold mb-2">🔄 切換工作 / 個人帳號</div>
+          <p class="text-red-100">點左上角頭像 → Switch Workspace<br />→ 工作事務一律走 CviLux Group Workspace（資料不用於訓練）</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-6 text-center text-sm text-red-200">
+      列印此頁卡片，放入錢包或記事本
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="bg-stone-900 text-stone-400 py-8 px-6">
+  <div class="max-w-6xl mx-auto text-xs">
+    <div class="flex flex-wrap justify-between items-start gap-4">
+      <div>
+        <p class="font-bold text-white">iPhone × Claude × 集團工作流設定指南 v1.0</p>
+        <p class="mt-1">© 2026 CviLux Group · 給董事長楊超群個人使用</p>
+      </div>
+      <div class="text-stone-500">
+        <p>查證日期：2026-05-03</p>
+        <p>下次升版時機：iOS 新版發布 / Claude 新功能上線後</p>
+      </div>
+    </div>
+    <div class="mt-4 pt-4 border-t border-stone-800 text-stone-500">
+      <p>本文件含 <span class="verify-tag verify-fact">已驗證</span> Anthropic 官方功能與 <span class="verify-tag verify-inferred">推論</span> 使用建議；「Claude Dispatch」<span class="verify-tag verify-unverified">未驗證</span> 在官方文件中未找到，待您提供更多資訊後續查證。</p>
+    </div>
+  </div>
+</footer>
+
+<script>if(window.lucide)lucide.createIcons();</script>
+</body>
+</html>

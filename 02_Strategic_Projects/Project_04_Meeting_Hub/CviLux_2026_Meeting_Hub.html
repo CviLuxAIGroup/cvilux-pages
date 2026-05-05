@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>瀚荃集團 2026 數位轉型作戰會議 Hub | CviLux Group 2026 Strategic Meeting Hub</title>
+<meta name="description" content="瀚荃集團 2026 數位轉型作戰會議單一入口 — 整合控股結構、AI 平台、改造路線、製造 AI PoC 與 30 天啟動行動。" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+<style>
+  :root{--red:#E83A48;--red-d:#B0202A;--red-l:#EB6363;--g9:#3D3A39;--g7:#595757;--g5:#999899;--g2:#E1DEDD;--blue:#0085C2;--orange:#F07810;--green:#10B981;--bg:#F7F5F2;--purple:#7C3AED;--amber:#F59E0B;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Century Gothic','Inter','Noto Sans TC',system-ui,sans-serif;color:#1F1F1F;background:var(--bg);}
+  .font-display{font-family:'Noto Sans TC','Inter',sans-serif;letter-spacing:-0.01em;}
+  .red-bg{background:linear-gradient(135deg,#B0202A 0%,#E83A48 60%,#EB6363 100%);}
+  .magazine-cover{background:radial-gradient(ellipse at 15% 70%,rgba(232,58,72,.4),transparent 60%),linear-gradient(135deg,#0a0a0a 0%,#2a0a0e 30%,#4a0a14 60%,#b0202a 100%);}
+  .red-edge{position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--red);}
+  .pill{display:inline-flex;align-items:center;gap:.4rem;padding:.25rem .75rem;font-size:.7rem;font-weight:700;letter-spacing:.05em;border-radius:9999px;}
+  .pill-red{background:rgba(232,58,72,.1);color:var(--red);border:1px solid rgba(232,58,72,.3);}
+  .pill-blue{background:rgba(0,133,194,.1);color:var(--blue);border:1px solid rgba(0,133,194,.3);}
+  .pill-green{background:rgba(16,185,129,.1);color:#047857;border:1px solid rgba(16,185,129,.3);}
+  .pill-orange{background:rgba(240,120,16,.1);color:var(--orange);border:1px solid rgba(240,120,16,.3);}
+  .pill-purple{background:rgba(124,58,237,.1);color:var(--purple);border:1px solid rgba(124,58,237,.3);}
+  .pill-amber{background:rgba(245,158,11,.15);color:#92400e;border:1px solid rgba(245,158,11,.4);}
+  .pill-grey{background:rgba(89,87,87,.1);color:var(--g7);border:1px solid rgba(89,87,87,.3);}
+  .pill-white{background:rgba(255,255,255,.95);color:var(--g9);border:1px solid rgba(0,0,0,.1);}
+  .verify-tag{font-size:.65rem;padding:.15rem .4rem;border-radius:4px;font-weight:600;}
+  .verify-inferred{background:#fef3c7;color:#92400e;}
+  .section-num{font-size:80px;font-weight:900;color:var(--red);line-height:1;font-family:'Noto Sans TC',sans-serif;}
+  .nav-link{position:relative;font-weight:500;}
+  .nav-link::after{content:'';position:absolute;left:50%;bottom:-3px;height:2px;width:0;background:var(--red);transition:.25s;transform:translateX(-50%);}
+  .nav-link:hover::after{width:100%;}
+  details>summary{list-style:none;cursor:pointer;}
+  details>summary::-webkit-details-marker{display:none;}
+  details[open] .chev{transform:rotate(90deg);}
+  .chev{transition:.2s;}
+  table.cis{width:100%;border-collapse:collapse;}
+  table.cis th{background:#1F1F1F;color:white;text-align:left;padding:.7rem 1rem;font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;font-weight:700;}
+  table.cis td{padding:.6rem 1rem;border-bottom:1px solid #e5e5e5;font-size:.85rem;vertical-align:top;}
+  table.cis tr:nth-child(even) td{background:#FAF8F5;}
+  .gantt-row{display:flex;align-items:center;border-bottom:1px solid #f3f4f6;padding:.4rem 0;}
+  .gantt-bar{height:22px;border-radius:4px;display:flex;align-items:center;padding-left:.6rem;color:white;font-size:.7rem;font-weight:600;}
+  .card-hover{transition:transform .25s, box-shadow .25s, border-color .25s;}
+  .card-hover:hover{transform:translateY(-3px);box-shadow:0 16px 32px -16px rgba(232,58,72,.35);}
+  @media print{.no-print{display:none !important;}body{background:white;}}
+  ::-webkit-scrollbar{width:10px;}
+  ::-webkit-scrollbar-thumb{background:#a0a0a0;border-radius:6px;}
+</style>
+</head>
+<body class="antialiased">
+
+<!-- ===== TOP NAV ===== -->
+<header class="no-print fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-stone-200 shadow-sm">
+  <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="#cover" class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-md flex items-center justify-center text-white font-bold" style="background:var(--red)">瀚</div>
+      <div class="leading-tight">
+        <div class="text-sm font-bold text-stone-900 font-display">2026 數位轉型作戰會議 Hub</div>
+        <div class="text-[11px] text-stone-500 tracking-wider">CVILUX 2026 STRATEGIC MEETING HUB</div>
+      </div>
+    </a>
+    <nav class="hidden xl:flex items-center gap-5 text-sm text-stone-700">
+      <a class="nav-link" href="#agenda">議程</a>
+      <a class="nav-link" href="#group">集團現況</a>
+      <a class="nav-link" href="#deliverables">交付物</a>
+      <a class="nav-link" href="#strategy">戰略地圖</a>
+      <a class="nav-link" href="#decisions">決策清單</a>
+      <a class="nav-link" href="#timeline">時程</a>
+      <a class="nav-link" href="#budget">預算</a>
+      <a class="nav-link" href="#actions">行動</a>
+      <a class="nav-link" href="#qa">Q&amp;A</a>
+    </nav>
+    <button onclick="window.print()" class="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-md text-white text-sm font-semibold" style="background:var(--red)">列印 <i data-lucide="printer" class="w-4 h-4"></i></button>
+  </div>
+</header>
+
+<!-- ===== COVER ===== -->
+<section id="cover" class="magazine-cover text-white pt-24 pb-14 min-h-screen flex items-center">
+  <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-red-700 via-red-500 to-red-300"></div>
+  <div class="max-w-7xl mx-auto px-8 w-full">
+    <div class="grid lg:grid-cols-12 gap-10 items-center">
+      <div class="lg:col-span-7">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-12 rounded-md flex items-center justify-center font-bold text-2xl" style="background:var(--red)">瀚</div>
+          <div>
+            <div class="text-sm font-bold tracking-widest">瀚荃集團 · CVILUX GROUP（控股公司）</div>
+            <div class="text-xs text-red-300 tracking-wider">Connect the World · Conserve the Earth</div>
+          </div>
+        </div>
+        <div class="text-[11px] text-red-200 tracking-[0.4em] mb-3">2026 STRATEGIC MEETING HUB · v1.0 · 2026-05-03</div>
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-black leading-[1.05] font-display mb-6">
+          2026 瀚荃<br />
+          <span class="text-red-300">數位轉型作戰會議</span>
+        </h1>
+        <h2 class="text-xl md:text-2xl font-light text-red-100 leading-tight mb-6">
+          整合 CIS 規範 × AI 平台 × 改造路線 × 製造 AI PoC<br />
+          <span class="text-red-200 text-base">— 單一入口，方便團隊掃描全貌 / 點按深入 / 即席決策</span>
+        </h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+          <div class="bg-white/10 backdrop-blur border border-white/20 rounded-xl p-3"><div class="text-2xl font-black text-red-300">4</div><div class="text-xs text-stone-300">交付物</div></div>
+          <div class="bg-white/10 backdrop-blur border border-white/20 rounded-xl p-3"><div class="text-2xl font-black text-red-300">7</div><div class="text-xs text-stone-300">議程主題</div></div>
+          <div class="bg-white/10 backdrop-blur border border-white/20 rounded-xl p-3"><div class="text-2xl font-black text-red-300">23</div><div class="text-xs text-stone-300">關鍵決策</div></div>
+          <div class="bg-white/10 backdrop-blur border border-white/20 rounded-xl p-3"><div class="text-2xl font-black text-red-300">30</div><div class="text-xs text-stone-300">天啟動</div></div>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <a href="#agenda" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white text-stone-900 font-semibold hover:bg-amber-100 transition shadow-lg">看議程 <i data-lucide="list" class="w-4 h-4"></i></a>
+          <a href="#decisions" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white/10 backdrop-blur border border-white/30 text-white font-semibold hover:bg-white/20 transition">23 條決策 <i data-lucide="check-square" class="w-4 h-4"></i></a>
+          <a href="#qa" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white/10 backdrop-blur border border-white/30 text-white font-semibold hover:bg-white/20 transition">Q&A 預備 <i data-lucide="message-circle-question" class="w-4 h-4"></i></a>
+        </div>
+      </div>
+      <div class="lg:col-span-5">
+        <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6 mb-4">
+          <div class="text-xs tracking-widest text-red-300 mb-3">MEETING OBJECTIVE · 會議目標</div>
+          <ol class="space-y-2 text-sm text-stone-200">
+            <li class="flex gap-2"><span class="text-red-300 font-bold flex-shrink-0">1.</span>共識：集團控股結構與「前店分工 + 後勤共用」商業模式</li>
+            <li class="flex gap-2"><span class="text-red-300 font-bold flex-shrink-0">2.</span>核准：AI 數位營運平台 7 階段路線與 5 大開發分包</li>
+            <li class="flex gap-2"><span class="text-red-300 font-bold flex-shrink-0">3.</span>核准：兩個製造 AI PoC 預算 NT$ 1,010-1,440 萬</li>
+            <li class="flex gap-2"><span class="text-red-300 font-bold flex-shrink-0">4.</span>指派：各 BU 業務 Owner、PM 辦公室、AI 治理委員會</li>
+            <li class="flex gap-2"><span class="text-red-300 font-bold flex-shrink-0">5.</span>啟動：30 天行動計畫（D+7、D+14、D+21、D+30）</li>
+          </ol>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+          <div class="text-xs tracking-widest text-amber-300 mb-2">CHAIRED BY · 主持人</div>
+          <div class="font-display font-bold text-lg">楊超群　Steve Yang</div>
+          <div class="text-sm text-stone-400">董事長兼永續長 · Chairman & CSO</div>
+          <div class="text-xs text-stone-400 mt-2">永續聯辦公室 Let's ESG（兼任 PMO）</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== AGENDA ===== -->
+<section id="agenda" class="bg-white py-16">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-8">
+      <div class="lg:col-span-4">
+        <div class="text-xs tracking-[0.3em] text-stone-500 mb-2">AGENDA</div>
+        <h2 class="font-display text-4xl font-black mb-2">會議議程</h2>
+        <p class="text-stone-500 text-sm">建議 120-150 分鐘 · 含 10 分鐘 Q&A 緩衝</p>
+      </div>
+      <div class="lg:col-span-8">
+        <div class="bg-rose-50 rounded-xl p-5 border border-rose-200 mb-3">
+          <div class="text-xs font-bold text-red-700 mb-1">📋 出席名單建議</div>
+          <p class="text-sm text-stone-700">董事長 / CEO · IT 副總 · 各 BU 處長（連接器 / 線纜 / 電子配件 / sCMS / Opro9 / CviMall）· 行銷主管 · 法務 · 資安 · 財務（預算簽核）· 永續聯辦 · 客戶代表（如需）</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="space-y-2">
+      <details class="bg-stone-50 rounded-xl border border-stone-200 overflow-hidden" open>
+        <summary class="p-4 hover:bg-stone-100 flex items-center justify-between gap-4">
+          <div class="flex items-center gap-4 flex-1"><div class="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-xs" style="background:var(--red)">10'</div><div><div class="text-xs text-stone-500">01</div><div class="font-bold">開場 + 集團現況快報</div></div></div>
+          <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+        </summary>
+        <div class="p-4 pt-0 border-t border-stone-200 text-sm text-stone-700">董事長開場 · 1990-2025 沿革 · 2025 營收 33 億 · 2,700+ 員工 · ESG 21 年里程</div>
+      </details>
+      <details class="bg-stone-50 rounded-xl border border-stone-200 overflow-hidden">
+        <summary class="p-4 hover:bg-stone-100 flex items-center justify-between gap-4">
+          <div class="flex items-center gap-4 flex-1"><div class="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-xs" style="background:var(--red)">15'</div><div><div class="text-xs text-stone-500">02</div><div class="font-bold">集團控股結構與商業模式釐清（v1.2 規範）</div></div></div>
+          <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+        </summary>
+        <div class="p-4 pt-0 border-t border-stone-200 text-sm text-stone-700">控股 + 3 前店子公司：CviLux、CviCloud、CviMall · Opro9 為 CviCloud 副品牌 · AllSor 為非集團協同夥伴 · 前店分工 / 後勤共用</div>
+      </details>
+      <details class="bg-stone-50 rounded-xl border border-stone-200 overflow-hidden">
+        <summary class="p-4 hover:bg-stone-100 flex items-center justify-between gap-4">
+          <div class="flex items-center gap-4 flex-1"><div class="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-xs" style="background:var(--red)">25'</div><div><div class="text-xs text-stone-500">03</div><div class="font-bold">AI 數位營運與全球行銷平台（架構提案）</div></div></div>
+          <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+        </summary>
+        <div class="p-4 pt-0 border-t border-stone-200 text-sm text-stone-700">7 層平台架構 · EIP 4 廠商選型矩陣 · Multi-Agent (1+9) · 品牌自動行銷 7 步流水線 · 對外 / 對內入口分層</div>
+      </details>
+      <details class="bg-stone-50 rounded-xl border border-stone-200 overflow-hidden">
+        <summary class="p-4 hover:bg-stone-100 flex items-center justify-between gap-4">
+          <div class="flex items-center gap-4 flex-1"><div class="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-xs" style="background:var(--red)">25'</div><div><div class="text-xs text-stone-500">04</div><div class="font-bold">2026 改造工作任務書（三軌並行 / 7 階段 / WF AIGP 整合）</div></div></div>
+          <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+        </summary>
+        <div class="p-4 pt-0 border-t border-stone-200 text-sm text-stone-700">舊網站維持 + 新網站建置 + Agent 微調 → 切換點 · Phase 0-6 路線 · A-E 5 大分包 · 製造 AI 10 個延伸模型</div>
+      </details>
+      <details class="bg-stone-50 rounded-xl border border-stone-200 overflow-hidden">
+        <summary class="p-4 hover:bg-stone-100 flex items-center justify-between gap-4">
+          <div class="flex items-center gap-4 flex-1"><div class="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-xs" style="background:var(--red)">25'</div><div><div class="text-xs text-stone-500">05</div><div class="font-bold">兩個 AI PoC 前置準備評估書（庫存 + 產線）</div></div></div>
+          <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+        </summary>
+        <div class="p-4 pt-0 border-t border-stone-200 text-sm text-stone-700">PoC #1 庫存預測（東莞 Top 100 SKU · 430-590 萬）· PoC #2 產線優化（FFC 高頻線 · 580-850 萬）· 共用治理框架</div>
+      </details>
+      <details class="bg-stone-50 rounded-xl border border-stone-200 overflow-hidden">
+        <summary class="p-4 hover:bg-stone-100 flex items-center justify-between gap-4">
+          <div class="flex items-center gap-4 flex-1"><div class="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-xs" style="background:var(--amber)">30'</div><div><div class="text-xs text-stone-500">06</div><div class="font-bold">★ 23 條關鍵決策清單（逐條 Yes/No 表決）</div></div></div>
+          <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+        </summary>
+        <div class="p-4 pt-0 border-t border-stone-200 text-sm text-stone-700">9 條 AI 平台決策 · 14 條 PoC 決策 · 預算總額 · 試點選擇 · 跨境策略 · 治理委員會 · 失敗止損條件</div>
+      </details>
+      <details class="bg-stone-50 rounded-xl border border-stone-200 overflow-hidden">
+        <summary class="p-4 hover:bg-stone-100 flex items-center justify-between gap-4">
+          <div class="flex items-center gap-4 flex-1"><div class="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-xs" style="background:var(--green)">15'</div><div><div class="text-xs text-stone-500">07</div><div class="font-bold">下一步行動：30 天啟動計畫 + 待決事項</div></div></div>
+          <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+        </summary>
+        <div class="p-4 pt-0 border-t border-stone-200 text-sm text-stone-700">D+7 啟動會議 · D+14 RFP · D+21 Phase 0 · D+30 簽約 + Kick-off · 待決事項列管</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 集團現況 ===== -->
+<section id="group" class="py-16" style="background:linear-gradient(180deg,#FFF5F5 0%,#F7F5F2 100%);">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-8">
+      <div class="lg:col-span-4">
+        <div class="section-num">02</div>
+        <h2 class="font-display text-3xl font-black mt-2">集團現況</h2>
+        <p class="text-stone-500 text-sm">Group Snapshot · v1.2</p>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-stone-700 leading-relaxed">瀚荃集團（CviLux Group）為控股公司，下轄 3 個前店子公司。AllSor 瀚碩科技為非集團之協同行銷夥伴。</p>
+      </div>
+    </div>
+
+    <!-- 關鍵指標 -->
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-8">
+      <div class="bg-white rounded-xl p-4 border border-stone-200"><div class="text-xs text-stone-500">FOUNDED</div><div class="text-2xl font-black font-display" style="color:var(--red)">1990</div></div>
+      <div class="bg-white rounded-xl p-4 border border-stone-200"><div class="text-xs text-stone-500">EMPLOYEES</div><div class="text-2xl font-black font-display" style="color:var(--red)">2,700+</div></div>
+      <div class="bg-white rounded-xl p-4 border border-stone-200"><div class="text-xs text-stone-500">CAPITAL</div><div class="text-2xl font-black font-display" style="color:var(--red)">9.2 億</div></div>
+      <div class="bg-white rounded-xl p-4 border border-stone-200"><div class="text-xs text-stone-500">TWSE</div><div class="text-2xl font-black font-display" style="color:var(--red)">8103</div></div>
+      <div class="bg-white rounded-xl p-4 border border-stone-200"><div class="text-xs text-stone-500">2025 REV</div><div class="text-2xl font-black font-display" style="color:var(--red)">33 億</div></div>
+      <div class="bg-white rounded-xl p-4 border border-stone-200"><div class="text-xs text-stone-500">ENTITIES</div><div class="text-2xl font-black font-display" style="color:var(--red)">14+</div></div>
+    </div>
+
+    <!-- 控股結構樹 -->
+    <div class="bg-white rounded-xl p-6 border border-stone-200">
+      <div class="text-xs tracking-widest text-stone-500 mb-4">CVILUX GROUP HOLDING TREE</div>
+
+      <div class="flex justify-center mb-4">
+        <div class="rounded-xl text-white p-4 max-w-xl text-center" style="background:linear-gradient(135deg,#B0202A,#E83A48);">
+          <div class="text-[10px] tracking-widest text-red-200">HOLDING COMPANY · 控股</div>
+          <h3 class="font-display font-black text-xl">瀚荃集團　CviLux Group</h3>
+        </div>
+      </div>
+
+      <div class="flex justify-center text-stone-400 mb-2"><i data-lucide="chevron-down" class="w-5 h-5"></i></div>
+
+      <div class="grid md:grid-cols-3 gap-3 mb-4">
+        <div class="bg-stone-50 rounded-lg border-2 p-3" style="border-color:var(--red)">
+          <div class="h-12 flex items-center justify-center text-white text-lg font-black font-display rounded-md mb-2" style="background:var(--red)">CviLux</div>
+          <div class="text-xs font-bold">瀚荃股份有限公司</div>
+          <div class="text-[10px] text-stone-500">CviLux Corporation</div>
+          <div class="text-xs text-stone-700 mt-2">連接器 + 線纜 B2B</div>
+        </div>
+        <div class="bg-stone-50 rounded-lg border-2 p-3" style="border-color:var(--blue)">
+          <div class="h-12 flex items-center justify-center text-white text-lg font-black font-display rounded-md mb-2" style="background:var(--blue)">CviCloud</div>
+          <div class="text-xs font-bold">瀚雲科技股份有限公司</div>
+          <div class="text-[10px] text-stone-500">CviCloud Technology Corporation</div>
+          <div class="text-xs text-stone-700 mt-2">智碳雲 + IoT + Opro9</div>
+        </div>
+        <div class="bg-stone-50 rounded-lg border-2 p-3" style="border-color:var(--orange)">
+          <div class="h-12 flex items-center justify-center text-white text-lg font-black font-display rounded-md mb-2" style="background:var(--orange)">cvimall</div>
+          <div class="text-xs font-bold">瀚柔國際股份有限公司</div>
+          <div class="text-[10px] text-stone-500">CviMall International Corporation</div>
+          <div class="text-xs text-stone-700 mt-2">B2B / B2C 商城</div>
+        </div>
+      </div>
+
+      <div class="flex justify-center text-stone-400 mb-2"><i data-lucide="chevrons-down" class="w-5 h-5"></i></div>
+      <div class="bg-stone-100 rounded-lg p-3 border-2 border-dashed border-stone-400 mb-4">
+        <div class="text-xs tracking-widest text-stone-600 text-center mb-1">SHARED MANUFACTURING · 後勤製造共用</div>
+        <p class="text-center text-xs text-stone-700">14+ 廠跨子公司分工：淡水 / 東莞 / 蘇州 / 重慶 / 深圳 / 安徽 / 上海 / 越南 / 寮國 / 墨西哥 / 巴西 / 美國 / 荷蘭</p>
+      </div>
+
+      <div class="flex justify-center my-3">
+        <div class="px-3 py-1 bg-stone-200 rounded-full text-[10px] tracking-widest text-stone-600">═════ 集團邊界 GROUP BOUNDARY ═════</div>
+      </div>
+
+      <div class="bg-white border-2 border-dashed border-stone-400 rounded-lg p-3 max-w-2xl mx-auto">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 flex items-center justify-center text-white text-sm font-black font-display rounded" style="background:#1A1A1A">AllSor</div>
+          <div class="flex-1">
+            <div class="text-xs font-bold">瀚碩科技股份有限公司</div>
+            <div class="text-[10px] text-stone-500">AllSor Technology Corporation · 非集團 · 協同行銷夥伴</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 4 大交付物 ===== -->
+<section id="deliverables" class="bg-white py-16">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-8">
+      <div class="lg:col-span-4">
+        <div class="section-num">03</div>
+        <h2 class="font-display text-3xl font-black mt-2">今日交付物</h2>
+        <p class="text-stone-500 text-sm">Today's Deliverables</p>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-stone-700 leading-relaxed">本會議基於 4 份完整文件 + 3 個 Claude Skills，所有資源整理在「Claude Cowrok工作流」資料夾。</p>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+      <a href="../CviLux/03_CIS_Handbook_v1.2/CviLux_CIS_Handbook_v1.html" class="card-hover bg-stone-50 rounded-xl p-5 border border-stone-200 block">
+        <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-3" style="background:var(--red)"><i data-lucide="palette" class="w-6 h-6 text-white"></i></div>
+        <div class="text-xs font-bold mb-1" style="color:var(--red)">DOCUMENT 1</div>
+        <h3 class="font-bold text-lg">CIS 手冊 v1.2</h3>
+        <p class="text-xs text-stone-500 mt-1">12 章節 · 中英對照 · 圖文並茂</p>
+        <p class="text-xs text-stone-700 mt-3">控股結構 + 色彩 + 字型 + 5 品牌定位 + 10 客戶產業 + ESG 21 年沿革</p>
+        <span class="text-xs mt-3 inline-flex items-center gap-1" style="color:var(--red)">點擊開啟 <i data-lucide="external-link" class="w-3 h-3"></i></span>
+      </a>
+      <a href="../Project_01_AI_Platform_Website/CviLux_AI_Platform_Website.html" class="card-hover bg-stone-50 rounded-xl p-5 border border-stone-200 block">
+        <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-3" style="background:var(--blue)"><i data-lucide="globe" class="w-6 h-6 text-white"></i></div>
+        <div class="text-xs font-bold mb-1" style="color:var(--blue)">DOCUMENT 2</div>
+        <h3 class="font-bold text-lg">AI 平台網站</h3>
+        <p class="text-xs text-stone-500 mt-1">13 章節 · 互動 accordion</p>
+        <p class="text-xs text-stone-700 mt-3">7 層架構 + EIP 4 廠商矩陣 + Multi-Agent (1+9) + 品牌自動行銷 7 步</p>
+        <span class="text-xs mt-3 inline-flex items-center gap-1" style="color:var(--blue)">點擊開啟 <i data-lucide="external-link" class="w-3 h-3"></i></span>
+      </a>
+      <a href="../Project_02_2026_Transformation_Roadmap/2026_CviLux_Transformation_Roadmap.html" class="card-hover bg-stone-50 rounded-xl p-5 border border-stone-200 block">
+        <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-3" style="background:var(--purple)"><i data-lucide="route" class="w-6 h-6 text-white"></i></div>
+        <div class="text-xs font-bold mb-1" style="color:var(--purple)">DOCUMENT 3</div>
+        <h3 class="font-bold text-lg">2026 改造任務書</h3>
+        <p class="text-xs text-stone-500 mt-1">12 章節 · 三軌並行 + 7 階段</p>
+        <p class="text-xs text-stone-700 mt-3">舊網站 / 新網站 / Agent 三軌 + WF AIGP 整合 + 製造 AI 10 個模型</p>
+        <span class="text-xs mt-3 inline-flex items-center gap-1" style="color:var(--purple)">點擊開啟 <i data-lucide="external-link" class="w-3 h-3"></i></span>
+      </a>
+      <a href="../Project_03_AI_PoC_Readiness/2026_CviLux_AI_PoC_Readiness_Assessment.html" class="card-hover bg-stone-50 rounded-xl p-5 border border-stone-200 block">
+        <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-3" style="background:var(--green)"><i data-lucide="target" class="w-6 h-6 text-white"></i></div>
+        <div class="text-xs font-bold mb-1" style="color:var(--green)">DOCUMENT 4</div>
+        <h3 class="font-bold text-lg">AI PoC 評估書</h3>
+        <p class="text-xs text-stone-500 mt-1">2 PoC × 10 維度</p>
+        <p class="text-xs text-stone-700 mt-3">庫存預測（東莞 Top 100）+ 產線優化（FFC 線）共用治理 + 量產化路徑</p>
+        <span class="text-xs mt-3 inline-flex items-center gap-1" style="color:var(--green)">點擊開啟 <i data-lucide="external-link" class="w-3 h-3"></i></span>
+      </a>
+    </div>
+
+    <div class="bg-stone-900 text-white rounded-xl p-6">
+      <div class="text-xs tracking-widest text-amber-300 mb-3">CLAUDE SKILLS · 集團共用智能技能</div>
+      <div class="grid md:grid-cols-3 gap-4 text-sm">
+        <div class="bg-white/5 border border-white/10 rounded-lg p-4">
+          <div class="font-bold text-amber-300 mb-1">hannstar-brand-cis v1.2 ⭐</div>
+          <p class="text-xs text-stone-300">下次提到「瀚荃」「CviLux」會自動套用 v1.2 控股結構與品牌規範</p>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-lg p-4">
+          <div class="font-bold text-amber-300 mb-1">enterprise-ai-platform-website</div>
+          <p class="text-xs text-stone-300">下次提到「AI 平台」「EIP」「Multi-Agent」會自動套用網站架構模板</p>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-lg p-4">
+          <div class="font-bold text-amber-300 mb-1">cvilux-doc-organizer</div>
+          <p class="text-xs text-stone-300">提到文件整理時自動載入</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 戰略地圖 ===== -->
+<section id="strategy" class="py-16" style="background:linear-gradient(180deg,#0a1f3d 0%,#1a1f3d 100%);">
+  <div class="max-w-7xl mx-auto px-8 text-white">
+    <div class="grid lg:grid-cols-12 gap-10 mb-8">
+      <div class="lg:col-span-4">
+        <div class="section-num" style="color:var(--red-l)">04</div>
+        <h2 class="font-display text-3xl font-black mt-2 text-white">戰略地圖</h2>
+        <p class="text-stone-300 text-sm">Strategy Map at a Glance</p>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-stone-300 leading-relaxed">把今天 4 份文件、3 個 skill、所有決策放在同一張地圖上。橫軸是時間（30 天 → 24 個月），縱軸是層級（戰略 / 平台 / 製造）。</p>
+      </div>
+    </div>
+
+    <!-- 三層戰略地圖 -->
+    <div class="bg-white/5 backdrop-blur rounded-xl p-6 border border-white/20">
+      <!-- 戰略層 -->
+      <div class="mb-5 pb-5 border-b border-white/10">
+        <div class="text-xs tracking-widest text-amber-300 mb-3">STRATEGIC LAYER · 戰略層（董事會 / PMO 主導）</div>
+        <div class="grid md:grid-cols-4 gap-3 text-sm">
+          <div class="bg-amber-900/30 rounded-lg p-3 border border-amber-500/30"><div class="font-bold text-amber-200">CIS v1.2 規範</div><div class="text-xs text-stone-300 mt-1">控股 + 3 子公司 + 前店 / 後勤模式</div></div>
+          <div class="bg-amber-900/30 rounded-lg p-3 border border-amber-500/30"><div class="font-bold text-amber-200">永續政策</div><div class="text-xs text-stone-300 mt-1">Let's ESG · CBAM · 淨零路徑</div></div>
+          <div class="bg-amber-900/30 rounded-lg p-3 border border-amber-500/30"><div class="font-bold text-amber-200">AI 治理委員會</div><div class="text-xs text-stone-300 mt-1">法務 + 資安 + 業務 + 永續</div></div>
+          <div class="bg-amber-900/30 rounded-lg p-3 border border-amber-500/30"><div class="font-bold text-amber-200">資料治理</div><div class="text-xs text-stone-300 mt-1">跨境 PIPL · 主資料 owner</div></div>
+        </div>
+      </div>
+
+      <!-- 平台層 -->
+      <div class="mb-5 pb-5 border-b border-white/10">
+        <div class="text-xs tracking-widest text-blue-300 mb-3">PLATFORM LAYER · 平台層（IT + 各 BU）</div>
+        <div class="grid md:grid-cols-3 gap-3 text-sm">
+          <div class="bg-blue-900/30 rounded-lg p-3 border border-blue-500/30">
+            <div class="font-bold text-blue-200">對外網站（Project_01）</div>
+            <ul class="text-xs text-stone-300 mt-2 space-y-0.5">
+              <li>· 集團首頁 + 多品牌</li>
+              <li>· CviLux 產品搜尋 + AI 圖搜</li>
+              <li>· sCMS / EAP / CviMall 導流</li>
+              <li>· Lead → D365</li>
+            </ul>
+          </div>
+          <div class="bg-blue-900/30 rounded-lg p-3 border border-blue-500/30">
+            <div class="font-bold text-blue-200">對內 EIP（Project_02）</div>
+            <ul class="text-xs text-stone-300 mt-2 space-y-0.5">
+              <li>· EIP 4 廠商選型（A+B 雙混合）</li>
+              <li>· SSO + 簽核 + 應用入口</li>
+              <li>· 文件審核 / 報價中心</li>
+              <li>· ERP 庫存促銷管理</li>
+            </ul>
+          </div>
+          <div class="bg-blue-900/30 rounded-lg p-3 border border-blue-500/30">
+            <div class="font-bold text-blue-200">Multi-Agent (1+9)</div>
+            <ul class="text-xs text-stone-300 mt-2 space-y-0.5">
+              <li>· Orchestrator 編排者</li>
+              <li>· 技術 / 銷售 / ESG / 圖搜</li>
+              <li>· 報價 / 替代料</li>
+              <li>· 行銷 / 品牌語調 / 維運</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 製造層 -->
+      <div>
+        <div class="text-xs tracking-widest text-green-300 mb-3">MANUFACTURING LAYER · 製造層（廠長 / IE / 品保）</div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-3 text-sm">
+          <div class="bg-green-900/30 rounded-lg p-3 border border-green-500/30"><div class="font-bold text-green-200">PoC #1（試）</div><div class="text-xs text-stone-300 mt-1">安全庫存預測<br />東莞 Top 100</div></div>
+          <div class="bg-green-900/30 rounded-lg p-3 border border-green-500/30"><div class="font-bold text-green-200">PoC #2（試）</div><div class="text-xs text-stone-300 mt-1">產線效率優化<br />FFC 高頻線</div></div>
+          <div class="bg-stone-700/40 rounded-lg p-3 border border-stone-500/30"><div class="font-bold text-stone-200">高優先（Ph2）</div><div class="text-xs text-stone-400 mt-1">AI 視覺品檢<br />客訴根因<br />能源優化</div></div>
+          <div class="bg-stone-700/40 rounded-lg p-3 border border-stone-500/30"><div class="font-bold text-stone-200">中優先（Ph3-4）</div><div class="text-xs text-stone-400 mt-1">預測性維護<br />智能排程<br />ESG AI 報表</div></div>
+          <div class="bg-stone-700/40 rounded-lg p-3 border border-stone-500/30"><div class="font-bold text-stone-200">後期（Ph5+）</div><div class="text-xs text-stone-400 mt-1">智能工安<br />智能採購<br />設計 Copilot</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 23 條決策清單 ===== -->
+<section id="decisions" class="bg-white py-16">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-8">
+      <div class="lg:col-span-4">
+        <div class="section-num">05</div>
+        <h2 class="font-display text-3xl font-black mt-2">關鍵決策清單</h2>
+        <p class="text-stone-500 text-sm">23 Decisions · Yes/No Format</p>
+      </div>
+      <div class="lg:col-span-8">
+        <div class="bg-amber-50 rounded-xl p-4 border border-amber-200">
+          <p class="text-sm text-stone-700"><strong>使用方式</strong>：建議現場以投影展示本表，逐條 Yes/No 表決；現場無法定案者列「待決事項」，3 個工作日內由 PMO 補資料再次出案。<strong>目標：現場決議比率 ≥ 80%</strong>。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- A 組：AI 平台 9 條 -->
+    <div class="mb-6">
+      <h3 class="text-lg font-bold mb-3 flex items-center gap-2"><span class="pill pill-blue">A 組 · AI 平台架構</span>9 條決策</h3>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div class="bg-stone-50 rounded-lg p-3 border border-stone-200"><div class="text-xs font-bold">A1. 第一階段範圍</div><p class="text-xs text-stone-600 mt-1">是否確認 Phase 1 MVP 6 個月內上線？</p></div>
+        <div class="bg-stone-50 rounded-lg p-3 border border-stone-200"><div class="text-xs font-bold">A2. 主資料來源</div><p class="text-xs text-stone-600 mt-1">產品/庫存=ERP、客戶=D365、文件=SharePoint、ESG=EAP？</p></div>
+        <div class="bg-stone-50 rounded-lg p-3 border border-stone-200"><div class="text-xs font-bold">A3. API 串接邊界</div><p class="text-xs text-stone-600 mt-1">不重做 ERP/CRM/M365/EAP 主功能？</p></div>
+        <div class="bg-stone-50 rounded-lg p-3 border border-stone-200"><div class="text-xs font-bold">A4. AI 分版</div><p class="text-xs text-stone-600 mt-1">MVP 版 vs 進階版 Multi-Agent 分階段？</p></div>
+        <div class="bg-stone-50 rounded-lg p-3 border border-stone-200"><div class="text-xs font-bold">A5. 報價策略</div><p class="text-xs text-stone-600 mt-1">採「規則 + AI 建議 + 人工審核」三段式？</p></div>
+        <div class="bg-stone-50 rounded-lg p-3 border border-stone-200"><div class="text-xs font-bold">A6. ERP 寫入策略</div><p class="text-xs text-stone-600 mt-1">第一期 ERP 只讀不寫？</p></div>
+        <div class="bg-stone-50 rounded-lg p-3 border border-stone-200"><div class="text-xs font-bold">A7. EAP 處理</div><p class="text-xs text-stone-600 mt-1">EAP 只導流不重做（另案開發）？</p></div>
+        <div class="bg-stone-50 rounded-lg p-3 border border-stone-200"><div class="text-xs font-bold">A8. 企業微信</div><p class="text-xs text-stone-600 mt-1">列為 Phase 6 後期，不列入第一期？</p></div>
+        <div class="bg-stone-50 rounded-lg p-3 border border-stone-200"><div class="text-xs font-bold">A9. UAT / 壓測 / SLA</div><p class="text-xs text-stone-600 mt-1">驗收標準是否確認？</p></div>
+      </div>
+    </div>
+
+    <!-- B 組：PoC 14 條 -->
+    <div class="mb-6">
+      <h3 class="text-lg font-bold mb-3 flex items-center gap-2"><span class="pill pill-green">B 組 · 製造 AI PoC</span>14 條決策</h3>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div class="bg-stone-50 rounded-lg p-3 border border-stone-200"><div class="text-xs font-bold">B1. 試點廠線</div><p class="text-xs text-stone-600 mt-1">PoC#1 東莞 / PoC#2 FFC 高頻線？</p></div>
+        <div class="bg-stone-50 rounded-lg p-3 border border-stone-200"><div class="text-xs font-bold">B2. 試點範圍</div><p class="text-xs text-stone-600 mt-1">PoC#1 Top 100 SKU / PoC#2 單線？</p></div>
+        <div class="bg-stone-50 rounded-lg p-3 border-2" style="border-color:var(--red)"><div class="text-xs font-bold" style="color:var(--red)">B3. ★ PoC 預算</div><p class="text-xs text-stone-600 mt-1">合計 NT$ 1,010-1,440 萬核准？</p></div>
+        <div class="bg-stone-50 rounded-lg p-3 border border-stone-200"><div class="text-xs font-bold">B4. 雲廠平台</div><p class="text-xs text-stone-600 mt-1">Azure 為主、Vertex AI 輔助？</p></div>
+        <div class="bg-stone-50 rounded-lg p-3 border border-stone-200"><div class="text-xs font-bold">B5. Owner 任命</div><p class="text-xs text-stone-600 mt-1">採購副理 + 廠長兼 IE</p></div>
+        <div class="bg-stone-50 rounded-lg p-3 border border-stone-200"><div class="text-xs font-bold">B6. 跨境資料</div><p class="text-xs text-stone-600 mt-1">陸區資料留陸 / 只傳 aggregated？</p></div>
+        <div class="bg-stone-50 rounded-lg p-3 border border-stone-200"><div class="text-xs font-bold">B7. AI 治理委員會</div><p class="text-xs text-stone-600 mt-1">永續聯辦 + IT + 法務 + 資安？</p></div>
+        <div class="bg-stone-50 rounded-lg p-3 border border-stone-200"><div class="text-xs font-bold">B8. Human-in-loop</div><p class="text-xs text-stone-600 mt-1">所有 AI 建議經人工審核？</p></div>
+        <div class="bg-stone-50 rounded-lg p-3 border border-stone-200"><div class="text-xs font-bold">B9. KPI 標準</div><p class="text-xs text-stone-600 mt-1">兩 PoC 各自 Go/No-Go 確認？</p></div>
+        <div class="bg-stone-50 rounded-lg p-3 border border-stone-200"><div class="text-xs font-bold">B10. 知識轉移</div><p class="text-xs text-stone-600 mt-1">外部顧問 4 週培訓內部接手？</p></div>
+        <div class="bg-stone-50 rounded-lg p-3 border border-stone-200"><div class="text-xs font-bold">B11. WF AIGP 對接</div><p class="text-xs text-stone-600 mt-1">第一階段先用 ERP 既有 API？</p></div>
+        <div class="bg-stone-50 rounded-lg p-3 border border-stone-200"><div class="text-xs font-bold">B12. 失敗止損</div><p class="text-xs text-stone-600 mt-1">中途終止條件、預算止損點？</p></div>
+        <div class="bg-stone-50 rounded-lg p-3 border border-stone-200"><div class="text-xs font-bold">B13. 對外宣傳</div><p class="text-xs text-stone-600 mt-1">PoC 階段對客戶 / 投資人公開？</p></div>
+        <div class="bg-stone-50 rounded-lg p-3 border border-stone-200"><div class="text-xs font-bold">B14. 量產預先承諾</div><p class="text-xs text-stone-600 mt-1">PoC 成功後預先承諾 Stage 2 預算？</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 時程 Gantt ===== -->
+<section id="timeline" class="bg-stone-50 py-16">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-8">
+      <div class="lg:col-span-4">
+        <div class="section-num">06</div>
+        <h2 class="font-display text-3xl font-black mt-2">時程總覽</h2>
+        <p class="text-stone-500 text-sm">Master Timeline (Gantt View)</p>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-stone-700 leading-relaxed">三軌並行於同一時間軸：30 天啟動 → 7 階段平台 → 兩個 PoC 同步推進。</p>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-xl p-6 border border-stone-200 overflow-x-auto">
+      <div style="min-width:800px;">
+        <!-- Header months -->
+        <div class="flex items-center mb-3 text-xs font-bold text-stone-500 border-b pb-2">
+          <div style="width:200px">階段 / 軌道</div>
+          <div class="flex-1 grid grid-cols-12 gap-px">
+            <div class="text-center">M1</div><div class="text-center">M2</div><div class="text-center">M3</div>
+            <div class="text-center">M4</div><div class="text-center">M5</div><div class="text-center">M6</div>
+            <div class="text-center">M7</div><div class="text-center">M8</div><div class="text-center">M9</div>
+            <div class="text-center">M12</div><div class="text-center">M18</div><div class="text-center">M24</div>
+          </div>
+        </div>
+
+        <!-- Track 1: Old site -->
+        <div class="gantt-row">
+          <div style="width:200px;font-size:.8rem"><span class="pill pill-grey">T1</span> 舊網站維持</div>
+          <div class="flex-1 relative" style="height:24px;">
+            <div class="gantt-bar absolute left-0" style="background:#94A3B8;width:50%;">凍結新功能</div>
+          </div>
+        </div>
+        <!-- Track 2: New site Phases -->
+        <div class="gantt-row">
+          <div style="width:200px;font-size:.8rem"><span class="pill pill-grey">T2</span> P0 盤點</div>
+          <div class="flex-1 relative" style="height:24px;">
+            <div class="gantt-bar absolute left-0" style="background:#3D3A39;width:8%;">1m</div>
+          </div>
+        </div>
+        <div class="gantt-row">
+          <div style="width:200px;font-size:.8rem"><span class="pill pill-red">T2</span> P1 MVP ★</div>
+          <div class="flex-1 relative" style="height:24px;">
+            <div class="gantt-bar absolute" style="background:var(--red);left:8%;width:42%;">5 個月 接單與轉換能力</div>
+          </div>
+        </div>
+        <div class="gantt-row">
+          <div style="width:200px;font-size:.8rem"><span class="pill pill-blue">T2</span> P2 AI 強化</div>
+          <div class="flex-1 relative" style="height:24px;">
+            <div class="gantt-bar absolute" style="background:var(--blue);left:50%;width:33%;">4 個月</div>
+          </div>
+        </div>
+        <div class="gantt-row">
+          <div style="width:200px;font-size:.8rem"><span class="pill pill-green">T2</span> P3 ESG 導流</div>
+          <div class="flex-1 relative" style="height:24px;">
+            <div class="gantt-bar absolute" style="background:var(--green);left:75%;width:25%;">3m</div>
+          </div>
+        </div>
+        <div class="gantt-row">
+          <div style="width:200px;font-size:.8rem"><span class="pill pill-orange">T2</span> P4 商城</div>
+          <div class="flex-1 relative" style="height:24px;">
+            <div class="gantt-bar absolute" style="background:var(--orange);left:75%;width:33%;">4m</div>
+          </div>
+        </div>
+        <!-- Track 3: Agents -->
+        <div class="gantt-row">
+          <div style="width:200px;font-size:.8rem"><span class="pill pill-purple">T3</span> Agent Shadow</div>
+          <div class="flex-1 relative" style="height:24px;">
+            <div class="gantt-bar absolute" style="background:var(--purple);left:8%;width:50%;">影子模式微調</div>
+          </div>
+        </div>
+        <div class="gantt-row">
+          <div style="width:200px;font-size:.8rem"><span class="pill pill-purple">T3</span> Agent 上線</div>
+          <div class="flex-1 relative" style="height:24px;">
+            <div class="gantt-bar absolute" style="background:var(--purple);left:58%;width:42%;">逐步釋出流量</div>
+          </div>
+        </div>
+
+        <div style="border-top:2px dashed #d1d5db;margin:8px 0"></div>
+
+        <!-- PoCs (parallel) -->
+        <div class="gantt-row">
+          <div style="width:200px;font-size:.8rem"><span class="pill pill-amber">PoC#1</span> 庫存預測</div>
+          <div class="flex-1 relative" style="height:24px;">
+            <div class="gantt-bar absolute" style="background:var(--amber);left:8%;width:25%;">3m PoC</div>
+            <div class="gantt-bar absolute opacity-60" style="background:var(--amber);left:33%;width:25%;">Pilot Plus 3m</div>
+            <div class="gantt-bar absolute opacity-40" style="background:var(--amber);left:58%;width:42%;">集團 Roll-out 12m</div>
+          </div>
+        </div>
+        <div class="gantt-row">
+          <div style="width:200px;font-size:.8rem"><span class="pill pill-amber">PoC#2</span> 產線效率</div>
+          <div class="flex-1 relative" style="height:24px;">
+            <div class="gantt-bar absolute" style="background:#F59E0B;left:8%;width:25%;">3m PoC + IoT</div>
+            <div class="gantt-bar absolute opacity-60" style="background:#F59E0B;left:33%;width:25%;">Pilot Plus 3m</div>
+            <div class="gantt-bar absolute opacity-40" style="background:#F59E0B;left:58%;width:42%;">集團 Roll-out 12m</div>
+          </div>
+        </div>
+
+        <div style="border-top:2px dashed #d1d5db;margin:8px 0"></div>
+
+        <div class="gantt-row">
+          <div style="width:200px;font-size:.8rem"><span class="pill pill-red">P5</span> 瀚荃學苑</div>
+          <div class="flex-1 relative" style="height:24px;">
+            <div class="gantt-bar absolute" style="background:#7C3AED;left:75%;width:25%;">3m</div>
+          </div>
+        </div>
+        <div class="gantt-row">
+          <div style="width:200px;font-size:.8rem"><span class="pill pill-grey">P6</span> 兩岸整合</div>
+          <div class="flex-1 relative" style="height:24px;">
+            <div class="gantt-bar absolute" style="background:#1A1A1A;left:83%;width:17%;">陸區</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <p class="text-xs text-stone-500 mt-3 text-center"><span class="verify-tag verify-inferred">推論</span> 時程估算為依產業類似專案規模推估，實際時程須由 IT 與 BU 依資源評估後敲定。</p>
+  </div>
+</section>
+
+<!-- ===== 預算總表 ===== -->
+<section id="budget" class="bg-white py-16">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-8">
+      <div class="lg:col-span-4">
+        <div class="section-num">07</div>
+        <h2 class="font-display text-3xl font-black mt-2">資源與預算</h2>
+        <p class="text-stone-500 text-sm">Resources & Budget</p>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-stone-700 leading-relaxed">本表整合 AI 平台、製造 PoC、量產化各階段預算估算 <span class="verify-tag verify-inferred">推論</span>，供董事會核定預算上限。</p>
+      </div>
+    </div>
+
+    <table class="cis mb-6">
+      <thead>
+        <tr><th>項目</th><th>期間</th><th>範圍</th><th>NT$ 估算</th><th>核准狀態</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>PoC #1 庫存預測</strong></td>
+          <td>3 個月</td>
+          <td>東莞 · Top 100 SKU</td>
+          <td class="text-right"><strong>430 - 590 萬</strong></td>
+          <td><span class="pill pill-amber">待 D+7 核准</span></td>
+        </tr>
+        <tr>
+          <td><strong>PoC #2 產線效率</strong></td>
+          <td>3 個月</td>
+          <td>FFC 高頻線（含 IoT 部署）</td>
+          <td class="text-right"><strong>580 - 850 萬</strong></td>
+          <td><span class="pill pill-amber">待 D+7 核准</span></td>
+        </tr>
+        <tr style="background:#FFF7ED;">
+          <td><strong>★ PoC 合計</strong></td>
+          <td>並行 3 個月</td>
+          <td>2 試點同步</td>
+          <td class="text-right" style="color:var(--red);font-weight:bold;">1,010 - 1,440 萬</td>
+          <td><span class="pill pill-red">優先核准</span></td>
+        </tr>
+        <tr>
+          <td>AI 平台 Phase 0-1（MVP）</td>
+          <td>6 個月</td>
+          <td>5 分包 A-E + PMO</td>
+          <td class="text-right">3,000 - 5,000 萬</td>
+          <td><span class="pill pill-grey">待 RFP 後估</span></td>
+        </tr>
+        <tr>
+          <td>AI 平台 Phase 2-3</td>
+          <td>7 個月</td>
+          <td>AI 強化 + ESG 導流</td>
+          <td class="text-right">2,000 - 3,500 萬</td>
+          <td><span class="pill pill-grey">後續</span></td>
+        </tr>
+        <tr>
+          <td>AI 平台 Phase 4-6</td>
+          <td>11 個月</td>
+          <td>商城 + 學苑 + 兩岸</td>
+          <td class="text-right">2,500 - 4,000 萬</td>
+          <td><span class="pill pill-grey">後續</span></td>
+        </tr>
+        <tr>
+          <td>PoC → Pilot Plus → Roll-out</td>
+          <td>15 個月</td>
+          <td>2 PoC 全集團部署</td>
+          <td class="text-right">3,300 - 5,500 萬</td>
+          <td><span class="pill pill-grey">後續（依 PoC 結果）</span></td>
+        </tr>
+        <tr>
+          <td>製造 AI 延伸（其他 8 模型）</td>
+          <td>分批 12-36 個月</td>
+          <td>視覺品檢 / 預測維護等</td>
+          <td class="text-right">逐案立項</td>
+          <td><span class="pill pill-grey">後續</span></td>
+        </tr>
+        <tr style="background:#FEE2E2;">
+          <td><strong>★ 全期總投入估算</strong></td>
+          <td>24 個月</td>
+          <td>平台 + PoC + Roll-out</td>
+          <td class="text-right" style="color:var(--red);font-weight:bold;">11,800 - 19,440 萬</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>年度維運（24 個月後）</td>
+          <td>每年</td>
+          <td>含人員 + 雲端 + 模型再訓練</td>
+          <td class="text-right">800 - 1,200 萬 / 年</td>
+          <td><span class="pill pill-grey">編入年度預算</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="grid md:grid-cols-3 gap-4">
+      <div class="bg-rose-50 rounded-xl p-4 border border-rose-200">
+        <div class="text-xs font-bold mb-1" style="color:var(--red)">會議重點 1</div>
+        <p class="text-sm text-stone-700">本日只需核准 <strong>PoC 1,010-1,440 萬</strong> 開始啟動；後續預算依 KPI 達標分階段核定。</p>
+      </div>
+      <div class="bg-blue-50 rounded-xl p-4 border border-blue-200">
+        <div class="text-xs font-bold mb-1" style="color:var(--blue)">會議重點 2</div>
+        <p class="text-sm text-stone-700">每階段結束報告 → 董事會核定下階段預算與範圍；任一階段未達標可暫停 / 終止。</p>
+      </div>
+      <div class="bg-emerald-50 rounded-xl p-4 border border-emerald-200">
+        <div class="text-xs font-bold text-emerald-700 mb-1">會議重點 3</div>
+        <p class="text-sm text-stone-700">投資總額相當於 2025 營收 4-6%，符合製造業數位轉型公司常規 <span class="verify-tag verify-inferred">推論</span>。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 30 天行動 ===== -->
+<section id="actions" class="py-16 red-bg text-white">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="text-center mb-10">
+      <div class="text-xs tracking-[0.4em] text-red-200 mb-3">D-30 KICK-OFF · 30 天行動</div>
+      <h2 class="text-4xl font-black font-display">會議結束後立即啟動</h2>
+    </div>
+
+    <div class="grid md:grid-cols-4 gap-4 mb-8">
+      <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20">
+        <div class="text-3xl font-black text-red-200">D+7</div>
+        <div class="font-bold mt-2">啟動會議結論</div>
+        <ul class="text-sm text-red-100 mt-2 space-y-1">
+          <li>· 23 條決策定案</li>
+          <li>· 待決事項列管</li>
+          <li>· 資料 Owner 任命</li>
+          <li>· PMO 開張</li>
+        </ul>
+      </div>
+      <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20">
+        <div class="text-3xl font-black text-red-200">D+14</div>
+        <div class="font-bold mt-2">RFP 發放</div>
+        <ul class="text-sm text-red-100 mt-2 space-y-1">
+          <li>· A-E 五包各 3-5 家</li>
+          <li>· PoC 顧問各 3 家</li>
+          <li>· AI 治理委員會成立</li>
+          <li>· 預算定案</li>
+        </ul>
+      </div>
+      <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20">
+        <div class="text-3xl font-black text-red-200">D+21</div>
+        <div class="font-bold mt-2">Phase 0 啟動</div>
+        <ul class="text-sm text-red-100 mt-2 space-y-1">
+          <li>· 系統架構圖</li>
+          <li>· API 初版清單</li>
+          <li>· 資料字典 v0</li>
+          <li>· IoT 規格</li>
+        </ul>
+      </div>
+      <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20">
+        <div class="text-3xl font-black text-red-200">D+30</div>
+        <div class="font-bold mt-2">Kick-off</div>
+        <ul class="text-sm text-red-100 mt-2 space-y-1">
+          <li>· 廠商簽約</li>
+          <li>· Phase 1 動工</li>
+          <li>· 兩 PoC 同步啟動</li>
+          <li>· 舊網站凍結新功能</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bg-black/30 rounded-xl p-6 border border-white/20">
+      <div class="text-xs tracking-widest text-red-200 mb-3">CHAIRMAN'S STANDING ORDER · 董事長常設指令</div>
+      <p class="text-xl font-black font-display leading-tight mb-3">
+        「永續聯辦公室同步擔任 PMO；CIS v1.2 為強制規範；6 個月內 Phase 1 MVP 上線；製造 AI 模型按優先順序啟動 PoC；每月一次董事會匯報。」
+      </p>
+      <p class="text-sm text-red-200">— 楊超群　Steve Yang　董事長兼永續長</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Q&A ===== -->
+<section id="qa" class="bg-white py-16">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-8">
+      <div class="lg:col-span-4">
+        <div class="section-num">08</div>
+        <h2 class="font-display text-3xl font-black mt-2">Q&amp;A 預備</h2>
+        <p class="text-stone-500 text-sm">Anticipated Questions</p>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-stone-700 leading-relaxed">主持人事先準備 10 個高機率問題與簡短回答，會議現場可快速回應，避免冷場或失焦。</p>
+      </div>
+    </div>
+
+    <div class="space-y-2">
+      <details class="bg-stone-50 rounded-xl border border-stone-200">
+        <summary class="p-4 hover:bg-stone-100 flex items-center justify-between"><span class="font-bold">Q1：為什麼是 1,010-1,440 萬？這個範圍怎麼算？</span><i data-lucide="chevron-right" class="chev w-4 h-4"></i></summary>
+        <div class="p-4 pt-0 text-sm text-stone-700 border-t border-stone-200">A：PoC#1 約 430-590 萬（資料工程 + ML + 顧問 + 內部資源）；PoC#2 約 580-850 萬（含 IoT 部署 100-180 萬）。範圍取決於最終廠商報價、IoT 點位數、是否啟用視覺品檢。詳見 PoC 評估書 §5。</div>
+      </details>
+      <details class="bg-stone-50 rounded-xl border border-stone-200">
+        <summary class="p-4 hover:bg-stone-100 flex items-center justify-between"><span class="font-bold">Q2：為什麼選東莞而不是淡水做試點？</span><i data-lucide="chevron-right" class="chev w-4 h-4"></i></summary>
+        <div class="p-4 pt-0 text-sm text-stone-700 border-t border-stone-200">A：東莞為集團主製造廠（量大、料號多、資料齊），跑出 PoC 結果可推 2-3 廠；淡水雖在台灣便於配合，但量體較小不利於模型訓練。如有 PIPL 顧慮，先做台灣端（淡水）也可接受，但需重新評估資料量是否足夠。</div>
+      </details>
+      <details class="bg-stone-50 rounded-xl border border-stone-200">
+        <summary class="p-4 hover:bg-stone-100 flex items-center justify-between"><span class="font-bold">Q3：WF AIGP 還在升級中，會不會影響進度？</span><i data-lucide="chevron-right" class="chev w-4 h-4"></i></summary>
+        <div class="p-4 pt-0 text-sm text-stone-700 border-t border-stone-200">A：本案 Phase 1 不依賴 WF AIGP，先用鼎新 ERP 既有 API + 中介整合層；WF AIGP 上線後再透過 Webhook / API 漸進整合。即使 WF AIGP 延誤 6 個月也不影響 Phase 1 上線。</div>
+      </details>
+      <details class="bg-stone-50 rounded-xl border border-stone-200">
+        <summary class="p-4 hover:bg-stone-100 flex items-center justify-between"><span class="font-bold">Q4：AllSor 為什麼從關係企業改成非集團？</span><i data-lucide="chevron-right" class="chev w-4 h-4"></i></summary>
+        <div class="p-4 pt-0 text-sm text-stone-700 border-t border-stone-200">A：依董事長 2026-05-03 指示，AllSor 瀚碩科技股份有限公司在法律上獨立於瀚荃集團，未涉股權關係。雙方僅為協同行銷夥伴。CIS v1.2 已正式更正，所有對外文宣須清楚標示「非集團公司」。</div>
+      </details>
+      <details class="bg-stone-50 rounded-xl border border-stone-200">
+        <summary class="p-4 hover:bg-stone-100 flex items-center justify-between"><span class="font-bold">Q5：AI 會不會自動修改 ERP 資料？</span><i data-lucide="chevron-right" class="chev w-4 h-4"></i></summary>
+        <div class="p-4 pt-0 text-sm text-stone-700 border-t border-stone-200">A：絕對不會。所有 AI 建議必經 Human-in-the-loop 人工審核才執行；超毛利底線報價、修改 ERP 主檔、發布外部訊息、刪除動作都是「永遠禁止 Agent 自動執行」之清單。詳見 AI 平台網站 §6 Multi-Agent Guardrails。</div>
+      </details>
+      <details class="bg-stone-50 rounded-xl border border-stone-200">
+        <summary class="p-4 hover:bg-stone-100 flex items-center justify-between"><span class="font-bold">Q6：6 個月做 Phase 1 MVP 太樂觀？</span><i data-lucide="chevron-right" class="chev w-4 h-4"></i></summary>
+        <div class="p-4 pt-0 text-sm text-stone-700 border-t border-stone-200">A：MVP 範圍刻意縮小 — 只做：多品牌首頁 + CviLux 產品搜尋 + RFQ + D365 寫入 + ERP 庫存讀取 + AI 基礎 RAG。不做 CviMall 完整交易、企業微信、AI 全自動報價。如資料盤點順利，6 個月可達；如資料品質差，先做 2-4 週「資料修補 Sprint」。</div>
+      </details>
+      <details class="bg-stone-50 rounded-xl border border-stone-200">
+        <summary class="p-4 hover:bg-stone-100 flex items-center justify-between"><span class="font-bold">Q7：如果 PoC 失敗怎麼辦？</span><i data-lucide="chevron-right" class="chev w-4 h-4"></i></summary>
+        <div class="p-4 pt-0 text-sm text-stone-700 border-t border-stone-200">A：PoC 結束時技術 KPI 全部達標 + 商業 KPI 至少 2 項達標 + 使用者滿意度 ≥ 3.5 才進量產化；否則啟動「為何失敗」回顧 + 決定終止 / 延長 / 重設範圍。即使失敗，集團累積「製造業 AI 落地能力」與資料治理基礎仍是正資產。</div>
+      </details>
+      <details class="bg-stone-50 rounded-xl border border-stone-200">
+        <summary class="p-4 hover:bg-stone-100 flex items-center justify-between"><span class="font-bold">Q8：陸區資料能不能傳台灣？</span><i data-lucide="chevron-right" class="chev w-4 h-4"></i></summary>
+        <div class="p-4 pt-0 text-sm text-stone-700 border-t border-stone-200">A：原則上陸區資料留陸區，僅將 aggregated 統計（如月度產能、缺料事件次數）傳台供集團視角。涉及客戶 PII / 商業機密的明細資料不跨境。實務做法：陸區獨立部署模型 + Azure 大陸地區 / 鼎新雲，與台灣部署同步權重但不共享原始資料。</div>
+      </details>
+      <details class="bg-stone-50 rounded-xl border border-stone-200">
+        <summary class="p-4 hover:bg-stone-100 flex items-center justify-between"><span class="font-bold">Q9：要不要趁機把 EAP 也整合進來重做？</span><i data-lucide="chevron-right" class="chev w-4 h-4"></i></summary>
+        <div class="p-4 pt-0 text-sm text-stone-700 border-t border-stone-200">A：不建議。EAP 為另案 SaaS 開發中的多租戶平台；本案網站只做：介紹 / 導流 / 試用申請 / Demo 申請 / API 串接，避免重做。EAP 上線後客戶從本網站 SSO 進入。</div>
+      </details>
+      <details class="bg-stone-50 rounded-xl border border-stone-200">
+        <summary class="p-4 hover:bg-stone-100 flex items-center justify-between"><span class="font-bold">Q10：員工會不會擔心 AI 取代工作？</span><i data-lucide="chevron-right" class="chev w-4 h-4"></i></summary>
+        <div class="p-4 pt-0 text-sm text-stone-700 border-t border-stone-200">A：本案定位為「AI 輔助、不自動決策」 — 採購、廠長、IE 工程師仍是主決策者，AI 提供建議與解釋。重複機械工作（資料整理、產生報表、回覆 FAQ）由 AI 處理；員工回到判斷、設計、客戶關係等高價值工作。瀚荃學苑 Phase 5 將提供員工 AI 協作訓練。</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 文件附錄 ===== -->
+<section class="bg-stone-50 py-16">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="text-center mb-10">
+      <div class="text-xs tracking-[0.3em] text-stone-500 mb-2">APPENDIX</div>
+      <h2 class="font-display text-3xl font-black">完整文件附錄</h2>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <a href="../README.md" class="bg-white rounded-xl p-5 border border-stone-200 card-hover block">
+        <div class="text-xs text-stone-500">主索引</div>
+        <div class="font-bold mt-1">資料夾架構 README</div>
+        <div class="text-xs text-stone-500 mt-2">總覽 CviLux/ + Project_xx/ 配置原則</div>
+      </a>
+      <a href="../CviLux/README.md" class="bg-white rounded-xl p-5 border border-stone-200 card-hover block">
+        <div class="text-xs text-stone-500">基礎資料</div>
+        <div class="font-bold mt-1">CviLux/ 集團資料說明</div>
+        <div class="text-xs text-stone-500 mt-2">5 個子資料夾用途與升版規則</div>
+      </a>
+      <a href="../CviLux/01_Group_Introduction_2026/" class="bg-white rounded-xl p-5 border border-stone-200 card-hover block">
+        <div class="text-xs text-stone-500">原始資料</div>
+        <div class="font-bold mt-1">2026 集團簡介中英文 + PPT</div>
+        <div class="text-xs text-stone-500 mt-2">3 個檔案，作為對外簡報基礎</div>
+      </a>
+      <a href="../CviLux/02_CIS_Original/" class="bg-white rounded-xl p-5 border border-stone-200 card-hover block">
+        <div class="text-xs text-stone-500">原始資料</div>
+        <div class="font-bold mt-1">6 份原始 CIS PDF</div>
+        <div class="text-xs text-stone-500 mt-2">2017 + 2019 各品牌歷史 CIS</div>
+      </a>
+      <a href="../CviLux/05_Skills/" class="bg-white rounded-xl p-5 border border-stone-200 card-hover block">
+        <div class="text-xs text-stone-500">智能技能</div>
+        <div class="font-bold mt-1">3 個 Claude Skills</div>
+        <div class="text-xs text-stone-500 mt-2">CIS v1.2 + AI 平台 + 文件整理</div>
+      </a>
+      <a href="../_Archive/README.md" class="bg-white rounded-xl p-5 border border-stone-200 card-hover block">
+        <div class="text-xs text-stone-500">封存</div>
+        <div class="font-bold mt-1">_Archive/ 舊版資料</div>
+        <div class="text-xs text-stone-500 mt-2">backup_v1 / legacy_skills / deprecated</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="bg-stone-900 text-stone-400 py-10">
+  <div class="max-w-7xl mx-auto px-8 grid md:grid-cols-4 gap-6 mb-6">
+    <div>
+      <div class="flex items-center gap-3 mb-3">
+        <div class="w-9 h-9 rounded-md flex items-center justify-center text-white font-bold" style="background:var(--red)">瀚</div>
+        <span class="text-white font-bold">瀚荃集團</span>
+      </div>
+      <p class="text-xs leading-relaxed">2026 數位轉型作戰會議 Hub v1.0<br />Connect the World · Conserve the Earth</p>
+    </div>
+    <div>
+      <div class="text-xs font-semibold text-stone-200 mb-3">本文件整合</div>
+      <ul class="space-y-1 text-xs">
+        <li>· CIS 手冊 v1.2</li>
+        <li>· AI 平台網站</li>
+        <li>· 2026 改造任務書</li>
+        <li>· AI PoC 評估書</li>
+      </ul>
+    </div>
+    <div>
+      <div class="text-xs font-semibold text-stone-200 mb-3">會議用途</div>
+      <ul class="space-y-1 text-xs">
+        <li>· 議程引導 7 項</li>
+        <li>· 23 條決策清單</li>
+        <li>· 預算總表</li>
+        <li>· Q&A 10 題預備</li>
+      </ul>
+    </div>
+    <div>
+      <div class="text-xs font-semibold text-stone-200 mb-3">主導</div>
+      <ul class="space-y-1 text-xs">
+        <li>· 楊超群 董事長兼永續長</li>
+        <li>· Let's ESG 永續聯辦公室（兼 PMO）</li>
+        <li>· 楊奕廣 CEO 督導</li>
+      </ul>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto px-8 pt-4 border-t border-stone-800 flex flex-col md:flex-row justify-between gap-2 text-xs">
+    <div>© 2026 CviLux Group · 內部會議用文件</div>
+    <div class="text-stone-500">v1.0 · 2026-05-03 · 整合本日全部交流資訊</div>
+  </div>
+</footer>
+
+<script>if(window.lucide)lucide.createIcons();</script>
+</body>
+</html>

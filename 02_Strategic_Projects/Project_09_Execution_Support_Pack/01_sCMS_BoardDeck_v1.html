@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>D2 · sCMS 商模董事會決策簡報 | CviCloud sCMS Business Model Board Deck</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+<style>
+  :root{--red:#E83A48;--red-d:#B0202A;--blue:#0085C2;--blue-d:#005078;--green:#10B981;--orange:#F07810;--g9:#3D3A39;--g7:#595757;--purple:#7C3AED;--amber:#F59E0B;}
+  body{font-family:'Century Gothic','Inter','Noto Sans TC',sans-serif;color:#1F1F1F;background:#0a0a0a;}
+  .font-display{font-family:'Noto Sans TC','Inter',sans-serif;letter-spacing:-0.01em;}
+  .slide{min-height:100vh;display:flex;align-items:center;padding:4rem 2rem;page-break-after:always;}
+  .slide-num{position:absolute;top:1.5rem;right:2rem;font-size:.8rem;color:#666;letter-spacing:.1em;}
+  .slide-title-bar{height:6px;background:linear-gradient(90deg,var(--red) 0%,var(--blue) 100%);}
+  .recommend-good{background:#D1FAE5;color:#065F46;font-weight:600;padding:.2rem .6rem;border-radius:6px;font-size:.75rem;}
+  .recommend-mid{background:#FEF3C7;color:#92400E;font-weight:600;padding:.2rem .6rem;border-radius:6px;font-size:.75rem;}
+  .recommend-bad{background:#FEE2E2;color:#991B1B;font-weight:600;padding:.2rem .6rem;border-radius:6px;font-size:.75rem;}
+  table.cis{width:100%;border-collapse:collapse;}
+  table.cis th{background:#1F1F1F;color:white;text-align:left;padding:.7rem 1rem;font-size:.75rem;letter-spacing:.05em;text-transform:uppercase;font-weight:700;}
+  table.cis td{padding:.65rem 1rem;border-bottom:1px solid #e5e5e5;font-size:.85rem;vertical-align:top;background:white;}
+  .magazine-cover{background:radial-gradient(ellipse at 15% 70%,rgba(0,133,194,.45),transparent 60%),linear-gradient(135deg,#0a0a0a 0%,#0a3a4a 50%,#005078 100%);}
+  .nav-fixed{position:fixed;bottom:1.5rem;right:1.5rem;z-index:50;}
+  @media print{.no-print{display:none !important;}.slide{page-break-after:always;}body{background:white;}}
+</style>
+</head>
+<body>
+
+<!-- ===== 投影片 1：封面 ===== -->
+<section class="slide magazine-cover text-white relative" id="s1">
+  <div class="slide-num text-blue-300">SLIDE 1 / 12</div>
+  <div class="max-w-5xl mx-auto w-full">
+    <div class="text-xs text-blue-300 tracking-[0.4em] mb-4">BOARD DECISION DECK · 董事會決策簡報</div>
+    <h1 class="text-6xl md:text-7xl font-black font-display leading-[1.05] mb-6">
+      D2 決策事項<br />
+      <span class="text-blue-300">CviCloud sCMS<br />商業模式選擇</span>
+    </h1>
+    <p class="text-xl text-blue-100 leading-tight max-w-3xl mb-8">
+      4 個方案 × 5 個評估面向 × 3 個情境推演<br />
+      <span class="text-base text-blue-200">— 提請董事會於 D+7 啟動會議定案</span>
+    </p>
+    <div class="grid grid-cols-3 gap-4 max-w-2xl">
+      <div class="bg-white/10 backdrop-blur border border-white/20 rounded-xl p-4 text-center">
+        <div class="text-3xl font-black text-blue-300">15</div>
+        <div class="text-xs text-stone-300">分鐘簡報</div>
+      </div>
+      <div class="bg-white/10 backdrop-blur border border-white/20 rounded-xl p-4 text-center">
+        <div class="text-3xl font-black text-blue-300">4</div>
+        <div class="text-xs text-stone-300">商模方案</div>
+      </div>
+      <div class="bg-white/10 backdrop-blur border border-white/20 rounded-xl p-4 text-center">
+        <div class="text-3xl font-black text-blue-300">1</div>
+        <div class="text-xs text-stone-300">需董事會決議</div>
+      </div>
+    </div>
+    <div class="absolute bottom-8 left-8 text-xs text-stone-400">
+      提案：永續聯辦公室（PMO）<br />核准：楊超群 董事長兼永續長 + 董事會
+    </div>
+  </div>
+</section>
+
+<!-- ===== 投影片 2：議程 ===== -->
+<section class="slide bg-white relative" id="s2">
+  <div class="slide-num text-stone-400">SLIDE 2 / 12 · AGENDA</div>
+  <div class="slide-title-bar absolute top-0 left-0 right-0"></div>
+  <div class="max-w-5xl mx-auto w-full">
+    <div class="text-xs text-blue-700 tracking-[0.3em] mb-3">AGENDA · 議程</div>
+    <h2 class="text-5xl font-black font-display mb-8">15 分鐘</h2>
+    <div class="space-y-3">
+      <div class="flex gap-4 items-start"><div class="w-12 h-12 rounded-lg flex items-center justify-center text-white font-bold flex-shrink-0" style="background:var(--red)">1</div><div><div class="font-bold text-lg">議題背景（2 分）</div><p class="text-stone-600">為什麼需要決定 sCMS 商模 + 與騰雲合作之關聯</p></div></div>
+      <div class="flex gap-4 items-start"><div class="w-12 h-12 rounded-lg flex items-center justify-center text-white font-bold flex-shrink-0" style="background:var(--red)">2</div><div><div class="font-bold text-lg">4 商模方案總覽（3 分）</div><p class="text-stone-600">A 賣斷 / B SaaS / C HaaS / D 混合 一頁圖</p></div></div>
+      <div class="flex gap-4 items-start"><div class="w-12 h-12 rounded-lg flex items-center justify-center text-white font-bold flex-shrink-0" style="background:var(--red)">3</div><div><div class="font-bold text-lg">財務推演（4 分）</div><p class="text-stone-600">3 年 ARR 與毛利模擬；保守 / 中性 / 樂觀情境</p></div></div>
+      <div class="flex gap-4 items-start"><div class="w-12 h-12 rounded-lg flex items-center justify-center text-white font-bold flex-shrink-0" style="background:var(--red)">4</div><div><div class="font-bold text-lg">非財務考量（3 分）</div><p class="text-stone-600">對品牌、組織、風險、客戶體驗的影響</p></div></div>
+      <div class="flex gap-4 items-start"><div class="w-12 h-12 rounded-lg flex items-center justify-center text-white font-bold flex-shrink-0" style="background:var(--red)">5</div><div><div class="font-bold text-lg">PMO 建議（1 分）</div><p class="text-stone-600">D 混合分層 + 漸進啟用</p></div></div>
+      <div class="flex gap-4 items-start"><div class="w-12 h-12 rounded-lg flex items-center justify-center text-white font-bold flex-shrink-0" style="background:var(--amber)">★</div><div><div class="font-bold text-lg">Q&A + 表決（2 分）</div><p class="text-stone-600">董事會討論並做出決議</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 投影片 3：背景 ===== -->
+<section class="slide bg-stone-50 relative" id="s3">
+  <div class="slide-num text-stone-400">SLIDE 3 / 12 · BACKGROUND</div>
+  <div class="slide-title-bar absolute top-0 left-0 right-0"></div>
+  <div class="max-w-5xl mx-auto w-full">
+    <div class="text-xs text-blue-700 tracking-[0.3em] mb-3">BACKGROUND · 議題背景</div>
+    <h2 class="text-5xl font-black font-display mb-6">為什麼現在要決定？</h2>
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="bg-white rounded-xl p-5 border border-stone-200">
+        <div class="text-4xl font-black mb-2" style="color:var(--red)">2026</div>
+        <h3 class="font-bold mb-2">CBAM 全面開徵</h3>
+        <p class="text-sm text-stone-600">歐盟出口客戶 100% 需要碳足跡報告 — sCMS 市場時機已到。</p>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-stone-200">
+        <div class="text-4xl font-black mb-2" style="color:var(--blue)">14m</div>
+        <h3 class="font-bold mb-2">CviCloud 站建置時程</h3>
+        <p class="text-sm text-stone-600">商模決定後才能定 wireframe / 金流 / 會員系統。延後 1 個月 = 整體延後 1 個月。</p>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-stone-200">
+        <div class="text-4xl font-black mb-2" style="color:var(--purple)">turn2cloud</div>
+        <h3 class="font-bold mb-2">與騰雲合作模式</h3>
+        <p class="text-sm text-stone-600">商模選擇直接決定與騰雲是「代理 / 共營 / 外包」哪一種合作型態。</p>
+      </div>
+    </div>
+    <div class="mt-6 bg-amber-50 rounded-xl p-4 border border-amber-200">
+      <p class="text-sm text-stone-700"><strong>關鍵提醒</strong>：本決議不是「現在就上哪一種」，而是「<strong>長期方向</strong>定位」 + 「<strong>第一期啟用哪些</strong>」。我們可以走漸進路徑。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 投影片 4：4 商模一覽 ===== -->
+<section class="slide bg-white relative" id="s4">
+  <div class="slide-num text-stone-400">SLIDE 4 / 12 · 4 OPTIONS</div>
+  <div class="slide-title-bar absolute top-0 left-0 right-0"></div>
+  <div class="max-w-6xl mx-auto w-full">
+    <div class="text-xs text-blue-700 tracking-[0.3em] mb-3">FOUR OPTIONS · 4 商模方案</div>
+    <h2 class="text-5xl font-black font-display mb-8">四個選擇</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="bg-stone-100 rounded-xl p-5 border-t-4" style="border-color:var(--g7);">
+        <div class="text-xs font-bold text-stone-700">A · 純硬體賣斷</div>
+        <h3 class="font-bold text-xl mt-1">Hardware Only</h3>
+        <p class="text-stone-600 text-sm mt-3">客戶買感測器 / 閘道，自己接雲、自己用</p>
+        <div class="mt-4 space-y-1.5 text-xs">
+          <div class="flex justify-between"><span class="text-stone-500">收入特性</span><span class="font-bold">一次性</span></div>
+          <div class="flex justify-between"><span class="text-stone-500">毛利</span><span class="font-bold">30-40%</span></div>
+          <div class="flex justify-between"><span class="text-stone-500">複雜度</span><span class="font-bold text-emerald-600">低</span></div>
+        </div>
+      </div>
+      <div class="bg-blue-50 rounded-xl p-5 border-t-4" style="border-color:var(--blue);">
+        <div class="text-xs font-bold" style="color:var(--blue)">B · SaaS 訂閱</div>
+        <h3 class="font-bold text-xl mt-1">Software-as-a-Service</h3>
+        <p class="text-stone-600 text-sm mt-3">客戶訂閱 sCMS 雲端平台，硬體可第三方 / 自有</p>
+        <div class="mt-4 space-y-1.5 text-xs">
+          <div class="flex justify-between"><span class="text-stone-500">收入特性</span><span class="font-bold text-emerald-600">★ 經常 ARR</span></div>
+          <div class="flex justify-between"><span class="text-stone-500">毛利</span><span class="font-bold text-emerald-600">70-85%</span></div>
+          <div class="flex justify-between"><span class="text-stone-500">複雜度</span><span class="font-bold text-amber-600">中</span></div>
+        </div>
+      </div>
+      <div class="bg-purple-50 rounded-xl p-5 border-t-4" style="border-color:var(--purple);">
+        <div class="text-xs font-bold" style="color:var(--purple)">C · HaaS 租賃</div>
+        <h3 class="font-bold text-xl mt-1">Hardware-as-a-Service</h3>
+        <p class="text-stone-600 text-sm mt-3">硬體 + 軟體 + 維護全包月租</p>
+        <div class="mt-4 space-y-1.5 text-xs">
+          <div class="flex justify-between"><span class="text-stone-500">收入特性</span><span class="font-bold text-emerald-600">經常 + 高黏</span></div>
+          <div class="flex justify-between"><span class="text-stone-500">毛利</span><span class="font-bold text-amber-600">40-55%</span></div>
+          <div class="flex justify-between"><span class="text-stone-500">複雜度</span><span class="font-bold text-red-600">高</span></div>
+        </div>
+      </div>
+      <div class="bg-emerald-50 rounded-xl p-5 border-t-4" style="border-color:var(--green);">
+        <div class="text-xs font-bold text-emerald-700">D ⭐ · 混合分層</div>
+        <h3 class="font-bold text-xl mt-1">Hybrid Tiered</h3>
+        <p class="text-stone-600 text-sm mt-3">大客戶 A / 中客戶 B / 小客戶 C 一站滿足</p>
+        <div class="mt-4 space-y-1.5 text-xs">
+          <div class="flex justify-between"><span class="text-stone-500">收入特性</span><span class="font-bold">三組合</span></div>
+          <div class="flex justify-between"><span class="text-stone-500">毛利</span><span class="font-bold">加權 50-65%</span></div>
+          <div class="flex justify-between"><span class="text-stone-500">複雜度</span><span class="font-bold text-red-600">最高</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 投影片 5-7：財務推演 3 情境 ===== -->
+<section class="slide bg-stone-900 text-white relative" id="s5">
+  <div class="slide-num text-stone-500">SLIDE 5 / 12 · CONSERVATIVE</div>
+  <div class="slide-title-bar absolute top-0 left-0 right-0"></div>
+  <div class="max-w-5xl mx-auto w-full">
+    <div class="text-xs text-blue-300 tracking-[0.3em] mb-3">SCENARIO 1 · 保守情境</div>
+    <h2 class="text-5xl font-black font-display mb-2">3 年 ARR 推演 <span class="text-blue-300">[推論]</span></h2>
+    <p class="text-stone-300 mb-6">假設：50 個小客戶 / 年（Yr1）→ 80（Yr2）→ 120（Yr3）；每客單價 NT$ 30 萬 / 年</p>
+    <table class="cis text-sm">
+      <thead><tr><th>方案</th><th class="text-right">Yr1 ARR</th><th class="text-right">Yr2 ARR</th><th class="text-right">Yr3 ARR</th><th class="text-right">3 年累計</th></tr></thead>
+      <tbody class="text-stone-200">
+        <tr style="background:#1F1F1F;"><td>A 賣斷</td><td class="text-right font-mono">1,500 萬</td><td class="text-right font-mono">2,400 萬</td><td class="text-right font-mono">3,600 萬</td><td class="text-right font-mono">7,500 萬</td></tr>
+        <tr style="background:#0a3a4a;"><td>B SaaS</td><td class="text-right font-mono">1,500 萬</td><td class="text-right font-mono">3,900 萬</td><td class="text-right font-mono">7,500 萬</td><td class="text-right font-mono text-blue-300">12,900 萬</td></tr>
+        <tr style="background:#1F1F1F;"><td>C HaaS</td><td class="text-right font-mono">1,500 萬</td><td class="text-right font-mono">3,900 萬</td><td class="text-right font-mono">7,500 萬</td><td class="text-right font-mono">12,900 萬</td></tr>
+        <tr style="background:#0a4a3a;"><td>D 混合 ⭐</td><td class="text-right font-mono">1,800 萬</td><td class="text-right font-mono">4,500 萬</td><td class="text-right font-mono">9,000 萬</td><td class="text-right font-mono text-emerald-300 font-bold">15,300 萬</td></tr>
+      </tbody>
+    </table>
+    <p class="text-xs text-stone-400 mt-4">註：B / C 因為訂閱性質，Yr2 起 Yr1 客戶續約累加。D 因可服務更廣客群，新客數較高。</p>
+  </div>
+</section>
+
+<section class="slide bg-stone-900 text-white relative" id="s6">
+  <div class="slide-num text-stone-500">SLIDE 6 / 12 · NEUTRAL</div>
+  <div class="slide-title-bar absolute top-0 left-0 right-0"></div>
+  <div class="max-w-5xl mx-auto w-full">
+    <div class="text-xs text-blue-300 tracking-[0.3em] mb-3">SCENARIO 2 · 中性情境</div>
+    <h2 class="text-5xl font-black font-display mb-2">3 年 ARR 推演</h2>
+    <p class="text-stone-300 mb-6">假設：100 個客戶 / 年（Yr1）→ 200（Yr2）→ 350（Yr3）；混合客單價 NT$ 50 萬 / 年</p>
+    <table class="cis text-sm">
+      <thead><tr><th>方案</th><th class="text-right">Yr1 ARR</th><th class="text-right">Yr2 ARR</th><th class="text-right">Yr3 ARR</th><th class="text-right">3 年累計</th></tr></thead>
+      <tbody class="text-stone-200">
+        <tr style="background:#1F1F1F;"><td>A 賣斷</td><td class="text-right font-mono">5,000 萬</td><td class="text-right font-mono">10,000 萬</td><td class="text-right font-mono">17,500 萬</td><td class="text-right font-mono">32,500 萬</td></tr>
+        <tr style="background:#0a3a4a;"><td>B SaaS</td><td class="text-right font-mono">5,000 萬</td><td class="text-right font-mono">15,000 萬</td><td class="text-right font-mono">32,500 萬</td><td class="text-right font-mono text-blue-300">52,500 萬</td></tr>
+        <tr style="background:#1F1F1F;"><td>C HaaS</td><td class="text-right font-mono">5,000 萬</td><td class="text-right font-mono">15,000 萬</td><td class="text-right font-mono">32,500 萬</td><td class="text-right font-mono">52,500 萬</td></tr>
+        <tr style="background:#0a4a3a;"><td>D 混合 ⭐</td><td class="text-right font-mono">6,500 萬</td><td class="text-right font-mono">18,000 萬</td><td class="text-right font-mono">40,000 萬</td><td class="text-right font-mono text-emerald-300 font-bold">64,500 萬</td></tr>
+      </tbody>
+    </table>
+    <p class="text-xs text-stone-400 mt-4">註：D 在中性情境下 3 年比 A 多 32,000 萬營收（98% 提升）。</p>
+  </div>
+</section>
+
+<section class="slide bg-stone-900 text-white relative" id="s7">
+  <div class="slide-num text-stone-500">SLIDE 7 / 12 · OPTIMISTIC</div>
+  <div class="slide-title-bar absolute top-0 left-0 right-0"></div>
+  <div class="max-w-5xl mx-auto w-full">
+    <div class="text-xs text-blue-300 tracking-[0.3em] mb-3">SCENARIO 3 · 樂觀情境</div>
+    <h2 class="text-5xl font-black font-display mb-2">3 年 ARR 推演</h2>
+    <p class="text-stone-300 mb-6">假設：CBAM + 全球 ESG 政策推動 + AllSor 通路加成 → 200/Yr1 → 500/Yr2 → 1,000/Yr3</p>
+    <table class="cis text-sm">
+      <thead><tr><th>方案</th><th class="text-right">Yr1 ARR</th><th class="text-right">Yr2 ARR</th><th class="text-right">Yr3 ARR</th><th class="text-right">3 年累計</th></tr></thead>
+      <tbody class="text-stone-200">
+        <tr style="background:#1F1F1F;"><td>A 賣斷</td><td class="text-right font-mono">1.0 億</td><td class="text-right font-mono">2.5 億</td><td class="text-right font-mono">5.0 億</td><td class="text-right font-mono">8.5 億</td></tr>
+        <tr style="background:#0a3a4a;"><td>B SaaS</td><td class="text-right font-mono">1.0 億</td><td class="text-right font-mono">3.5 億</td><td class="text-right font-mono">8.5 億</td><td class="text-right font-mono text-blue-300">13.0 億</td></tr>
+        <tr style="background:#1F1F1F;"><td>C HaaS</td><td class="text-right font-mono">1.0 億</td><td class="text-right font-mono">3.5 億</td><td class="text-right font-mono">8.5 億</td><td class="text-right font-mono">13.0 億</td></tr>
+        <tr style="background:#0a4a3a;"><td>D 混合 ⭐</td><td class="text-right font-mono">1.3 億</td><td class="text-right font-mono">4.5 億</td><td class="text-right font-mono">10.5 億</td><td class="text-right font-mono text-emerald-300 font-bold">16.3 億</td></tr>
+      </tbody>
+    </table>
+    <p class="text-xs text-stone-400 mt-4">註：樂觀情境下 D 方案 3 年累計可達 16.3 億，相當於現集團 50% 營收。</p>
+  </div>
+</section>
+
+<!-- ===== 投影片 8：非財務考量 ===== -->
+<section class="slide bg-white relative" id="s8">
+  <div class="slide-num text-stone-400">SLIDE 8 / 12 · NON-FINANCIAL</div>
+  <div class="slide-title-bar absolute top-0 left-0 right-0"></div>
+  <div class="max-w-6xl mx-auto w-full">
+    <div class="text-xs text-blue-700 tracking-[0.3em] mb-3">NON-FINANCIAL · 非財務考量</div>
+    <h2 class="text-5xl font-black font-display mb-6">5 個非財務面向</h2>
+    <table class="cis">
+      <thead><tr><th>面向</th><th class="text-center">A 賣斷</th><th class="text-center">B SaaS</th><th class="text-center">C HaaS</th><th class="text-center">D 混合 ⭐</th></tr></thead>
+      <tbody>
+        <tr><td><strong>品牌定位</strong></td><td class="text-center"><span class="recommend-mid">硬體商</span></td><td class="text-center"><span class="recommend-good">SaaS 業者</span></td><td class="text-center"><span class="recommend-good">解決方案商</span></td><td class="text-center"><span class="recommend-good">完整服務商</span></td></tr>
+        <tr><td><strong>組織能力要求</strong></td><td class="text-center"><span class="recommend-good">既有銷售可</span></td><td class="text-center"><span class="recommend-mid">需 SaaS 團隊</span></td><td class="text-center"><span class="recommend-bad">需融資 + 物流</span></td><td class="text-center"><span class="recommend-bad">三模並重</span></td></tr>
+        <tr><td><strong>客戶體驗</strong></td><td class="text-center"><span class="recommend-mid">傳統採購</span></td><td class="text-center"><span class="recommend-good">數位現代</span></td><td class="text-center"><span class="recommend-good">無痛使用</span></td><td class="text-center"><span class="recommend-good">客戶選擇</span></td></tr>
+        <tr><td><strong>競爭門檻</strong></td><td class="text-center"><span class="recommend-bad">易被低價競爭</span></td><td class="text-center"><span class="recommend-good">數據累積</span></td><td class="text-center"><span class="recommend-good">資金門檻</span></td><td class="text-center"><span class="recommend-good">綜合最高</span></td></tr>
+        <tr><td><strong>退場成本（如 5 年後想退）</strong></td><td class="text-center"><span class="recommend-good">低</span></td><td class="text-center"><span class="recommend-mid">中（客戶綁定）</span></td><td class="text-center"><span class="recommend-bad">高（硬體在客戶端）</span></td><td class="text-center"><span class="recommend-mid">中</span></td></tr>
+        <tr style="background:#FEF3C7;"><td><strong>對 AllSor 通路 (協同夥伴)</strong></td><td class="text-center">易導入硬體</td><td class="text-center">SaaS 抽佣</td><td class="text-center">複雜</td><td class="text-center font-bold">最大協同</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== 投影片 9：與騰雲合作 ===== -->
+<section class="slide bg-stone-50 relative" id="s9">
+  <div class="slide-num text-stone-400">SLIDE 9 / 12 · TURN2CLOUD</div>
+  <div class="slide-title-bar absolute top-0 left-0 right-0"></div>
+  <div class="max-w-5xl mx-auto w-full">
+    <div class="text-xs text-blue-700 tracking-[0.3em] mb-3">TURN2CLOUD PARTNERSHIP · 與騰雲合作</div>
+    <h2 class="text-5xl font-black font-display mb-2">商模 → 合作型態</h2>
+    <p class="text-stone-600 mb-6">每個商模對應不同的騰雲合作方式與責任分擔</p>
+    <table class="cis">
+      <thead><tr><th>商模</th><th>騰雲角色</th><th>責任分擔</th><th>分潤建議</th></tr></thead>
+      <tbody>
+        <tr><td><strong>A 賣斷</strong></td><td>幾乎不需要</td><td>瀚雲：100%</td><td>不適用</td></tr>
+        <tr><td><strong>B SaaS</strong></td><td>軟體技術維運</td><td>瀚雲：硬體 + 客戶；騰雲：平台</td><td>瀚雲 60-70% / 騰雲 30-40%</td></tr>
+        <tr><td><strong>C HaaS</strong></td><td>軟體 + 部分維運</td><td>瀚雲：硬體 + 融資；騰雲：軟體</td><td>瀚雲 65-75% / 騰雲 25-35%</td></tr>
+        <tr style="background:#D1FAE5;"><td><strong>D 混合 ⭐</strong></td><td>SaaS 與 HaaS 之軟體後台</td><td>客戶分層管理</td><td>各模式不同分潤</td></tr>
+      </tbody>
+    </table>
+    <div class="mt-6 bg-amber-50 rounded-xl p-4 border border-amber-200">
+      <p class="text-sm text-stone-700"><strong>建議模式：技術外包</strong> — 騰雲為技術後台 ODM，瀚雲為唯一面向客戶。如此 CviCloud 仍可對外保持「自有 SaaS 平台」之品牌定位（避免 v1.2 商業模式衝擊章節提到的 4 大風險）。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 投影片 10：PMO 建議 ===== -->
+<section class="slide text-white relative" id="s10" style="background:linear-gradient(135deg,#0a4a3a 0%,#10B981 100%);">
+  <div class="slide-num text-emerald-200">SLIDE 10 / 12 · RECOMMENDATION</div>
+  <div class="slide-title-bar absolute top-0 left-0 right-0"></div>
+  <div class="max-w-5xl mx-auto w-full">
+    <div class="text-xs text-emerald-200 tracking-[0.4em] mb-3">PMO RECOMMENDATION · PMO 建議</div>
+    <h2 class="text-6xl font-black font-display mb-6">採 D 混合分層<br /><span class="text-emerald-200 text-3xl">+ 漸進啟用</span></h2>
+    <div class="grid md:grid-cols-2 gap-5 mb-6">
+      <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20">
+        <div class="text-xs font-bold text-emerald-200">第一期（M1-M9）</div>
+        <h3 class="font-bold text-2xl mt-2">A 賣斷 + B Demo 申請</h3>
+        <ul class="text-sm text-emerald-50 mt-3 space-y-1">
+          <li>· 立即可變現之商模</li>
+          <li>· 建立客戶基礎</li>
+          <li>· 蒐集 SaaS 試用名單</li>
+        </ul>
+      </div>
+      <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20">
+        <div class="text-xs font-bold text-emerald-200">第二期（M10-M14）</div>
+        <h3 class="font-bold text-2xl mt-2">B SaaS 完整上線</h3>
+        <ul class="text-sm text-emerald-50 mt-3 space-y-1">
+          <li>· 啟動 ARR 經常收入</li>
+          <li>· 騰雲技術外包合作</li>
+          <li>· 第一期客戶轉訂閱</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20 mb-6">
+      <div class="text-xs font-bold text-emerald-200">第三期（M15+）</div>
+      <h3 class="font-bold text-2xl mt-2">C HaaS 評估啟動</h3>
+      <p class="text-sm text-emerald-50 mt-2">如前兩期成功且資金允許，啟動 HaaS 服務中小客戶。需融資夥伴與物流佈建。</p>
+    </div>
+    <div class="bg-black/30 rounded-xl p-4 border border-white/20">
+      <div class="font-bold text-emerald-200">為什麼是 D 漸進？</div>
+      <p class="text-sm text-stone-100 mt-2">中性情境 3 年 ARR 比 A 多 98%；同時降低第一期執行風險（不一次上 3 模式）；保留長期上行空間；對外品牌定位「Sustainability-as-a-Service」最強。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 投影片 11：決議要點 ===== -->
+<section class="slide bg-white relative" id="s11">
+  <div class="slide-num text-stone-400">SLIDE 11 / 12 · DECISION POINTS</div>
+  <div class="slide-title-bar absolute top-0 left-0 right-0"></div>
+  <div class="max-w-5xl mx-auto w-full">
+    <div class="text-xs text-blue-700 tracking-[0.3em] mb-3">DECISION POINTS · 待表決事項</div>
+    <h2 class="text-5xl font-black font-display mb-6">請董事會決議</h2>
+    <div class="space-y-3">
+      <div class="bg-rose-50 rounded-xl p-5 border-2 border-red-300">
+        <div class="font-bold text-lg" style="color:var(--red)">D2.1 ★ 商模主方向</div>
+        <p class="text-stone-700 text-sm mt-2">採 PMO 建議之 D 混合分層 + 漸進啟用？　□ 同意　□ 不同意　□ 修改為：______</p>
+      </div>
+      <div class="bg-stone-50 rounded-xl p-5 border border-stone-200">
+        <div class="font-bold text-lg">D2.2 第一期啟用範圍</div>
+        <p class="text-stone-700 text-sm mt-2">M1-M9 上 A 賣斷 + B Demo？　□ 同意　□ 修改</p>
+      </div>
+      <div class="bg-stone-50 rounded-xl p-5 border border-stone-200">
+        <div class="font-bold text-lg">D2.3 與騰雲合作模式</div>
+        <p class="text-stone-700 text-sm mt-2">採「技術外包」模式（騰雲後台 / 瀚雲面向客戶）？　□ 同意　□ 修改為：______</p>
+      </div>
+      <div class="bg-stone-50 rounded-xl p-5 border border-stone-200">
+        <div class="font-bold text-lg">D2.4 預算與時程</div>
+        <p class="text-stone-700 text-sm mt-2">CviCloud 站建置 14 個月 + NT$ 3,500 萬建置 + 800-1,200 萬/年維運？　□ 同意　□ 調整：______</p>
+      </div>
+      <div class="bg-stone-50 rounded-xl p-5 border border-stone-200">
+        <div class="font-bold text-lg">D2.5 對外品牌定位</div>
+        <p class="text-stone-700 text-sm mt-2">採「Sustainability-as-a-Service · ESG 即服務」對外宣傳主標？　□ 同意　□ 替代方案：______</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 投影片 12：下一步 ===== -->
+<section class="slide bg-stone-900 text-white relative" id="s12">
+  <div class="slide-num text-stone-500">SLIDE 12 / 12 · NEXT</div>
+  <div class="slide-title-bar absolute top-0 left-0 right-0"></div>
+  <div class="max-w-5xl mx-auto w-full">
+    <div class="text-xs text-blue-300 tracking-[0.4em] mb-3">NEXT STEPS · 下一步</div>
+    <h2 class="text-6xl font-black font-display mb-8">決議後 14 天行動</h2>
+    <div class="space-y-3">
+      <div class="flex gap-4 items-start"><div class="w-12 h-12 rounded-lg flex items-center justify-center text-stone-900 font-bold flex-shrink-0" style="background:#FBBF24;">D+1</div><div><div class="font-bold text-lg text-amber-200">PMO 公告決議結果</div><p class="text-stone-300">通知 IT、CviCloud 主管、行銷、法務</p></div></div>
+      <div class="flex gap-4 items-start"><div class="w-12 h-12 rounded-lg flex items-center justify-center text-stone-900 font-bold flex-shrink-0" style="background:#FBBF24;">D+3</div><div><div class="font-bold text-lg text-amber-200">法務聯繫騰雲</div><p class="text-stone-300">取得「技術外包」型合作協議草約 + DPA</p></div></div>
+      <div class="flex gap-4 items-start"><div class="w-12 h-12 rounded-lg flex items-center justify-center text-stone-900 font-bold flex-shrink-0" style="background:#FBBF24;">D+7</div><div><div class="font-bold text-lg text-amber-200">CviCloud 站 wireframe 啟動</div><p class="text-stone-300">依 D 混合分層設計三層客戶入口</p></div></div>
+      <div class="flex gap-4 items-start"><div class="w-12 h-12 rounded-lg flex items-center justify-center text-stone-900 font-bold flex-shrink-0" style="background:#FBBF24;">D+14</div><div><div class="font-bold text-lg text-amber-200">廠商 RFP 發放</div><p class="text-stone-300">發給 3 家有 SaaS 經驗之網站開發商</p></div></div>
+    </div>
+    <div class="mt-10 text-center">
+      <p class="text-2xl font-bold text-blue-300 font-display">「ESG 即服務」<br />從決議的這一刻開始</p>
+    </div>
+  </div>
+</section>
+
+<div class="nav-fixed no-print bg-white rounded-full shadow-lg px-3 py-2 flex gap-1 text-xs">
+  <span class="text-stone-500 px-2">投影片導覽：</span>
+  <a href="#s1" class="px-2 py-1 rounded hover:bg-stone-100">1</a>
+  <a href="#s2" class="px-2 py-1 rounded hover:bg-stone-100">2</a>
+  <a href="#s3" class="px-2 py-1 rounded hover:bg-stone-100">3</a>
+  <a href="#s4" class="px-2 py-1 rounded hover:bg-stone-100">4</a>
+  <a href="#s5" class="px-2 py-1 rounded hover:bg-stone-100">5</a>
+  <a href="#s6" class="px-2 py-1 rounded hover:bg-stone-100">6</a>
+  <a href="#s7" class="px-2 py-1 rounded hover:bg-stone-100">7</a>
+  <a href="#s8" class="px-2 py-1 rounded hover:bg-stone-100">8</a>
+  <a href="#s9" class="px-2 py-1 rounded hover:bg-stone-100">9</a>
+  <a href="#s10" class="px-2 py-1 rounded hover:bg-stone-100">10</a>
+  <a href="#s11" class="px-2 py-1 rounded hover:bg-stone-100">11</a>
+  <a href="#s12" class="px-2 py-1 rounded hover:bg-stone-100">12</a>
+  <button onclick="window.print()" class="px-2 py-1 rounded bg-red-600 text-white ml-2">列印</button>
+</div>
+
+<script>if(window.lucide)lucide.createIcons();</script>
+</body>
+</html>

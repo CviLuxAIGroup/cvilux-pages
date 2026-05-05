@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>EAP vs AI 數位營運平台 差異分析 | CviCloud EAP × CviLux AI Platform Gap Analysis</title>
+<meta name="description" content="瀚荃集團 CviCloud EAP（ESG AI Platform）產品線 與 P01 AI 數位營運平台 v2.0 之深度差異分析、互補機會與整合建議。">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Microsoft JhengHei", "Noto Sans TC", -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #1a1a1a; line-height: 1.7; background: #f7f8fa;
+  }
+  header.hero {
+    background: linear-gradient(135deg, #1F3864 0%, #0d9488 100%);
+    color: white; padding: 56px 32px;
+  }
+  header.hero h1 { font-size: 32px; margin: 0 0 8px; letter-spacing: 0.5px; }
+  header.hero .sub { opacity: 0.9; font-size: 15px; }
+  header.hero .meta { margin-top: 18px; font-size: 13px; opacity: 0.85; }
+  main { max-width: 1280px; margin: 0 auto; padding: 32px; }
+  section { background: white; border-radius: 12px; padding: 28px 32px; margin: 24px 0; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+  h2 { color: #1F3864; border-bottom: 3px solid #0d9488; padding-bottom: 8px; margin-top: 0; font-size: 22px; }
+  h3 { color: #0d9488; margin-top: 22px; font-size: 17px; }
+  h4 { color: #444; margin: 14px 0 6px; font-size: 15px; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; }
+  th, td { border: 1px solid #d8dde5; padding: 9px 11px; text-align: left; vertical-align: top; }
+  th { background: #1F3864; color: white; font-weight: 600; }
+  tr:nth-child(even) td { background: #fafbfc; }
+  .pill { display: inline-block; padding: 2px 8px; border-radius: 11px; font-size: 12px; margin: 1px; white-space: nowrap; }
+  .pill-eap { background: #fff7e6; color: #b86b00; border: 1px solid #f0c97a; }
+  .pill-p01 { background: #eaf1fb; color: #1F3864; border: 1px solid #aec3e0; }
+  .pill-overlap { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+  .pill-gap { background: #fce5e5; color: #b71c1c; border: 1px solid #ef9a9a; }
+  .pill-syn { background: #e1f5fe; color: #01579b; border: 1px solid #81d4fa; }
+  .verify { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: 11px; margin: 0 4px; }
+  .verify-inferred { background: #fff3e0; color: #e65100; border: 1px solid #ffb74d; }
+  .verify-unverified { background: #ffebee; color: #c62828; border: 1px solid #ef9a9a; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .card-blue { background: #eaf1fb; padding: 16px 18px; border-left: 4px solid #1F3864; border-radius: 6px; }
+  .card-amber { background: #fff7e6; padding: 16px 18px; border-left: 4px solid #d97706; border-radius: 6px; }
+  .card-green { background: #e8f5e9; padding: 16px 18px; border-left: 4px solid #2e7d32; border-radius: 6px; }
+  .card-rose { background: #fce5e5; padding: 16px 18px; border-left: 4px solid #b71c1c; border-radius: 6px; }
+  .layer-stack { background: linear-gradient(180deg, #1F3864, #0d9488); border-radius: 10px; padding: 14px; color: white; }
+  .layer-row { background: rgba(255,255,255,0.92); color: #1a1a1a; padding: 10px 14px; margin: 6px 0; border-radius: 6px; font-size: 14px; }
+  .arrow { text-align: center; font-size: 24px; color: #0d9488; margin: 6px 0; }
+  ul { margin: 8px 0; padding-left: 22px; }
+  li { margin: 4px 0; }
+  .toc { background: #f7f8fa; padding: 16px 22px; border-radius: 8px; margin-bottom: 24px; }
+  .toc a { color: #1F3864; text-decoration: none; margin-right: 18px; font-size: 14px; }
+  .toc a:hover { text-decoration: underline; }
+  footer { text-align: center; padding: 28px; color: #6c757d; font-size: 13px; }
+  .matrix-cell { font-size: 13px; }
+  @media (max-width: 800px) {
+    .grid-2 { grid-template-columns: 1fr; }
+    table { font-size: 12px; }
+    th, td { padding: 6px 8px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>EAP vs AI 數位營運平台 · 差異分析報告</h1>
+  <div class="sub">CviCloud EAP（ESG AI Platform）產品線 ↔ Project_01 AI 數位營運與全球行銷平台 v2.0</div>
+  <div class="meta">
+    產出日期：2026-05-03 ·
+    主導：楊超群 董事長兼永續長 · Let's ESG 永續聯辦公室 ·
+    版本：v1.0
+  </div>
+</header>
+
+<main>
+
+<section>
+  <div class="toc">
+    導覽：
+    <a href="#summary">▌ 一、結論摘要</a>
+    <a href="#identity">▌ 二、本質定位差異</a>
+    <a href="#architecture">▌ 三、架構分層對照</a>
+    <a href="#functional">▌ 四、功能模組差異</a>
+    <a href="#products">▌ 五、產品線對照</a>
+    <a href="#business">▌ 六、商業模式差異</a>
+    <a href="#overlaps">▌ 七、重疊與互補</a>
+    <a href="#gaps">▌ 八、雙方缺口</a>
+    <a href="#integration">▌ 九、整合機會</a>
+    <a href="#actions">▌ 十、建議行動</a>
+  </div>
+</section>
+
+<!-- ============== 一、結論摘要 ============== -->
+<section id="summary">
+  <h2>一、結論摘要（Executive Summary）</h2>
+  <p>
+    P01「AI 數位營運與全球行銷平台」是<strong>集團對外的「入口層」</strong>——
+    把 6 大品牌、既有 ERP/D365/M365/EAP 整合於一個前台，並以 9+1 Multi-Agent 串接內外網作業。
+    EAP 則是<strong>CviCloud 對客戶銷售的「產品層」</strong>——
+    一條完整的 SaaS + IoT 硬體產品線，由 5 個系統模組（EMS、MES、EHS、CMS、SCADA）+ 13 個 IoT 硬體 SKU 組成。
+  </p>
+  <div class="grid-2">
+    <div class="card-blue">
+      <h4>P01 在 EAP 觀點的角色</h4>
+      <ul>
+        <li>P01 是 EAP 的<strong>銷售前台與品牌入口</strong></li>
+        <li>P01 的 Lead 系統 = EAP SaaS 試用申請通道</li>
+        <li>P01 的 ESG Agent 應呼叫 EAP CMS 推論 API</li>
+      </ul>
+    </div>
+    <div class="card-amber">
+      <h4>EAP 在 P01 觀點的角色</h4>
+      <ul>
+        <li>EAP 是 P01「品牌矩陣」中的一張卡（Layer 6.7）</li>
+        <li>EAP 細節（5 模組 + 13 SKU + 10 套裝）目前在 P01 中尚未充分呈現</li>
+        <li>EAP 的推論 API 應成為 P01 Multi-Agent Orchestration 的可呼叫工具</li>
+      </ul>
+    </div>
+  </div>
+  <p style="margin-top:14px; padding:12px 16px; background:#fff7e6; border-left:4px solid #d97706; border-radius:6px;">
+    <span class="verify verify-inferred">推論</span>
+    <strong>核心發現：</strong>P01 與 EAP 並非競合，而是<strong>「外殼 vs 內核」</strong>關係。
+    P01 是集團統一品牌與 AI 治理層；EAP 是 CviCloud 銷售給客戶的 SaaS+硬體商品。
+    兩者整合好則 P01 成為 EAP 全球行銷與銷售引擎，EAP 成為 P01 ESG/IoT/碳管能力底座；
+    整合不好則出現「P01 模糊提及 EAP」「EAP 自己做小網站重複行銷」之雙頭情況。
+  </p>
+</section>
+
+<!-- ============== 二、本質定位差異 ============== -->
+<section id="identity">
+  <h2>二、本質定位差異</h2>
+  <table>
+    <thead>
+      <tr><th width="22%">維度</th><th width="38%">P01 AI 數位營運平台 v2.0</th><th width="40%">CviCloud EAP（ESG AI Platform）</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>本質</strong></td>
+        <td><span class="pill pill-p01">入口 / 中介 / 治理</span> 集團對外行銷與對內整合的前台</td>
+        <td><span class="pill pill-eap">產品線 / SaaS+硬體</span> CviCloud 賣給工廠客戶的智慧能源/製造/碳管系統</td></tr>
+      <tr><td><strong>主責方</strong></td>
+        <td>集團 PMO + 永續聯辦 + IT 副總</td>
+        <td>CviCloud Technology Corp. 之 SaaS 產品線</td></tr>
+      <tr><td><strong>客戶</strong></td>
+        <td>集團員工 + 集團客戶（連接器、商城、Opro9 用戶）</td>
+        <td>外部製造業客戶（工廠主、能源主管、ESG 主管）+ 集團自身工廠</td></tr>
+      <tr><td><strong>商品化</strong></td>
+        <td>不販售，是內部投資與品牌資產</td>
+        <td>多種訂閱組合 + IoT 硬體銷售 + 整合服務</td></tr>
+      <tr><td><strong>營收貢獻</strong></td>
+        <td>間接（提升集團整體 Lead/品牌/ESG 形象）</td>
+        <td>直接（SaaS ARR + 硬體 BOM + 服務收入）</td></tr>
+      <tr><td><strong>競爭對手</strong></td>
+        <td>同業集團網站（電子零組件廠商之品牌入口）</td>
+        <td>Voltaware（NILM）、Schneider EcoStruxure、SAP S/4 ESG、施耐德、其他智能工廠 SaaS</td></tr>
+      <tr><td><strong>更新頻率</strong></td>
+        <td>季度大改版、月度功能優化</td>
+        <td>年度新版本 + 持續模組釋出</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============== 三、架構分層對照 ============== -->
+<section id="architecture">
+  <h2>三、架構分層對照</h2>
+  <div class="grid-2">
+    <div>
+      <h3>P01 七層平台架構</h3>
+      <div class="layer-stack">
+        <div class="layer-row">L1 對外網站（10 個對外功能模組）</div>
+        <div class="layer-row">L2 對內入口 EIP（9 個內網模組）</div>
+        <div class="layer-row">L3 AI Agent Layer（1 編排者 + 9 Agent）</div>
+        <div class="layer-row">L4 EIP 整合中介層（v2.0 NEW）</div>
+        <div class="layer-row">L5 Integration Layer（API Gateway / Identity）</div>
+        <div class="layer-row">L6 既有系統（ERP / D365 / M365 / Fabric / Vertex / EAP / WeCom）</div>
+        <div class="layer-row">L7 平台資料庫（10 DB：產品索引 / 向量 / 報價規則 …）</div>
+      </div>
+    </div>
+    <div>
+      <h3>EAP 五層產品架構</h3>
+      <div class="layer-stack">
+        <div class="layer-row">L1 應用服務層 EAP Dashboard Web + 推理端點 API</div>
+        <div class="layer-row">L2 AI 智慧層 客戶專屬微調 + 通用基底模型 + ML Training Engine</div>
+        <div class="layer-row">L3 數據整合層 Azure Event Hubs + Data Factory ETL + Data Lake</div>
+        <div class="layer-row">L4 系統模組層 EMS / MES / EHS / CMS / SCADA（5 模組）</div>
+        <div class="layer-row">L5 IoT 設備層 智慧電表 / 環境感測 / 串口服務器 / 數據採集網關</div>
+      </div>
+    </div>
+  </div>
+  <div class="arrow">↕</div>
+  <p style="text-align:center;">
+    <strong>對應關係：</strong>
+    P01 L6「既有系統 6.7 EAP」 = EAP 整層產品線 ｜
+    P01 L3「ESG Agent」 應呼叫 → EAP L1「推論端點 API」 ｜
+    P01 L7「資料庫」 與 EAP L3「Data Lake」 應建立資料治理共識
+  </p>
+</section>
+
+<!-- ============== 四、功能模組差異 ============== -->
+<section id="functional">
+  <h2>四、功能模組差異</h2>
+
+  <h3>4.1　P01 — 9+1 Multi-Agent + 9 內網模組 + 10 外網模組</h3>
+  <div class="grid-2">
+    <div>
+      <h4>對外（網站）10 模組</h4>
+      <ul style="font-size:13px;">
+        <li>1.1 集團首頁</li>
+        <li>1.2 CviLux 零組件平台</li>
+        <li>1.3 sCMS 智碳雲</li>
+        <li>1.4 EAP 導流（試用 / 訂閱 / SSO）</li>
+        <li>1.5 OEM/ODM 詢價</li>
+        <li>1.6 Opro9 品牌 / 1.7 CviMall</li>
+        <li>1.8 ESG/CBAM 成果展示</li>
+        <li>1.9 瀚荃學苑外網</li>
+        <li>1.10 Lead/Landing Page</li>
+      </ul>
+    </div>
+    <div>
+      <h4>對內（EIP）9 模組</h4>
+      <ul style="font-size:13px;">
+        <li>2.1 AI Agent 工作台</li>
+        <li>2.2 BU 內容維護</li>
+        <li>2.3 文件審核中心</li>
+        <li>2.4 報價管理中心</li>
+        <li>2.5 ERP 庫存促銷</li>
+        <li>2.6 行銷管理 / 2.7 ESG 管理</li>
+        <li>2.8 內部教育訓練 / 2.9 系統監控</li>
+      </ul>
+    </div>
+  </div>
+
+  <h4>9+1 Multi-Agent</h4>
+  <p>
+    Orchestrator + Technical / Sales / ESG / Image-Search / Cross-ref / Quote / Marketing（NEW）/ Brand-Voice（NEW）/ Ops（NEW）
+  </p>
+
+  <h3 style="margin-top:24px;">4.2　EAP — 5 系統模組 + 推論 API</h3>
+  <table>
+    <thead>
+      <tr><th>模組</th><th>主功能</th><th>關鍵 IoT 設備</th><th>對接系統</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>EAP EMS</strong><br>能源管理</td>
+        <td>戰情首頁 · 即時數據 · 能源報表 · 歷史數據；尖離峰、設備能耗排行、用電佔比</td>
+        <td>智慧電表（單相 DC16/32A、三相 CT100/200A、Slim、電源控制）</td>
+        <td>Azure Event Hubs · 鼎新永續數據館</td></tr>
+      <tr><td><strong>EAP MES</strong><br>製造執行</td>
+        <td>製程 / 模具 / 機台 / 人員 / 工時 / 品質 / 看板（6 大能力）</td>
+        <td>智慧串口服務器（HF 232/485/All W）· 智慧製造數據採集網關</td>
+        <td>ERP（工單）· SCADA</td></tr>
+      <tr><td><strong>EAP EHS</strong><br>環安衛</td>
+        <td>溫度 / 濕度 / TVOC / PM2.5 / 甲醛 / 光照 即時監控；異常告警；ESG 健康指標</td>
+        <td>6/7/8-in-1 智慧環境感測器與監控器</td>
+        <td>數據整合中台</td></tr>
+      <tr><td><strong>EAP CMS</strong><br>碳管理</td>
+        <td>組織碳盤查（ISO 14064 / GHG / CBAM）+ 產品碳足跡（ISO 14067）；雙軌並行；範疇 1-3</td>
+        <td>整合 EMS / MES / EHS 數據；不直連硬體</td>
+        <td>ERP（BOM）· 鼎新永續數據館</td></tr>
+      <tr><td><strong>EAP SCADA</strong><br>設備管理</td>
+        <td>生產與 IoT 設備雙向狀態管控；MES 之設備參數採集解析</td>
+        <td>所有 IoT 設備之主控匯流</td>
+        <td>MES · EMS · EHS</td></tr>
+    </tbody>
+  </table>
+
+  <h4>EAP 推論 API（AI 智慧層核心）</h4>
+  <ul>
+    <li>節能建議推論（基於 EMS 歷史用電 + 製造業基底模型）</li>
+    <li>碳排警示推論（基於 CMS 即時數據與目標）</li>
+    <li>設備故障 / 老化預警（基於 SCADA + MES 設備參數）</li>
+    <li>停機優化分析（MES + EAP AI）</li>
+    <li>客戶專屬微調模型（MLOps / ML Training Engine）</li>
+  </ul>
+</section>
+
+<!-- ============== 五、產品線對照 ============== -->
+<section id="products">
+  <h2>五、產品線（具象產品 SKU）對照</h2>
+
+  <h3>5.1　P01 之「產品具象度」</h3>
+  <p>
+    P01 沒有自有產品 SKU。它是「集團入口 + AI Agent」服務，銷售上市公司形象、Lead 與品牌資產。
+    P01 之內提及的「產品」全部指向<strong>集團子公司之既有商品</strong>：CviLux 連接器、Opro9 配件、CviMall 商城、CviCloud sCMS / EAP（即本文比對對象）。
+  </p>
+
+  <h3>5.2　EAP 之 13 個 IoT 硬體 SKU</h3>
+  <div class="grid-2">
+    <div>
+      <h4>智慧電表（8 款）</h4>
+      <ul style="font-size:13px;">
+        <li>智慧單相電表 DC16A · DC32A</li>
+        <li>智慧單相電表 mini CT40A</li>
+        <li>智慧三相電表 CT100A · CT200A</li>
+        <li>智慧電源控制電表 DC（最大 850W、可遠端開關）</li>
+        <li>智慧單相電表 Slim CT 30A</li>
+        <li>智慧三相電表 Slim CT 60A</li>
+        <li>智慧三路單相電表 Slim CT 60A</li>
+      </ul>
+      <h4>智慧串口服務器（3 款）</h4>
+      <ul style="font-size:13px;">
+        <li>HF 485W · HF 232W · HF AllW（RS-232/422/485 → WiFi/Ethernet）</li>
+      </ul>
+    </div>
+    <div>
+      <h4>智慧環境感測 / 監控器（6 款）</h4>
+      <ul style="font-size:13px;">
+        <li>7-in-1 含 CO2</li>
+        <li>6-in-1 一般版 / 彩屏 / 86 彩屏</li>
+        <li>7-in-1 彩屏</li>
+        <li>8-in-1 含光照</li>
+      </ul>
+      <h4>智慧數據採集網關（3 款，模組化韌體）</h4>
+      <ul style="font-size:13px;">
+        <li>智慧製造數據採集網關 MDG（MES）</li>
+        <li>智慧環安衛數據採集網關（EHS）</li>
+        <li>智慧能源數據採集網關 EDG（EMS）</li>
+      </ul>
+      <p style="font-size:12px; color:#666;">
+        <span class="verify verify-inferred">推論</span>
+        三款網關共用同一硬體基底，透過韌體升級切換 MES/EMS/EHS 應用，延長壽命與降低成本。
+      </p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:24px;">5.3　EAP 之 10 種銷售組合（套裝）</h3>
+  <table>
+    <thead>
+      <tr><th>套裝名稱</th><th>英文</th><th>包含模組</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>CviCloud ESG AI 整合平台</td><td>CviCloud EAP (ESG AI Platform)</td><td>整合平台 + 數據中台 + EMS + MES + EHS + CMS + SCADA（全套）</td></tr>
+      <tr><td>碳智慧 EAP（智碳雲）</td><td>EAP for Carbon</td><td>整合平台 + 數據中台 + EMS + MES + CMS</td></tr>
+      <tr><td>製造智慧 EAP</td><td>EAP for Manufacturing</td><td>整合平台 + 數據中台 + MES + SCADA</td></tr>
+      <tr><td>能源智慧 EAP</td><td>EAP for Energy</td><td>整合平台 + 數據中台 + EMS</td></tr>
+      <tr><td>環境智慧 EAP</td><td>EAP for Environment</td><td>整合平台 + 數據中台 + EHS</td></tr>
+      <tr><td>碳管理組合</td><td>Carbon Management Solution</td><td>CMS + EMS + MES（不含整合平台）</td></tr>
+      <tr><td>生產能源優化組合</td><td>Manufacturing & Energy Optimization</td><td>MES + EMS</td></tr>
+      <tr><td>生產製程優化組合</td><td>Manufacturing Process Optimization</td><td>MES + SCADA</td></tr>
+      <tr><td>能源環安管理組合</td><td>Energy & Environment Management</td><td>EMS + EHS</td></tr>
+      <tr><td>生產環安管理組合</td><td>Manufacturing & Environment Management</td><td>MES + EHS</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:13px; color:#666;">另可單獨銷售各模組與所有 IoT 硬體單品。</p>
+</section>
+
+<!-- ============== 六、商業模式差異 ============== -->
+<section id="business">
+  <h2>六、商業模式差異</h2>
+  <table>
+    <thead>
+      <tr><th width="22%">商業面向</th><th>P01 AI 數位營運平台</th><th>CviCloud EAP</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>收入結構</strong></td>
+        <td>無直接收入（投資型基礎設施）；間接帶動 Lead 數、ESG 訂單、品牌力</td>
+        <td>① SaaS 模組訂閱 ② IoT 硬體一次性銷售 ③ 整合導入服務 ④ 客戶專屬模型微調 ⑤ 跨企業數據加值（鼎新永續數據館）</td></tr>
+      <tr><td><strong>價值主張</strong></td>
+        <td>「一站式集團入口、AI 賦能、品牌統一、ESG 對外形象」</td>
+        <td>「智慧節能 × ESG 永續 × 即時數據決策；模組化彈性導入、降低風險」</td></tr>
+      <tr><td><strong>銷售模式</strong></td>
+        <td>（不銷售本身；做為其他產品銷售之入口）</td>
+        <td>直銷 + 通路 + 鼎新永續數據館生態合作</td></tr>
+      <tr><td><strong>客戶決策層</strong></td>
+        <td>瀚荃集團董事會 / IT 副總（內部決策）</td>
+        <td>客戶之 IT 副總 + 廠長 + ESG 主管 + CFO</td></tr>
+      <tr><td><strong>導入時程</strong></td>
+        <td>24 個月分 3 階段（P1 MVP / P2 擴展 / P3 大陸）</td>
+        <td>模組化彈性，最小可從單一模組（如 EMS）開始，6-12 個月導入完成</td></tr>
+      <tr><td><strong>績效指標</strong></td>
+        <td>Lead 轉換率 · 品牌曝光 · ESG 報告品質 · 內部生產力</td>
+        <td>節電率 · 碳排降低 % · OEE 提升 · 設備故障減少 · ESG 法遵符合</td></tr>
+      <tr><td><strong>合規對齊</strong></td>
+        <td>ISO 27001 · GDPR · PIPL · 個資法</td>
+        <td>ISO 14064 · ISO 14067 · GHG Protocol · CBAM · 環境部規範</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============== 七、重疊與互補 ============== -->
+<section id="overlaps">
+  <h2>七、重疊與互補關係</h2>
+  <table>
+    <thead>
+      <tr><th width="20%">面向</th><th width="38%">P01 提供</th><th width="42%">EAP 提供</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><span class="pill pill-overlap">重疊</span> Azure 雲基底</td>
+        <td>Azure Fabric Data Lake（資料湖）</td>
+        <td>Azure Event Hubs + Data Factory + Data Lake（同生態）</td></tr>
+      <tr><td><span class="pill pill-overlap">重疊</span> AI 模型</td>
+        <td>Vertex AI / Gemini 通用 LLM 推理</td>
+        <td>製造業基底模型 + 客戶專屬微調（垂直 SLM）</td></tr>
+      <tr><td><span class="pill pill-overlap">重疊</span> ESG / CBAM 揭露</td>
+        <td>網站對外展示成果、客戶問卷、報告模板</td>
+        <td>實際資料來源（盤查、足跡、Scope 1-3 計算引擎）</td></tr>
+      <tr><td><span class="pill pill-overlap">重疊</span> MES 提及</td>
+        <td>L6.2 鼎新 MES / CMS（既有系統，僅讀取摘要）</td>
+        <td>EAP MES（自有產品；對外銷售；內部可考慮替換或並存）</td></tr>
+      <tr><td><span class="pill pill-syn">互補</span> AI Agent vs 推論 API</td>
+        <td>9+1 Multi-Agent（橫向：技術 / 銷售 / ESG / 報價 …）</td>
+        <td>4 類推論 API（縱向：節能 / 碳排 / 故障 / 停機優化）</td></tr>
+      <tr><td><span class="pill pill-syn">互補</span> IoT</td>
+        <td>無自有硬體；提及 IoT 概念</td>
+        <td>13 個自有 IoT 硬體 SKU；可成為集團 IoT 形象基底</td></tr>
+      <tr><td><span class="pill pill-syn">互補</span> 行銷與導流</td>
+        <td>14 大資料準備 + 7 步行銷流水線 + Lead 評分</td>
+        <td>無對外行銷模組；需依靠 P01 帶來客戶</td></tr>
+      <tr><td><span class="pill pill-syn">互補</span> 跨企業數據</td>
+        <td>無外部數據共享機制</td>
+        <td>鼎新永續數據館對接（已規劃）</td></tr>
+      <tr><td><span class="pill pill-syn">互補</span> SCADA / 製造現場</td>
+        <td>無</td>
+        <td>EAP SCADA + 串口服務器，覆蓋現場硬體</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============== 八、雙方缺口 ============== -->
+<section id="gaps">
+  <h2>八、雙方缺口</h2>
+
+  <h3>8.1　P01 中「EAP 描述不足」之處（待強化）</h3>
+  <ol>
+    <li><strong>EAP 卡僅 5 行字</strong>：P01 的「品牌矩陣 EAP 卡」目前只描述「多租戶 SaaS · sEMS / sCMS / sMES / sEHS / sWMS · 模組訂閱」——
+      <span class="verify verify-unverified">未驗證</span> 但實際 EAP 是「EMS / MES / EHS / CMS / SCADA」；P01 所列模組名稱與 EAP 規範不一致。<strong>建議更正</strong>。</li>
+    <li><strong>無 EAP 之 IoT 硬體呈現</strong>：P01 沒有展示 EAP 13 個 SKU；對外網站缺少完整產品圖庫。</li>
+    <li><strong>無銷售套裝路徑</strong>：P01 未呈現 EAP 之 10 種套裝組合，無法引導客戶選型。</li>
+    <li><strong>Multi-Agent 未呼叫 EAP API</strong>：9+1 Agent 中 ESG Agent 只提及 sCMS / EAP CBAM，未說明如何透過推論端點 API 取得實際碳排數值。</li>
+    <li><strong>無 EAP 試用 / 訂閱流程設計</strong>：P01 提到「EAP 導流、SaaS 試算、試用申請」但缺少具體流程與 D365 對接欄位。</li>
+    <li><strong>無 EAP × 鼎新永續數據館 接點</strong>：P01 僅提鼎新 ERP 與鼎新 MES，未涵蓋鼎新永續數據館（EAP 已規劃對接）。</li>
+    <li><strong>無 LifeSmart 整合提及</strong>：EAP 規劃串接 LifeSmart 完成智慧連動；P01 未提。</li>
+  </ol>
+
+  <h3>8.2　EAP 中「P01 角色缺失」之處（待強化）</h3>
+  <ol>
+    <li><strong>無對外行銷入口設計</strong>：EAP 規劃無「客戶從哪認識 EAP」之路徑；應指向 P01 的 EAP Landing。</li>
+    <li><strong>無 EIP 整合</strong>：客戶採購 EAP 後，集團內部使用是否走 EIP SSO？尚未對齊。</li>
+    <li><strong>無 Multi-Agent 視覺</strong>：EAP Dashboard 自然語言查詢 ≠ Multi-Agent Orchestration；可考慮把 EAP 的對話層接到 P01 的 Orchestrator。</li>
+    <li><strong>銷售路徑與 D365 整合不明</strong>：EAP 試用 → 簽約 → 部署 → 續約之 Lead → Opportunity → Quote 流程，與 P01 的 Lead 系統如何串？</li>
+    <li><strong>客戶教育訓練</strong>：EAP 客戶教育是否走 P01「瀚荃學苑外網」？或自建？</li>
+    <li><strong>P01 行銷流水線可賦能 EAP 內容生成</strong>：EAP 客戶案例、白皮書、CBAM 解決方案 eDM，可由 P01 行銷自動化 Agent 量產。</li>
+  </ol>
+</section>
+
+<!-- ============== 九、整合機會（10 條） ============== -->
+<section id="integration">
+  <h2>九、整合機會（10 條建議）</h2>
+  <table>
+    <thead>
+      <tr><th width="4%">#</th><th width="22%">主題</th><th width="44%">建議內容</th><th width="14%">主責</th><th width="16%">階段</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>01</td><td>EAP 卡片擴充</td>
+        <td>P01「品牌矩陣 EAP 卡」改寫，模組正名為「EMS/MES/EHS/CMS/SCADA」，列出 13 SKU 與 10 套裝</td>
+        <td>P01 PMO + CviCloud 產品經理</td>
+        <td>P1（0-3M）</td></tr>
+      <tr><td>02</td><td>ESG Agent 接 EAP API</td>
+        <td>ESG Agent 自然語言查詢時，如涉及實際數值，呼叫 EAP CMS 推論端點 API；返回值附 source ID</td>
+        <td>IT + AI 轉型組</td>
+        <td>P1（4-6M）</td></tr>
+      <tr><td>03</td><td>Lead 流程貫通</td>
+        <td>P01 Landing 表單 → D365 Lead → CviCloud BD 跟進 → EAP 試用帳號開通 → Audit 回寫 P01</td>
+        <td>D365 Admin + CviCloud Sales</td>
+        <td>P1（4-6M）</td></tr>
+      <tr><td>04</td><td>EAP 客戶 SSO</td>
+        <td>EAP 客戶之集團內部使用走 Azure AD；外部客戶走獨立 EAP Identity；雙身份隔離設計</td>
+        <td>IT + 資安</td>
+        <td>P2（7-12M）</td></tr>
+      <tr><td>05</td><td>13 SKU 產品頁</td>
+        <td>P01 之 CviCloud sCMS 子站新增「IoT 硬體」分頁，呈現 13 SKU 規格、安裝、報價</td>
+        <td>P01 + CviCloud 行銷</td>
+        <td>P1（4-9M）</td></tr>
+      <tr><td>06</td><td>10 套裝 SaaS 試算器</td>
+        <td>P01 EAP 子站建立 SaaS Pricing Calculator（模組數 × 用戶數 × IoT 點數）；輸出建議組合與報價</td>
+        <td>P01 前端 + CviCloud 商務</td>
+        <td>P2（10-15M）</td></tr>
+      <tr><td>07</td><td>鼎新永續數據館共識</td>
+        <td>P01 與 EAP 共同制定資料共享治理（哪些欄位輸出、權限矩陣、加密機制）</td>
+        <td>IT + 法務 + 永續聯辦</td>
+        <td>P2（13-18M）</td></tr>
+      <tr><td>08</td><td>行銷自動化內容下放 EAP</td>
+        <td>P01 行銷 Agent 為 EAP 生成 CBAM 解決方案 eDM、客戶案例、白皮書；品牌語調 Agent 確保口徑一致</td>
+        <td>行銷副總</td>
+        <td>P2（10-18M）</td></tr>
+      <tr><td>09</td><td>EAP 教育訓練接學苑</td>
+        <td>EAP 客戶教育走 P01「瀚荃學苑外網」；證書、課程、線上測驗統一</td>
+        <td>HR + CviCloud Customer Success</td>
+        <td>P2（13-18M）</td></tr>
+      <tr><td>10</td><td>內部工廠 EAP 試點</td>
+        <td>集團自身工廠（淡水 / 東莞 / 蘇州）導入 EAP 至少一個模組（建議 EMS），作為案例素材；P01 同步發 ESG 揭露稿</td>
+        <td>各廠廠長 + 永續聯辦 + P01 行銷 Agent</td>
+        <td>P1-P2（4-12M）</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============== 十、建議行動 ============== -->
+<section id="actions">
+  <h2>十、立即可執行的 5 項短期行動（30 天內）</h2>
+  <ol>
+    <li><strong>正名 EAP 模組命名</strong>：P01 HTML 中「sEMS / sCMS / sMES / sEHS / sWMS」→ 改為 EAP 規範 <code>EMS / MES / EHS / CMS / SCADA</code>，移除 sWMS（不在 EAP 模組清單）。</li>
+    <li><strong>新增 P01 章節「EAP 產品線詳介」</strong>：把本報告 §4.2、§5.2、§5.3 內容嵌入 P01 HTML 之適當位置（建議在「品牌矩陣」之後）。</li>
+    <li><strong>更新 Skill 規範</strong>：新增 <code>cvilux-eap-product-line-v1.skill</code>，含 EAP 5 模組 / 13 SKU / 10 套裝知識，並建立觸發關鍵字（EAP、CviCloud EAP、智碳雲、EMS、MES、EHS、CMS、SCADA、智慧電表、感測器、推論 API…）。</li>
+    <li><strong>更新主索引表</strong>：新增 EAP 13 份檔案至 <code>00_Master_Index.xlsx</code> 與 <code>00_Master_Index_TeamShared.xlsx</code>，分類為「CviLux 基礎 → EAP 產品線」。</li>
+    <li><strong>內部對齊會議</strong>：邀集 P01 PMO（IT + 永續聯辦）+ CviCloud 產品經理 + 行銷副總，30 分鐘確認本報告 §9 之 10 條整合機會優先順序，並指派 owner。</li>
+  </ol>
+
+  <p style="margin-top:18px; padding:14px 18px; background:#e8f5e9; border-left:4px solid #2e7d32; border-radius:6px;">
+    <strong>執行決議建議：</strong>本報告 §9 第 1、2、3、5 條建議納入 P08 主執行計畫書之 90 天每週任務；
+    §9 第 4、7、9 條納入 P02 改造 Roadmap 之 P2 階段；§9 第 6、8、10 條由 CviCloud 與行銷副總提案後排入下一季度 OKR。
+  </p>
+</section>
+
+<section>
+  <h2>附錄：來源檔案</h2>
+  <table>
+    <thead><tr><th>#</th><th>檔案</th><th>大小</th><th>已分析重點</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>2026 EAP Catalog-NEW.pdf</td><td>6.9 MB</td><td>影像型 PDF（內容多為設計圖），已從其他文件交叉確認產品線</td></tr>
+      <tr><td>2</td><td>CviCloud EAP 整合平台&功能系統&IoT設備介紹 (1).pdf</td><td>4.1 MB</td><td>★ 主要內容來源；架構、4 模組、IoT 硬體分類</td></tr>
+      <tr><td>3</td><td>CviCloud ESG專案產品R1.xlsx / English</td><td>2.7 MB × 2</td><td>產品專案資料（中英對照）</td></tr>
+      <tr><td>4</td><td>EAP系統產品組合說明.xlsx</td><td>356 KB</td><td>★ 5 模組整合矩陣、10 種銷售組合、所有 IoT SKU 清冊</td></tr>
+      <tr><td>5</td><td>瀚雲智慧功率感測控制電錶 SPB1-003 產品手冊（中英）</td><td>15.5 + 1.2 MB</td><td>單款電表規格手冊</td></tr>
+      <tr><td>6</td><td>瀚雲智慧生產資料採集網關 ESG-GW-001/002/003 產品手冊</td><td>3.6 MB</td><td>三款網關產品規格</td></tr>
+      <tr><td>7</td><td>產品型錄.docx</td><td>9.5 MB</td><td>整體產品型錄</td></tr>
+      <tr><td>8</td><td>系統架構.pdf / 英文版</td><td>5.0 + 5.6 MB</td><td>★ 5 層產品架構、推論 API、ML Training Engine、鼎新永續數據館對接</td></tr>
+      <tr><td>9</td><td>模組連動說明.pdf / 英文版</td><td>1.6 + 1.7 MB</td><td>★ 5 模組之間數據連動關係（CMS 整合 EMS+MES+EHS）</td></tr>
+    </tbody>
+  </table>
+</section>
+
+</main>
+
+<footer>
+  © 2026 CviLux Group · EAP × AI Platform Gap Analysis v1.0 · 永續聯辦公室<br>
+  本報告為差異分析與整合建議，建議實作須由 IT、CviCloud、永續聯辦、行銷四方對齊後執行<br>
+  <span class="verify verify-inferred">推論</span> 標記為基於文件內容之合理推論；<span class="verify verify-unverified">未驗證</span> 為待求證項目
+</footer>
+
+</body>
+</html>

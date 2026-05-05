@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>瀚荃集團 · 全方位智慧營運 AI 助手</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Share+Tech+Mono&family=Oswald:wght@400;500;600&display=swap');
+:root{
+  --bg:#060b14;
+  --panel:#0b1220;
+  --panel2:#0f1829;
+  --border:#1a2840;
+  --border2:#243550;
+  --cyan:#00d4ff;
+  --cyan2:#0099bb;
+  --amber:#ffaa00;
+  --green:#00e87c;
+  --red:#ff4455;
+  --orange:#ff6b35;
+  --violet:#aa77ff;
+  --text:#b8d0e8;
+  --dim:#4a6580;
+  --bright:#e0f0ff;
+  --grid:rgba(0,212,255,0.03);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{
+  font-family:'Noto Sans TC',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  background-image:
+    linear-gradient(var(--grid) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:32px 32px;
+  display:flex;flex-direction:column;
+}
+
+/* ── TOPBAR ── */
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 20px;height:52px;flex-shrink:0;
+  background:rgba(6,11,20,0.95);
+  border-bottom:1px solid var(--border2);
+  backdrop-filter:blur(10px);
+}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-mark{
+  width:34px;height:34px;
+  background:linear-gradient(135deg,var(--cyan),var(--cyan2));
+  clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+  display:flex;align-items:center;justify-content:center;
+}
+.logo-name{font-family:'Oswald',sans-serif;font-size:18px;letter-spacing:2px;color:var(--bright)}
+.logo-sub{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--dim);letter-spacing:1px}
+.topbar-center{
+  font-family:'Share Tech Mono',monospace;font-size:11px;
+  color:var(--cyan);letter-spacing:2px;text-transform:uppercase;
+}
+.topbar-right{display:flex;align-items:center;gap:16px;font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--dim)}
+.live{display:flex;align-items:center;gap:5px;color:var(--green)}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 1.8s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
+.clock{color:var(--amber)}
+.notice{background:rgba(255,170,0,0.07);border-bottom:1px solid rgba(255,170,0,0.2);padding:4px 20px;font-family:'Share Tech Mono',monospace;font-size:10px;color:rgba(255,170,0,0.7);flex-shrink:0;letter-spacing:0.5px}
+
+/* ── NAV ── */
+.nav{display:flex;background:rgba(11,18,32,0.8);border-bottom:1px solid var(--border);flex-shrink:0}
+.nav-item{
+  padding:10px 18px;
+  font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:1.5px;
+  color:var(--dim);cursor:pointer;border-bottom:2px solid transparent;
+  transition:all 0.2s;text-transform:uppercase;white-space:nowrap;
+}
+.nav-item:hover{color:var(--text)}
+.nav-item.active{color:var(--cyan);border-bottom-color:var(--cyan)}
+
+/* ── CONTENT ── */
+.content{flex:1;overflow-y:auto;overflow-x:hidden}
+.section{display:none;padding:16px 20px;animation:fadeUp 0.3s ease}
+.section.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* ── WAR ROOM ── */
+.warroom-header{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:14px;
+}
+.warroom-title{
+  font-family:'Oswald',sans-serif;font-size:22px;letter-spacing:3px;color:var(--bright);
+}
+.warroom-title span{color:var(--cyan)}
+.sys-badges{display:flex;gap:8px;flex-wrap:wrap}
+.badge{
+  font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1px;
+  padding:3px 9px;border-radius:2px;border:1px solid;
+}
+.badge-cyan{color:var(--cyan);border-color:rgba(0,212,255,0.3);background:rgba(0,212,255,0.05)}
+.badge-amber{color:var(--amber);border-color:rgba(255,170,0,0.3);background:rgba(255,170,0,0.05)}
+.badge-green{color:var(--green);border-color:rgba(0,232,124,0.3);background:rgba(0,232,124,0.05)}
+.badge-violet{color:var(--violet);border-color:rgba(170,119,255,0.3);background:rgba(170,119,255,0.05)}
+
+/* KPI GRID */
+.kpi-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;margin-bottom:14px;
+}
+@media(max-width:1100px){.kpi-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:700px){.kpi-grid{grid-template-columns:repeat(2,1fr)}}
+
+.kpi-card{
+  background:var(--panel);border:1px solid var(--border);border-radius:4px;
+  padding:12px 14px;position:relative;overflow:hidden;cursor:pointer;
+  transition:border-color 0.2s;
+}
+.kpi-card:hover{border-color:var(--border2)}
+.kpi-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+}
+.kpi-card.c-cyan::before{background:linear-gradient(90deg,var(--cyan),transparent)}
+.kpi-card.c-amber::before{background:linear-gradient(90deg,var(--amber),transparent)}
+.kpi-card.c-green::before{background:linear-gradient(90deg,var(--green),transparent)}
+.kpi-card.c-red::before{background:linear-gradient(90deg,var(--red),transparent)}
+.kpi-card.c-orange::before{background:linear-gradient(90deg,var(--orange),transparent)}
+.kpi-card.c-violet::before{background:linear-gradient(90deg,var(--violet),transparent)}
+
+.kpi-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+.kpi-cycle{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1.5px;color:var(--dim);text-transform:uppercase}
+.kpi-status{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:2px}
+.status-g{background:var(--green);box-shadow:0 0 6px var(--green)}
+.status-y{background:var(--amber);box-shadow:0 0 6px var(--amber)}
+.status-r{background:var(--red);box-shadow:0 0 6px var(--red)}
+.kpi-name{font-size:12px;font-weight:500;color:var(--bright);margin-bottom:10px;line-height:1.3}
+.kpi-metrics{display:flex;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.kpi-metric{flex:1;min-width:60px}
+.kpi-val{font-family:'Oswald',sans-serif;font-size:22px;color:var(--bright);line-height:1}
+.kpi-val small{font-size:12px;color:var(--dim)}
+.kpi-label{font-size:10px;color:var(--dim);margin-top:2px}
+.kpi-bar{height:3px;background:var(--border);border-radius:2px;overflow:hidden;margin-bottom:6px}
+.kpi-bar-fill{height:100%;border-radius:2px;transition:width 1s ease}
+.kpi-sub{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--dim);line-height:1.5}
+.kpi-sub span{color:var(--amber)}
+.kpi-alert{
+  font-family:'Share Tech Mono',monospace;font-size:9px;
+  color:var(--amber);background:rgba(255,170,0,0.07);
+  border-left:2px solid var(--amber);padding:3px 6px;margin-top:6px;
+}
+.kpi-alert.red{color:var(--red);background:rgba(255,68,85,0.07);border-color:var(--red)}
+
+/* DETAIL PANEL */
+.detail-panel{
+  background:var(--panel);border:1px solid var(--border2);border-radius:4px;
+  padding:14px 16px;margin-bottom:14px;
+}
+.detail-panel h4{
+  font-family:'Share Tech Mono',monospace;font-size:10px;
+  letter-spacing:2px;color:var(--cyan);text-transform:uppercase;
+  margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border);
+}
+.cycle-detail{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:800px){.cycle-detail{grid-template-columns:repeat(2,1fr)}}
+.detail-item{font-size:11px;color:var(--text)}
+.detail-item strong{color:var(--bright);display:block;font-size:12px;margin-bottom:2px}
+.detail-item .v-g{color:var(--green)}
+.detail-item .v-y{color:var(--amber)}
+.detail-item .v-r{color:var(--red)}
+
+/* ── SYSTEM ARCH ── */
+.arch-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+@media(max-width:700px){.arch-grid{grid-template-columns:1fr}}
+.arch-card{
+  background:var(--panel);border:1px solid var(--border);border-radius:4px;padding:16px;
+}
+.arch-card h3{
+  font-family:'Oswald',sans-serif;font-size:15px;letter-spacing:2px;
+  color:var(--bright);margin-bottom:10px;padding-bottom:8px;
+  border-bottom:1px solid var(--border);
+}
+.arch-card h3 .hl{color:var(--cyan)}
+.arch-card h3 .hl-a{color:var(--amber)}
+.arch-card h3 .hl-g{color:var(--green)}
+.arch-card h3 .hl-v{color:var(--violet)}
+.flow-list{list-style:none}
+.flow-list li{
+  font-size:12px;color:var(--text);padding:5px 0;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:flex-start;gap:8px;
+}
+.flow-list li:last-child{border-bottom:none}
+.flow-list li::before{content:'→';color:var(--cyan);flex-shrink:0;margin-top:1px;font-size:10px}
+.flow-list.amber li::before{color:var(--amber)}
+.flow-list.green li::before{color:var(--green)}
+.flow-list.violet li::before{color:var(--violet)}
+
+.arch-flow{
+  display:flex;align-items:center;gap:6px;flex-wrap:wrap;
+  margin:10px 0;padding:10px;
+  background:rgba(0,0,0,0.2);border-radius:3px;
+}
+.af-node{
+  font-family:'Share Tech Mono',monospace;font-size:10px;
+  padding:4px 10px;border-radius:2px;border:1px solid;text-align:center;
+}
+.af-node.cyan{color:var(--cyan);border-color:rgba(0,212,255,0.3)}
+.af-node.amber{color:var(--amber);border-color:rgba(255,170,0,0.3)}
+.af-node.green{color:var(--green);border-color:rgba(0,232,124,0.3)}
+.af-node.violet{color:var(--violet);border-color:rgba(170,119,255,0.3)}
+.af-arr{color:var(--dim);font-size:12px}
+
+.table-wrap{overflow-x:auto;margin-top:10px}
+.arch-table{width:100%;border-collapse:collapse;font-size:11px}
+.arch-table th{
+  text-align:left;padding:6px 10px;
+  font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1.5px;
+  color:var(--dim);border-bottom:1px solid var(--border);text-transform:uppercase;
+  background:rgba(0,0,0,0.2);
+}
+.arch-table td{padding:7px 10px;border-bottom:1px solid rgba(26,40,64,0.5);color:var(--text)}
+.arch-table tr:hover td{background:rgba(0,212,255,0.02)}
+.t-cy{color:var(--cyan);font-family:'Share Tech Mono',monospace;font-size:10px}
+.t-am{color:var(--amber);font-family:'Share Tech Mono',monospace;font-size:10px}
+.t-gn{color:var(--green);font-family:'Share Tech Mono',monospace;font-size:10px}
+
+/* ── TASK SUMMARY ── */
+.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+@media(max-width:700px){.summary-grid{grid-template-columns:1fr}}
+.sum-card{background:var(--panel);border:1px solid var(--border);border-radius:4px;padding:14px}
+.sum-card h3{
+  font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;
+  color:var(--cyan);text-transform:uppercase;margin-bottom:10px;
+  padding-bottom:7px;border-bottom:1px solid var(--border);
+}
+.sum-card.amber h3{color:var(--amber)}
+.sum-card.green h3{color:var(--green)}
+.sum-card.violet h3{color:var(--violet)}
+.sum-item{
+  display:flex;gap:10px;padding:6px 0;
+  border-bottom:1px solid rgba(26,40,64,0.6);font-size:12px;
+}
+.sum-item:last-child{border-bottom:none}
+.sum-item .num{
+  font-family:'Oswald',monospace;font-size:14px;
+  color:var(--cyan);min-width:22px;font-weight:600;flex-shrink:0;
+}
+.sum-card.amber .sum-item .num{color:var(--amber)}
+.sum-card.green .sum-item .num{color:var(--green)}
+.sum-card.violet .sum-item .num{color:var(--violet)}
+.sum-item .txt{color:var(--text)}
+.sum-item .txt small{display:block;color:var(--dim);font-size:10px;margin-top:1px}
+.priority-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:5px 0;border-bottom:1px solid rgba(26,40,64,0.5);font-size:12px;
+}
+.priority-row:last-child{border-bottom:none}
+.pr-name{color:var(--text)}
+.pr-tag{
+  font-family:'Share Tech Mono',monospace;font-size:9px;padding:2px 7px;border-radius:2px;
+}
+.pr-p1{background:rgba(255,68,85,0.1);color:var(--red);border:1px solid rgba(255,68,85,0.3)}
+.pr-p2{background:rgba(255,170,0,0.1);color:var(--amber);border:1px solid rgba(255,170,0,0.3)}
+.pr-p3{background:rgba(0,232,124,0.1);color:var(--green);border:1px solid rgba(0,232,124,0.3)}
+
+/* ── MIND MAP ── */
+#mindmap-svg{width:100%;height:auto;display:block}
+.mindmap-wrap{
+  background:var(--panel);border:1px solid var(--border);border-radius:4px;
+  padding:10px;overflow:auto;
+}
+
+/* INFERRED */
+.inferred{
+  font-family:'Share Tech Mono',monospace;font-size:9px;
+  color:rgba(255,170,0,0.7);background:rgba(255,170,0,0.05);
+  border:1px solid rgba(255,170,0,0.15);border-radius:2px;
+  padding:4px 10px;margin-bottom:12px;letter-spacing:0.5px;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo">
+    <div class="logo-mark"></div>
+    <div>
+      <div class="logo-name">CVILUX GROUP</div>
+      <div class="logo-sub">8103.TW · 全方位智慧營運 AI 助手 v1.0</div>
+    </div>
+  </div>
+  <div class="topbar-center">⬡ SMART OPS COMMAND CENTER</div>
+  <div class="topbar-right">
+    <span class="live"><span class="dot"></span>LIVE</span>
+    <span class="clock" id="clk">--:--:--</span>
+  </div>
+</div>
+
+<div class="notice">
+  ⚠ [推論框架] 本平台依附檔資料梳理建構，KPI 模擬數值供示意用途，非貴公司實際系統即時數據。戰情室數據串接需完成鼎新AIGP → 聯詮BI / Power BI 資料管道建置後方可實測。
+</div>
+
+<div class="nav">
+  <div class="nav-item active" onclick="show('warroom',this)">🎯 戰情室看板</div>
+  <div class="nav-item" onclick="show('arch',this)">⚙ 系統整合架構</div>
+  <div class="nav-item" onclick="show('summary',this)">📋 任務摘要</div>
+  <div class="nav-item" onclick="show('mindmap',this)">🧠 心智圖</div>
+  <div class="nav-item" onclick="show('skill',this)">🤖 AI 助手技能</div>
+</div>
+
+<div class="content">
+
+<!-- ====== WARROOM ====== -->
+<div class="section active" id="warroom">
+  <div class="warroom-header">
+    <div>
+      <div class="warroom-title">九大循環 <span>AI 監控看板</span></div>
+      <div style="font-size:11px;color:var(--dim);font-family:'Share Tech Mono',monospace;margin-top:2px;">
+        DATA SOURCE: 鼎新AIGP·聯詮BI·Power BI · 更新週期: 即時/日/週
+      </div>
+    </div>
+    <div class="sys-badges">
+      <span class="badge badge-cyan">鼎新 WF AIGP ERP</span>
+      <span class="badge badge-amber">聯詮 BI (鼎新端)</span>
+      <span class="badge badge-cyan">Microsoft Power BI</span>
+      <span class="badge badge-green">Google Vertex AI</span>
+      <span class="badge badge-violet">AI Agentic ×10</span>
+    </div>
+  </div>
+
+  <div class="kpi-grid" id="kpi-grid">
+  </div>
+
+  <div class="detail-panel" id="detail-panel">
+    <h4 id="detail-title">SELECT A CYCLE CARD TO VIEW DETAILS</h4>
+    <div class="cycle-detail" id="detail-body">
+      <div style="color:var(--dim);font-size:12px;grid-column:1/-1;padding:20px 0;text-align:center;">
+        點擊上方任一循環卡片，展開詳細 KPI 與 AI 助理功能說明
+      </div>
+    </div>
+  </div>
+
+  <div class="detail-panel">
+    <h4>⚡ 跨循環即時預警摘要 · CROSS-CYCLE ALERTS</h4>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:rgba(255,68,85,0.05);border:1px solid rgba(255,68,85,0.2);border-radius:3px;padding:10px">
+        <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--red);letter-spacing:1px;margin-bottom:6px">🔴 緊急 · P1</div>
+        <div style="font-size:11px;color:var(--text);line-height:1.7">
+          · 生產良品率低於管制下限<br>
+          · 3筆大客戶應收逾期90天<br>
+          · 東南亞廠某主料缺料預警
+        </div>
+      </div>
+      <div style="background:rgba(255,170,0,0.05);border:1px solid rgba(255,170,0,0.2);border-radius:3px;padding:10px">
+        <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--amber);letter-spacing:1px;margin-bottom:6px">🟡 注意 · P2</div>
+        <div style="font-size:11px;color:var(--text);line-height:1.7">
+          · 採購需求達成率偏低<br>
+          · 倉儲呆滯料比率上升中<br>
+          · 設備稼動率本週下滑2%
+        </div>
+      </div>
+      <div style="background:rgba(0,232,124,0.05);border:1px solid rgba(0,232,124,0.2);border-radius:3px;padding:10px">
+        <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--green);letter-spacing:1px;margin-bottom:6px">🟢 正常 · OK</div>
+        <div style="font-size:11px;color:var(--text);line-height:1.7">
+          · 銷售達成率超過目標<br>
+          · ESG碳排指標持續優化<br>
+          · 稽核建議完成率達標
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== ARCH ====== -->
+<div class="section" id="arch">
+  <div class="inferred">[推論] 以下整合架構依附檔文件（2026網域規劃、MS訂閱評估、全方位手冊）梳理推論，實際技術選型需IT團隊與顧問評估確認。</div>
+
+  <div class="detail-panel">
+    <h4>🏗 瀚荃集團 BI 輕量高效整合架構 · 戰情室數據流</h4>
+    <div class="arch-flow">
+      <div class="af-node cyan">鼎新 WF AIGP<br>ERP（台灣）</div>
+      <div class="af-arr">→</div>
+      <div class="af-node amber">聯詮 BI<br>（鼎新端）</div>
+      <div class="af-arr">+</div>
+      <div class="af-node cyan">Power BI<br>（MS端）</div>
+      <div class="af-arr">→</div>
+      <div class="af-node green">Microsoft Fabric<br>數據中台</div>
+      <div class="af-arr">→</div>
+      <div class="af-node violet">Google Vertex AI<br>幕僚分析</div>
+      <div class="af-arr">→</div>
+      <div class="af-node cyan">戰情室看板<br>War Room</div>
+    </div>
+    <div style="font-size:11px;color:var(--dim);margin-top:6px">[推論] 大陸廠區: 鼎新AIGP → 阿里雲/華為雲中轉（數據脫敏） → Google Cloud HK節點 → Vertex AI</div>
+  </div>
+
+  <div class="arch-grid">
+    <div class="arch-card">
+      <h3><span class="hl">鼎新 WF AIGP ERP</span> + 聯詮 BI</h3>
+      <ul class="flow-list amber">
+        <li>鼎新 AIGP ERP：含 AI 助手，九大循環作業單一入口，台灣總部主系統</li>
+        <li>聯詮 BI（LCNet）：專為鼎新ERP開發的 BI 可視化，深度整合製造業報表</li>
+        <li>九大循環原始 KPI 數據源：訂單、生產、採購、庫存、財務等全由鼎新輸出</li>
+        <li>聯詮BI負責鼎新端的製造BI看板，含即時生產監控、良品率、OEE等</li>
+        <li>聯詮BI可與戰情室 Embed 整合，減少重複開發</li>
+      </ul>
+      <div class="table-wrap">
+        <table class="arch-table">
+          <tr><th>層次</th><th>工具</th><th>職責</th></tr>
+          <tr><td class="t-am">生產層</td><td>鼎新 WF AIGP</td><td>ERP 主系統、AI 助理、作業循環</td></tr>
+          <tr><td class="t-am">分析層</td><td>聯詮 BI</td><td>製造KPI、生產良品、財務報表</td></tr>
+          <tr><td class="t-am">介面層</td><td>聯詮 Embed</td><td>戰情室看板嵌入呈現</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="arch-card">
+      <h3><span class="hl">Microsoft</span> 生態系 BI 整合</h3>
+      <ul class="flow-list">
+        <li>Power BI：MS生態系端的BI主工具，整合 D365、M365、Azure 數據</li>
+        <li>Microsoft Fabric：數據中台，整合鼎新、D365、CRM多源數據的中央倉儲</li>
+        <li>Power BI Embedded：可直接嵌入戰情室看板，無需另建前端</li>
+        <li>Azure Data Factory：ETL 工具，定期從鼎新拉取資料同步至 Fabric</li>
+        <li>Copilot for Power BI：自然語言查詢（「本月毛利最低的產品線？」）</li>
+      </ul>
+      <div class="table-wrap">
+        <table class="arch-table">
+          <tr><th>層次</th><th>工具</th><th>職責</th></tr>
+          <tr><td class="t-cy">中台層</td><td>Microsoft Fabric</td><td>統一數據倉儲、跨系統整合</td></tr>
+          <tr><td class="t-cy">分析層</td><td>Power BI</td><td>MS端KPI、財務、ESG、行銷</td></tr>
+          <tr><td class="t-cy">AI層</td><td>Copilot + Azure AI</td><td>自然語言問答、預測分析</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="arch-card">
+      <h3><span class="hl-v">Google</span> 企業智能 AI 平台（幕僚系統）</h3>
+      <ul class="flow-list violet">
+        <li>Google Workspace：高階幕僚協作（Docs、Slides、Meet、Drive）</li>
+        <li>Gemini for Workspace：AI 會議摘要、策略文件起草、多語翻譯</li>
+        <li>Vertex AI：集團視角的跨廠ESG分析、獲利預測、供應鏈AI</li>
+        <li>BigQuery：集團BI數據倉儲，整合台灣/海外/ESG全域數據</li>
+        <li>Looker Studio：高管儀表板（Google端），可直接讀取BigQuery</li>
+        <li>大陸廠：鼎新→阿里雲中轉（脫敏）→GCP香港節點→BigQuery</li>
+      </ul>
+    </div>
+    <div class="arch-card">
+      <h3><span class="hl-g">戰情室看板</span> 輕量整合建議</h3>
+      <ul class="flow-list green">
+        <li><strong>方案A（推薦）</strong>：Power BI Embedded 為主看板，聯詮BI製造模組以 iFrame 嵌入，Google Looker Studio 幕僚看板獨立頁</li>
+        <li><strong>方案B</strong>：統一開發 Web 戰情室（React），透過 API 分別拉取鼎新API / Power BI API / BigQuery API</li>
+        <li>九大循環KPI統一定義後，由 Fabric 作為 SSOT（Single Source of Truth）</li>
+        <li>交通燈號自動判斷：閾值設定於 Fabric，各看板共用同一邏輯</li>
+        <li>行動裝置：Power BI Mobile 應用，供高管隨時查閱</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="detail-panel">
+    <h4>📋 九大循環 BI KPI 數據源對照表</h4>
+    <div class="table-wrap">
+      <table class="arch-table" style="min-width:700px">
+        <tr><th>作業循環</th><th>AI 數位員工</th><th>主要數據源</th><th>BI 工具</th><th>看板層級</th></tr>
+        <tr><td>銷售循環</td><td class="t-cy">AI業務助理</td><td>CRM / 鼎新訂單</td><td>Power BI + 聯詮</td><td>業務主管 / 高管</td></tr>
+        <tr><td>訂單循環</td><td class="t-cy">AI訂單助理</td><td>鼎新訂單模組</td><td>聯詮 BI</td><td>生管 / 業務</td></tr>
+        <tr><td>生產循環</td><td class="t-cy">AI生管助理</td><td>MES / 鼎新製造</td><td>聯詮 BI（主）</td><td>廠長 / 生管</td></tr>
+        <tr><td>採購循環</td><td class="t-cy">AI採購助理</td><td>鼎新採購 / 供應商</td><td>聯詮 BI</td><td>採購主管</td></tr>
+        <tr><td>倉儲循環</td><td class="t-cy">AI庫存助理</td><td>鼎新倉儲模組</td><td>聯詮 BI</td><td>倉管 / 生管</td></tr>
+        <tr><td>品質循環</td><td class="t-cy">AI品質助理</td><td>MES品管 / 客訴</td><td>聯詮 BI + Power BI</td><td>品保主管 / 廠長</td></tr>
+        <tr><td>設備循環</td><td class="t-cy">AI設備助理</td><td>SCADA / MES設備</td><td>聯詮 BI</td><td>維修主管</td></tr>
+        <tr><td>財務循環</td><td class="t-cy">AI財務助理</td><td>鼎新財務 / ERP</td><td>Power BI（主）+ 聯詮</td><td>財務長 / 高管</td></tr>
+        <tr><td>ESG循環</td><td class="t-cy">AI永續助理</td><td>SCMS / CviCloud</td><td>Power BI + Looker</td><td>ESG委員會 / 高管</td></tr>
+        <tr><td>稽核循環</td><td class="t-cy">AI內控助理</td><td>全系統異常日誌</td><td>Power BI + Fabric</td><td>稽核 / 董事會</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ====== SUMMARY ====== -->
+<div class="section" id="summary">
+  <div class="inferred">[推論框架] 以下任務摘要依10份附檔文件梳理整合，涵蓋：全方位智慧手冊、AI Agentic推動辦法、MS訂閱評估、網域規劃、網站企劃等。</div>
+
+  <div class="detail-panel">
+    <h4>🏢 瀚荃集團全方位智慧平台 · 總任務摘要</h4>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="text-align:center;padding:10px">
+        <div style="font-family:'Oswald',sans-serif;font-size:32px;color:var(--cyan)">10</div>
+        <div style="font-size:11px;color:var(--dim)">AI 數位員工類型</div>
+      </div>
+      <div style="text-align:center;padding:10px">
+        <div style="font-family:'Oswald',sans-serif;font-size:32px;color:var(--amber)">7</div>
+        <div style="font-size:11px;color:var(--dim)">2025-2026 重大任務</div>
+      </div>
+      <div style="text-align:center;padding:10px">
+        <div style="font-family:'Oswald',sans-serif;font-size:32px;color:var(--green)">3</div>
+        <div style="font-size:11px;color:var(--dim)">科技生態系整合</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="summary-grid">
+    <div class="sum-card">
+      <h3>🎯 2025-2026 重大任務 (P1 優先)</h3>
+      <div class="priority-row"><span class="pr-name">鼎新 WF AIGP ERP 升級上線</span><span class="pr-tag pr-p1">P1 進行中</span></div>
+      <div class="priority-row"><span class="pr-name">Microsoft 生態系全面導入（M365+D365+Copilot）</span><span class="pr-tag pr-p1">P1 進行中</span></div>
+      <div class="priority-row"><span class="pr-name">AI Agentic 數位員工推動辦法落地</span><span class="pr-tag pr-p1">P1 規劃中</span></div>
+      <div class="priority-row"><span class="pr-name">新集團官網開發（CviLux+CviCloud+CviMall）</span><span class="pr-tag pr-p2">P2 外包規劃</span></div>
+      <div class="priority-row"><span class="pr-name">EAP/ESG解決方案商品化（SCMS/CviCloud）</span><span class="pr-tag pr-p2">P2 測試中</span></div>
+      <div class="priority-row"><span class="pr-name">SCADA 低碳智能製造平台全面上線</span><span class="pr-tag pr-p2">P2 推進中</span></div>
+      <div class="priority-row"><span class="pr-name">HR 扁平化（CoE職能中心轉型）</span><span class="pr-tag pr-p3">P3 規劃中</span></div>
+    </div>
+    <div class="sum-card amber">
+      <h3>⚙ 三大科技生態系任務</h3>
+      <div class="sum-item"><span class="num">A</span><span class="txt"><strong>鼎新生態系</strong> WF AIGP ERP 九大循環作業、聯詮BI製造看板、AI助手整合、各廠MES/SCADA對接<small>目標：九大循環AI數位員工全面上線</small></span></div>
+      <div class="sum-item"><span class="num">B</span><span class="txt"><strong>微軟生態系</strong> M365+D365+Azure Fabric+Power BI+Copilot、MS CSP租戶治理、Intune+EntraID資安<small>目標：Microsoft Fabric 作統一數據中台</small></span></div>
+      <div class="sum-item"><span class="num">C</span><span class="txt"><strong>Google生態系</strong> Workspace幕僚協作、Vertex AI集團決策、BigQuery全域數據、Looker Studio高管看板、大陸廠中轉架構<small>目標：高階幕僚AI進階應用，跨廠治理</small></span></div>
+    </div>
+    <div class="sum-card green">
+      <h3>🌐 網站與電商任務</h3>
+      <div class="sum-item"><span class="num">1</span><span class="txt"><strong>集團官網重構</strong> 一站式企業門戶（CviLux/CviCloud/CviMall三板塊）<small>多語系 / IR專區 / ESG文件下載中心</small></span></div>
+      <div class="sum-item"><span class="num">2</span><span class="txt"><strong>B2B自動化功能</strong> 線上詢報價→訂單→Invoice自動化流程<small>同業品號比對、自動計價、經銷商代銷</small></span></div>
+      <div class="sum-item"><span class="num">3</span><span class="txt"><strong>AI 線上客服</strong> 整合產品知識庫、多語詢問回覆<small>24hr自動回覆、Leads分級轉業務</small></span></div>
+      <div class="sum-item"><span class="num">4</span><span class="txt"><strong>ESG/智碳雲對接</strong> 網站連結SCMS碳排儀表板、ESG報告<small>投資人/稽核機構 可直接存取</small></span></div>
+    </div>
+    <div class="sum-card violet">
+      <h3>🔒 治理與合規任務</h3>
+      <div class="sum-item"><span class="num">I</span><span class="txt"><strong>MS CSP 租戶治理</strong> 釐清租戶類型（CSP/EA/Hybrid），建立SSOT授權文件<small>避免治理複雜度，集中控管多子公司</small></span></div>
+      <div class="sum-item"><span class="num">II</span><span class="txt"><strong>大陸數據合規</strong> 中國廠區數據出境合規（數安法/個資法），SD-WAN/阿里雲中轉架構<small>脫敏後回傳Google Cloud HK節點</small></span></div>
+      <div class="sum-item"><span class="num">III</span><span class="txt"><strong>AI 治理辦法</strong> AI CoE成立，AI Agent操作日誌稽核，上市公司內控合規<small>AI行動留存日誌，重大決策人工審核</small></span></div>
+      <div class="sum-item"><span class="num">IV</span><span class="txt"><strong>ESG 永續申報</strong> ISO14064/14067、GHG Protocol、CBAM因應<small>SCMS自動彙整，符合國際揭露標準</small></span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== MINDMAP ====== -->
+<div class="section" id="mindmap">
+  <div class="inferred">[推論] 以下心智圖依附檔10份文件梳理，呈現瀚荃集團全方位智慧平台核心架構關係。</div>
+  <div class="mindmap-wrap" style="min-height:520px">
+    <svg id="mindmap-svg" viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="glow"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <!-- BG -->
+      <rect width="1200" height="600" fill="#0b1220"/>
+
+      <!-- CENTER -->
+      <rect x="470" y="255" width="260" height="90" rx="6" fill="#0f1829" stroke="#00d4ff" stroke-width="1.5"/>
+      <text x="600" y="286" text-anchor="middle" fill="#00d4ff" font-family="'Oswald',sans-serif" font-size="16" letter-spacing="2">瀚荃集團</text>
+      <text x="600" y="306" text-anchor="middle" fill="#b8d0e8" font-family="'Noto Sans TC',sans-serif" font-size="11">全方位智慧營運平台</text>
+      <text x="600" y="326" text-anchor="middle" fill="#4a6580" font-family="'Share Tech Mono',monospace" font-size="9">CviLux Group 8103.TW</text>
+
+      <!-- BRANCH: 鼎新生態系 (LEFT-TOP) -->
+      <line x1="470" y1="275" x2="280" y2="180" stroke="#ffaa00" stroke-width="1" stroke-dasharray="4,3"/>
+      <rect x="110" y="140" width="180" height="80" rx="4" fill="#0f1829" stroke="#ffaa00" stroke-width="1"/>
+      <text x="200" y="164" text-anchor="middle" fill="#ffaa00" font-family="'Oswald',sans-serif" font-size="12" letter-spacing="1">鼎新生態系</text>
+      <text x="200" y="180" text-anchor="middle" fill="#b8d0e8" font-family="'Noto Sans TC',sans-serif" font-size="9">WF AIGP ERP</text>
+      <text x="200" y="194" text-anchor="middle" fill="#b8d0e8" font-family="'Noto Sans TC',sans-serif" font-size="9">聯詮BI · AI助手</text>
+      <text x="200" y="208" text-anchor="middle" fill="#4a6580" font-family="'Share Tech Mono',monospace" font-size="8">九大作業循環</text>
+      <!-- sub -->
+      <circle cx="60" cy="110" r="28" fill="#0b1220" stroke="#ffaa00" stroke-width="0.8" opacity="0.7"/>
+      <text x="60" y="106" text-anchor="middle" fill="#ffaa00" font-family="'Noto Sans TC',sans-serif" font-size="8">AI 助手</text>
+      <text x="60" y="118" text-anchor="middle" fill="#4a6580" font-family="'Share Tech Mono',monospace" font-size="7">AIGP</text>
+      <line x1="110" y1="165" x2="88" y2="120" stroke="#ffaa00" stroke-width="0.6" opacity="0.5"/>
+      <circle cx="60" cy="220" r="28" fill="#0b1220" stroke="#ffaa00" stroke-width="0.8" opacity="0.7"/>
+      <text x="60" y="216" text-anchor="middle" fill="#ffaa00" font-family="'Noto Sans TC',sans-serif" font-size="8">聯詮 BI</text>
+      <text x="60" y="228" text-anchor="middle" fill="#4a6580" font-family="'Share Tech Mono',monospace" font-size="7">LCNet</text>
+      <line x1="110" y1="190" x2="88" y2="218" stroke="#ffaa00" stroke-width="0.6" opacity="0.5"/>
+
+      <!-- BRANCH: 微軟生態系 (LEFT-BOTTOM) -->
+      <line x1="470" y1="320" x2="280" y2="400" stroke="#00d4ff" stroke-width="1" stroke-dasharray="4,3"/>
+      <rect x="100" y="360" width="190" height="90" rx="4" fill="#0f1829" stroke="#00d4ff" stroke-width="1"/>
+      <text x="195" y="384" text-anchor="middle" fill="#00d4ff" font-family="'Oswald',sans-serif" font-size="12" letter-spacing="1">微軟生態系</text>
+      <text x="195" y="400" text-anchor="middle" fill="#b8d0e8" font-family="'Noto Sans TC',sans-serif" font-size="9">M365 · D365 · Azure</text>
+      <text x="195" y="415" text-anchor="middle" fill="#b8d0e8" font-family="'Noto Sans TC',sans-serif" font-size="9">Power BI · Copilot</text>
+      <text x="195" y="430" text-anchor="middle" fill="#4a6580" font-family="'Share Tech Mono',monospace" font-size="8">Microsoft Fabric SSOT</text>
+      <!-- sub -->
+      <circle cx="55" cy="370" r="28" fill="#0b1220" stroke="#00d4ff" stroke-width="0.8" opacity="0.7"/>
+      <text x="55" y="366" text-anchor="middle" fill="#00d4ff" font-family="'Noto Sans TC',sans-serif" font-size="8">Fabric</text>
+      <text x="55" y="378" text-anchor="middle" fill="#4a6580" font-family="'Share Tech Mono',monospace" font-size="7">中台</text>
+      <line x1="100" y1="385" x2="83" y2="374" stroke="#00d4ff" stroke-width="0.6" opacity="0.5"/>
+      <circle cx="55" cy="450" r="28" fill="#0b1220" stroke="#00d4ff" stroke-width="0.8" opacity="0.7"/>
+      <text x="55" y="446" text-anchor="middle" fill="#00d4ff" font-family="'Noto Sans TC',sans-serif" font-size="8">Copilot</text>
+      <text x="55" y="458" text-anchor="middle" fill="#4a6580" font-family="'Share Tech Mono',monospace" font-size="7">AI 助理</text>
+      <line x1="100" y1="430" x2="82" y2="448" stroke="#00d4ff" stroke-width="0.6" opacity="0.5"/>
+
+      <!-- BRANCH: Google AI (RIGHT-TOP) -->
+      <line x1="730" y1="275" x2="900" y2="180" stroke="#aa77ff" stroke-width="1" stroke-dasharray="4,3"/>
+      <rect x="890" y="140" width="200" height="80" rx="4" fill="#0f1829" stroke="#aa77ff" stroke-width="1"/>
+      <text x="990" y="164" text-anchor="middle" fill="#aa77ff" font-family="'Oswald',sans-serif" font-size="12" letter-spacing="1">Google 幕僚系統</text>
+      <text x="990" y="180" text-anchor="middle" fill="#b8d0e8" font-family="'Noto Sans TC',sans-serif" font-size="9">Workspace · Vertex AI</text>
+      <text x="990" y="195" text-anchor="middle" fill="#b8d0e8" font-family="'Noto Sans TC',sans-serif" font-size="9">BigQuery · Looker Studio</text>
+      <text x="990" y="209" text-anchor="middle" fill="#4a6580" font-family="'Share Tech Mono',monospace" font-size="8">高階幕僚AI進階應用</text>
+      <circle cx="1135" cy="110" r="28" fill="#0b1220" stroke="#aa77ff" stroke-width="0.8" opacity="0.7"/>
+      <text x="1135" y="106" text-anchor="middle" fill="#aa77ff" font-family="'Noto Sans TC',sans-serif" font-size="8">Gemini</text>
+      <text x="1135" y="118" text-anchor="middle" fill="#4a6580" font-family="'Share Tech Mono',monospace" font-size="7">AI LLM</text>
+      <line x1="1090" y1="163" x2="1112" y2="122" stroke="#aa77ff" stroke-width="0.6" opacity="0.5"/>
+
+      <!-- BRANCH: AI Agentic (RIGHT-BOTTOM) -->
+      <line x1="730" y1="320" x2="900" y2="400" stroke="#00e87c" stroke-width="1" stroke-dasharray="4,3"/>
+      <rect x="890" y="360" width="200" height="90" rx="4" fill="#0f1829" stroke="#00e87c" stroke-width="1"/>
+      <text x="990" y="384" text-anchor="middle" fill="#00e87c" font-family="'Oswald',sans-serif" font-size="12" letter-spacing="1">AI Agentic ×10</text>
+      <text x="990" y="400" text-anchor="middle" fill="#b8d0e8" font-family="'Noto Sans TC',sans-serif" font-size="9">十大數位員工</text>
+      <text x="990" y="415" text-anchor="middle" fill="#b8d0e8" font-family="'Noto Sans TC',sans-serif" font-size="9">銷售/訂單/生產/採購/倉儲</text>
+      <text x="990" y="430" text-anchor="middle" fill="#b8d0e8" font-family="'Noto Sans TC',sans-serif" font-size="9">品質/設備/財務/ESG/稽核</text>
+
+      <!-- BRANCH: 戰情室 (TOP-CENTER) -->
+      <line x1="600" y1="255" x2="600" y2="140" stroke="#00e87c" stroke-width="1" stroke-dasharray="4,3"/>
+      <rect x="490" y="80" width="220" height="65" rx="4" fill="#0f1829" stroke="#00e87c" stroke-width="1"/>
+      <text x="600" y="105" text-anchor="middle" fill="#00e87c" font-family="'Oswald',sans-serif" font-size="13" letter-spacing="2">戰情室看板</text>
+      <text x="600" y="122" text-anchor="middle" fill="#b8d0e8" font-family="'Noto Sans TC',sans-serif" font-size="9">War Room Dashboard</text>
+      <text x="600" y="137" text-anchor="middle" fill="#4a6580" font-family="'Share Tech Mono',monospace" font-size="8">Power BI Embed + 聯詮 + Looker</text>
+
+      <!-- BRANCH: 網站/電商 (BOTTOM-CENTER) -->
+      <line x1="600" y1="345" x2="600" y2="460" stroke="#ff6b35" stroke-width="1" stroke-dasharray="4,3"/>
+      <rect x="480" y="455" width="240" height="80" rx="4" fill="#0f1829" stroke="#ff6b35" stroke-width="1"/>
+      <text x="600" y="478" text-anchor="middle" fill="#ff6b35" font-family="'Oswald',sans-serif" font-size="12" letter-spacing="1">官網 / 電商 / CviMall</text>
+      <text x="600" y="495" text-anchor="middle" fill="#b8d0e8" font-family="'Noto Sans TC',sans-serif" font-size="9">CviLux + CviCloud + B2B 自動化</text>
+      <text x="600" y="510" text-anchor="middle" fill="#b8d0e8" font-family="'Noto Sans TC',sans-serif" font-size="9">AI 客服 · 多語系 · ESG對接</text>
+      <text x="600" y="525" text-anchor="middle" fill="#4a6580" font-family="'Share Tech Mono',monospace" font-size="8">IR / ESG / 投資人專區</text>
+
+      <!-- ESG branch (bottom-right) -->
+      <line x1="720" y1="345" x2="840" y2="500" stroke="#ffaa00" stroke-width="0.8" stroke-dasharray="3,3" opacity="0.6"/>
+      <rect x="830" y="490" width="160" height="55" rx="3" fill="#0b1220" stroke="#ffaa00" stroke-width="0.8" opacity="0.8"/>
+      <text x="910" y="512" text-anchor="middle" fill="#ffaa00" font-family="'Noto Sans TC',sans-serif" font-size="10">ESG / 永續</text>
+      <text x="910" y="528" text-anchor="middle" fill="#4a6580" font-family="'Share Tech Mono',monospace" font-size="8">SCMS · CBAM · 減碳30%</text>
+
+      <!-- CN Compliance branch -->
+      <line x1="470" y1="345" x2="340" y2="500" stroke="#ff4455" stroke-width="0.8" stroke-dasharray="3,3" opacity="0.6"/>
+      <rect x="180" y="490" width="175" height="55" rx="3" fill="#0b1220" stroke="#ff4455" stroke-width="0.8" opacity="0.8"/>
+      <text x="267" y="512" text-anchor="middle" fill="#ff4455" font-family="'Noto Sans TC',sans-serif" font-size="10">大陸數據合規</text>
+      <text x="267" y="528" text-anchor="middle" fill="#4a6580" font-family="'Share Tech Mono',monospace" font-size="8">SD-WAN · 阿里雲中轉 · 脫敏</text>
+
+      <!-- Legend -->
+      <rect x="20" y="560" width="800" height="28" rx="3" fill="rgba(0,0,0,0.3)"/>
+      <text x="30" y="578" fill="#ffaa00" font-family="'Share Tech Mono',monospace" font-size="9">■ 鼎新</text>
+      <text x="100" y="578" fill="#00d4ff" font-family="'Share Tech Mono',monospace" font-size="9">■ 微軟</text>
+      <text x="170" y="578" fill="#aa77ff" font-family="'Share Tech Mono',monospace" font-size="9">■ Google</text>
+      <text x="255" y="578" fill="#00e87c" font-family="'Share Tech Mono',monospace" font-size="9">■ AI Agentic / 戰情室</text>
+      <text x="415" y="578" fill="#ff6b35" font-family="'Share Tech Mono',monospace" font-size="9">■ 官網電商</text>
+      <text x="510" y="578" fill="#ff4455" font-family="'Share Tech Mono',monospace" font-size="9">■ 大陸合規</text>
+      <text x="600" y="578" fill="#4a6580" font-family="'Share Tech Mono',monospace" font-size="9">[推論] 依附檔文件梳理，非實際系統截圖</text>
+    </svg>
+  </div>
+</div>
+
+<!-- ====== SKILL ====== -->
+<div class="section" id="skill">
+  <div class="inferred">[推論框架] 以下 AI 助手技能定義依附檔全文梳理建構，作為個人 Skill 或幕僚 AI 助理的使用指引。</div>
+
+  <div class="detail-panel">
+    <h4>🤖 瀚荃集團智慧營運 AI 助手 · Skill 定義</h4>
+    <div class="arch-grid">
+      <div>
+        <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--cyan);letter-spacing:2px;margin-bottom:10px">SYSTEM PROMPT CORE</div>
+        <div style="background:#060b14;border:1px solid var(--border);border-radius:3px;padding:12px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--text);line-height:1.8">
+          你是瀚荃集團（CviLux Group，8103.TW）的智慧幕僚 AI 助手。<br><br>
+          集團背景：台灣上市電子零組件產銷研一體公司。核心系統：鼎新 WF AIGP ERP + 聯詮BI（製造端）、Microsoft M365+D365+Power BI（協作分析端）、Google Workspace+Vertex AI（幕僚決策端）。<br><br>
+          你的任務：協助高階幕僚分析九大作業循環（銷售/訂單/生產/採購/倉儲/品質/設備/財務/ESG/稽核）的KPI數據、產生管理報告、評估AI Agentic數位員工部署策略、整合三大科技生態系（鼎新+微軟+Google）。<br><br>
+          回覆規則：[推論]內容必須標示。不確定的事實不呈現為確定。所有建議需說明前提假設。
+        </div>
+      </div>
+      <div>
+        <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--amber);letter-spacing:2px;margin-bottom:10px">SKILL KNOWLEDGE BASE</div>
+        <div class="sum-item"><span class="num" style="color:var(--amber)">01</span><span class="txt">瀚荃集團全方位智慧手冊V2.0（公司總覽、產品線、ESG、商業模式）</span></div>
+        <div class="sum-item"><span class="num" style="color:var(--amber)">02</span><span class="txt">AI Agentic 數位員工推動辦法（10大循環、架構、SOP、RACI）</span></div>
+        <div class="sum-item"><span class="num" style="color:var(--amber)">03</span><span class="txt">Microsoft 生態系應用課程（Fabric/D365/M365/Power Platform）</span></div>
+        <div class="sum-item"><span class="num" style="color:var(--amber)">04</span><span class="txt">2026網域規劃（Google混合雲架構、大陸合規、雙引擎策略）</span></div>
+        <div class="sum-item"><span class="num" style="color:var(--amber)">05</span><span class="txt">MS訂閱評估（CSP/EA/Hybrid租戶治理、授權模式）</span></div>
+        <div class="sum-item"><span class="num" style="color:var(--amber)">06</span><span class="txt">集團新網站企劃書（CviLux+CviCloud+CviMall、B2B自動化）</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="summary-grid">
+    <div class="sum-card">
+      <h3>💬 常用指令範例</h3>
+      <div style="background:#060b14;border:1px solid var(--border);border-radius:3px;padding:12px">
+        <div style="font-size:12px;color:var(--text);line-height:2">
+          <span style="color:var(--cyan)">→</span> 「本月生產循環KPI異常分析報告」<br>
+          <span style="color:var(--cyan)">→</span> 「鼎新AIGP與Power BI整合最佳路徑？」<br>
+          <span style="color:var(--cyan)">→</span> 「AI採購助理的SOP草稿」<br>
+          <span style="color:var(--cyan)">→</span> 「大陸廠數據如何合規接入Google AI？」<br>
+          <span style="color:var(--cyan)">→</span> 「Microsoft CSP租戶治理建議」<br>
+          <span style="color:var(--cyan)">→</span> 「ESG CBAM因應策略摘要」<br>
+          <span style="color:var(--cyan)">→</span> 「網站B2B詢報價自動化需求規格」<br>
+          <span style="color:var(--cyan)">→</span> 「AI CoE組織架構建議」
+        </div>
+      </div>
+    </div>
+    <div class="sum-card amber">
+      <h3>⚙ 建議整合至 Claude Project</h3>
+      <div class="sum-item"><span class="num">①</span><span class="txt"><strong>建立 Claude Project「瀚荃集團智慧幕僚」</strong><br>上傳全部10份附檔為 Project 知識庫<small>Claude Project Documents 功能讓每次對話自動帶入集團背景</small></span></div>
+      <div class="sum-item"><span class="num">②</span><span class="txt"><strong>設定 Project Instructions</strong><br>貼入上方 System Prompt Core 內容<small>確保每次回答都遵循不推論為事實的原則</small></span></div>
+      <div class="sum-item"><span class="num">③</span><span class="txt"><strong>定期更新知識庫</strong><br>每月更新 KPI 實際數據快照、新版手冊<small>讓 AI 助手的建議更貼近實況</small></span></div>
+      <div class="sum-item"><span class="num">④</span><span class="txt"><strong>幕僚查詢工作流</strong><br>「附檔＋問題」→ Claude 分析 → 結論貼入 Google Docs<small>整合 Google Workspace 幕僚協作流</small></span></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end content -->
+
+<script>
+// Clock
+function updateClock(){
+  const now = new Date();
+  document.getElementById('clk').textContent =
+    now.toLocaleTimeString('zh-TW',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+}
+updateClock(); setInterval(updateClock,1000);
+
+// NAV
+function show(id,el){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  el.classList.add('active');
+}
+
+// KPI DATA
+const cycles = [
+  {
+    id:'sales', color:'c-cyan', cycle:'銷售循環', name:'AI業務助理', status:'g',
+    kpis:[{val:'108',unit:'%',label:'業績達成率'},{val:'↑12',unit:'%',label:'訂單成長率'}],
+    bar:92, barColor:'#00d4ff',
+    sub:'報價轉換率 <span>38%</span> · 新客24hr回應 <span>96%</span>',
+    alert:null,
+    details:[
+      {label:'月業績達成率',val:'108%',cls:'v-g'},
+      {label:'訂單年成長率',val:'+12%',cls:'v-g'},
+      {label:'報價轉換率',val:'38%',cls:'v-y'},
+      {label:'新客回應時效',val:'<24hr / 96%',cls:'v-g'},
+      {label:'AI預測準確率',val:'[未驗證]',cls:''},
+      {label:'客訴件數/月',val:'3件',cls:'v-g'},
+      {label:'大客戶滿意度',val:'待建立',cls:''},
+      {label:'商機A/B/C分佈',val:'鼎新CRM輸出',cls:''},
+    ],
+    src:'CRM + 鼎新訂單 → 聯詮BI + Power BI'
+  },
+  {
+    id:'order', color:'c-amber', cycle:'訂單循環', name:'AI訂單助理', status:'y',
+    kpis:[{val:'87',unit:'%',label:'準時交貨OTD'},{val:'18',unit:'%',label:'急單比率'}],
+    bar:62, barColor:'#ffaa00',
+    sub:'高風險訂單預警 <span>5筆</span> · 插單率 <span>↑</span>',
+    alert:'急單比率偏高，建議召開產銷協調會',
+    details:[
+      {label:'準時交貨率OTD',val:'87%',cls:'v-y'},
+      {label:'急單比率',val:'18%',cls:'v-r'},
+      {label:'訂單確認時效',val:'<4hr',cls:'v-g'},
+      {label:'產能衝突件數',val:'5筆',cls:'v-y'},
+      {label:'客戶集貨建議',val:'AI每日產出',cls:''},
+      {label:'交期承諾準確率',val:'待量化',cls:''},
+      {label:'高風險訂單預警',val:'5筆待處理',cls:'v-y'},
+      {label:'資料源',val:'鼎新訂單模組',cls:''},
+    ],
+    src:'鼎新訂單模組 → 聯詮BI'
+  },
+  {
+    id:'prod', color:'c-red', cycle:'生產循環', name:'AI生管助理', status:'r',
+    kpis:[{val:'91.2',unit:'%',label:'良品率'},{val:'78',unit:'%',label:'產能利用率'}],
+    bar:45, barColor:'#ff4455',
+    sub:'OEE <span>72%</span> · 在製週轉 <span>4.2天</span>',
+    alert:'良品率低於管制下限 92% — 品保確認中',
+    alertClass:'red',
+    details:[
+      {label:'良品率',val:'91.2% ⚠',cls:'v-r'},
+      {label:'產能利用率',val:'78%',cls:'v-y'},
+      {label:'整體設備效率OEE',val:'72%',cls:'v-y'},
+      {label:'在製品週轉天數',val:'4.2天',cls:'v-g'},
+      {label:'日產量達成率',val:'94%',cls:'v-g'},
+      {label:'排程變更次數/週',val:'8次',cls:'v-y'},
+      {label:'管制下限',val:'92%（已觸發）',cls:'v-r'},
+      {label:'資料源',val:'MES + 鼎新製造 → 聯詮BI',cls:''},
+    ],
+    src:'MES + 鼎新 → 聯詮BI（主）'
+  },
+  {
+    id:'proc', color:'c-amber', cycle:'採購循環', name:'AI採購助理', status:'y',
+    kpis:[{val:'82',unit:'%',label:'採購達成率'},{val:'3.2',unit:'%',label:'缺料率'}],
+    bar:58, barColor:'#ffaa00',
+    sub:'供應商準交率 <span>88%</span> · 比價節省 <span>2.1%</span>',
+    alert:'東南亞廠缺料率偏高，影響排程',
+    details:[
+      {label:'採購需求達成率',val:'82%',cls:'v-y'},
+      {label:'缺料率',val:'3.2%',cls:'v-y'},
+      {label:'供應商準時交貨率',val:'88%',cls:'v-y'},
+      {label:'比價節省率',val:'2.1%',cls:'v-g'},
+      {label:'PO發行時效',val:'<2天',cls:'v-g'},
+      {label:'新供應商審核件數',val:'4件待審',cls:''},
+      {label:'缺料影響工單',val:'12張',cls:'v-r'},
+      {label:'資料源',val:'鼎新採購 → 聯詮BI',cls:''},
+    ],
+    src:'鼎新採購模組 → 聯詮BI'
+  },
+  {
+    id:'wh', color:'c-cyan', cycle:'倉儲循環', name:'AI庫存助理', status:'y',
+    kpis:[{val:'6.8',unit:'次',label:'庫存週轉率'},{val:'8.4',unit:'%',label:'呆滯料比率'}],
+    bar:55, barColor:'#00d4ff',
+    sub:'庫存準確率 <span>98.2%</span> · 安全庫存 <span>89%</span>',
+    alert:'呆滯料比率持續上升，建議處理',
+    details:[
+      {label:'庫存週轉率',val:'6.8次/年',cls:'v-g'},
+      {label:'呆滯料比率',val:'8.4% ↑',cls:'v-y'},
+      {label:'庫存準確率',val:'98.2%',cls:'v-g'},
+      {label:'安全庫存達成率',val:'89%',cls:'v-y'},
+      {label:'跨廠調撥建議',val:'AI每日產出',cls:''},
+      {label:'庫存金額',val:'鼎新實時',cls:''},
+      {label:'呆料處理建議',val:'待業務確認',cls:''},
+      {label:'資料源',val:'鼎新倉儲 → 聯詮BI',cls:''},
+    ],
+    src:'鼎新倉儲模組 → 聯詮BI'
+  },
+  {
+    id:'qa', color:'c-red', cycle:'品質循環', name:'AI品質助理', status:'y',
+    kpis:[{val:'280',unit:'PPM',label:'不良率'},{val:'86',unit:'%',label:'8D完成率'}],
+    bar:68, barColor:'#ff6b35',
+    sub:'客訴 <span>3件/月</span> · 來料不良率 <span>0.8%</span>',
+    alert:null,
+    details:[
+      {label:'生產不良率',val:'280 PPM',cls:'v-y'},
+      {label:'客訴件數/月',val:'3件',cls:'v-g'},
+      {label:'8D改善完成率',val:'86%',cls:'v-y'},
+      {label:'來料不良率',val:'0.8%',cls:'v-g'},
+      {label:'SPC異常偵測',val:'AI即時',cls:''},
+      {label:'品質報告生成',val:'AI自動/日',cls:''},
+      {label:'品保出貨審核',val:'100%人工',cls:''},
+      {label:'資料源',val:'MES品管 + 鼎新 → 聯詮+Power BI',cls:''},
+    ],
+    src:'MES品管 + 鼎新 → 聯詮BI + Power BI'
+  },
+  {
+    id:'eqp', color:'c-orange', cycle:'設備循環', name:'AI設備助理', status:'y',
+    kpis:[{val:'91',unit:'%',label:'設備稼動率'},{val:'96',unit:'%',label:'預保完成率'}],
+    bar:75, barColor:'#ff6b35',
+    sub:'MTBF <span>320hr</span> · 緊急停機 <span>2次/月</span>',
+    alert:'設備稼動率本週較上週下滑2%',
+    details:[
+      {label:'設備稼動率',val:'91%',cls:'v-g'},
+      {label:'預防保養完成率',val:'96%',cls:'v-g'},
+      {label:'MTBF平均故障間隔',val:'320小時',cls:'v-g'},
+      {label:'緊急停機次數',val:'2次/月',cls:'v-y'},
+      {label:'本週稼動率趨勢',val:'↓ -2%',cls:'v-y'},
+      {label:'備品庫存預警',val:'3項偏低',cls:'v-y'},
+      {label:'SCADA整合狀態',val:'上線中',cls:''},
+      {label:'資料源',val:'SCADA + MES設備 → 聯詮BI',cls:''},
+    ],
+    src:'SCADA + MES → 聯詮BI'
+  },
+  {
+    id:'fin', color:'c-violet', cycle:'財務循環', name:'AI財務助理', status:'g',
+    kpis:[{val:'18.4',unit:'%',label:'毛利率'},{val:'52',unit:'天',label:'DSO應收天數'}],
+    bar:80, barColor:'#aa77ff',
+    sub:'逾期應收 <span>3筆大額</span> · 現金轉換 <span>65天</span>',
+    alert:'3筆大客戶應收逾期90天，請財務跟催',
+    details:[
+      {label:'合併毛利率',val:'18.4%',cls:'v-g'},
+      {label:'應收帳款天數DSO',val:'52天',cls:'v-y'},
+      {label:'逾期90天以上',val:'3筆大額',cls:'v-r'},
+      {label:'現金轉換週期',val:'65天',cls:'v-y'},
+      {label:'預算達成率',val:'97%',cls:'v-g'},
+      {label:'月結完成時效',val:'D+3',cls:'v-g'},
+      {label:'財報勾稽異常',val:'0項',cls:'v-g'},
+      {label:'資料源',val:'鼎新財務 → Power BI（主）',cls:''},
+    ],
+    src:'鼎新財務ERP → Power BI + 聯詮'
+  },
+  {
+    id:'esg', color:'c-green', cycle:'ESG循環', name:'AI永續助理', status:'g',
+    kpis:[{val:'↓8',unit:'%',label:'碳排強度年減'},{val:'92',unit:'%',label:'再生能源率'}],
+    bar:85, barColor:'#00e87c',
+    sub:'CBAM因應 <span>進行中</span> · ISO14064 <span>通過</span>',
+    alert:null,
+    details:[
+      {label:'碳排強度年減率',val:'-8%',cls:'v-g'},
+      {label:'再生能源使用率',val:'92%',cls:'v-g'},
+      {label:'廢棄物回收率',val:'87%',cls:'v-g'},
+      {label:'CBAM因應狀態',val:'進行中',cls:'v-y'},
+      {label:'ESG評分趨勢',val:'持續優化',cls:'v-g'},
+      {label:'SCMS碳總管',val:'上線中',cls:''},
+      {label:'永續報告書',val:'2024版已發佈',cls:'v-g'},
+      {label:'資料源',val:'SCMS + CviCloud → Power BI + Looker',cls:''},
+    ],
+    src:'SCMS + CviCloud ESG → Power BI + Google Looker'
+  },
+  {
+    id:'audit', color:'c-cyan', cycle:'稽核循環', name:'AI內控助理', status:'g',
+    kpis:[{val:'2',unit:'件',label:'本月異常交易'},{val:'94',unit:'%',label:'建議完成率'}],
+    bar:88, barColor:'#00d4ff',
+    sub:'流程偏差 <span>0.3%</span> · 日誌覆蓋率 <span>100%</span>',
+    alert:null,
+    details:[
+      {label:'異常交易件數/月',val:'2件',cls:'v-g'},
+      {label:'稽核建議完成率',val:'94%',cls:'v-g'},
+      {label:'流程偏差率',val:'0.3%',cls:'v-g'},
+      {label:'AI日誌覆蓋率',val:'100%',cls:'v-g'},
+      {label:'內控異常處理',val:'平均3天',cls:'v-g'},
+      {label:'稽核報告週期',val:'季度',cls:''},
+      {label:'高風險審核',val:'人工必審',cls:''},
+      {label:'資料源',val:'全系統日誌 → Power BI + Fabric',cls:''},
+    ],
+    src:'全系統異常日誌 → Power BI + Microsoft Fabric'
+  }
+];
+
+function renderKPIs(){
+  const grid = document.getElementById('kpi-grid');
+  grid.innerHTML = cycles.map(c=>`
+    <div class="kpi-card ${c.color}" onclick="showDetail('${c.id}')">
+      <div class="kpi-top">
+        <div class="kpi-cycle">${c.cycle}</div>
+        <div class="kpi-status status-${c.status}"></div>
+      </div>
+      <div class="kpi-name">${c.name}</div>
+      <div class="kpi-metrics">
+        ${c.kpis.map(k=>`<div class="kpi-metric">
+          <div class="kpi-val">${k.val}<small>${k.unit}</small></div>
+          <div class="kpi-label">${k.label}</div>
+        </div>`).join('')}
+      </div>
+      <div class="kpi-bar"><div class="kpi-bar-fill" style="width:${c.bar}%;background:${c.barColor}"></div></div>
+      <div class="kpi-sub">${c.sub}</div>
+      ${c.alert?`<div class="kpi-alert ${c.alertClass||''}">${c.alert}</div>`:''}
+    </div>
+  `).join('');
+}
+
+function showDetail(id){
+  const c = cycles.find(x=>x.id===id);
+  if(!c) return;
+  document.getElementById('detail-title').textContent =
+    `${c.cycle} · ${c.name} · DATA SOURCE: ${c.src}`;
+  document.getElementById('detail-body').innerHTML = c.details.map(d=>`
+    <div class="detail-item">
+      <strong>${d.label}</strong>
+      <span class="${d.cls}">${d.val}</span>
+    </div>
+  `).join('');
+}
+
+renderKPIs();
+</script>
+</body>
+</html>

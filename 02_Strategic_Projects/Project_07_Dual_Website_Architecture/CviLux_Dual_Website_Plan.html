@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>瀚荃集團雙網站融合架構企劃 | CviLux + CviCloud Dual-Website Architecture Plan</title>
+<meta name="description" content="CviLux 綜合網站 + CviCloud sCMS 智碳雲網站之融合協作架構；以 ESG 治理 / 碳淨零為共同主軸；含 sCMS 商模 4 方案評估。" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+<style>
+  :root{--red:#E83A48;--red-d:#B0202A;--red-l:#EB6363;--g9:#3D3A39;--g7:#595757;--g5:#999899;--g2:#E1DEDD;--blue:#0085C2;--blue-d:#005078;--orange:#F07810;--green:#10B981;--green-d:#047857;--bg:#F7F5F2;--amber:#F59E0B;--purple:#7C3AED;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Century Gothic','Inter','Noto Sans TC',system-ui,sans-serif;color:#1F1F1F;background:var(--bg);}
+  .font-display{font-family:'Noto Sans TC','Inter',sans-serif;letter-spacing:-0.01em;}
+  .red-bg{background:linear-gradient(135deg,#B0202A 0%,#E83A48 60%,#EB6363 100%);}
+  .blue-bg{background:linear-gradient(135deg,#005078 0%,#0085C2 60%,#33A0D5 100%);}
+  .green-bg{background:linear-gradient(135deg,#047857 0%,#10B981 60%,#34D399 100%);}
+  .duo-bg{background:linear-gradient(135deg,#B0202A 0%,#E83A48 30%,#10B981 50%,#0085C2 70%,#005078 100%);}
+  .magazine-cover{background:radial-gradient(ellipse at 15% 70%,rgba(232,58,72,.4),transparent 60%),radial-gradient(ellipse at 85% 30%,rgba(0,133,194,.3),transparent 60%),linear-gradient(135deg,#0a0a0a 0%,#2a0a0e 30%,#0a3a4a 60%,#005078 100%);}
+  .red-edge{position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--red);}
+  .blue-edge{position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--blue);}
+  .green-edge{position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--green);}
+  .pill{display:inline-flex;align-items:center;gap:.4rem;padding:.25rem .75rem;font-size:.7rem;font-weight:700;letter-spacing:.05em;border-radius:9999px;}
+  .pill-red{background:rgba(232,58,72,.1);color:var(--red);border:1px solid rgba(232,58,72,.3);}
+  .pill-blue{background:rgba(0,133,194,.1);color:var(--blue);border:1px solid rgba(0,133,194,.3);}
+  .pill-green{background:rgba(16,185,129,.1);color:#047857;border:1px solid rgba(16,185,129,.3);}
+  .pill-amber{background:rgba(245,158,11,.15);color:#92400e;border:1px solid rgba(245,158,11,.4);}
+  .pill-grey{background:rgba(89,87,87,.1);color:var(--g7);border:1px solid rgba(89,87,87,.3);}
+  .verify-tag{font-size:.65rem;padding:.15rem .4rem;border-radius:4px;font-weight:600;}
+  .verify-inferred{background:#fef3c7;color:#92400e;}
+  .verify-unverified{background:#fee2e2;color:#991b1b;}
+  .section-num{font-size:80px;font-weight:900;color:var(--red);line-height:1;font-family:'Noto Sans TC',sans-serif;}
+  .nav-link{position:relative;font-weight:500;}
+  .nav-link::after{content:'';position:absolute;left:50%;bottom:-3px;height:2px;width:0;background:var(--red);transition:.25s;transform:translateX(-50%);}
+  .nav-link:hover::after{width:100%;}
+  details>summary{list-style:none;cursor:pointer;}
+  details>summary::-webkit-details-marker{display:none;}
+  details[open] .chev{transform:rotate(90deg);}
+  .chev{transition:.2s;}
+  table.cis{width:100%;border-collapse:collapse;}
+  table.cis th{background:#1F1F1F;color:white;text-align:left;padding:.7rem 1rem;font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;font-weight:700;}
+  table.cis td{padding:.6rem 1rem;border-bottom:1px solid #e5e5e5;font-size:.85rem;vertical-align:top;}
+  table.cis tr:nth-child(even) td{background:#FAF8F5;}
+  .recommend-good{background:#D1FAE5;color:#065F46;font-weight:600;padding:.15rem .5rem;border-radius:4px;font-size:.7rem;}
+  .recommend-mid{background:#FEF3C7;color:#92400E;font-weight:600;padding:.15rem .5rem;border-radius:4px;font-size:.7rem;}
+  .recommend-bad{background:#FEE2E2;color:#991B1B;font-weight:600;padding:.15rem .5rem;border-radius:4px;font-size:.7rem;}
+  @media print{.no-print{display:none !important;}body{background:white;}}
+  ::-webkit-scrollbar{width:10px;}
+  ::-webkit-scrollbar-thumb{background:#a0a0a0;border-radius:6px;}
+</style>
+</head>
+<body class="antialiased">
+
+<!-- ===== TOP NAV ===== -->
+<header class="no-print fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-stone-200 shadow-sm">
+  <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="#cover" class="flex items-center gap-3">
+      <div class="flex">
+        <div class="w-9 h-9 rounded-l-md flex items-center justify-center text-white font-bold" style="background:var(--red)">瀚</div>
+        <div class="w-9 h-9 rounded-r-md flex items-center justify-center text-white font-bold" style="background:var(--blue)">雲</div>
+      </div>
+      <div class="leading-tight">
+        <div class="text-sm font-bold text-stone-900 font-display">雙網站融合架構企劃</div>
+        <div class="text-[11px] text-stone-500 tracking-wider">DUAL-WEBSITE PLAN · v1.0</div>
+      </div>
+    </a>
+    <nav class="hidden xl:flex items-center gap-5 text-sm text-stone-700">
+      <a class="nav-link" href="#positioning">雙站定位</a>
+      <a class="nav-link" href="#esg">ESG 主軸</a>
+      <a class="nav-link" href="#models">商模評估</a>
+      <a class="nav-link" href="#fusion">融合協作</a>
+      <a class="nav-link" href="#journey">使用者旅程</a>
+      <a class="nav-link" href="#tech">技術架構</a>
+      <a class="nav-link" href="#timeline">時程</a>
+      <a class="nav-link" href="#decisions">決策</a>
+    </nav>
+    <button onclick="window.print()" class="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-md text-white text-sm font-semibold" style="background:var(--red)">列印 <i data-lucide="printer" class="w-4 h-4"></i></button>
+  </div>
+</header>
+
+<!-- ===== COVER ===== -->
+<section id="cover" class="magazine-cover text-white pt-24 pb-14 min-h-screen flex items-center">
+  <div class="absolute top-0 left-0 right-0 h-1.5" style="background:linear-gradient(90deg,#B0202A 0%,#E83A48 33%,#10B981 50%,#0085C2 66%,#005078 100%);"></div>
+  <div class="max-w-7xl mx-auto px-8 w-full">
+    <div class="grid lg:grid-cols-12 gap-10 items-center">
+      <div class="lg:col-span-7">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="flex">
+            <div class="w-12 h-12 rounded-l-md flex items-center justify-center font-bold text-2xl" style="background:var(--red)">瀚</div>
+            <div class="w-12 h-12 rounded-r-md flex items-center justify-center font-bold text-2xl" style="background:var(--blue)">雲</div>
+          </div>
+          <div>
+            <div class="text-sm font-bold tracking-widest">CVILUX × CVICLOUD</div>
+            <div class="text-xs text-emerald-300 tracking-wider">Connect the World · Conserve the Earth</div>
+          </div>
+        </div>
+        <div class="text-[11px] text-emerald-200 tracking-[0.4em] mb-3">DUAL-WEBSITE ARCHITECTURE PLAN · v1.0 · 2026-05-03</div>
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-black leading-[1.05] font-display mb-6">
+          雙網站<br />
+          <span class="bg-gradient-to-r from-red-300 via-emerald-300 to-blue-300 bg-clip-text text-transparent">融合協作</span>
+        </h1>
+        <h2 class="text-xl md:text-2xl font-light text-stone-200 leading-tight mb-8">
+          CviLux 綜合網站 × CviCloud sCMS 智碳雲網站<br />
+          <span class="text-emerald-200 text-base">以 ESG 治理 × 碳淨零為共同經營理念之融合協作架構</span>
+        </h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+          <div class="bg-white/10 backdrop-blur border border-white/20 rounded-xl p-3"><div class="text-2xl font-black text-red-300">2</div><div class="text-xs text-stone-300">獨立網站</div></div>
+          <div class="bg-white/10 backdrop-blur border border-white/20 rounded-xl p-3"><div class="text-2xl font-black text-emerald-300">5</div><div class="text-xs text-stone-300">融合協作點</div></div>
+          <div class="bg-white/10 backdrop-blur border border-white/20 rounded-xl p-3"><div class="text-2xl font-black text-blue-300">4</div><div class="text-xs text-stone-300">商模選項</div></div>
+          <div class="bg-white/10 backdrop-blur border border-white/20 rounded-xl p-3"><div class="text-2xl font-black text-amber-300">90</div><div class="text-xs text-stone-300">天上線</div></div>
+        </div>
+      </div>
+      <div class="lg:col-span-5">
+        <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6 mb-4">
+          <div class="text-xs tracking-widest text-emerald-300 mb-3">CORE THESIS · 核心主張</div>
+          <p class="text-base text-white leading-relaxed mb-3">
+            「<strong>兩個網站</strong>，不是<strong>兩個品牌切割</strong>，而是<strong>同一 ESG 故事</strong>的<strong>兩端入口</strong> — 客戶從哪一端進都能看見集團整體永續價值。」
+          </p>
+          <div class="text-xs text-stone-300 mt-3 pt-3 border-t border-white/10">
+            <div>· CviLux：產品製造端的 ESG 實踐者</div>
+            <div>· CviCloud：客戶碳管理的 ESG 賦能者</div>
+            <div>· 集團：兩者共構「<strong class="text-emerald-300">產銷淨零循環</strong>」</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 雙站定位 ===== -->
+<section id="positioning" class="bg-white py-16">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-8">
+      <div class="lg:col-span-4">
+        <div class="text-xs tracking-[0.3em] text-stone-500 mb-2">POSITIONING</div>
+        <h2 class="font-display text-4xl font-black mb-3">兩站各自定位</h2>
+        <p class="text-stone-500 text-sm">2 Sites, 2 Audiences, 1 Story</p>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-stone-700 leading-relaxed">兩個網站<strong>不是內容互抄</strong>，而是不同角色、不同決策階段、不同入口；通過共同的 ESG 故事連接。</p>
+      </div>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-5 mb-6">
+      <!-- CviLux 綜合網站 -->
+      <div class="bg-stone-50 rounded-xl border-2 overflow-hidden" style="border-color:var(--red);">
+        <div class="red-bg text-white p-5">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-12 h-12 rounded-md flex items-center justify-center text-2xl font-black" style="background:rgba(255,255,255,.2)">瀚</div>
+            <div>
+              <div class="text-xs tracking-widest text-red-200">SITE 1</div>
+              <h3 class="font-bold text-2xl">CviLux 綜合網站</h3>
+            </div>
+          </div>
+          <p class="text-sm text-red-100">cvilux-group.com · cvilux.com</p>
+        </div>
+        <div class="p-5">
+          <div class="text-xs font-bold text-red-700 mb-2">主要對象</div>
+          <p class="text-sm text-stone-700 mb-3">B2B 工業客戶（汽車 / EMS / 品牌商 / 家電 / 工業 / 醫療）採購、RD、供應鏈主管 + 投資人 + 求職者 + 媒體</p>
+          <div class="text-xs font-bold text-red-700 mb-2">內容重點</div>
+          <ul class="text-sm text-stone-700 space-y-1">
+            <li>· 集團控股結構（瀚荃集團 + 3 子公司）</li>
+            <li>· CviLux 連接器 / 線纜 / 電子配件 3 大事業群</li>
+            <li>· CviMall 商城導流</li>
+            <li>· OEM/ODM 業務</li>
+            <li>· Opro9 品牌頁</li>
+            <li>· 全球 14+ 製造據點</li>
+            <li>· 集團 ESG 治理（永續長 / Let's ESG）</li>
+            <li>· IR 投資人專區</li>
+            <li>· 瀚荃學苑（產學合作）</li>
+            <li>· 招募</li>
+          </ul>
+          <div class="text-xs font-bold text-red-700 mb-2 mt-3">主要 KPI</div>
+          <p class="text-sm text-stone-700">RFQ 數、Lead 進 D365、產品搜尋次數、文件下載、IR 點閱</p>
+        </div>
+      </div>
+
+      <!-- CviCloud sCMS 網站 -->
+      <div class="bg-stone-50 rounded-xl border-2 overflow-hidden" style="border-color:var(--blue);">
+        <div class="blue-bg text-white p-5">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-12 h-12 rounded-md flex items-center justify-center text-2xl font-black" style="background:rgba(255,255,255,.2)">雲</div>
+            <div>
+              <div class="text-xs tracking-widest text-blue-200">SITE 2</div>
+              <h3 class="font-bold text-2xl">CviCloud sCMS 智碳雲</h3>
+            </div>
+          </div>
+          <p class="text-sm text-blue-100">cvicloud.com（建議獨立網域）</p>
+        </div>
+        <div class="p-5">
+          <div class="text-xs font-bold mb-2" style="color:var(--blue)">主要對象</div>
+          <p class="text-sm text-stone-700 mb-3">ESG 法遵主管、永續長、CFO（CBAM 申報）、廠長（IoT 整合）+ 各規模製造業客戶</p>
+          <div class="text-xs font-bold mb-2" style="color:var(--blue)">內容重點</div>
+          <ul class="text-sm text-stone-700 space-y-1">
+            <li>· sCMS 智碳雲方案介紹（IoT 硬體 + 軟體平台）</li>
+            <li>· EAP ESG AI Platform（多模組 SaaS）</li>
+            <li>· CBAM / ISO 14064/14067 申報能力</li>
+            <li>· **商模選擇**：硬體賣斷 / SaaS / HaaS / 混合</li>
+            <li>· 客戶案例（含瀚荃自家成果作 Reference）</li>
+            <li>· Demo 申請 + SaaS 試算 + 試用</li>
+            <li>· ROI 計算機（節能 / 減碳 / 退稅）</li>
+            <li>· 永續顧問服務</li>
+            <li>· Opro9（依集團架構列子品牌）</li>
+          </ul>
+          <div class="text-xs font-bold mb-2 mt-3" style="color:var(--blue)">主要 KPI</div>
+          <p class="text-sm text-stone-700">Demo 申請、SaaS 試用、訂閱開通、客戶減碳量、CBAM 報告產出數</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 關鍵差異對照 -->
+    <div class="bg-white rounded-xl p-5 border border-stone-200">
+      <div class="text-xs tracking-widest text-stone-500 mb-3">KEY DIFFERENCES · 關鍵差異對照</div>
+      <table class="cis">
+        <thead><tr><th>面向</th><th style="background:#B0202A">CviLux 綜合</th><th style="background:#005078">CviCloud sCMS</th></tr></thead>
+        <tbody>
+          <tr><td>客戶決策角色</td><td>採購 / RD / 供應鏈</td><td>永續長 / CFO / 廠長</td></tr>
+          <tr><td>Sales Cycle</td><td>3-9 個月（連接器專案）</td><td>3-6 個月（軟硬體訂閱）</td></tr>
+          <tr><td>單筆價值</td><td>NT$ 萬到億（依專案）</td><td>NT$ 萬到百萬 / 年（訂閱）</td></tr>
+          <tr><td>收入特性</td><td>專案性 + 一次性</td><td>**經常性收入 ARR**</td></tr>
+          <tr><td>主要 CTA</td><td>RFQ / 產品搜尋 / 下載 Spec</td><td>Demo / 試用 / ROI 試算</td></tr>
+          <tr><td>主色</td><td><span class="pill pill-red">#E83A48 紅</span></td><td><span class="pill pill-blue">#0085C2 藍</span></td></tr>
+          <tr><td>共用主題色</td><td colspan="2" class="text-center"><span class="pill pill-green">#10B981 碳淨零綠</span> 用於兩站 ESG 區塊</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ESG 主軸 ===== -->
+<section id="esg" class="green-bg text-white py-16">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-8">
+      <div class="lg:col-span-4">
+        <div class="section-num" style="color:rgba(255,255,255,.3)">02</div>
+        <h2 class="font-display text-3xl font-black mt-2 text-white">共同經營理念</h2>
+        <p class="text-emerald-100 text-sm">ESG · 碳淨零 · 共同經營理念</p>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-emerald-50 leading-relaxed text-lg">「<strong>Connect the World · Conserve the Earth</strong>」不只是標語 — 是**兩個網站的共同骨架**，從導覽結構、視覺、內容、KPI 全面貫穿。</p>
+      </div>
+    </div>
+
+    <!-- 三大融合主題 -->
+    <div class="grid md:grid-cols-3 gap-5 mb-8">
+      <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20">
+        <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-3" style="background:rgba(255,255,255,.2)"><i data-lucide="leaf" class="w-6 h-6 text-white"></i></div>
+        <h3 class="font-bold text-xl mb-2">主題 1：產銷淨零循環</h3>
+        <p class="text-sm text-emerald-50 leading-relaxed">CviLux **製造端**自身淨零實踐 → CviCloud **解決方案** → 賦能客戶淨零 → 客戶下單 CviLux 連接器 → 形成閉環。</p>
+        <p class="text-xs text-emerald-200 mt-3">兩站共同講「我們做到了，你也可以」的故事。</p>
+      </div>
+      <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20">
+        <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-3" style="background:rgba(255,255,255,.2)"><i data-lucide="award" class="w-6 h-6 text-white"></i></div>
+        <h3 class="font-bold text-xl mb-2">主題 2：21 年 ESG 信用</h3>
+        <p class="text-sm text-emerald-50 leading-relaxed">2003 起 ISO 14001、14064、14067、50001 等認證歷程是 CviCloud 對客戶的最大說服力。</p>
+        <p class="text-xs text-emerald-200 mt-3">CviLux 證明「能做到」→ CviCloud 提供「做到的工具」</p>
+      </div>
+      <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20">
+        <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-3" style="background:rgba(255,255,255,.2)"><i data-lucide="shield-check" class="w-6 h-6 text-white"></i></div>
+        <h3 class="font-bold text-xl mb-2">主題 3：CBAM 一站服務</h3>
+        <p class="text-sm text-emerald-50 leading-relaxed">2026 起 CBAM 全面開徵，**所有出口歐盟客戶**都需要碳足跡報告 — CviLux 自己會做、CviCloud 賣這個能力。</p>
+        <p class="text-xs text-emerald-200 mt-3">外銷集團需求 + ESG SaaS 需求一站滿足</p>
+      </div>
+    </div>
+
+    <!-- 共用 ESG 中心 -->
+    <div class="bg-black/20 backdrop-blur rounded-xl p-6 border border-white/20">
+      <div class="text-xs tracking-widest text-emerald-200 mb-3">SHARED ESG HUB · 共用 ESG 中心</div>
+      <h3 class="font-display text-2xl font-bold mb-4">建議設計：esg.cvilux-group.com 為集團 ESG 中央資源</h3>
+      <p class="text-sm text-emerald-50 mb-4">兩站均連結到同一個 ESG Hub，避免重複建設且統一品牌訊息。內含：</p>
+      <div class="grid md:grid-cols-2 gap-3 text-sm">
+        <div class="bg-white/5 rounded-lg p-3 border border-white/10">📊 集團 ESG 報告書（年度）</div>
+        <div class="bg-white/5 rounded-lg p-3 border border-white/10">📜 ISO 14001 / 14064 / 14067 / 50001 認證</div>
+        <div class="bg-white/5 rounded-lg p-3 border border-white/10">📑 CBAM 申報範本與指南</div>
+        <div class="bg-white/5 rounded-lg p-3 border border-white/10">🌱 集團淨零路徑圖（SBTi 已申請否?）</div>
+        <div class="bg-white/5 rounded-lg p-3 border border-white/10">🏆 客戶 ESG 評鑑成績（EcoVadis / CDP）</div>
+        <div class="bg-white/5 rounded-lg p-3 border border-white/10">📚 ESG / CBAM 知識文章</div>
+        <div class="bg-white/5 rounded-lg p-3 border border-white/10">📺 永續長媒體訪談影片</div>
+        <div class="bg-white/5 rounded-lg p-3 border border-white/10">🤝 客戶減碳成功案例</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== sCMS 商模 4 方案 ===== -->
+<section id="models" class="bg-white py-16">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-8">
+      <div class="lg:col-span-4">
+        <div class="section-num">03</div>
+        <h2 class="font-display text-3xl font-black mt-2">sCMS 商模 4 方案</h2>
+        <p class="text-stone-500 text-sm">CviCloud sCMS Business Model</p>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-stone-700 leading-relaxed">CviCloud sCMS 商模仍在考慮中。下列 4 方案各有優劣 — 每個方案對網站設計、客戶旅程、收入結構、合作對象（騰雲）都有不同要求。</p>
+      </div>
+    </div>
+
+    <!-- 4 方案矩陣 -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <!-- A. 賣斷 -->
+      <div class="bg-stone-50 rounded-xl border border-stone-200 overflow-hidden">
+        <div class="p-4 text-white" style="background:var(--g7);">
+          <div class="text-xs tracking-widest opacity-80">OPTION A</div>
+          <h3 class="font-bold text-lg">純硬體賣斷</h3>
+          <p class="text-xs opacity-80">Hardware-Only</p>
+        </div>
+        <div class="p-4 text-sm">
+          <div class="font-bold mb-1">內容</div>
+          <p class="text-xs text-stone-700 mb-3">客戶買感測器、閘道、Edge 設備；自己接雲、自己分析</p>
+          <table class="text-xs w-full">
+            <tr><td class="text-stone-500 py-1">收入</td><td>一次性</td></tr>
+            <tr><td class="text-stone-500 py-1">毛利</td><td>低-中（30-40%）</td></tr>
+            <tr><td class="text-stone-500 py-1">維運</td><td>客戶自管</td></tr>
+            <tr><td class="text-stone-500 py-1">客戶金流</td><td>Capex</td></tr>
+            <tr><td class="text-stone-500 py-1">複雜度</td><td>低</td></tr>
+          </table>
+          <div class="mt-3 pt-3 border-t border-stone-200 text-xs">
+            <span class="recommend-mid">適合：小型 / 不熟雲端客戶</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- B. SaaS -->
+      <div class="bg-stone-50 rounded-xl border-2 overflow-hidden" style="border-color:var(--blue);">
+        <div class="blue-bg p-4 text-white">
+          <div class="text-xs tracking-widest opacity-80">OPTION B</div>
+          <h3 class="font-bold text-lg">SaaS 軟體服務</h3>
+          <p class="text-xs opacity-80">Software-as-a-Service</p>
+        </div>
+        <div class="p-4 text-sm">
+          <div class="font-bold mb-1">內容</div>
+          <p class="text-xs text-stone-700 mb-3">客戶用自家 IoT 或第三方硬體；訂閱 sCMS 雲平台分析 / 報表</p>
+          <table class="text-xs w-full">
+            <tr><td class="text-stone-500 py-1">收入</td><td>**經常 ARR**</td></tr>
+            <tr><td class="text-stone-500 py-1">毛利</td><td>高（70-85%）</td></tr>
+            <tr><td class="text-stone-500 py-1">維運</td><td>瀚雲（or 騰雲）</td></tr>
+            <tr><td class="text-stone-500 py-1">客戶金流</td><td>Opex</td></tr>
+            <tr><td class="text-stone-500 py-1">複雜度</td><td>中（需經營雲）</td></tr>
+          </table>
+          <div class="mt-3 pt-3 border-t border-stone-200 text-xs">
+            <span class="recommend-good">適合：中大型已有 IoT 客戶</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- C. HaaS -->
+      <div class="bg-stone-50 rounded-xl border border-stone-200 overflow-hidden">
+        <div class="p-4 text-white" style="background:var(--purple);">
+          <div class="text-xs tracking-widest opacity-80">OPTION C</div>
+          <h3 class="font-bold text-lg">HaaS 硬體即服務</h3>
+          <p class="text-xs opacity-80">Hardware-as-a-Service</p>
+        </div>
+        <div class="p-4 text-sm">
+          <div class="font-bold mb-1">內容</div>
+          <p class="text-xs text-stone-700 mb-3">客戶租賃硬體 + 軟體訂閱包月；含安裝、維護、升級全包</p>
+          <table class="text-xs w-full">
+            <tr><td class="text-stone-500 py-1">收入</td><td>**經常 + 高黏著**</td></tr>
+            <tr><td class="text-stone-500 py-1">毛利</td><td>中（40-55%）</td></tr>
+            <tr><td class="text-stone-500 py-1">維運</td><td>瀚雲全包</td></tr>
+            <tr><td class="text-stone-500 py-1">客戶金流</td><td>Opex</td></tr>
+            <tr><td class="text-stone-500 py-1">複雜度</td><td>**高**（融資 + 物流）</td></tr>
+          </table>
+          <div class="mt-3 pt-3 border-t border-stone-200 text-xs">
+            <span class="recommend-mid">適合：中小型客戶（無 IT 部門）</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- D. 混合 -->
+      <div class="bg-stone-50 rounded-xl border-2 overflow-hidden" style="border-color:var(--green);">
+        <div class="green-bg p-4 text-white">
+          <div class="text-xs tracking-widest opacity-80">OPTION D ⭐ 建議</div>
+          <h3 class="font-bold text-lg">混合分層</h3>
+          <p class="text-xs opacity-80">Hybrid Tiered</p>
+        </div>
+        <div class="p-4 text-sm">
+          <div class="font-bold mb-1">內容</div>
+          <p class="text-xs text-stone-700 mb-3">大客戶：賣斷+SaaS / 中客戶：純 SaaS / 小客戶：HaaS — 一站滿足</p>
+          <table class="text-xs w-full">
+            <tr><td class="text-stone-500 py-1">收入</td><td>三組合並行</td></tr>
+            <tr><td class="text-stone-500 py-1">毛利</td><td>加權 50-65%</td></tr>
+            <tr><td class="text-stone-500 py-1">維運</td><td>分工模式</td></tr>
+            <tr><td class="text-stone-500 py-1">客戶金流</td><td>客戶選擇</td></tr>
+            <tr><td class="text-stone-500 py-1">複雜度</td><td>**最高**（管理 3 模式）</td></tr>
+          </table>
+          <div class="mt-3 pt-3 border-t border-stone-200 text-xs">
+            <span class="recommend-good">⭐ 配合 ESG 普及最廣</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 商模對網站影響 -->
+    <div class="bg-stone-900 text-white rounded-xl overflow-hidden">
+      <div class="p-5 bg-black/20">
+        <div class="text-xs tracking-wider text-amber-300 font-bold">IMPACT ON WEBSITE · 各商模對網站設計的影響</div>
+      </div>
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="bg-white/10">
+            <th class="text-left p-3 text-xs">設計項目</th>
+            <th class="p-3 text-xs text-center">A 賣斷</th>
+            <th class="p-3 text-xs text-center">B SaaS</th>
+            <th class="p-3 text-xs text-center">C HaaS</th>
+            <th class="p-3 text-xs text-center" style="color:#7DD685">D 混合 ⭐</th>
+          </tr>
+        </thead>
+        <tbody class="text-stone-200">
+          <tr class="border-b border-white/10"><td class="p-3 font-semibold bg-white/5">產品頁</td><td class="p-3 text-center text-xs">產品型錄</td><td class="p-3 text-center text-xs">SaaS 模組介紹</td><td class="p-3 text-center text-xs">套餐頁</td><td class="p-3 text-center text-xs">客戶分層導向</td></tr>
+          <tr class="border-b border-white/10"><td class="p-3 font-semibold bg-white/5">CTA</td><td class="p-3 text-center text-xs">詢價</td><td class="p-3 text-center text-xs">註冊試用</td><td class="p-3 text-center text-xs">租賃申請</td><td class="p-3 text-center text-xs">**3 個 CTA 並列**</td></tr>
+          <tr class="border-b border-white/10"><td class="p-3 font-semibold bg-white/5">會員系統</td><td class="p-3 text-center text-xs">不需</td><td class="p-3 text-center text-xs">**SSO + Plan**</td><td class="p-3 text-center text-xs">合約管理</td><td class="p-3 text-center text-xs">混合會員</td></tr>
+          <tr class="border-b border-white/10"><td class="p-3 font-semibold bg-white/5">客戶後台</td><td class="p-3 text-center text-xs">無</td><td class="p-3 text-center text-xs">**自助管理**</td><td class="p-3 text-center text-xs">合約 + 工單</td><td class="p-3 text-center text-xs">三合一</td></tr>
+          <tr class="border-b border-white/10"><td class="p-3 font-semibold bg-white/5">金流整合</td><td class="p-3 text-center text-xs">B2B 對帳</td><td class="p-3 text-center text-xs">**訂閱+信用卡**</td><td class="p-3 text-center text-xs">分期租賃</td><td class="p-3 text-center text-xs">3 種金流</td></tr>
+          <tr class="border-b border-white/10"><td class="p-3 font-semibold bg-white/5">建置複雜度</td><td class="p-3 text-center text-xs"><span class="recommend-good">低</span></td><td class="p-3 text-center text-xs"><span class="recommend-mid">中</span></td><td class="p-3 text-center text-xs"><span class="recommend-bad">高</span></td><td class="p-3 text-center text-xs"><span class="recommend-bad">最高</span></td></tr>
+          <tr class="bg-amber-900/30"><td class="p-3 font-semibold">建議網站階段</td><td class="p-3 text-center text-xs">P1 立即可上</td><td class="p-3 text-center text-xs">P2 後續</td><td class="p-3 text-center text-xs">P3 長期</td><td class="p-3 text-center text-xs">**P1 視覺先 / P2-3 漸進**</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 推薦策略 -->
+    <div class="mt-6 bg-emerald-50 rounded-xl p-5 border border-emerald-200">
+      <div class="text-xs font-bold text-emerald-700 mb-2">⭐ 我的建議：D 混合分層 + 漸進建置</div>
+      <p class="text-sm text-stone-700 mb-3">網站<strong>設計時即預留 3 種商模</strong>，但<strong>第一期只先上 A 賣斷 + B SaaS Demo 申請</strong>。HaaS 列為第二期。原因：</p>
+      <ul class="text-sm text-stone-700 space-y-1 list-disc list-inside">
+        <li>客戶分層自然存在，不能逼客戶接受同一商模</li>
+        <li>HaaS 涉及融資、物流、合約複雜，第一期就上會拖慢主流程</li>
+        <li>SaaS 為高毛利、可規模化、ARR 穩定收入，應該優先佈局</li>
+        <li>賣斷立即可變現、客戶最熟悉的模式</li>
+        <li>「ESG 即服務（Sustainability-as-a-Service）」可成為對外行銷主標語</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 5 大融合協作點 ===== -->
+<section id="fusion" class="py-16" style="background:linear-gradient(180deg,#FFF5F5 0%,#F0F9FF 100%);">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-8">
+      <div class="lg:col-span-4">
+        <div class="section-num">04</div>
+        <h2 class="font-display text-3xl font-black mt-2">5 大融合協作點</h2>
+        <p class="text-stone-500 text-sm">Fusion Touchpoints</p>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-stone-700 leading-relaxed">兩個獨立網站如何融合協作？以下 5 個觸點是設計重點 — 既保留各自獨立、又讓客戶旅程順暢。</p>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="bg-white rounded-xl p-5 border border-stone-200 relative overflow-hidden">
+        <div class="green-edge"></div>
+        <div class="pl-3">
+          <span class="pill pill-green">FUSION 1</span>
+          <h3 class="font-bold text-lg mt-2">共用 ESG Hub</h3>
+          <p class="text-sm text-stone-700 mt-2">建立 <strong>esg.cvilux-group.com</strong> 集中所有 ESG 內容；兩站都嵌入此 Hub 而非各自做。</p>
+          <p class="text-xs text-stone-500 mt-2">效益：避免重複建設、統一訊息、SEO 集中</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-stone-200 relative overflow-hidden">
+        <div class="green-edge"></div>
+        <div class="pl-3">
+          <span class="pill pill-green">FUSION 2</span>
+          <h3 class="font-bold text-lg mt-2">共用導覽列</h3>
+          <p class="text-sm text-stone-700 mt-2">兩站頂部 nav 永遠看得到對方品牌的入口（如 CviLux 站永遠有 sCMS 連結）。</p>
+          <p class="text-xs text-stone-500 mt-2">效益：客戶任何時候都知道集團還有什麼</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-stone-200 relative overflow-hidden">
+        <div class="green-edge"></div>
+        <div class="pl-3">
+          <span class="pill pill-green">FUSION 3</span>
+          <h3 class="font-bold text-lg mt-2">共用 SSO + 客戶資料</h3>
+          <p class="text-sm text-stone-700 mt-2">客戶在 CviLux 註冊（RFQ）→ 同帳號可登入 CviCloud 試用 sCMS；資料統一進 D365。</p>
+          <p class="text-xs text-stone-500 mt-2">效益：降低重複註冊摩擦、客戶資料完整</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-stone-200 relative overflow-hidden">
+        <div class="green-edge"></div>
+        <div class="pl-3">
+          <span class="pill pill-green">FUSION 4</span>
+          <h3 class="font-bold text-lg mt-2">交叉 Lead 導流</h3>
+          <p class="text-sm text-stone-700 mt-2">CviLux 客戶有 ESG 需求 → 自動推薦 CviCloud；CviCloud 客戶採購零件 → 推薦 CviLux。</p>
+          <p class="text-xs text-stone-500 mt-2">效益：擴大集團錢包份額（Wallet Share）</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-stone-200 relative overflow-hidden">
+        <div class="green-edge"></div>
+        <div class="pl-3">
+          <span class="pill pill-green">FUSION 5</span>
+          <h3 class="font-bold text-lg mt-2">共用 AI Agent</h3>
+          <p class="text-sm text-stone-700 mt-2">同一個 ESG Agent 服務兩個網站；技術 Agent 同時處理連接器與 sCMS 問題。</p>
+          <p class="text-xs text-stone-500 mt-2">效益：知識共享、開發成本減半</p>
+        </div>
+      </div>
+      <div class="bg-stone-100 rounded-xl p-5 border-2 border-dashed border-stone-300">
+        <span class="pill pill-grey">不融合的部分</span>
+        <h3 class="font-bold text-lg mt-2">獨立元素</h3>
+        <p class="text-sm text-stone-700 mt-2">產品搜尋（兩站完全不同）、後台管理、各自客戶後台、各自定價系統 — 這些不需要融合。</p>
+        <p class="text-xs text-stone-500 mt-2">原則：使用者體驗融合，但系統耦合最小化</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 客戶旅程 ===== -->
+<section id="journey" class="bg-white py-16">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-8">
+      <div class="lg:col-span-4">
+        <div class="section-num">05</div>
+        <h2 class="font-display text-3xl font-black mt-2">客戶旅程整合</h2>
+        <p class="text-stone-500 text-sm">Customer Journey Integration</p>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-stone-700 leading-relaxed">以「歐盟出口客戶 + CBAM 申報需求」為案例，展示客戶在兩個網站的順暢旅程。</p>
+      </div>
+    </div>
+
+    <!-- 旅程流程圖 -->
+    <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+      <div class="text-xs tracking-widest text-stone-500 mb-4">CASE: EUROPE OEM CUSTOMER · 案例：出口歐盟之代工廠採購主管</div>
+
+      <div class="space-y-3">
+        <!-- Step 1 -->
+        <div class="flex gap-4 items-start">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center text-white font-bold" style="background:var(--red);">1</div>
+          <div class="flex-1 bg-white p-4 rounded-lg border border-stone-200">
+            <div class="flex items-center gap-2 mb-1"><span class="pill pill-red">CviLux 站</span><span class="text-xs text-stone-500">客戶來源：Google 搜尋連接器規格</span></div>
+            <p class="text-sm text-stone-700">客戶搜尋 Type-C 連接器規格 → 進到 CviLux 產品頁 → 用 AI 圖搜圖找到符合產品 → 下載 Spec → 送出 RFQ</p>
+          </div>
+        </div>
+        <!-- Step 2 -->
+        <div class="flex gap-4 items-start">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center text-white font-bold" style="background:var(--red);">2</div>
+          <div class="flex-1 bg-white p-4 rounded-lg border border-stone-200">
+            <div class="flex items-center gap-2 mb-1"><span class="pill pill-red">CviLux 站</span><span class="text-xs text-stone-500">RFQ 表單</span></div>
+            <p class="text-sm text-stone-700">表單中**新增一題**：「您的最終產品是否出口歐盟？需要 CBAM 碳足跡資料嗎？」 → 勾選後系統紀錄</p>
+          </div>
+        </div>
+        <!-- Step 3 - Bridge -->
+        <div class="flex gap-4 items-start">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center text-white font-bold" style="background:var(--green);"><i data-lucide="arrow-right-left" class="w-5 h-5"></i></div>
+          <div class="flex-1 bg-emerald-50 p-4 rounded-lg border-2 border-emerald-200">
+            <div class="flex items-center gap-2 mb-1"><span class="pill pill-green">融合協作點</span><span class="text-xs text-stone-500">⭐ 跨站協同自動化</span></div>
+            <p class="text-sm text-stone-700"><strong>銷售 Agent 自動執行</strong>：發送個人化 eDM 給客戶，附 (1) CviLux 報價（含產品 carbon footprint）+ (2) <strong>CviCloud sCMS 介紹</strong>「我們客戶用這套工具 12 個月內取得 CBAM 申報能力」</p>
+          </div>
+        </div>
+        <!-- Step 4 -->
+        <div class="flex gap-4 items-start">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center text-white font-bold" style="background:var(--blue);">4</div>
+          <div class="flex-1 bg-white p-4 rounded-lg border border-stone-200">
+            <div class="flex items-center gap-2 mb-1"><span class="pill pill-blue">CviCloud 站</span><span class="text-xs text-stone-500">客戶點 eDM 連結進入</span></div>
+            <p class="text-sm text-stone-700">客戶到 sCMS 頁面 → 看 CBAM 解決方案 → 用 ROI 試算機輸入廠別、產量 → 看到「3 個月回本」估算 → 申請 Demo</p>
+          </div>
+        </div>
+        <!-- Step 5 -->
+        <div class="flex gap-4 items-start">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center text-white font-bold" style="background:var(--blue);">5</div>
+          <div class="flex-1 bg-white p-4 rounded-lg border border-stone-200">
+            <div class="flex items-center gap-2 mb-1"><span class="pill pill-blue">CviCloud 站</span><span class="text-xs text-stone-500">Demo 申請</span></div>
+            <p class="text-sm text-stone-700">系統認出客戶（透過 SSO 從 CviLux 帶入）→ 直接用既有資料，不用重填 → 客戶 Demo 後選 SaaS B 方案</p>
+          </div>
+        </div>
+        <!-- Step 6 -->
+        <div class="flex gap-4 items-start">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center text-white font-bold" style="background:var(--green);"><i data-lucide="check" class="w-5 h-5"></i></div>
+          <div class="flex-1 bg-emerald-50 p-4 rounded-lg border-2 border-emerald-200">
+            <div class="flex items-center gap-2 mb-1"><span class="pill pill-green">結果</span><span class="text-xs text-stone-500">⭐ 集團錢包份額擴大</span></div>
+            <p class="text-sm text-stone-700">**單一客戶**從 CviLux 進入，最終購買：(1) 連接器年度合約 NT$ 500 萬 + (2) sCMS SaaS 訂閱 NT$ 50 萬/年 = **集團合計 ~550 萬**，且形成長期合作關係</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 技術架構 ===== -->
+<section id="tech" class="bg-stone-50 py-16">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-8">
+      <div class="lg:col-span-4">
+        <div class="section-num">06</div>
+        <h2 class="font-display text-3xl font-black mt-2">技術架構</h2>
+        <p class="text-stone-500 text-sm">Technical Architecture</p>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-stone-700 leading-relaxed">兩網站獨立部署、共用後台 — 實現「使用者體驗融合，系統耦合最小」。</p>
+      </div>
+    </div>
+
+    <!-- 架構圖 -->
+    <div class="bg-white rounded-xl p-6 border border-stone-200">
+      <div class="text-xs tracking-widest text-stone-500 mb-4">DUAL-SITE ARCHITECTURE</div>
+
+      <!-- 前端 -->
+      <div class="grid md:grid-cols-3 gap-4 mb-4">
+        <div class="bg-stone-50 rounded-lg p-3 border-2" style="border-color:var(--red);">
+          <div class="text-xs font-bold mb-1" style="color:var(--red)">FRONTEND 1</div>
+          <h4 class="font-bold">CviLux 綜合網站</h4>
+          <p class="text-xs text-stone-700 mt-1">cvilux.com / cvilux-group.com</p>
+          <p class="text-[10px] text-stone-500 mt-1">Next.js / React + CDN</p>
+        </div>
+        <div class="bg-stone-50 rounded-lg p-3 border-2 border-dashed border-emerald-400">
+          <div class="text-xs font-bold mb-1 text-emerald-700">SHARED HUB</div>
+          <h4 class="font-bold">ESG Hub</h4>
+          <p class="text-xs text-stone-700 mt-1">esg.cvilux-group.com</p>
+          <p class="text-[10px] text-stone-500 mt-1">兩站共用嵌入</p>
+        </div>
+        <div class="bg-stone-50 rounded-lg p-3 border-2" style="border-color:var(--blue);">
+          <div class="text-xs font-bold mb-1" style="color:var(--blue)">FRONTEND 2</div>
+          <h4 class="font-bold">CviCloud sCMS</h4>
+          <p class="text-xs text-stone-700 mt-1">cvicloud.com</p>
+          <p class="text-[10px] text-stone-500 mt-1">Next.js / React + CDN</p>
+        </div>
+      </div>
+
+      <div class="flex justify-center text-stone-400 mb-2"><i data-lucide="chevrons-down" class="w-5 h-5"></i></div>
+
+      <!-- 共用後台 -->
+      <div class="bg-stone-100 rounded-lg p-4 border-2 border-dashed border-stone-400 mb-4">
+        <div class="text-xs tracking-widest text-stone-600 text-center mb-2">SHARED BACKEND · 共用後台</div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+          <div class="bg-white rounded p-2 border border-stone-300 text-center">API Gateway</div>
+          <div class="bg-white rounded p-2 border border-stone-300 text-center">Azure AD SSO</div>
+          <div class="bg-white rounded p-2 border border-stone-300 text-center">Multi-Agent</div>
+          <div class="bg-white rounded p-2 border border-stone-300 text-center">Knowledge RAG</div>
+          <div class="bg-white rounded p-2 border border-stone-300 text-center">CMS（Headless）</div>
+          <div class="bg-white rounded p-2 border border-stone-300 text-center">CIS 規範引用</div>
+          <div class="bg-white rounded p-2 border border-stone-300 text-center">Lead → D365</div>
+          <div class="bg-white rounded p-2 border border-stone-300 text-center">Audit Log</div>
+        </div>
+      </div>
+
+      <div class="flex justify-center text-stone-400 mb-2"><i data-lucide="chevrons-down" class="w-5 h-5"></i></div>
+
+      <!-- 既有系統 -->
+      <div class="grid md:grid-cols-4 gap-3 mb-4">
+        <div class="bg-stone-50 rounded p-3 border border-stone-200 text-center text-xs">
+          <i data-lucide="database" class="w-5 h-5 mx-auto mb-1 text-stone-500"></i>
+          <div class="font-bold">鼎新 ERP</div>
+          <div class="text-stone-500">產品 / 庫存</div>
+        </div>
+        <div class="bg-stone-50 rounded p-3 border border-stone-200 text-center text-xs">
+          <i data-lucide="users" class="w-5 h-5 mx-auto mb-1 text-stone-500"></i>
+          <div class="font-bold">D365 CRM</div>
+          <div class="text-stone-500">Lead / 商機</div>
+        </div>
+        <div class="bg-stone-50 rounded p-3 border border-stone-200 text-center text-xs">
+          <i data-lucide="file-text" class="w-5 h-5 mx-auto mb-1 text-stone-500"></i>
+          <div class="font-bold">SharePoint</div>
+          <div class="text-stone-500">文件 / Spec</div>
+        </div>
+        <div class="bg-stone-50 rounded p-3 border border-stone-200 text-center text-xs">
+          <i data-lucide="cloud" class="w-5 h-5 mx-auto mb-1 text-stone-500"></i>
+          <div class="font-bold">Azure Fabric</div>
+          <div class="text-stone-500">資料湖 / AI</div>
+        </div>
+      </div>
+
+      <div class="bg-emerald-50 rounded-lg p-3 border border-emerald-200">
+        <div class="text-xs text-emerald-800"><strong>關鍵設計：</strong>兩個前端共用同一個後端 API。當客戶在 CviLux 註冊後，CviCloud 立即透過 SSO 認得他；行為資料（瀏覽、下載、RFQ）統一存入 D365；AI Agent 跨站學習。<strong>避免</strong>兩個前端各自串 ERP / D365 — 那樣會出現「客戶資料不同步」的災難。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 時程 ===== -->
+<section id="timeline" class="bg-white py-16">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-8">
+      <div class="lg:col-span-4">
+        <div class="section-num">07</div>
+        <h2 class="font-display text-3xl font-black mt-2">時程與里程</h2>
+        <p class="text-stone-500 text-sm">Timeline & Milestones</p>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-stone-700 leading-relaxed">兩網站<strong>不是同時上線</strong>，而是分期建置：先 CviLux 主站打地基，再上 CviCloud（避免一次太多風險）。</p>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-5 mb-8">
+      <div class="bg-stone-50 rounded-xl p-5 border-l-4" style="border-color:var(--red);">
+        <div class="text-xs font-bold" style="color:var(--red)">PHASE 1 · M1-M5（5 個月）</div>
+        <h3 class="font-bold mt-2">CviLux 綜合網站 MVP</h3>
+        <ul class="text-sm text-stone-700 mt-3 space-y-1">
+          <li>· 集團首頁 + 控股結構</li>
+          <li>· CviLux 產品搜尋 + AI 圖搜</li>
+          <li>· RFQ → D365</li>
+          <li>· SharePoint 文件下載</li>
+          <li>· ESG Hub 雛形</li>
+          <li>· **CviCloud 暫只放介紹頁 + Demo 申請表單**</li>
+        </ul>
+      </div>
+      <div class="bg-stone-50 rounded-xl p-5 border-l-4" style="border-color:var(--green);">
+        <div class="text-xs font-bold text-emerald-700">PHASE 2 · M6-M9（4 個月）</div>
+        <h3 class="font-bold mt-2">ESG Hub 建構 + 交叉導流</h3>
+        <ul class="text-sm text-stone-700 mt-3 space-y-1">
+          <li>· 完整 ESG Hub 上線</li>
+          <li>· 兩站交叉導覽連結</li>
+          <li>· 銷售 Agent 跨站推薦</li>
+          <li>· CviCloud sCMS 主站開始建置（A 賣斷）</li>
+          <li>· 客戶案例 / Reference 上架</li>
+        </ul>
+      </div>
+      <div class="bg-stone-50 rounded-xl p-5 border-l-4" style="border-color:var(--blue);">
+        <div class="text-xs font-bold" style="color:var(--blue)">PHASE 3 · M10-M14（5 個月）</div>
+        <h3 class="font-bold mt-2">CviCloud sCMS 完整上線</h3>
+        <ul class="text-sm text-stone-700 mt-3 space-y-1">
+          <li>· SaaS 模式上線（會員 + 訂閱 + 後台）</li>
+          <li>· SSO + 跨站客戶資料同步</li>
+          <li>· Demo 環境 + ROI 試算機</li>
+          <li>· 共用 AI Agent 深度整合</li>
+          <li>· HaaS 第二期啟動評估</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 預算 -->
+    <div class="bg-stone-900 text-white rounded-xl p-6">
+      <div class="text-xs tracking-wider text-amber-300 font-bold mb-3">BUDGET ESTIMATE · 預算估算 [推論]</div>
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-white/20">
+            <th class="text-left p-2 text-xs">項目</th>
+            <th class="text-right p-2 text-xs">CviLux 站</th>
+            <th class="text-right p-2 text-xs">CviCloud 站</th>
+            <th class="text-right p-2 text-xs">共用後台</th>
+            <th class="text-right p-2 text-xs">合計</th>
+          </tr>
+        </thead>
+        <tbody class="text-stone-200">
+          <tr class="border-b border-white/10"><td class="p-2">Phase 1 建置</td><td class="text-right p-2 font-mono">1,800 萬</td><td class="text-right p-2 font-mono">200 萬</td><td class="text-right p-2 font-mono">800 萬</td><td class="text-right p-2 font-mono">2,800 萬</td></tr>
+          <tr class="border-b border-white/10"><td class="p-2">Phase 2 ESG Hub + 交叉</td><td class="text-right p-2 font-mono">300 萬</td><td class="text-right p-2 font-mono">800 萬</td><td class="text-right p-2 font-mono">400 萬</td><td class="text-right p-2 font-mono">1,500 萬</td></tr>
+          <tr class="border-b border-white/10"><td class="p-2">Phase 3 sCMS 完整</td><td class="text-right p-2 font-mono">200 萬</td><td class="text-right p-2 font-mono">2,500 萬</td><td class="text-right p-2 font-mono">500 萬</td><td class="text-right p-2 font-mono">3,200 萬</td></tr>
+          <tr class="bg-amber-900/30"><td class="p-2 font-bold">★ 全期合計（14 個月）</td><td class="text-right p-2 font-mono font-bold">2,300 萬</td><td class="text-right p-2 font-mono font-bold">3,500 萬</td><td class="text-right p-2 font-mono font-bold">1,700 萬</td><td class="text-right p-2 font-mono font-bold text-amber-300">7,500 萬</td></tr>
+          <tr><td class="p-2">年度維運</td><td class="text-right p-2 font-mono">500-700</td><td class="text-right p-2 font-mono">800-1,200</td><td class="text-right p-2 font-mono">300-500</td><td class="text-right p-2 font-mono">1,600-2,400 萬/年</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 決策清單 ===== -->
+<section id="decisions" class="bg-stone-50 py-16">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-8">
+      <div class="lg:col-span-4">
+        <div class="section-num">08</div>
+        <h2 class="font-display text-3xl font-black mt-2">12 條決策事項</h2>
+        <p class="text-stone-500 text-sm">12 Decisions Required</p>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-stone-700 leading-relaxed">啟動雙網站專案前，需董事會 + IT + CviCloud 主管確認下列決議。</p>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-5">
+      <div>
+        <h3 class="font-bold mb-3">🎯 戰略層（董事會核准）</h3>
+        <div class="space-y-2">
+          <div class="bg-white rounded-lg p-3 border-2" style="border-color:var(--red)"><div class="text-sm font-bold" style="color:var(--red)">D1. ★ 雙網站策略確認</div><p class="text-xs text-stone-600 mt-1">CviLux 與 CviCloud 是否分為兩個獨立網站？</p></div>
+          <div class="bg-white rounded-lg p-3 border-2" style="border-color:var(--red)"><div class="text-sm font-bold" style="color:var(--red)">D2. ★ sCMS 商模選擇</div><p class="text-xs text-stone-600 mt-1">A 賣斷 / B SaaS / C HaaS / D 混合分層？</p></div>
+          <div class="bg-white rounded-lg p-3 border border-stone-200"><div class="text-sm font-bold">D3. ESG Hub 獨立網域</div><p class="text-xs text-stone-600 mt-1">是否建 esg.cvilux-group.com 子站？</p></div>
+          <div class="bg-white rounded-lg p-3 border border-stone-200"><div class="text-sm font-bold">D4. 與騰雲合作模式</div><p class="text-xs text-stone-600 mt-1">代理 / 共營 / 技術外包？影響網站設計</p></div>
+          <div class="bg-white rounded-lg p-3 border border-stone-200"><div class="text-sm font-bold">D5. CviCloud 網域選擇</div><p class="text-xs text-stone-600 mt-1">cvicloud.com 是否註冊？</p></div>
+          <div class="bg-white rounded-lg p-3 border border-stone-200"><div class="text-sm font-bold">D6. 預算核准</div><p class="text-xs text-stone-600 mt-1">7,500 萬建置 + 1,600-2,400 萬/年維運</p></div>
+        </div>
+      </div>
+      <div>
+        <h3 class="font-bold mb-3">🛠 執行層（IT + 永續聯辦）</h3>
+        <div class="space-y-2">
+          <div class="bg-white rounded-lg p-3 border border-stone-200"><div class="text-sm font-bold">D7. SSO 範圍</div><p class="text-xs text-stone-600 mt-1">兩站使用同一 Azure AD 客戶租戶？</p></div>
+          <div class="bg-white rounded-lg p-3 border border-stone-200"><div class="text-sm font-bold">D8. CMS 平台</div><p class="text-xs text-stone-600 mt-1">兩站共用 Headless CMS？選 Strapi / Sanity / 自建？</p></div>
+          <div class="bg-white rounded-lg p-3 border border-stone-200"><div class="text-sm font-bold">D9. AI Agent 共用</div><p class="text-xs text-stone-600 mt-1">ESG Agent / 技術 Agent 跨站共用？</p></div>
+          <div class="bg-white rounded-lg p-3 border border-stone-200"><div class="text-sm font-bold">D10. CRM 同步</div><p class="text-xs text-stone-600 mt-1">客戶 unified profile 在 D365 同一筆？</p></div>
+          <div class="bg-white rounded-lg p-3 border border-stone-200"><div class="text-sm font-bold">D11. 廠商分包</div><p class="text-xs text-stone-600 mt-1">同一廠商做兩站 vs 各 1 廠商？</p></div>
+          <div class="bg-white rounded-lg p-3 border border-stone-200"><div class="text-sm font-bold">D12. 上線順序</div><p class="text-xs text-stone-600 mt-1">確認 P1 CviLux 先 / P3 CviCloud 後？</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-6 bg-amber-50 rounded-xl p-5 border border-amber-200">
+      <div class="font-bold mb-2 text-amber-700">⚠️ 立即可做（不需等董事會）</div>
+      <ol class="text-sm text-stone-700 space-y-1.5">
+        <li>1. 註冊 cvicloud.com 網域（如尚未持有）</li>
+        <li>2. 註冊 esg.cvilux-group.com 子網域</li>
+        <li>3. 與騰雲確認合作協議草約（影響 D2 + D4 決策）</li>
+        <li>4. CviCloud 主管召集團隊評估 4 個商模偏好</li>
+        <li>5. IT 副總列出兩站共用後台之技術選型清單</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="bg-stone-900 text-stone-400 py-10">
+  <div class="max-w-7xl mx-auto px-8 grid md:grid-cols-4 gap-6 mb-6">
+    <div>
+      <div class="flex items-center gap-3 mb-3">
+        <div class="flex">
+          <div class="w-9 h-9 rounded-l-md flex items-center justify-center text-white font-bold" style="background:var(--red)">瀚</div>
+          <div class="w-9 h-9 rounded-r-md flex items-center justify-center text-white font-bold" style="background:var(--blue)">雲</div>
+        </div>
+      </div>
+      <p class="text-xs leading-relaxed">雙網站融合架構企劃 v1.0<br />Connect the World · Conserve the Earth</p>
+    </div>
+    <div>
+      <div class="text-xs font-semibold text-stone-200 mb-3">兩網站定位</div>
+      <ul class="space-y-1 text-xs">
+        <li>· CviLux 綜合（B2B 工業）</li>
+        <li>· CviCloud sCMS（ESG SaaS）</li>
+        <li>· ESG Hub（共用主軸）</li>
+      </ul>
+    </div>
+    <div>
+      <div class="text-xs font-semibold text-stone-200 mb-3">關聯文件</div>
+      <ul class="space-y-1 text-xs">
+        <li>· CIS 手冊 v1.2</li>
+        <li>· AI 平台網站</li>
+        <li>· 雲端架構建議書</li>
+        <li>· AI 轉型組企劃書</li>
+      </ul>
+    </div>
+    <div>
+      <div class="text-xs font-semibold text-stone-200 mb-3">主導</div>
+      <ul class="space-y-1 text-xs">
+        <li>· 楊超群 董事長兼永續長</li>
+        <li>· CviCloud 主管</li>
+        <li>· 行銷 + IT + 永續聯辦</li>
+      </ul>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto px-8 pt-4 border-t border-stone-800 flex flex-col md:flex-row justify-between gap-2 text-xs">
+    <div>© 2026 CviLux Group · 內部規範文件</div>
+    <div class="text-stone-500">v1.0 · 2026-05-03 · 與 Project_06 雲端架構建議書配合使用</div>
+  </div>
+</footer>
+
+<script>if(window.lucide)lucide.createIcons();</script>
+</body>
+</html>

@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>瀚荃集團 AI 轉型組企劃書 | CviLux Group AI Transformation Team Charter</title>
+<meta name="description" content="精實 AI 轉型組設計 — 9 個核心角色 + Claude Workspace 協作模式 + AI 工具棧 + 12 個產銷一體小模型推薦。" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  :root{--red:#E83A48;--red-d:#B0202A;--red-l:#EB6363;--g9:#3D3A39;--g7:#595757;--g5:#999899;--g2:#E1DEDD;--blue:#0085C2;--orange:#F07810;--green:#10B981;--bg:#F7F5F2;--purple:#7C3AED;--amber:#F59E0B;--cyan:#06B6D4;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Century Gothic','Inter','Noto Sans TC',system-ui,sans-serif;color:#1F1F1F;background:var(--bg);}
+  .font-display{font-family:'Noto Sans TC','Inter',sans-serif;letter-spacing:-0.01em;}
+  .font-mono{font-family:'JetBrains Mono','Courier New',monospace;}
+  .red-bg{background:linear-gradient(135deg,#B0202A 0%,#E83A48 60%,#EB6363 100%);}
+  .magazine-cover{background:radial-gradient(ellipse at 15% 70%,rgba(232,58,72,.4),transparent 60%),linear-gradient(135deg,#0a0a0a 0%,#2a0a0e 30%,#4a0a14 60%,#b0202a 100%);}
+  .red-edge{position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--red);}
+  .pill{display:inline-flex;align-items:center;gap:.4rem;padding:.25rem .75rem;font-size:.7rem;font-weight:700;letter-spacing:.05em;border-radius:9999px;}
+  .pill-red{background:rgba(232,58,72,.1);color:var(--red);border:1px solid rgba(232,58,72,.3);}
+  .pill-blue{background:rgba(0,133,194,.1);color:var(--blue);border:1px solid rgba(0,133,194,.3);}
+  .pill-green{background:rgba(16,185,129,.1);color:#047857;border:1px solid rgba(16,185,129,.3);}
+  .pill-orange{background:rgba(240,120,16,.1);color:var(--orange);border:1px solid rgba(240,120,16,.3);}
+  .pill-purple{background:rgba(124,58,237,.1);color:var(--purple);border:1px solid rgba(124,58,237,.3);}
+  .pill-amber{background:rgba(245,158,11,.15);color:#92400e;border:1px solid rgba(245,158,11,.4);}
+  .pill-cyan{background:rgba(6,182,212,.1);color:#0E7490;border:1px solid rgba(6,182,212,.3);}
+  .pill-grey{background:rgba(89,87,87,.1);color:var(--g7);border:1px solid rgba(89,87,87,.3);}
+  .verify-tag{font-size:.65rem;padding:.15rem .4rem;border-radius:4px;font-weight:600;}
+  .verify-inferred{background:#fef3c7;color:#92400e;}
+  .section-num{font-size:80px;font-weight:900;color:var(--red);line-height:1;font-family:'Noto Sans TC',sans-serif;}
+  .nav-link{position:relative;font-weight:500;}
+  .nav-link::after{content:'';position:absolute;left:50%;bottom:-3px;height:2px;width:0;background:var(--red);transition:.25s;transform:translateX(-50%);}
+  .nav-link:hover::after{width:100%;}
+  details>summary{list-style:none;cursor:pointer;}
+  details>summary::-webkit-details-marker{display:none;}
+  details[open] .chev{transform:rotate(90deg);}
+  .chev{transition:.2s;}
+  table.cis{width:100%;border-collapse:collapse;}
+  table.cis th{background:#1F1F1F;color:white;text-align:left;padding:.6rem .75rem;font-size:.68rem;letter-spacing:.05em;text-transform:uppercase;font-weight:700;}
+  table.cis td{padding:.55rem .75rem;border-bottom:1px solid #e5e5e5;font-size:.82rem;vertical-align:top;}
+  table.cis tr:nth-child(even) td{background:#FAF8F5;}
+  .role-card{background:white;border:1px solid #e5e5e5;border-radius:12px;padding:1.25rem;transition:all .25s;}
+  .role-card:hover{transform:translateY(-2px);box-shadow:0 12px 24px -12px rgba(232,58,72,.3);}
+  .skill-pill{display:inline-block;font-size:.65rem;padding:.2rem .5rem;border-radius:9999px;background:#f1f5f9;color:#475569;margin:.15rem .15rem 0 0;}
+  .skill-pill-must{background:rgba(232,58,72,.12);color:var(--red);font-weight:600;}
+  .skill-pill-should{background:rgba(245,158,11,.12);color:#92400e;}
+  .lean-banner{background:linear-gradient(90deg,rgba(232,58,72,.05),rgba(245,158,11,.05));border-left:4px solid var(--red);}
+  @media print{.no-print{display:none !important;}body{background:white;}}
+  ::-webkit-scrollbar{width:10px;}
+  ::-webkit-scrollbar-thumb{background:#a0a0a0;border-radius:6px;}
+</style>
+</head>
+<body class="antialiased">
+
+<!-- ===== TOP NAV ===== -->
+<header class="no-print fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-stone-200 shadow-sm">
+  <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="#cover" class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-md flex items-center justify-center text-white font-bold" style="background:var(--red)">瀚</div>
+      <div class="leading-tight">
+        <div class="text-sm font-bold text-stone-900 font-display">AI 轉型組企劃書</div>
+        <div class="text-[11px] text-stone-500 tracking-wider">AI TRANSFORMATION TEAM CHARTER · v1.0</div>
+      </div>
+    </a>
+    <nav class="hidden xl:flex items-center gap-5 text-sm text-stone-700">
+      <a class="nav-link" href="#vision">願景</a>
+      <a class="nav-link" href="#org">組織</a>
+      <a class="nav-link" href="#roles">角色</a>
+      <a class="nav-link" href="#skills">技能</a>
+      <a class="nav-link" href="#workspace">Workspace</a>
+      <a class="nav-link" href="#tools">工具</a>
+      <a class="nav-link" href="#models">小模型</a>
+      <a class="nav-link" href="#90day">90 天</a>
+      <a class="nav-link" href="#kpi">KPI</a>
+    </nav>
+    <button onclick="window.print()" class="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-md text-white text-sm font-semibold" style="background:var(--red)">列印 <i data-lucide="printer" class="w-4 h-4"></i></button>
+  </div>
+</header>
+
+<!-- ===== COVER ===== -->
+<section id="cover" class="magazine-cover text-white pt-24 pb-14 min-h-screen flex items-center">
+  <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-red-700 via-red-500 to-red-300"></div>
+  <div class="max-w-7xl mx-auto px-8 w-full">
+    <div class="grid lg:grid-cols-12 gap-10 items-center">
+      <div class="lg:col-span-7">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-12 rounded-md flex items-center justify-center font-bold text-2xl" style="background:var(--red)">瀚</div>
+          <div>
+            <div class="text-sm font-bold tracking-widest">瀚荃集團 · CVILUX GROUP</div>
+            <div class="text-xs text-red-300 tracking-wider">Connect the World · Conserve the Earth</div>
+          </div>
+        </div>
+        <div class="text-[11px] text-red-200 tracking-[0.4em] mb-3">AI TRANSFORMATION TEAM CHARTER · v1.0 · 2026</div>
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-black leading-[1.05] font-display mb-6">
+          AI 轉型組<br />
+          <span class="text-red-300">企劃書</span>
+        </h1>
+        <h2 class="text-xl md:text-2xl font-light text-red-100 leading-tight mb-8">
+          精實組織 × Claude Workspace 協作 × 產銷一體小模型棧<br />
+          <span class="text-red-200 text-base">— 從成立到首個 PoC 上線，90 天可達</span>
+        </h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+          <div class="bg-white/10 backdrop-blur border border-white/20 rounded-xl p-3"><div class="text-2xl font-black text-red-300">9</div><div class="text-xs text-stone-300">核心角色</div></div>
+          <div class="bg-white/10 backdrop-blur border border-white/20 rounded-xl p-3"><div class="text-2xl font-black text-red-300">12</div><div class="text-xs text-stone-300">推薦小模型</div></div>
+          <div class="bg-white/10 backdrop-blur border border-white/20 rounded-xl p-3"><div class="text-2xl font-black text-red-300">90</div><div class="text-xs text-stone-300">天啟動</div></div>
+          <div class="bg-white/10 backdrop-blur border border-white/20 rounded-xl p-3"><div class="text-2xl font-black text-red-300">5</div><div class="text-xs text-stone-300">關鍵 KPI</div></div>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <a href="#org" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white text-stone-900 font-semibold hover:bg-amber-100 transition">看組織架構 <i data-lucide="users" class="w-4 h-4"></i></a>
+          <a href="#models" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white/10 backdrop-blur border border-white/30 text-white font-semibold hover:bg-white/20 transition">12 個小模型 <i data-lucide="cpu" class="w-4 h-4"></i></a>
+        </div>
+      </div>
+      <div class="lg:col-span-5">
+        <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6 mb-4">
+          <div class="text-xs tracking-widest text-red-300 mb-3">DESIGN PRINCIPLES · 設計原則</div>
+          <div class="space-y-2 text-sm text-stone-200">
+            <div class="flex gap-2"><i data-lucide="zap" class="w-4 h-4 mt-0.5 text-amber-300 flex-shrink-0"></i><div><strong>2-Pizza Team 精實</strong>：核心不超過 9 人，跨 BU 兼任另計</div></div>
+            <div class="flex gap-2"><i data-lucide="users-round" class="w-4 h-4 mt-0.5 text-amber-300 flex-shrink-0"></i><div><strong>T-shaped 人才</strong>：深 1 項專業 + 廣 3 項相關</div></div>
+            <div class="flex gap-2"><i data-lucide="git-branch" class="w-4 h-4 mt-0.5 text-amber-300 flex-shrink-0"></i><div><strong>Fusion Team</strong>：業務 + IT + AI 三元組</div></div>
+            <div class="flex gap-2"><i data-lucide="repeat" class="w-4 h-4 mt-0.5 text-amber-300 flex-shrink-0"></i><div><strong>Sprint 衝刺</strong>：2 週迭代、月度回顧、季度路標</div></div>
+            <div class="flex gap-2"><i data-lucide="brain-circuit" class="w-4 h-4 mt-0.5 text-amber-300 flex-shrink-0"></i><div><strong>AI Native</strong>：每個成員每天用 Claude / Copilot 協作</div></div>
+          </div>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+          <div class="text-xs tracking-widest text-amber-300 mb-2">DIRECT REPORT · 直接匯報</div>
+          <div class="font-display font-bold text-lg">楊超群　Steve Yang</div>
+          <div class="text-sm text-stone-400">董事長兼永續長</div>
+          <div class="text-xs text-stone-400 mt-2">AI 轉型組組長對董事長月度匯報；永續聯辦兼 PMO 為制度設計協作夥伴</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 願景 ===== -->
+<section id="vision" class="bg-white py-16">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-8">
+      <div class="lg:col-span-4">
+        <div class="text-xs tracking-[0.3em] text-stone-500 mb-2">VISION</div>
+        <h2 class="font-display text-4xl font-black mb-3">使命願景</h2>
+        <p class="text-stone-500 text-sm">瀚動數位、荃釋未來</p>
+      </div>
+      <div class="lg:col-span-8 space-y-3">
+        <div class="bg-stone-50 rounded-xl p-5 border border-stone-200 relative overflow-hidden">
+          <div class="red-edge"></div>
+          <div class="pl-4">
+            <div class="text-xs font-bold text-red-700 mb-1">使命　Mission</div>
+            <p class="text-base text-stone-800 leading-relaxed">為瀚荃集團「<strong>產銷一體</strong>」建立 AI 賦能能力 — 讓行銷、設計、生產、品管、採購、客服、ESG、決策層皆有 AI 助手；以資料驅動取代直覺、以小模型補齊大模型、以人機協作取代純人力。</p>
+          </div>
+        </div>
+        <div class="bg-stone-50 rounded-xl p-5 border border-stone-200 relative overflow-hidden">
+          <div class="red-edge"></div>
+          <div class="pl-4">
+            <div class="text-xs font-bold text-red-700 mb-1">願景　Vision</div>
+            <p class="text-base text-stone-800 leading-relaxed">3 年內成為「製造業 AI 落地能力」標竿；集團 50% 員工每日使用 AI 工具；20+ AI 應用模型在產線、行銷、決策落地；對外輸出 AI 顧問服務（透過 CviCloud sCMS / EAP）。</p>
+          </div>
+        </div>
+        <div class="bg-stone-50 rounded-xl p-5 border border-stone-200 relative overflow-hidden">
+          <div class="red-edge"></div>
+          <div class="pl-4">
+            <div class="text-xs font-bold text-red-700 mb-1">5 大策略支柱　Strategic Pillars</div>
+            <ol class="text-sm text-stone-700 space-y-1.5 mt-2">
+              <li><strong>1. 業務驅動</strong>：每個 AI 專案先有 BU 業務 Owner 簽字承諾使用；不做純技術 Demo</li>
+              <li><strong>2. 小模型優先</strong>：在製造廠端優先用可邊緣部署的小模型；大模型作 Orchestrator</li>
+              <li><strong>3. Human-in-loop</strong>：AI 輔助、不自動決策；商業重要決策必經人工審核</li>
+              <li><strong>4. 可解釋 / 可追溯</strong>：每個 AI 決策保留來源 + Audit Log + 信心分數</li>
+              <li><strong>5. 持續學習</strong>：使用者 thumbs up/down → RLHF → 月度模型評估</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 組織架構 ===== -->
+<section id="org" class="bg-stone-50 py-16">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-8">
+      <div class="lg:col-span-4">
+        <div class="section-num">02</div>
+        <h2 class="font-display text-3xl font-black mt-2">精實組織架構</h2>
+        <p class="text-stone-500 text-sm">Lean Org Structure</p>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-stone-700 leading-relaxed">採「2-Pizza Team」精實原則：核心 9 人專任 + 跨 BU 業務 Champion 兼任 + 永續聯辦 / IT / 法務支援。直接對董事長兼永續長楊超群匯報。</p>
+      </div>
+    </div>
+
+    <!-- 組織層級圖 -->
+    <div class="bg-white rounded-xl p-6 border border-stone-200 mb-8">
+      <div class="text-xs tracking-widest text-stone-500 mb-4">REPORTING STRUCTURE · 組織層級</div>
+
+      <div class="flex justify-center mb-3">
+        <div class="rounded-xl text-white p-4 text-center max-w-md" style="background:linear-gradient(135deg,#0a0a0a,#3D3A39);">
+          <div class="text-[10px] tracking-widest text-stone-300">SPONSOR · 出資人</div>
+          <div class="font-bold">楊超群　董事長兼永續長</div>
+          <div class="text-xs text-stone-400 mt-1">月度策略檢核 + 季度董事會匯報</div>
+        </div>
+      </div>
+
+      <div class="flex justify-center text-stone-400 mb-2"><i data-lucide="chevron-down" class="w-5 h-5"></i></div>
+
+      <div class="flex justify-center mb-4">
+        <div class="rounded-xl text-white p-4 text-center max-w-md" style="background:linear-gradient(135deg,#B0202A,#E83A48);">
+          <div class="text-[10px] tracking-widest text-red-200">HEAD · AI 轉型組組長</div>
+          <div class="font-bold">Chief AI Officer (CAIO)</div>
+          <div class="text-xs text-red-100 mt-1">建議：永續長兼任 / 新聘高階</div>
+        </div>
+      </div>
+
+      <div class="flex justify-center text-stone-400 mb-2"><i data-lucide="chevrons-down" class="w-5 h-5"></i></div>
+
+      <div class="grid md:grid-cols-3 gap-3 mb-4 text-xs">
+        <div class="bg-blue-50 border-2 border-blue-200 rounded-lg p-3">
+          <div class="font-bold text-blue-700 mb-1">業務 Pod（3 人）</div>
+          <ul class="text-stone-600 space-y-0.5">
+            <li>· AI 產品經理</li>
+            <li>· 業務分析師</li>
+            <li>· 變革管理 / 訓練</li>
+          </ul>
+        </div>
+        <div class="bg-emerald-50 border-2 border-emerald-200 rounded-lg p-3">
+          <div class="font-bold text-emerald-700 mb-1">技術 Pod（4 人）</div>
+          <ul class="text-stone-600 space-y-0.5">
+            <li>· 資料工程師</li>
+            <li>· MLOps 工程師</li>
+            <li>· LLM 應用工程師</li>
+            <li>· 前端 / UX（兼）</li>
+          </ul>
+        </div>
+        <div class="bg-amber-50 border-2 border-amber-200 rounded-lg p-3">
+          <div class="font-bold text-amber-700 mb-1">治理 Pod（2 人）</div>
+          <ul class="text-stone-600 space-y-0.5">
+            <li>· AI 治理 / 法遵</li>
+            <li>· 資安專員</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="flex justify-center my-3">
+        <div class="px-3 py-1 bg-stone-200 rounded-full text-[10px] tracking-widest text-stone-600">─── 跨部門協作邊界 ───</div>
+      </div>
+
+      <div class="bg-stone-100 rounded-lg p-3 border-2 border-dashed border-stone-400">
+        <div class="text-xs tracking-widest text-stone-600 text-center mb-2">EMBEDDED CHAMPIONS · 跨 BU 兼任（不在編，月配 30-50% 工時）</div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+          <div class="bg-white px-2 py-1.5 rounded border border-stone-300 text-center">採購 Champion（PoC#1）</div>
+          <div class="bg-white px-2 py-1.5 rounded border border-stone-300 text-center">廠長 / IE Champion（PoC#2）</div>
+          <div class="bg-white px-2 py-1.5 rounded border border-stone-300 text-center">行銷 Champion（自動行銷）</div>
+          <div class="bg-white px-2 py-1.5 rounded border border-stone-300 text-center">ESG Champion（CBAM）</div>
+          <div class="bg-white px-2 py-1.5 rounded border border-stone-300 text-center">CviLux BU Champion</div>
+          <div class="bg-white px-2 py-1.5 rounded border border-stone-300 text-center">CviCloud BU Champion</div>
+          <div class="bg-white px-2 py-1.5 rounded border border-stone-300 text-center">CviMall BU Champion</div>
+          <div class="bg-white px-2 py-1.5 rounded border border-stone-300 text-center">客服 Champion</div>
+        </div>
+      </div>
+
+      <div class="flex justify-center my-3">
+        <div class="px-3 py-1 bg-stone-200 rounded-full text-[10px] tracking-widest text-stone-600">─── 共用支援 ───</div>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+        <div class="bg-white px-2 py-1.5 rounded border border-stone-300 text-center">永續聯辦 / PMO</div>
+        <div class="bg-white px-2 py-1.5 rounded border border-stone-300 text-center">IT 維運 / 雲架構</div>
+        <div class="bg-white px-2 py-1.5 rounded border border-stone-300 text-center">法務（合約 / NDA）</div>
+        <div class="bg-white px-2 py-1.5 rounded border border-stone-300 text-center">外部顧問（PoC 階段）</div>
+      </div>
+    </div>
+
+    <div class="lean-banner rounded-xl p-5">
+      <div class="flex gap-3 items-start">
+        <i data-lucide="lightbulb" class="w-5 h-5 mt-0.5" style="color:var(--red)"></i>
+        <div>
+          <div class="font-bold text-stone-900">為什麼是 9 + Champions 而不是 30 人大團隊？</div>
+          <p class="text-sm text-stone-700 mt-1">[推論] 業界經驗顯示 AI 轉型組超過 12 人會出現「會議多過交付」現象；超過 20 人會分裂為次團隊。9 人核心 + 跨 BU Champions 的 Fusion Team 設計，能：(1) 維持決策速度；(2) 讓業務知識在團隊內流動；(3) 避免 IT 與 BU 脫節；(4) 控制人力成本。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 9 角色 ===== -->
+<section id="roles" class="bg-white py-16">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-8">
+      <div class="lg:col-span-4">
+        <div class="section-num">03</div>
+        <h2 class="font-display text-3xl font-black mt-2">9 個核心角色</h2>
+        <p class="text-stone-500 text-sm">Core 9 Roles</p>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-stone-700 leading-relaxed">每個角色含：職責、向誰負責、KPI、薪資範圍 [推論]、招募策略、可遠端與否。</p>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <!-- R1 CAIO -->
+      <div class="role-card">
+        <span class="pill pill-red">R1 · LEAD</span>
+        <h3 class="font-bold text-lg mt-2">AI 轉型組組長</h3>
+        <p class="text-stone-500 text-xs">Chief AI Officer (CAIO)</p>
+        <p class="text-sm text-stone-700 mt-3">統籌組織、預算、KPI、對董事長匯報；扮演 AI 與業務翻譯者角色。</p>
+        <div class="mt-3 pt-3 border-t border-stone-200 text-xs text-stone-600">
+          <div><strong>對誰：</strong>董事長</div>
+          <div><strong>KPI：</strong>AI 應用上線數、業務 ROI</div>
+          <div><strong>薪資 [推論]：</strong>NT$ 450-650 萬 / 年</div>
+          <div><strong>招募：</strong>建議永續長兼任 1 年，期間外聘</div>
+        </div>
+      </div>
+
+      <!-- R2 PM -->
+      <div class="role-card">
+        <span class="pill pill-blue">R2 · BUSINESS POD</span>
+        <h3 class="font-bold text-lg mt-2">AI 產品經理</h3>
+        <p class="text-stone-500 text-xs">AI Product Manager</p>
+        <p class="text-sm text-stone-700 mt-3">把業務需求翻譯為 AI 任務；定義 KPI；管理 PoC 流程；協調 BU Champion。</p>
+        <div class="mt-3 pt-3 border-t border-stone-200 text-xs text-stone-600">
+          <div><strong>對誰：</strong>CAIO</div>
+          <div><strong>KPI：</strong>PoC 上線時程、業務採納率</div>
+          <div><strong>薪資 [推論]：</strong>NT$ 180-280 萬 / 年</div>
+          <div><strong>招募：</strong>內部資深 PM + AI 訓練 4 週</div>
+        </div>
+      </div>
+
+      <!-- R3 Business Analyst -->
+      <div class="role-card">
+        <span class="pill pill-blue">R3 · BUSINESS POD</span>
+        <h3 class="font-bold text-lg mt-2">業務分析師</h3>
+        <p class="text-stone-500 text-xs">Business Analyst</p>
+        <p class="text-sm text-stone-700 mt-3">深入採購 / 倉儲 / 廠長場景訪談；建立 user story；驗證 AI 輸出與業務需求一致。</p>
+        <div class="mt-3 pt-3 border-t border-stone-200 text-xs text-stone-600">
+          <div><strong>對誰：</strong>AI 產品經理</div>
+          <div><strong>KPI：</strong>需求文件品質、業務滿意度</div>
+          <div><strong>薪資 [推論]：</strong>NT$ 120-180 萬 / 年</div>
+          <div><strong>招募：</strong>內部 BU 資深員工轉任</div>
+        </div>
+      </div>
+
+      <!-- R4 Data Engineer -->
+      <div class="role-card">
+        <span class="pill pill-green">R4 · TECH POD</span>
+        <h3 class="font-bold text-lg mt-2">資料工程師</h3>
+        <p class="text-stone-500 text-xs">Data Engineer</p>
+        <p class="text-sm text-stone-700 mt-3">ETL Pipeline、資料品質、Azure Fabric Data Lake、ERP / MES API 串接、跨境資料治理。</p>
+        <div class="mt-3 pt-3 border-t border-stone-200 text-xs text-stone-600">
+          <div><strong>對誰：</strong>CAIO</div>
+          <div><strong>KPI：</strong>資料品質、Pipeline SLA</div>
+          <div><strong>薪資 [推論]：</strong>NT$ 150-220 萬 / 年</div>
+          <div><strong>招募：</strong>外聘 + 1 名內部 IT 升任</div>
+        </div>
+      </div>
+
+      <!-- R5 MLOps -->
+      <div class="role-card">
+        <span class="pill pill-green">R5 · TECH POD</span>
+        <h3 class="font-bold text-lg mt-2">MLOps 工程師</h3>
+        <p class="text-stone-500 text-xs">ML / MLOps Engineer</p>
+        <p class="text-sm text-stone-700 mt-3">模型訓練、版本管理、部署、監控、再訓練自動化；熟悉 Azure ML / MLflow / Edge Deploy。</p>
+        <div class="mt-3 pt-3 border-t border-stone-200 text-xs text-stone-600">
+          <div><strong>對誰：</strong>CAIO</div>
+          <div><strong>KPI：</strong>模型部署成功率、推理 SLA</div>
+          <div><strong>薪資 [推論]：</strong>NT$ 180-260 萬 / 年</div>
+          <div><strong>招募：</strong>外聘優先（市場稀缺）</div>
+        </div>
+      </div>
+
+      <!-- R6 LLM App Engineer -->
+      <div class="role-card">
+        <span class="pill pill-green">R6 · TECH POD</span>
+        <h3 class="font-bold text-lg mt-2">LLM 應用工程師</h3>
+        <p class="text-stone-500 text-xs">LLM Application Engineer</p>
+        <p class="text-sm text-stone-700 mt-3">RAG 系統、Multi-Agent 編排、Prompt 工程、Claude Skills / Copilot Studio 整合。</p>
+        <div class="mt-3 pt-3 border-t border-stone-200 text-xs text-stone-600">
+          <div><strong>對誰：</strong>CAIO</div>
+          <div><strong>KPI：</strong>Agent 答對率、引用率</div>
+          <div><strong>薪資 [推論]：</strong>NT$ 160-240 萬 / 年</div>
+          <div><strong>招募：</strong>外聘 + 內部資深軟體工程師</div>
+        </div>
+      </div>
+
+      <!-- R7 AI Governance -->
+      <div class="role-card">
+        <span class="pill pill-amber">R7 · GOVERNANCE POD</span>
+        <h3 class="font-bold text-lg mt-2">AI 治理 / 法遵</h3>
+        <p class="text-stone-500 text-xs">AI Governance & Compliance Lead</p>
+        <p class="text-sm text-stone-700 mt-3">AI 倫理、偏見偵測、Audit Log 設計、PIPL / GDPR / 個資法、CBAM 文件 AI 合規。</p>
+        <div class="mt-3 pt-3 border-t border-stone-200 text-xs text-stone-600">
+          <div><strong>對誰：</strong>CAIO + 法務副總</div>
+          <div><strong>KPI：</strong>合規稽核通過率</div>
+          <div><strong>薪資 [推論]：</strong>NT$ 130-200 萬 / 年</div>
+          <div><strong>招募：</strong>內部法務 / 內稽轉任 + AI 訓練</div>
+        </div>
+      </div>
+
+      <!-- R8 Security -->
+      <div class="role-card">
+        <span class="pill pill-amber">R8 · GOVERNANCE POD</span>
+        <h3 class="font-bold text-lg mt-2">資安專員</h3>
+        <p class="text-stone-500 text-xs">AI Security Specialist</p>
+        <p class="text-sm text-stone-700 mt-3">跨境資料控管、NDA 文件保護、Azure 資安、Prompt Injection 防範、Model Card 維護。</p>
+        <div class="mt-3 pt-3 border-t border-stone-200 text-xs text-stone-600">
+          <div><strong>對誰：</strong>CAIO + 資安長</div>
+          <div><strong>KPI：</strong>零資安事件</div>
+          <div><strong>薪資 [推論]：</strong>NT$ 130-200 萬 / 年</div>
+          <div><strong>招募：</strong>內部資安轉任 + AI 訓練</div>
+        </div>
+      </div>
+
+      <!-- R9 Change Mgmt -->
+      <div class="role-card">
+        <span class="pill pill-purple">R9 · BUSINESS POD</span>
+        <h3 class="font-bold text-lg mt-2">變革管理 / 訓練</h3>
+        <p class="text-stone-500 text-xs">Change & Training Lead</p>
+        <p class="text-sm text-stone-700 mt-3">員工 AI 訓練、文化變革、新工具導入、瀚荃學苑 AI 課程、抗拒管理。</p>
+        <div class="mt-3 pt-3 border-t border-stone-200 text-xs text-stone-600">
+          <div><strong>對誰：</strong>CAIO + HR 副總</div>
+          <div><strong>KPI：</strong>員工 AI 工具使用率</div>
+          <div><strong>薪資 [推論]：</strong>NT$ 120-180 萬 / 年</div>
+          <div><strong>招募：</strong>HR 內部 + 外部訓練顧問</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-6 bg-amber-50 rounded-xl p-4 border border-amber-200">
+      <div class="text-xs font-bold text-amber-700 mb-1">招募策略總體建議</div>
+      <p class="text-sm text-stone-700">
+        <strong>內部優先 60%</strong>（R1-R3、R7-R9 由現有員工轉任 + 培訓）<strong>外聘 40%</strong>（R4-R6 技術核心市場稀缺，必須外聘）；建議與淡江大學、職訓局合作開設「製造業 AI 工程師」班，2-3 年內提升內部佔比至 80%。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 技能矩陣 ===== -->
+<section id="skills" class="bg-stone-50 py-16">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-8">
+      <div class="lg:col-span-4">
+        <div class="section-num">04</div>
+        <h2 class="font-display text-3xl font-black mt-2">人才技能矩陣</h2>
+        <p class="text-stone-500 text-sm">Skills Matrix</p>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-stone-700 leading-relaxed">每個角色含 Must（必備）/ Should（應有）/ Nice-to-have（加分）三類技能；T-shaped 設計，深 1 項 + 廣 3 項。</p>
+        <div class="flex gap-3 mt-3 text-xs">
+          <span class="skill-pill skill-pill-must">Must 必備</span>
+          <span class="skill-pill skill-pill-should">Should 應有</span>
+          <span class="skill-pill">Nice 加分</span>
+        </div>
+      </div>
+    </div>
+
+    <table class="cis">
+      <thead>
+        <tr>
+          <th style="width:18%">角色</th>
+          <th>必備技能 Must</th>
+          <th>應有技能 Should</th>
+          <th>加分 Nice-to-have</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>R1 CAIO</strong></td>
+          <td><span class="skill-pill skill-pill-must">業務理解</span><span class="skill-pill skill-pill-must">領導</span><span class="skill-pill skill-pill-must">AI 戰略</span></td>
+          <td><span class="skill-pill skill-pill-should">財務</span><span class="skill-pill skill-pill-should">變革管理</span><span class="skill-pill skill-pill-should">公關溝通</span></td>
+          <td><span class="skill-pill">技術背景</span><span class="skill-pill">創投經驗</span></td>
+        </tr>
+        <tr>
+          <td><strong>R2 AI PM</strong></td>
+          <td><span class="skill-pill skill-pill-must">產品管理</span><span class="skill-pill skill-pill-must">敏捷</span><span class="skill-pill skill-pill-must">業務分析</span></td>
+          <td><span class="skill-pill skill-pill-should">SQL</span><span class="skill-pill skill-pill-should">Notion / Asana</span><span class="skill-pill skill-pill-should">JTBD</span></td>
+          <td><span class="skill-pill">Python</span><span class="skill-pill">數據分析</span></td>
+        </tr>
+        <tr>
+          <td><strong>R3 BA</strong></td>
+          <td><span class="skill-pill skill-pill-must">用戶訪談</span><span class="skill-pill skill-pill-must">流程分析</span><span class="skill-pill skill-pill-must">SQL</span></td>
+          <td><span class="skill-pill skill-pill-should">Excel 進階</span><span class="skill-pill skill-pill-should">Power BI</span><span class="skill-pill skill-pill-should">Process Mining</span></td>
+          <td><span class="skill-pill">UML</span><span class="skill-pill">業界 Domain</span></td>
+        </tr>
+        <tr>
+          <td><strong>R4 Data Eng</strong></td>
+          <td><span class="skill-pill skill-pill-must">Python</span><span class="skill-pill skill-pill-must">SQL</span><span class="skill-pill skill-pill-must">ETL</span><span class="skill-pill skill-pill-must">Azure Fabric</span></td>
+          <td><span class="skill-pill skill-pill-should">Spark / Databricks</span><span class="skill-pill skill-pill-should">Airflow</span><span class="skill-pill skill-pill-should">資料治理</span></td>
+          <td><span class="skill-pill">Kafka</span><span class="skill-pill">dbt</span><span class="skill-pill">鼎新 ERP API</span></td>
+        </tr>
+        <tr>
+          <td><strong>R5 MLOps</strong></td>
+          <td><span class="skill-pill skill-pill-must">PyTorch / TF</span><span class="skill-pill skill-pill-must">scikit-learn</span><span class="skill-pill skill-pill-must">Azure ML</span><span class="skill-pill skill-pill-must">MLflow</span></td>
+          <td><span class="skill-pill skill-pill-should">Docker / K8s</span><span class="skill-pill skill-pill-should">時序模型</span><span class="skill-pill skill-pill-should">Edge AI</span></td>
+          <td><span class="skill-pill">RL</span><span class="skill-pill">ONNX</span><span class="skill-pill">CUDA</span></td>
+        </tr>
+        <tr>
+          <td><strong>R6 LLM App</strong></td>
+          <td><span class="skill-pill skill-pill-must">LangChain / LangGraph</span><span class="skill-pill skill-pill-must">Prompt 工程</span><span class="skill-pill skill-pill-must">RAG</span><span class="skill-pill skill-pill-must">向量資料庫</span></td>
+          <td><span class="skill-pill skill-pill-should">Claude API</span><span class="skill-pill skill-pill-should">Function Calling</span><span class="skill-pill skill-pill-should">React / Next.js</span></td>
+          <td><span class="skill-pill">Fine-tune</span><span class="skill-pill">Multi-Agent</span></td>
+        </tr>
+        <tr>
+          <td><strong>R7 Governance</strong></td>
+          <td><span class="skill-pill skill-pill-must">資料隱私</span><span class="skill-pill skill-pill-must">PIPL/GDPR</span><span class="skill-pill skill-pill-must">AI 倫理</span></td>
+          <td><span class="skill-pill skill-pill-should">CBAM</span><span class="skill-pill skill-pill-should">ISO 27001</span><span class="skill-pill skill-pill-should">內稽</span></td>
+          <td><span class="skill-pill">EU AI Act</span><span class="skill-pill">NIST AI RMF</span></td>
+        </tr>
+        <tr>
+          <td><strong>R8 Security</strong></td>
+          <td><span class="skill-pill skill-pill-must">Azure Security</span><span class="skill-pill skill-pill-must">RBAC</span><span class="skill-pill skill-pill-must">Prompt Injection 防範</span></td>
+          <td><span class="skill-pill skill-pill-should">滲透測試</span><span class="skill-pill skill-pill-should">SOC</span><span class="skill-pill skill-pill-should">SIEM</span></td>
+          <td><span class="skill-pill">Red Team AI</span><span class="skill-pill">Zero Trust</span></td>
+        </tr>
+        <tr>
+          <td><strong>R9 Change/Train</strong></td>
+          <td><span class="skill-pill skill-pill-must">教學設計</span><span class="skill-pill skill-pill-must">變革管理</span><span class="skill-pill skill-pill-must">溝通</span></td>
+          <td><span class="skill-pill skill-pill-should">LMS</span><span class="skill-pill skill-pill-should">Power Apps</span><span class="skill-pill skill-pill-should">影片製作</span></td>
+          <td><span class="skill-pill">Prosci 認證</span><span class="skill-pill">SCRUM Master</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== Claude Workspace 協作 ===== -->
+<section id="workspace" class="bg-white py-16">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-8">
+      <div class="lg:col-span-4">
+        <div class="section-num">05</div>
+        <h2 class="font-display text-3xl font-black mt-2">Claude Workspace 協作</h2>
+        <p class="text-stone-500 text-sm">Workspace Collaboration</p>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-stone-700 leading-relaxed">建議採用 Claude Team 或 Enterprise 方案 <span class="verify-tag verify-inferred">推論</span> 作為 AI 轉型組之主協作環境。團隊共用 Skills、Projects、Knowledge Base，避免每位成員獨立摸索。</p>
+      </div>
+    </div>
+
+    <!-- Workspace 結構 -->
+    <div class="grid lg:grid-cols-2 gap-5 mb-8">
+      <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background:var(--red)"><i data-lucide="building" class="w-6 h-6 text-white"></i></div>
+          <div>
+            <div class="text-xs tracking-widest" style="color:var(--red)">CVILUX WORKSPACE</div>
+            <h3 class="font-bold text-xl">瀚荃集團 AI 轉型 Workspace</h3>
+          </div>
+        </div>
+        <ul class="text-sm text-stone-700 space-y-1.5">
+          <li><strong>Owner</strong>：永續聯辦 / IT</li>
+          <li><strong>方案</strong>：Claude Team 或 Enterprise（依資安需求）</li>
+          <li><strong>成員規劃</strong>：核心 9 + Champions 8 + 共用支援 4 ≈ 20-25 帳號</li>
+          <li><strong>SSO</strong>：Azure AD 整合</li>
+          <li><strong>資料邊界</strong>：對話不用於訓練（Enterprise 預設）</li>
+        </ul>
+      </div>
+      <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background:var(--blue)"><i data-lucide="folder-open" class="w-6 h-6 text-white"></i></div>
+          <div>
+            <div class="text-xs tracking-widest" style="color:var(--blue)">PROJECTS · 專案</div>
+            <h3 class="font-bold text-xl">每個 PoC / 任務一個 Project</h3>
+          </div>
+        </div>
+        <ul class="text-sm text-stone-700 space-y-1.5">
+          <li>· P01-AI-Platform-Website</li>
+          <li>· P02-2026-Transformation-Roadmap</li>
+          <li>· P03-PoC-Inventory-Forecast</li>
+          <li>· P04-PoC-Production-Optimization</li>
+          <li>· P05-AI-Transformation-Team（本案）</li>
+          <li>· P06-Brand-Auto-Marketing</li>
+          <li>· ...（每月新增 1-2 個）</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Skills + Knowledge -->
+    <div class="grid md:grid-cols-2 gap-5 mb-8">
+      <div class="bg-white border border-stone-200 rounded-xl p-6">
+        <div class="text-xs tracking-widest mb-3" style="color:var(--red)">SHARED SKILLS · 共用智能技能</div>
+        <h3 class="font-bold mb-4">已建立 + 規劃中</h3>
+        <table class="text-sm w-full">
+          <tr class="border-b border-stone-100"><td class="py-2"><strong>hannstar-brand-cis v1.2</strong></td><td class="text-emerald-700 text-xs">✅ 已上線</td></tr>
+          <tr class="border-b border-stone-100"><td class="py-2"><strong>enterprise-ai-platform-website</strong></td><td class="text-emerald-700 text-xs">✅ 已上線</td></tr>
+          <tr class="border-b border-stone-100"><td class="py-2"><strong>cvilux-doc-organizer</strong></td><td class="text-emerald-700 text-xs">✅ 已上線</td></tr>
+          <tr class="border-b border-stone-100"><td class="py-2"><strong>cvilux-meeting-minutes</strong></td><td class="text-amber-700 text-xs">📝 規劃</td></tr>
+          <tr class="border-b border-stone-100"><td class="py-2"><strong>cvilux-rfp-writer</strong></td><td class="text-amber-700 text-xs">📝 規劃</td></tr>
+          <tr class="border-b border-stone-100"><td class="py-2"><strong>cvilux-esg-cbam-helper</strong></td><td class="text-amber-700 text-xs">📝 規劃</td></tr>
+          <tr><td class="py-2"><strong>cvilux-product-spec-extractor</strong></td><td class="text-amber-700 text-xs">📝 規劃</td></tr>
+        </table>
+      </div>
+      <div class="bg-white border border-stone-200 rounded-xl p-6">
+        <div class="text-xs tracking-widest mb-3" style="color:var(--blue)">KNOWLEDGE BASES · 知識庫</div>
+        <h3 class="font-bold mb-4">Project 內掛載文件</h3>
+        <ul class="text-sm text-stone-700 space-y-1.5">
+          <li>· <strong>CIS 規範</strong>（永遠最新版）</li>
+          <li>· <strong>產品 SKU 主檔</strong>（從 ERP 同步）</li>
+          <li>· <strong>客戶 NDA 規範</strong></li>
+          <li>· <strong>ISO 認證文件清單</strong></li>
+          <li>· <strong>IE 工程師經驗手冊</strong>（從訪談累積）</li>
+          <li>· <strong>採購規則手冊</strong></li>
+          <li>· <strong>歷史 RFP / 提案</strong></li>
+          <li>· <strong>會議記錄索引</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 協作 Sprint 流程 -->
+    <div class="bg-stone-900 text-white rounded-xl p-6">
+      <div class="text-xs tracking-widest text-amber-300 mb-3">SPRINT WORKFLOW · 2 週迭代節奏</div>
+      <div class="grid md:grid-cols-5 gap-3 text-sm">
+        <div class="bg-white/5 rounded-lg p-3 border border-white/10">
+          <div class="text-amber-300 font-bold text-xs">DAY 1 · 週一</div>
+          <div class="font-bold mt-1">Sprint Planning</div>
+          <p class="text-xs text-stone-300 mt-1">在 Workspace 開新 Project / 排 14 天任務</p>
+        </div>
+        <div class="bg-white/5 rounded-lg p-3 border border-white/10">
+          <div class="text-amber-300 font-bold text-xs">DAY 2-12</div>
+          <div class="font-bold mt-1">Daily Standup（15 min）</div>
+          <p class="text-xs text-stone-300 mt-1">早上 9:30 線上同步進度 / 阻礙</p>
+        </div>
+        <div class="bg-white/5 rounded-lg p-3 border border-white/10">
+          <div class="text-amber-300 font-bold text-xs">DAY 7</div>
+          <div class="font-bold mt-1">Mid-Sprint Demo</div>
+          <p class="text-xs text-stone-300 mt-1">向 BU Champion 展示中段成果</p>
+        </div>
+        <div class="bg-white/5 rounded-lg p-3 border border-white/10">
+          <div class="text-amber-300 font-bold text-xs">DAY 13 · 週四</div>
+          <div class="font-bold mt-1">Sprint Review</div>
+          <p class="text-xs text-stone-300 mt-1">Demo 給董事長 / Champions / 出資人</p>
+        </div>
+        <div class="bg-white/5 rounded-lg p-3 border border-white/10">
+          <div class="text-amber-300 font-bold text-xs">DAY 14 · 週五</div>
+          <div class="font-bold mt-1">Retrospective</div>
+          <p class="text-xs text-stone-300 mt-1">回顧 Keep / Stop / Start</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== AI 工具棧 ===== -->
+<section id="tools" class="bg-stone-50 py-16">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-8">
+      <div class="lg:col-span-4">
+        <div class="section-num">06</div>
+        <h2 class="font-display text-3xl font-black mt-2">AI 輔助工具棧</h2>
+        <p class="text-stone-500 text-sm">AI Tool Stack</p>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-stone-700 leading-relaxed">分為 4 個層級：個人生產力 / 團隊協作 / 開發環境 / 平台基礎建設。每個成員依角色配置不同組合。</p>
+      </div>
+    </div>
+
+    <table class="cis">
+      <thead>
+        <tr>
+          <th>層級</th>
+          <th>工具</th>
+          <th>主要用途</th>
+          <th>建議授權範圍</th>
+          <th>月成本估算 [推論]</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background:#FEF2F2;">
+          <td rowspan="3" class="font-bold"><span style="color:var(--red)">L1 個人</span><br />Personal</td>
+          <td><strong>Claude Pro / Team</strong></td>
+          <td>對話、寫作、Skill、Project 協作</td>
+          <td>核心 9 + Champions 8 = 17 席</td>
+          <td>NT$ 12,000-25,000</td>
+        </tr>
+        <tr style="background:#FEF2F2;">
+          <td><strong>Microsoft 365 Copilot</strong></td>
+          <td>Excel、Word、PowerPoint、Teams</td>
+          <td>核心 9 + 高階主管 10 席</td>
+          <td>NT$ 19,000-25,000</td>
+        </tr>
+        <tr style="background:#FEF2F2;">
+          <td><strong>Claude in Chrome / Excel</strong></td>
+          <td>瀏覽器自動化、試算表 AI</td>
+          <td>含於 Team 方案</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td rowspan="3" class="font-bold"><span style="color:var(--blue)">L2 團隊</span><br />Team</td>
+          <td><strong>Claude Workspace</strong></td>
+          <td>共用 Projects / Skills / Knowledge</td>
+          <td>同 Claude Team</td>
+          <td>含於上方</td>
+        </tr>
+        <tr>
+          <td><strong>Microsoft Teams + SharePoint</strong></td>
+          <td>會議、文件、共筆</td>
+          <td>全集團（既有授權）</td>
+          <td>已採購</td>
+        </tr>
+        <tr>
+          <td><strong>Notion / Confluence</strong>（擇一）</td>
+          <td>知識管理、wiki、SOP</td>
+          <td>核心 9 + 全 BU PM</td>
+          <td>NT$ 8,000-15,000</td>
+        </tr>
+        <tr style="background:#F0F9FF;">
+          <td rowspan="4" class="font-bold"><span style="color:var(--green)">L3 開發</span><br />Dev</td>
+          <td><strong>GitHub Copilot Business</strong></td>
+          <td>程式碼補全、Pull Request 評審</td>
+          <td>R4-R6 技術 Pod 4 席</td>
+          <td>NT$ 6,000-8,000</td>
+        </tr>
+        <tr style="background:#F0F9FF;">
+          <td><strong>Claude Code</strong></td>
+          <td>命令列 AI 編程</td>
+          <td>R4-R6 技術 Pod</td>
+          <td>含於 Claude Team</td>
+        </tr>
+        <tr style="background:#F0F9FF;">
+          <td><strong>Cursor / Windsurf</strong></td>
+          <td>AI 原生 IDE（替代 VSCode）</td>
+          <td>選擇性 — 視個人偏好</td>
+          <td>NT$ 0-3,000</td>
+        </tr>
+        <tr style="background:#F0F9FF;">
+          <td><strong>Hugging Face Pro</strong></td>
+          <td>小模型下載、私有部署</td>
+          <td>R5 MLOps 1 席</td>
+          <td>NT$ 1,500-3,000</td>
+        </tr>
+        <tr>
+          <td rowspan="5" class="font-bold"><span style="color:var(--purple)">L4 平台</span><br />Platform</td>
+          <td><strong>Azure ML Workspace</strong></td>
+          <td>模型訓練、部署、MLflow</td>
+          <td>集團共用</td>
+          <td>NT$ 80,000-150,000</td>
+        </tr>
+        <tr>
+          <td><strong>Azure Fabric Data Lake</strong></td>
+          <td>集團資料湖、AI 訓練資料</td>
+          <td>集團共用（既有）</td>
+          <td>已採購</td>
+        </tr>
+        <tr>
+          <td><strong>Azure AI Search / Pinecone</strong></td>
+          <td>向量資料庫、RAG</td>
+          <td>集團共用</td>
+          <td>NT$ 30,000-80,000</td>
+        </tr>
+        <tr>
+          <td><strong>Google Vertex AI / Gemini API</strong></td>
+          <td>備用 LLM、多模態</td>
+          <td>選擇性使用</td>
+          <td>用量計費</td>
+        </tr>
+        <tr>
+          <td><strong>Anthropic Claude API</strong></td>
+          <td>Multi-Agent 後端</td>
+          <td>R6 LLM 應用工程師</td>
+          <td>用量計費 NT$ 30,000-100,000</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="mt-6 grid md:grid-cols-3 gap-4">
+      <div class="bg-rose-50 rounded-xl p-4 border border-rose-200">
+        <div class="text-xs font-bold mb-1" style="color:var(--red)">月度估算 — 啟動期</div>
+        <p class="text-2xl font-black mt-1">NT$ 30 萬</p>
+        <p class="text-xs text-stone-700 mt-1">17 席授權 + 雲端基礎建設（不含 PoC 額外資源）</p>
+      </div>
+      <div class="bg-blue-50 rounded-xl p-4 border border-blue-200">
+        <div class="text-xs font-bold mb-1" style="color:var(--blue)">月度估算 — 穩定期</div>
+        <p class="text-2xl font-black mt-1">NT$ 50 萬</p>
+        <p class="text-xs text-stone-700 mt-1">擴展至 25 席 + 模型訓練 + 推理用量</p>
+      </div>
+      <div class="bg-emerald-50 rounded-xl p-4 border border-emerald-200">
+        <div class="text-xs font-bold text-emerald-700 mb-1">年度總投入</div>
+        <p class="text-2xl font-black mt-1">NT$ 480-720 萬</p>
+        <p class="text-xs text-stone-700 mt-1">工具授權年度成本（不含人事）</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 12 個小模型 ===== -->
+<section id="models" class="bg-white py-16">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-8">
+      <div class="lg:col-span-4">
+        <div class="section-num">07</div>
+        <h2 class="font-display text-3xl font-black mt-2">產銷一體小模型</h2>
+        <p class="text-stone-500 text-sm">12 Small Models for Manufacturing</p>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-stone-700 leading-relaxed">「產銷一體」涵蓋從業務 RFQ → 設計 → 採購 → 生產 → 品檢 → 出貨 → 客服全鏈。小模型（&lt; 10B 參數）優勢：可邊緣部署、低延遲、隱私保護、跨境合規、成本低、可微調。</p>
+        <p class="text-xs mt-2"><span class="verify-tag verify-inferred">推論</span> 模型推薦基於 2024-2025 公開資訊；實際採用須由 R5 MLOps 評估後決定。</p>
+      </div>
+    </div>
+
+    <!-- 模型分類 -->
+    <div class="space-y-3">
+      <!-- A. 時序預測 -->
+      <details class="bg-stone-50 rounded-xl border border-stone-200" open>
+        <summary class="p-4 hover:bg-stone-100 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold" style="background:var(--red)">A</div>
+            <div>
+              <div class="text-xs text-stone-500">CATEGORY 1</div>
+              <h3 class="font-bold text-lg">時序預測 · Time-Series Forecasting</h3>
+              <p class="text-xs text-stone-500">用於：庫存預測、需求預測、能耗預測、產能規劃</p>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+        </summary>
+        <div class="p-4 pt-0 border-t border-stone-200">
+          <table class="cis">
+            <thead><tr><th>模型</th><th>參數</th><th>授權</th><th>適用場景</th><th>邊緣部署</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Prophet（Meta）</strong></td><td>輕量</td><td>MIT</td><td>季節性強的銷售預測、庫存週期</td><td>✅ CPU</td></tr>
+              <tr><td><strong>NeuralProphet</strong></td><td>輕量</td><td>MIT</td><td>Prophet 的神經網路版，更準</td><td>✅ CPU</td></tr>
+              <tr><td><strong>LightGBM</strong></td><td>輕量</td><td>MIT</td><td>含外部特徵的需求預測（客戶等級、節氣）</td><td>✅ CPU</td></tr>
+              <tr><td><strong>TimesFM（Google）</strong></td><td>200M</td><td>Apache 2.0</td><td>零樣本時序預測 — 不需訓練即可預測</td><td>⚠️ 需 GPU 推理</td></tr>
+              <tr><td><strong>Chronos（Amazon）</strong></td><td>20M-700M</td><td>Apache 2.0</td><td>多任務時序基礎模型，可微調</td><td>✅ 中型 GPU</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+
+      <!-- B. 視覺品檢 -->
+      <details class="bg-stone-50 rounded-xl border border-stone-200">
+        <summary class="p-4 hover:bg-stone-100 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold" style="background:var(--blue)">B</div>
+            <div>
+              <div class="text-xs text-stone-500">CATEGORY 2</div>
+              <h3 class="font-bold text-lg">電腦視覺 · Computer Vision</h3>
+              <p class="text-xs text-stone-500">用於：連接器外觀檢測、線材瑕疵、Pin 偏位、工人姿態</p>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+        </summary>
+        <div class="p-4 pt-0 border-t border-stone-200">
+          <table class="cis">
+            <thead><tr><th>模型</th><th>參數</th><th>授權</th><th>適用場景</th><th>邊緣部署</th></tr></thead>
+            <tbody>
+              <tr><td><strong>YOLOv8 / v10</strong></td><td>3M-68M</td><td>AGPL-3.0</td><td>即時瑕疵偵測、Pin 數確認、安全帽佩戴</td><td>✅ Jetson Edge</td></tr>
+              <tr><td><strong>EfficientNet-B0/B4</strong></td><td>5M-20M</td><td>Apache 2.0</td><td>產品分類、良/不良二元判定</td><td>✅ Jetson</td></tr>
+              <tr><td><strong>MobileNetV3</strong></td><td>2M-5M</td><td>Apache 2.0</td><td>手機 APP 上的線材分類</td><td>✅ 手機</td></tr>
+              <tr><td><strong>DINOv2（Meta）</strong></td><td>21M-300M</td><td>Apache 2.0</td><td>自監督特徵 — 異常偵測 / 圖搜圖</td><td>✅ 中型 GPU</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+
+      <!-- C. 語言模型（製造領域） -->
+      <details class="bg-stone-50 rounded-xl border border-stone-200">
+        <summary class="p-4 hover:bg-stone-100 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold" style="background:var(--green)">C</div>
+            <div>
+              <div class="text-xs text-stone-500">CATEGORY 3</div>
+              <h3 class="font-bold text-lg">語言小模型 · Small Language Models</h3>
+              <p class="text-xs text-stone-500">用於：本地 RAG、文件理解、製造領域問答（隱私場景）</p>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+        </summary>
+        <div class="p-4 pt-0 border-t border-stone-200">
+          <table class="cis">
+            <thead><tr><th>模型</th><th>參數</th><th>授權</th><th>適用場景</th><th>邊緣部署</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Llama 3.1 8B（Meta）</strong></td><td>8B</td><td>Llama License</td><td>內部問答、製造 SOP 查詢</td><td>⚠️ 需 24GB GPU</td></tr>
+              <tr><td><strong>Qwen 2.5 7B（Alibaba）</strong></td><td>7B</td><td>Apache 2.0</td><td>中文最佳的小模型；陸區優選</td><td>⚠️ 需 24GB GPU</td></tr>
+              <tr><td><strong>Phi-3 mini / medium（Microsoft）</strong></td><td>3.8B-14B</td><td>MIT</td><td>商業友善、可在筆電執行</td><td>✅ 16GB GPU</td></tr>
+              <tr><td><strong>Gemma 2 2B / 9B（Google）</strong></td><td>2B-9B</td><td>商業友善</td><td>高效率小模型，可在 CPU 跑</td><td>✅ 8GB GPU 或 CPU</td></tr>
+              <tr><td><strong>Mistral 7B / Nemo 12B</strong></td><td>7B-12B</td><td>Apache 2.0</td><td>歐洲合規、英文與多語</td><td>⚠️ 需 24GB GPU</td></tr>
+            </tbody>
+          </table>
+          <div class="mt-3 bg-amber-50 rounded-lg p-3 border border-amber-200">
+            <p class="text-xs text-stone-700"><strong>策略</strong>：對外客戶服務 + 跨集團 Agent → 用 Claude / GPT 大模型；廠端、跨境敏感場景（陸區、ESG 內稽）→ 用 Phi-3 / Qwen 7B / Gemma 2 等小模型本地部署，確保資料不外送。</p>
+          </div>
+        </div>
+      </details>
+
+      <!-- D. OCR / 文件理解 -->
+      <details class="bg-stone-50 rounded-xl border border-stone-200">
+        <summary class="p-4 hover:bg-stone-100 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold" style="background:var(--orange)">D</div>
+            <div>
+              <div class="text-xs text-stone-500">CATEGORY 4</div>
+              <h3 class="font-bold text-lg">OCR / 文件理解 · Document AI</h3>
+              <p class="text-xs text-stone-500">用於：客戶 RFQ 規格擷取、進料 BOL、出貨單、發票、ESG 報告自動萃取</p>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+        </summary>
+        <div class="p-4 pt-0 border-t border-stone-200">
+          <table class="cis">
+            <thead><tr><th>模型</th><th>參數</th><th>授權</th><th>適用場景</th><th>邊緣部署</th></tr></thead>
+            <tbody>
+              <tr><td><strong>PaddleOCR</strong></td><td>輕量</td><td>Apache 2.0</td><td>中英文 OCR、表格辨識（陸廠首選）</td><td>✅ CPU 即可</td></tr>
+              <tr><td><strong>Donut / Pix2Struct</strong></td><td>200M</td><td>MIT / Apache</td><td>結構化文件理解 — RFQ 直接萃取規格</td><td>✅ 中型 GPU</td></tr>
+              <tr><td><strong>LayoutLMv3</strong></td><td>133M</td><td>CC BY-NC</td><td>表單欄位辨識（注意：非商用）</td><td>✅ 中型 GPU</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+
+      <!-- E. 異常偵測 / 預測性維護 -->
+      <details class="bg-stone-50 rounded-xl border border-stone-200">
+        <summary class="p-4 hover:bg-stone-100 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold" style="background:var(--purple)">E</div>
+            <div>
+              <div class="text-xs text-stone-500">CATEGORY 5</div>
+              <h3 class="font-bold text-lg">異常偵測 / 預測性維護</h3>
+              <p class="text-xs text-stone-500">用於：設備故障預警、品質漂移、IoT 訊號異常</p>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+        </summary>
+        <div class="p-4 pt-0 border-t border-stone-200">
+          <table class="cis">
+            <thead><tr><th>模型</th><th>參數</th><th>授權</th><th>適用場景</th><th>邊緣部署</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Isolation Forest</strong></td><td>輕量</td><td>scikit-learn</td><td>無標籤異常偵測（電流、振動）</td><td>✅ CPU</td></tr>
+              <tr><td><strong>Autoencoder LSTM</strong></td><td>輕量</td><td>自訓</td><td>多變量時序異常（溫度+壓力+電流）</td><td>✅ Jetson</td></tr>
+              <tr><td><strong>TFT（Temporal Fusion Transformer）</strong></td><td>1M-10M</td><td>Apache 2.0</td><td>多變量時序、含可解釋性</td><td>✅ 中型 GPU</td></tr>
+              <tr><td><strong>N-BEATS</strong></td><td>輕量</td><td>—</td><td>單變量精準時序預測</td><td>✅ CPU</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+
+    <!-- 部署策略 -->
+    <div class="mt-8 bg-stone-900 text-white rounded-xl p-6">
+      <div class="text-xs tracking-widest text-amber-300 mb-3">DEPLOYMENT STRATEGY · 部署策略總原則</div>
+      <div class="grid md:grid-cols-3 gap-4 text-sm">
+        <div class="bg-white/5 rounded-lg p-4 border border-white/10">
+          <div class="font-bold text-amber-300 mb-2">廠端 Edge（隱私 + 低延遲）</div>
+          <p class="text-stone-300">YOLO 視覺品檢 + Autoencoder 異常 + Phi-3 / Gemma 小語言<br /><span class="text-xs">部署：NVIDIA Jetson / Industrial PC</span></p>
+        </div>
+        <div class="bg-white/5 rounded-lg p-4 border border-white/10">
+          <div class="font-bold text-amber-300 mb-2">集團雲端（成本最佳）</div>
+          <p class="text-stone-300">Prophet / LightGBM / TimesFM / Chronos / TFT<br /><span class="text-xs">部署：Azure ML Endpoint</span></p>
+        </div>
+        <div class="bg-white/5 rounded-lg p-4 border border-white/10">
+          <div class="font-bold text-amber-300 mb-2">SaaS 大模型（複雜任務）</div>
+          <p class="text-stone-300">Claude / GPT-4 / Gemini Pro 作 Orchestrator<br /><span class="text-xs">部署：API 呼叫</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 90 天啟動 ===== -->
+<section id="90day" class="py-16 red-bg text-white">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="text-center mb-10">
+      <div class="text-xs tracking-[0.4em] text-red-200 mb-3">90-DAY KICK-OFF · 90 天啟動</div>
+      <h2 class="text-4xl font-black font-display">從成立到首個 PoC 上線</h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20">
+        <div class="text-3xl font-black text-red-200">M1</div>
+        <div class="text-xs tracking-widest text-red-100 mt-1">DAY 1-30 · 組建期</div>
+        <h3 class="font-bold text-lg mt-2">招募 + Workspace 開通</h3>
+        <ul class="text-sm text-red-100 mt-2 space-y-1">
+          <li>· CAIO 任命 + 對外宣告</li>
+          <li>· 9 個職位開放招募</li>
+          <li>· Claude Workspace 開通</li>
+          <li>· Azure ML / Fabric 配置</li>
+          <li>· 內部訓練教材籌備</li>
+          <li>· 與 Champion 對齊</li>
+        </ul>
+      </div>
+      <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20">
+        <div class="text-3xl font-black text-red-200">M2</div>
+        <div class="text-xs tracking-widest text-red-100 mt-1">DAY 31-60 · 暖身期</div>
+        <h3 class="font-bold text-lg mt-2">資料盤點 + Sprint 暖身</h3>
+        <ul class="text-sm text-red-100 mt-2 space-y-1">
+          <li>· 資料字典 v0 完成</li>
+          <li>· 第一個 Sprint 啟動（PoC#1）</li>
+          <li>· Skills 建構 3 個</li>
+          <li>· 廠端 IoT 規格定案</li>
+          <li>· 員工 AI 訓練班開課</li>
+          <li>· 跨 BU 訪談完成</li>
+        </ul>
+      </div>
+      <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20">
+        <div class="text-3xl font-black text-red-200">M3</div>
+        <div class="text-xs tracking-widest text-red-100 mt-1">DAY 61-90 · 交付期</div>
+        <h3 class="font-bold text-lg mt-2">首個 PoC Demo</h3>
+        <ul class="text-sm text-red-100 mt-2 space-y-1">
+          <li>· PoC#1 Shadow Mode 啟動</li>
+          <li>· PoC#2 IoT 部署完成</li>
+          <li>· 第一個 LLM 應用上線</li>
+          <li>· 集團 AI 內部使用率 ≥ 30%</li>
+          <li>· 董事會首次成果匯報</li>
+          <li>· Q1 KPI 檢核 + 下季規劃</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-10 bg-black/30 rounded-xl p-6 border border-white/20">
+      <div class="text-xs tracking-widest text-red-200 mb-3">FOUNDING DIRECTIVE · 成立宣示</div>
+      <p class="text-xl font-black font-display leading-tight mb-3">
+        「AI 轉型組為集團次世代成長引擎；90 天內必須有 1 個可展示 PoC、3 個共用 Skills、20+ 員工日常使用 AI；以 KPI 證明價值，不以人數證明存在。」
+      </p>
+      <p class="text-sm text-red-200">— 楊超群　Steve Yang　董事長兼永續長</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== KPI ===== -->
+<section id="kpi" class="bg-white py-16">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-8">
+      <div class="lg:col-span-4">
+        <div class="section-num">09</div>
+        <h2 class="font-display text-3xl font-black mt-2">成效衡量</h2>
+        <p class="text-stone-500 text-sm">KPI & Risk</p>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-stone-700 leading-relaxed">每季董事會檢核 5 大 KPI；不達標啟動「重設 / 強化 / 終止」三選一決議。</p>
+      </div>
+    </div>
+
+    <table class="cis mb-6">
+      <thead>
+        <tr><th>KPI 類別</th><th>指標</th><th>Q1 目標（90 天）</th><th>Q2 目標</th><th>Q4 目標（年底）</th></tr>
+      </thead>
+      <tbody>
+        <tr><td rowspan="2" class="bg-red-50"><strong style="color:var(--red)">業務影響</strong></td><td>PoC 上線數</td><td>1（PoC#1 Shadow）</td><td>2（含 PoC#2）</td><td>5+</td></tr>
+        <tr><td>業務 ROI（vs baseline）</td><td>—（baseline 建立中）</td><td>+5-10%</td><td>+15-25%</td></tr>
+        <tr><td rowspan="2" class="bg-blue-50"><strong style="color:var(--blue)">採用率</strong></td><td>員工每日 AI 工具使用率</td><td>30%</td><td>50%</td><td>70%</td></tr>
+        <tr><td>共用 Skills 數</td><td>3</td><td>7</td><td>15</td></tr>
+        <tr><td class="bg-emerald-50"><strong class="text-emerald-700">技術品質</strong></td><td>Agent 答對率（事實性）</td><td>≥ 75%</td><td>≥ 82%</td><td>≥ 88%</td></tr>
+        <tr><td class="bg-amber-50"><strong style="color:var(--amber)">治理</strong></td><td>合規稽核通過率</td><td>100%</td><td>100%</td><td>100%</td></tr>
+        <tr><td class="bg-purple-50"><strong style="color:var(--purple)">人才</strong></td><td>核心 9 席到位率</td><td>78%（7/9）</td><td>100%</td><td>100% + 替補</td></tr>
+      </tbody>
+    </table>
+
+    <!-- 風險 -->
+    <div class="bg-rose-50 rounded-xl p-6 border border-rose-200">
+      <div class="text-xs tracking-widest mb-3" style="color:var(--red)">RISK & MITIGATION · 風險與緩解</div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-3 text-sm">
+        <div class="bg-white p-3 rounded-lg border border-rose-200">
+          <div class="font-bold text-rose-700">招募困難</div>
+          <div class="text-xs text-stone-600 mt-1">外部市場稀缺 → 與淡江 / 職訓局合作 + 內部培訓 + 遠端工作</div>
+        </div>
+        <div class="bg-white p-3 rounded-lg border border-rose-200">
+          <div class="font-bold text-rose-700">業務不採納</div>
+          <div class="text-xs text-stone-600 mt-1">Champion 機制 + Shadow Mode 共審 + KPI 與 BU 連動</div>
+        </div>
+        <div class="bg-white p-3 rounded-lg border border-rose-200">
+          <div class="font-bold text-rose-700">資料品質差</div>
+          <div class="text-xs text-stone-600 mt-1">Phase 0 強制盤點 + 不達 95% 不啟動模型</div>
+        </div>
+        <div class="bg-white p-3 rounded-lg border border-rose-200">
+          <div class="font-bold text-rose-700">過度擴張</div>
+          <div class="text-xs text-stone-600 mt-1">嚴守 9 人 + Champions 上限；新角色需董事長核准</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="bg-stone-900 text-stone-400 py-10">
+  <div class="max-w-7xl mx-auto px-8 grid md:grid-cols-4 gap-6 mb-6">
+    <div>
+      <div class="flex items-center gap-3 mb-3">
+        <div class="w-9 h-9 rounded-md flex items-center justify-center text-white font-bold" style="background:var(--red)">瀚</div>
+        <span class="text-white font-bold">瀚荃集團</span>
+      </div>
+      <p class="text-xs leading-relaxed">AI 轉型組企劃書 v1.0<br />Connect the World · Conserve the Earth</p>
+    </div>
+    <div>
+      <div class="text-xs font-semibold text-stone-200 mb-3">本案規模</div>
+      <ul class="space-y-1 text-xs">
+        <li>· 核心 9 席</li>
+        <li>· Champions 8 席（兼任）</li>
+        <li>· 工具年成本 ~480-720 萬</li>
+        <li>· 年度人事 ~1,800-2,800 萬</li>
+      </ul>
+    </div>
+    <div>
+      <div class="text-xs font-semibold text-stone-200 mb-3">關聯文件</div>
+      <ul class="space-y-1 text-xs">
+        <li>· 2026 改造工作任務書</li>
+        <li>· AI PoC 評估書</li>
+        <li>· CIS 手冊 v1.2</li>
+        <li>· 數位轉型會議 Hub</li>
+      </ul>
+    </div>
+    <div>
+      <div class="text-xs font-semibold text-stone-200 mb-3">主導</div>
+      <ul class="space-y-1 text-xs">
+        <li>· 楊超群 董事長兼永續長（Sponsor）</li>
+        <li>· CAIO（待任命）</li>
+        <li>· 永續聯辦（兼 PMO）</li>
+      </ul>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto px-8 pt-4 border-t border-stone-800 flex flex-col md:flex-row justify-between gap-2 text-xs">
+    <div>© 2026 CviLux Group · 內部規範文件</div>
+    <div class="text-stone-500">v1.0 · 2026-05-03 · 配合 90 天啟動計畫</div>
+  </div>
+</footer>
+
+<script>if(window.lucide)lucide.createIcons();</script>
+</body>
+</html>

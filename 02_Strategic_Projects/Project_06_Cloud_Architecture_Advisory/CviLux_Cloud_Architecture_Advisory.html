@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>瀚荃集團雲端架構建議書 | CviLux Group Cloud Architecture Advisory</title>
+<meta name="description" content="鼎新 ERP + M365 → Azure Fabric 評估；CviCloud 與騰雲合作之 Azure vs Google Cloud 選型；雙雲管理成本與商業模式衝擊。" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+<style>
+  :root{--red:#E83A48;--red-d:#B0202A;--red-l:#EB6363;--g9:#3D3A39;--g7:#595757;--g5:#999899;--g2:#E1DEDD;--azure:#0078D4;--gcp:#4285F4;--green:#10B981;--bg:#F7F5F2;--amber:#F59E0B;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Century Gothic','Inter','Noto Sans TC',system-ui,sans-serif;color:#1F1F1F;background:var(--bg);}
+  .font-display{font-family:'Noto Sans TC','Inter',sans-serif;letter-spacing:-0.01em;}
+  .red-bg{background:linear-gradient(135deg,#B0202A 0%,#E83A48 60%,#EB6363 100%);}
+  .magazine-cover{background:radial-gradient(ellipse at 15% 70%,rgba(232,58,72,.4),transparent 60%),linear-gradient(135deg,#0a0a0a 0%,#2a0a0e 30%,#4a0a14 60%,#b0202a 100%);}
+  .red-edge{position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--red);}
+  .pill{display:inline-flex;align-items:center;gap:.4rem;padding:.25rem .75rem;font-size:.7rem;font-weight:700;letter-spacing:.05em;border-radius:9999px;}
+  .pill-red{background:rgba(232,58,72,.1);color:var(--red);border:1px solid rgba(232,58,72,.3);}
+  .pill-azure{background:rgba(0,120,212,.1);color:var(--azure);border:1px solid rgba(0,120,212,.3);}
+  .pill-gcp{background:rgba(66,133,244,.1);color:var(--gcp);border:1px solid rgba(66,133,244,.3);}
+  .pill-green{background:rgba(16,185,129,.1);color:#047857;border:1px solid rgba(16,185,129,.3);}
+  .pill-amber{background:rgba(245,158,11,.15);color:#92400e;border:1px solid rgba(245,158,11,.4);}
+  .pill-grey{background:rgba(89,87,87,.1);color:var(--g7);border:1px solid rgba(89,87,87,.3);}
+  .verify-tag{font-size:.65rem;padding:.15rem .4rem;border-radius:4px;font-weight:600;}
+  .verify-inferred{background:#fef3c7;color:#92400e;}
+  .verify-unverified{background:#fee2e2;color:#991b1b;}
+  .verify-fact{background:#d1fae5;color:#065f46;}
+  .section-num{font-size:80px;font-weight:900;color:var(--red);line-height:1;font-family:'Noto Sans TC',sans-serif;}
+  .nav-link{position:relative;font-weight:500;}
+  .nav-link::after{content:'';position:absolute;left:50%;bottom:-3px;height:2px;width:0;background:var(--red);transition:.25s;transform:translateX(-50%);}
+  .nav-link:hover::after{width:100%;}
+  details>summary{list-style:none;cursor:pointer;}
+  details>summary::-webkit-details-marker{display:none;}
+  details[open] .chev{transform:rotate(90deg);}
+  .chev{transition:.2s;}
+  table.cis{width:100%;border-collapse:collapse;}
+  table.cis th{background:#1F1F1F;color:white;text-align:left;padding:.7rem 1rem;font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;font-weight:700;}
+  table.cis td{padding:.6rem 1rem;border-bottom:1px solid #e5e5e5;font-size:.85rem;vertical-align:top;}
+  table.cis tr:nth-child(even) td{background:#FAF8F5;}
+  .recommend-good{background:#D1FAE5;color:#065F46;font-weight:600;padding:.15rem .5rem;border-radius:4px;font-size:.7rem;}
+  .recommend-mid{background:#FEF3C7;color:#92400E;font-weight:600;padding:.15rem .5rem;border-radius:4px;font-size:.7rem;}
+  .recommend-bad{background:#FEE2E2;color:#991B1B;font-weight:600;padding:.15rem .5rem;border-radius:4px;font-size:.7rem;}
+  .alert-box{background:#FEF2F2;border-left:4px solid var(--red);padding:1rem 1.25rem;border-radius:0 8px 8px 0;}
+  .alert-fact{background:#ECFDF5;border-left:4px solid #10B981;padding:1rem 1.25rem;border-radius:0 8px 8px 0;}
+  .alert-warn{background:#FFFBEB;border-left:4px solid #F59E0B;padding:1rem 1.25rem;border-radius:0 8px 8px 0;}
+  @media print{.no-print{display:none !important;}body{background:white;}}
+  ::-webkit-scrollbar{width:10px;}
+  ::-webkit-scrollbar-thumb{background:#a0a0a0;border-radius:6px;}
+</style>
+</head>
+<body class="antialiased">
+
+<!-- ===== TOP NAV ===== -->
+<header class="no-print fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-stone-200 shadow-sm">
+  <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="#cover" class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-md flex items-center justify-center text-white font-bold" style="background:var(--red)">瀚</div>
+      <div class="leading-tight">
+        <div class="text-sm font-bold text-stone-900 font-display">雲端架構建議書</div>
+        <div class="text-[11px] text-stone-500 tracking-wider">CLOUD ARCHITECTURE ADVISORY · v1.0</div>
+      </div>
+    </a>
+    <nav class="hidden xl:flex items-center gap-5 text-sm text-stone-700">
+      <a class="nav-link" href="#summary">結論摘要</a>
+      <a class="nav-link" href="#issue1">議題 1 Fabric</a>
+      <a class="nav-link" href="#issue2">議題 2 雙雲</a>
+      <a class="nav-link" href="#fact">關鍵事實</a>
+      <a class="nav-link" href="#cross">跨境分區</a>
+      <a class="nav-link" href="#impact">商模衝擊</a>
+      <a class="nav-link" href="#decisions">決策</a>
+    </nav>
+    <button onclick="window.print()" class="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-md text-white text-sm font-semibold" style="background:var(--red)">列印 <i data-lucide="printer" class="w-4 h-4"></i></button>
+  </div>
+</header>
+
+<!-- ===== COVER ===== -->
+<section id="cover" class="magazine-cover text-white pt-24 pb-14 min-h-screen flex items-center">
+  <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-red-700 via-red-500 to-red-300"></div>
+  <div class="max-w-7xl mx-auto px-8 w-full">
+    <div class="grid lg:grid-cols-12 gap-10 items-center">
+      <div class="lg:col-span-7">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-12 rounded-md flex items-center justify-center font-bold text-2xl" style="background:var(--red)">瀚</div>
+          <div>
+            <div class="text-sm font-bold tracking-widest">瀚荃集團 · CVILUX GROUP</div>
+            <div class="text-xs text-red-300 tracking-wider">Cloud Architecture for AI &amp; ESG</div>
+          </div>
+        </div>
+        <div class="text-[11px] text-red-200 tracking-[0.4em] mb-3">CLOUD ADVISORY · v1.0 · 2026-05-03</div>
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-black leading-[1.05] font-display mb-6">
+          雲端架構<br />
+          <span class="text-red-300">建議書</span>
+        </h1>
+        <h2 class="text-xl md:text-2xl font-light text-red-100 leading-tight mb-8">
+          兩大議題：Azure Fabric 資料平台 + CviCloud 雙雲評估<br />
+          <span class="text-red-200 text-base">— 給董事會 / IT 副總 / CviCloud 主管之決策依據</span>
+        </h2>
+        <div class="grid grid-cols-3 gap-4 max-w-xl mb-6">
+          <div class="bg-white/10 backdrop-blur border border-white/20 rounded-xl p-3"><div class="text-2xl font-black text-red-300">2</div><div class="text-xs text-stone-300">核心議題</div></div>
+          <div class="bg-white/10 backdrop-blur border border-white/20 rounded-xl p-3"><div class="text-2xl font-black text-red-300">7</div><div class="text-xs text-stone-300">關鍵建議</div></div>
+          <div class="bg-white/10 backdrop-blur border border-white/20 rounded-xl p-3"><div class="text-2xl font-black text-red-300">11</div><div class="text-xs text-stone-300">決策事項</div></div>
+        </div>
+      </div>
+      <div class="lg:col-span-5">
+        <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6 mb-4">
+          <div class="text-xs tracking-widest text-red-300 mb-3">執行結論</div>
+          <ol class="text-sm text-stone-200 space-y-2">
+            <li class="flex gap-2"><span class="text-red-300 font-bold">1.</span><div><strong>議題 1</strong>：採 Azure Fabric Data Lake — <span class="recommend-good">合理選擇</span></div></li>
+            <li class="flex gap-2"><span class="text-red-300 font-bold">2.</span><div><strong>議題 2</strong>：CviCloud sCMS 主雲建議 <strong>Azure</strong>；Google Vertex 作 LLM 推理輔助 — <span class="recommend-good">建議</span></div></li>
+            <li class="flex gap-2"><span class="text-red-300 font-bold">3.</span><div><strong>關鍵警訊</strong>：Google Cloud IoT Core 已於 <strong>2023 年 8 月正式退役</strong></div></li>
+            <li class="flex gap-2"><span class="text-red-300 font-bold">4.</span><div><strong>商模衝擊</strong>：騰雲合作模式需重新檢視 CviCloud 之 SaaS 定位</div></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SUMMARY ===== -->
+<section id="summary" class="bg-white py-16">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-8">
+      <div class="lg:col-span-4">
+        <div class="text-xs tracking-[0.3em] text-stone-500 mb-2">EXECUTIVE SUMMARY</div>
+        <h2 class="font-display text-4xl font-black mb-3">結論摘要</h2>
+        <p class="text-stone-500 text-sm">先看建議結論；細節在後續章節展開</p>
+      </div>
+      <div class="lg:col-span-8 space-y-3">
+        <div class="bg-stone-50 rounded-xl p-5 border border-stone-200 relative overflow-hidden">
+          <div class="red-edge"></div>
+          <div class="pl-4">
+            <div class="flex items-center gap-2 mb-2"><span class="pill pill-azure">議題 1</span><span class="recommend-good">建議：採用</span></div>
+            <h3 class="font-bold text-lg">鼎新 ERP + M365 → Azure Fabric Data Lake</h3>
+            <p class="text-sm text-stone-700 mt-2">合理選擇，與既有 Azure AD / D365 / SharePoint 生態一致；補充 3 個必補設計：Medallion 架構、跨境分區、鼎新連接器評估。</p>
+          </div>
+        </div>
+        <div class="bg-stone-50 rounded-xl p-5 border border-stone-200 relative overflow-hidden">
+          <div class="red-edge"></div>
+          <div class="pl-4">
+            <div class="flex items-center gap-2 mb-2"><span class="pill pill-azure">議題 2</span><span class="recommend-good">建議：Azure 為主</span></div>
+            <h3 class="font-bold text-lg">CviCloud + 騰雲合作 → 雙雲評估</h3>
+            <p class="text-sm text-stone-700 mt-2">強烈建議 Azure 主雲（IoT 服務齊全、大陸合規、與集團一致）；Google Vertex AI 作為 LLM 推理輔助。⚠️ <strong>Google Cloud IoT Core 已退役</strong>是關鍵負面信號。</p>
+          </div>
+        </div>
+        <div class="bg-stone-50 rounded-xl p-5 border border-stone-200 relative overflow-hidden">
+          <div class="red-edge"></div>
+          <div class="pl-4">
+            <div class="flex items-center gap-2 mb-2"><span class="pill pill-amber">商模衝擊</span><span class="recommend-mid">需董事會討論</span></div>
+            <h3 class="font-bold text-lg">騰雲合作對 CviCloud 商業模式的影響</h3>
+            <p class="text-sm text-stone-700 mt-2">瀚雲變成「硬體 + IoT 整合服務商」而非真正 SaaS 業者；CviCloud 對外宣傳之「自有 SaaS 平台」定位需重新檢視；分潤模式、客戶 NDA、DPA 資料處理協議須法務簽訂。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ISSUE 1: AZURE FABRIC ===== -->
+<section id="issue1" class="bg-stone-50 py-16">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-8">
+      <div class="lg:col-span-4">
+        <div class="section-num">01</div>
+        <h2 class="font-display text-3xl font-black mt-2">議題 1：Azure Fabric</h2>
+        <p class="text-stone-500 text-sm">鼎新 ERP + M365 → Fabric Data Lake</p>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-stone-700 leading-relaxed">將鼎新 ERP 與 Microsoft 系統資料整合至 Azure Fabric Data Lake — 此為合理選擇，但需補強 3 個關鍵設計。</p>
+      </div>
+    </div>
+
+    <!-- 為什麼合理 -->
+    <div class="bg-white rounded-xl p-6 border border-stone-200 mb-6">
+      <div class="text-xs font-bold mb-3" style="color:var(--azure)">✅ 為什麼合理 — 5 個支持理由</div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3 text-sm">
+        <div class="bg-blue-50 rounded-lg p-3 border border-blue-200">
+          <div class="font-bold text-blue-800">1. 生態一致</div>
+          <p class="text-xs text-stone-700 mt-1">已採 Azure AD / D365 / SharePoint，Fabric OneLake 對 M365 為原生整合，無需重複連接器</p>
+        </div>
+        <div class="bg-blue-50 rounded-lg p-3 border border-blue-200">
+          <div class="font-bold text-blue-800">2. Power BI 內建</div>
+          <p class="text-xs text-stone-700 mt-1">Fabric 直接提供 Power BI Premium 容量，集團報表無縫</p>
+        </div>
+        <div class="bg-blue-50 rounded-lg p-3 border border-blue-200">
+          <div class="font-bold text-blue-800">3. AI 整合</div>
+          <p class="text-xs text-stone-700 mt-1">與 Azure ML、Azure OpenAI、M365 Copilot 一條龍；與您先前選定的 Multi-Agent 架構一致</p>
+        </div>
+        <div class="bg-blue-50 rounded-lg p-3 border border-blue-200">
+          <div class="font-bold text-blue-800">4. Lakehouse 統一</div>
+          <p class="text-xs text-stone-700 mt-1">結構化（ERP）+ 非結構化（PDF / 圖片 / 影音）統一管理</p>
+        </div>
+        <div class="bg-blue-50 rounded-lg p-3 border border-blue-200">
+          <div class="font-bold text-blue-800">5. 持續發展</div>
+          <p class="text-xs text-stone-700 mt-1">Fabric 為 Microsoft 戰略產品，每季功能擴張 <span class="verify-tag verify-inferred">推論</span></p>
+        </div>
+        <div class="bg-blue-50 rounded-lg p-3 border border-blue-200">
+          <div class="font-bold text-blue-800">6. 大陸合規</div>
+          <p class="text-xs text-stone-700 mt-1">Azure 在大陸有 21Vianet 獨立部署，符合 PIPL 跨境分區需求</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 個必補設計 -->
+    <div class="grid lg:grid-cols-3 gap-5 mb-6">
+      <div class="bg-white rounded-xl p-5 border-2" style="border-color:var(--red);">
+        <span class="pill pill-red">必補 1</span>
+        <h3 class="font-bold text-lg mt-2">Medallion 架構</h3>
+        <p class="text-stone-500 text-xs">Bronze / Silver / Gold</p>
+        <p class="text-sm text-stone-700 mt-3">不要把 ERP 原表直接拿來分析。設計三層：</p>
+        <ul class="text-xs text-stone-600 mt-2 space-y-1">
+          <li>· <strong>Bronze</strong>：ERP / MES / SharePoint 原始資料 raw copy</li>
+          <li>· <strong>Silver</strong>：清洗、去重、Schema 統一</li>
+          <li>· <strong>Gold</strong>：業務 KPI、跨系統 join 後的分析表</li>
+        </ul>
+        <p class="text-xs text-stone-500 mt-2">效益：可追溯、可重算、AI 訓練資料品質保證</p>
+      </div>
+      <div class="bg-white rounded-xl p-5 border-2" style="border-color:var(--red);">
+        <span class="pill pill-red">必補 2</span>
+        <h3 class="font-bold text-lg mt-2">跨境資料分區</h3>
+        <p class="text-stone-500 text-xs">PIPL / GDPR / 個資法</p>
+        <p class="text-sm text-stone-700 mt-3">**不可**單一 Fabric Workspace 容納全集團資料：</p>
+        <ul class="text-xs text-stone-600 mt-2 space-y-1">
+          <li>· <strong>台灣 Workspace</strong>：台灣公司、海外（美 / 荷 / 寮）</li>
+          <li>· <strong>大陸 Workspace</strong>：陸區子公司（用 21Vianet 或鼎新雲）</li>
+          <li>· 跨境僅交換 aggregated 統計（如月度產能、成本指標）</li>
+        </ul>
+        <p class="text-xs text-stone-500 mt-2">效益：合規 + 風險隔離 + 各區優化模型</p>
+      </div>
+      <div class="bg-white rounded-xl p-5 border-2" style="border-color:var(--red);">
+        <span class="pill pill-red">必補 3</span>
+        <h3 class="font-bold text-lg mt-2">鼎新 ERP 連接器</h3>
+        <p class="text-stone-500 text-xs">確認可行路徑</p>
+        <p class="text-sm text-stone-700 mt-3">[推論] Fabric 對鼎新 ERP 沒有原生連接器；可能路徑：</p>
+        <ul class="text-xs text-stone-600 mt-2 space-y-1">
+          <li>· 鼎新 WF AIGP 升級後是否有原生 Fabric Sink？</li>
+          <li>· 用 Azure Data Factory + ODBC 連 ERP 資料庫</li>
+          <li>· 用 Logic Apps + ERP REST API（增量）</li>
+          <li>· 鼎新雲（如已採購）對 Fabric 的整合方案</li>
+        </ul>
+        <p class="text-xs text-stone-500 mt-2">建議 IT 副總與鼎新確認後選定主路徑</p>
+      </div>
+    </div>
+
+    <!-- Fabric 容量規劃 -->
+    <div class="alert-warn">
+      <div class="font-bold mb-1">⚠️ 容量規劃提醒　Capacity Planning</div>
+      <p class="text-sm text-stone-700">Fabric 採 F2-F2048 容量計費（小時計）；建議從 F32 / F64 起步測試 <span class="verify-tag verify-inferred">推論</span>，再依實際負載調整。**Capacity 可暫停**降低週末閒置成本。月度成本估算 NT$ 30-150 萬不等，視容量等級。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ISSUE 2: DUAL-CLOUD ===== -->
+<section id="issue2" class="bg-white py-16">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-8">
+      <div class="lg:col-span-4">
+        <div class="section-num">02</div>
+        <h2 class="font-display text-3xl font-black mt-2">議題 2：CviCloud 雙雲</h2>
+        <p class="text-stone-500 text-sm">Azure vs Google Cloud for sCMS</p>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-stone-700 leading-relaxed">CviCloud 智碳雲與騰雲（turn2cloud.com）合作 — 騰雲維護管理軟體、瀚雲負責硬體 IoT — 評估主雲選型。</p>
+        <p class="text-xs mt-2"><span class="verify-tag verify-unverified">未驗證</span> turn2cloud.com 我未實際查證其公司資訊；本評估基於合作模式之常見實踐。</p>
+      </div>
+    </div>
+
+    <!-- 合作模式視覺化 -->
+    <div class="bg-stone-50 rounded-xl p-6 border border-stone-200 mb-6">
+      <div class="text-xs tracking-widest text-stone-500 mb-4">PARTNERSHIP MODEL · 合作分工示意</div>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="bg-white rounded-lg p-5 border-2" style="border-color:var(--red);">
+          <div class="text-xs font-bold" style="color:var(--red)">瀚雲科技 CviCloud</div>
+          <h3 class="font-bold mt-1">硬體 + IoT 整合</h3>
+          <ul class="text-xs text-stone-700 mt-2 space-y-1">
+            <li>· 智碳雲感測器 / 閘道 / Edge AI</li>
+            <li>· 客戶現場安裝</li>
+            <li>· 硬體售後維修</li>
+            <li>· IoT 資料採集</li>
+          </ul>
+          <p class="text-xs text-stone-500 mt-2">商模：硬體賣斷</p>
+        </div>
+        <div class="bg-white rounded-lg p-5 border-2" style="border-color:var(--azure);">
+          <div class="text-xs font-bold" style="color:var(--azure)">騰雲 turn2cloud <span class="verify-tag verify-unverified">未驗證</span></div>
+          <h3 class="font-bold mt-1">SaaS 軟體維運</h3>
+          <ul class="text-xs text-stone-700 mt-2 space-y-1">
+            <li>· sCMS 平台維運</li>
+            <li>· 雲端管理</li>
+            <li>· 軟體升級</li>
+            <li>· SaaS 客戶服務</li>
+          </ul>
+          <p class="text-xs text-stone-500 mt-2">商模：SaaS 訂閱</p>
+        </div>
+        <div class="bg-white rounded-lg p-5 border-2 border-dashed">
+          <div class="text-xs font-bold text-stone-700">客戶</div>
+          <h3 class="font-bold mt-1">企業 ESG 用戶</h3>
+          <ul class="text-xs text-stone-700 mt-2 space-y-1">
+            <li>· 購買硬體（瀚雲）</li>
+            <li>· 訂閱軟體（騰雲營運）</li>
+            <li>· 使用統一品牌（CviCloud）</li>
+            <li>· ESG 報告 / CBAM</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Azure vs GCP 評估矩陣 -->
+    <div class="bg-stone-900 text-white rounded-xl overflow-hidden mb-6">
+      <div class="p-5 bg-black/20">
+        <div class="text-xs text-amber-300 font-bold tracking-wider">CLOUD VENDOR EVALUATION · 雲端廠商評估</div>
+        <h3 class="text-xl font-bold mt-1">Azure vs Google Cloud for CviCloud sCMS</h3>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="bg-white/10">
+              <th class="text-left p-3 text-xs">評估面向</th>
+              <th class="text-center p-3 text-xs"><span style="color:#7DD3FC">Microsoft Azure</span></th>
+              <th class="text-center p-3 text-xs"><span style="color:#FBBF24">Google Cloud</span></th>
+              <th class="text-left p-3 text-xs">勝者</th>
+            </tr>
+          </thead>
+          <tbody class="text-stone-200">
+            <tr class="border-b border-white/10">
+              <td class="p-3 font-semibold bg-white/5">IoT 平台原生服務</td>
+              <td class="p-3 text-center"><span class="recommend-good">★★★★★</span><div class="text-[10px] mt-1">IoT Hub + Edge + Digital Twins</div></td>
+              <td class="p-3 text-center"><span class="recommend-bad">★</span><div class="text-[10px] mt-1">⚠️ IoT Core 已退役 (2023-08)</div></td>
+              <td class="p-3 font-bold text-emerald-400">Azure 大勝</td>
+            </tr>
+            <tr class="border-b border-white/10">
+              <td class="p-3 font-semibold bg-white/5">ESG / 永續服務</td>
+              <td class="p-3 text-center"><span class="recommend-good">★★★★★</span><div class="text-[10px] mt-1">Azure Sustainability Manager</div></td>
+              <td class="p-3 text-center"><span class="recommend-mid">★★★</span><div class="text-[10px] mt-1">Carbon Sense Suite（限分析）</div></td>
+              <td class="p-3 font-bold text-emerald-400">Azure</td>
+            </tr>
+            <tr class="border-b border-white/10">
+              <td class="p-3 font-semibold bg-white/5">與集團既有生態整合</td>
+              <td class="p-3 text-center"><span class="recommend-good">★★★★★</span><div class="text-[10px] mt-1">原生 M365 / D365 / Azure AD</div></td>
+              <td class="p-3 text-center"><span class="recommend-mid">★★★</span><div class="text-[10px] mt-1">需 Workload Identity Federation</div></td>
+              <td class="p-3 font-bold text-emerald-400">Azure</td>
+            </tr>
+            <tr class="border-b border-white/10">
+              <td class="p-3 font-semibold bg-white/5">大陸區合規部署</td>
+              <td class="p-3 text-center"><span class="recommend-good">★★★★</span><div class="text-[10px] mt-1">21Vianet 獨立服務</div></td>
+              <td class="p-3 text-center"><span class="recommend-bad">★</span><div class="text-[10px] mt-1">無正式服務</div></td>
+              <td class="p-3 font-bold text-emerald-400">Azure 大勝</td>
+            </tr>
+            <tr class="border-b border-white/10">
+              <td class="p-3 font-semibold bg-white/5">LLM / Generative AI</td>
+              <td class="p-3 text-center"><span class="recommend-good">★★★★</span><div class="text-[10px] mt-1">Azure OpenAI（GPT-4 系列）</div></td>
+              <td class="p-3 text-center"><span class="recommend-good">★★★★★</span><div class="text-[10px] mt-1">Vertex AI / Gemini Pro</div></td>
+              <td class="p-3 font-bold text-amber-400">GCP 略勝</td>
+            </tr>
+            <tr class="border-b border-white/10">
+              <td class="p-3 font-semibold bg-white/5">Multi-Agent / Agent Builder</td>
+              <td class="p-3 text-center"><span class="recommend-good">★★★★</span><div class="text-[10px] mt-1">Copilot Studio + AI Foundry</div></td>
+              <td class="p-3 text-center"><span class="recommend-good">★★★★</span><div class="text-[10px] mt-1">Vertex Agent Builder</div></td>
+              <td class="p-3 font-bold text-stone-400">平手</td>
+            </tr>
+            <tr class="border-b border-white/10">
+              <td class="p-3 font-semibold bg-white/5">時序預測模型</td>
+              <td class="p-3 text-center"><span class="recommend-mid">★★★</span></td>
+              <td class="p-3 text-center"><span class="recommend-good">★★★★</span><div class="text-[10px] mt-1">TimesFM 自家模型</div></td>
+              <td class="p-3 font-bold text-amber-400">GCP 略勝</td>
+            </tr>
+            <tr class="border-b border-white/10">
+              <td class="p-3 font-semibold bg-white/5">永續品牌效應（對外）</td>
+              <td class="p-3 text-center"><span class="recommend-good">★★★★</span></td>
+              <td class="p-3 text-center"><span class="recommend-good">★★★★★</span><div class="text-[10px] mt-1">100% 再生電力</div></td>
+              <td class="p-3 font-bold text-amber-400">GCP 略勝</td>
+            </tr>
+            <tr class="border-b border-white/10">
+              <td class="p-3 font-semibold bg-white/5">成本（IoT + 資料 + AI）</td>
+              <td class="p-3 text-center"><span class="recommend-mid">中</span></td>
+              <td class="p-3 text-center"><span class="recommend-mid">中</span><div class="text-[10px] mt-1">BigQuery 較划算</div></td>
+              <td class="p-3 font-bold text-stone-400">差距小</td>
+            </tr>
+            <tr class="bg-amber-900/30">
+              <td class="p-3 font-semibold">總體建議定位</td>
+              <td class="p-3 text-center text-xs"><strong class="text-emerald-300">主雲（IoT + 資料 + 整合）</strong></td>
+              <td class="p-3 text-center text-xs"><strong class="text-amber-300">輔位（LLM 推理）</strong></td>
+              <td class="p-3"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 推薦混合架構 -->
+    <div class="bg-white rounded-xl p-6 border-2" style="border-color:var(--red)">
+      <div class="text-xs font-bold mb-3" style="color:var(--red)">⭐ 推薦混合架構　Recommended Hybrid</div>
+      <div class="grid md:grid-cols-2 gap-5">
+        <div>
+          <div class="flex items-center gap-2 mb-2"><div class="w-8 h-8 rounded flex items-center justify-center text-white text-xs font-bold" style="background:var(--azure)">主</div><span class="font-bold">Azure 主雲（90%）</span></div>
+          <ul class="text-sm text-stone-700 space-y-1.5">
+            <li>· **IoT Hub + IoT Edge** — 智碳雲感測器資料</li>
+            <li>· **Digital Twins** — 客戶廠房數位雙生</li>
+            <li>· **Sustainability Manager** — ESG / CBAM 報表</li>
+            <li>· **Fabric Data Lake** — 與集團共用</li>
+            <li>· **AKS / Container Apps** — sCMS 平台運行</li>
+            <li>· **Azure OpenAI** — 中英文 LLM</li>
+            <li>· **21Vianet** — 大陸客戶部署</li>
+          </ul>
+        </div>
+        <div>
+          <div class="flex items-center gap-2 mb-2"><div class="w-8 h-8 rounded flex items-center justify-center text-white text-xs font-bold" style="background:var(--gcp)">輔</div><span class="font-bold">Google Cloud 輔位（10%）</span></div>
+          <ul class="text-sm text-stone-700 space-y-1.5">
+            <li>· **Vertex AI / Gemini API** — 多模態 LLM 推理</li>
+            <li>· **TimesFM** — 時序預測小模型（透過 API）</li>
+            <li>· 透過 API 呼叫，<strong>不需把客戶資料搬過去</strong></li>
+            <li>· 與既有 AI 平台規劃書中「Vertex AI 為 AI Agent 能力層」一致</li>
+          </ul>
+          <div class="alert-fact mt-3 text-xs">
+            ✅ <strong>事實</strong>：Vertex AI 可在不轉移資料的情況下提供 LLM 服務（API 呼叫模式）
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== KEY FACTS ===== -->
+<section id="fact" class="bg-stone-50 py-16">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-8">
+      <div class="lg:col-span-4">
+        <div class="section-num">03</div>
+        <h2 class="font-display text-3xl font-black mt-2">關鍵事實</h2>
+        <p class="text-stone-500 text-sm">3 Critical Facts to Know</p>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-stone-700 leading-relaxed">下列三個事實會強烈影響選型決策，董事會與 IT 副總須優先了解。</p>
+      </div>
+    </div>
+
+    <div class="space-y-4">
+      <div class="alert-box">
+        <div class="flex items-start gap-3">
+          <i data-lucide="alert-triangle" class="w-6 h-6 mt-0.5 flex-shrink-0" style="color:var(--red)"></i>
+          <div>
+            <div class="font-bold text-lg">事實 1：Google Cloud IoT Core 已退役 <span class="verify-tag verify-fact">已驗證</span></div>
+            <p class="text-sm text-stone-700 mt-2">Google 於 2022 年 8 月宣布、<strong>2023 年 8 月 16 日正式關閉 IoT Core 服務</strong>。原 IoT Core 用戶必須遷移至第三方平台（如 ClearBlade IoT Core、HiveMQ）或自建 MQTT broker。</p>
+            <p class="text-sm text-stone-700 mt-2">**對 CviCloud 影響**：若選 GCP 為主雲，sCMS 智碳雲（IoT 主導）需自建 IoT 基礎設施或接受第三方廠商，增加複雜度與維運成本；Azure IoT 服務在當前持續投資，是更穩定選擇。</p>
+            <p class="text-xs text-stone-500 mt-2">資料來源：Google Cloud 官方退役公告（公開資訊）</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert-warn">
+        <div class="flex items-start gap-3">
+          <i data-lucide="info" class="w-6 h-6 mt-0.5 flex-shrink-0" style="color:#F59E0B"></i>
+          <div>
+            <div class="font-bold text-lg">事實 2：Azure Fabric 為 Microsoft 戰略產品 <span class="verify-tag verify-inferred">推論</span></div>
+            <p class="text-sm text-stone-700 mt-2">Fabric 於 2023 年 5 月發表、2023 年 11 月一般可用（GA）；整合 Power BI、Synapse、Data Factory、Real-Time Analytics、AI 服務於 OneLake。</p>
+            <p class="text-sm text-stone-700 mt-2">**選用考量**：作為較新平台，部分鼎新 ERP / MES 連接器可能需自行開發；建議於 PoC 階段（非全集團 Roll-out）先驗證關鍵 Pipeline，避免資源綁死。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert-fact">
+        <div class="flex items-start gap-3">
+          <i data-lucide="check-circle-2" class="w-6 h-6 mt-0.5 flex-shrink-0" style="color:#10B981"></i>
+          <div>
+            <div class="font-bold text-lg">事實 3：雙雲管理成本疊加 <span class="verify-tag verify-inferred">推論</span></div>
+            <p class="text-sm text-stone-700 mt-2">業界普遍經驗 [推論]：同時維運 2 個雲端供應商之管理成本約為「主雲 + 30-50%」（含人才稀缺、跨雲監控工具、API 同步、資料聯邦等）。除非有強烈業務理由，建議「**單一主雲 + LLM API 級別呼叫第二雲**」之輕量混合，而非真正雙雲對等。</p>
+            <p class="text-sm text-stone-700 mt-2">**對應建議**：Azure 為主、Vertex AI 透過 API 呼叫（不部署資料服務在 GCP）—管理成本疊加可控制在 +5-10%。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CROSS-BORDER ===== -->
+<section id="cross" class="bg-white py-16">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-8">
+      <div class="lg:col-span-4">
+        <div class="section-num">04</div>
+        <h2 class="font-display text-3xl font-black mt-2">跨境分區設計</h2>
+        <p class="text-stone-500 text-sm">Cross-Border Data Zoning</p>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-stone-700 leading-relaxed">瀚荃集團跨台 / 陸 / 海外運營，跨境資料是「最大法律風險」。本章建議分區設計。</p>
+      </div>
+    </div>
+
+    <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+      <div class="text-xs tracking-widest text-stone-500 mb-4">DATA ZONING ARCHITECTURE</div>
+
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="bg-white rounded-lg p-4 border-2" style="border-color:var(--azure);">
+          <div class="text-xs font-bold mb-1" style="color:var(--azure)">ZONE 1 · 台灣 / 海外</div>
+          <h4 class="font-bold">Azure（東亞）</h4>
+          <ul class="text-xs text-stone-700 mt-2 space-y-1">
+            <li>· 瀚荃股份 / 瀚雲 / 瀚柔總部</li>
+            <li>· CviLux USA / Opro9 EU</li>
+            <li>· Fabric Workspace（台）</li>
+            <li>· D365 / SharePoint 主資料</li>
+            <li>· 客戶 NDA 文件</li>
+          </ul>
+          <p class="text-xs text-stone-500 mt-2 pt-2 border-t border-stone-200">合規：個資法 + GDPR</p>
+        </div>
+        <div class="bg-white rounded-lg p-4 border-2" style="border-color:var(--red);">
+          <div class="text-xs font-bold mb-1" style="color:var(--red)">ZONE 2 · 大陸</div>
+          <h4 class="font-bold">Azure 21Vianet 或鼎新雲</h4>
+          <ul class="text-xs text-stone-700 mt-2 space-y-1">
+            <li>· 東莞 / 蘇州 / 重慶 / 深圳 / 安徽 / 上海</li>
+            <li>· Fabric Workspace（陸）獨立</li>
+            <li>· 鼎新 ERP 大陸實例</li>
+            <li>· 陸區客戶 / 經銷商資料</li>
+            <li>· 微信 / 企業微信整合</li>
+          </ul>
+          <p class="text-xs text-stone-500 mt-2 pt-2 border-t border-stone-200">合規：PIPL + 數據安全法</p>
+        </div>
+        <div class="bg-white rounded-lg p-4 border-2 border-dashed border-stone-400">
+          <div class="text-xs font-bold mb-1 text-stone-700">ZONE 3 · 跨境聯邦</div>
+          <h4 class="font-bold">僅 aggregated 統計</h4>
+          <ul class="text-xs text-stone-700 mt-2 space-y-1">
+            <li>· 集團月度 / 季度報表</li>
+            <li>· 全集團 KPI 儀表板</li>
+            <li>· 集團 ESG 報告數據</li>
+            <li>· 客戶 PII 不傳遞</li>
+            <li>· 商業機密不跨境</li>
+          </ul>
+          <p class="text-xs text-stone-500 mt-2 pt-2 border-t border-stone-200">機制：Power BI 跨域連線 / API</p>
+        </div>
+      </div>
+
+      <div class="mt-5 alert-warn text-sm">
+        <strong>⚠️ 重要</strong>：陸區資料 → 台灣 Power BI 不可直接連接明細資料；需先在陸區彙總後傳送 aggregated 結果。建議由法務 + 資安 + IT 三方建立「**跨境資料傳輸白名單**」，明確列出可跨境的資料類型與粒度。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BUSINESS IMPACT ===== -->
+<section id="impact" class="py-16 red-bg text-white">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-8">
+      <div class="lg:col-span-4">
+        <div class="section-num" style="color:rgba(255,255,255,.3)">05</div>
+        <h2 class="font-display text-3xl font-black mt-2">商業模式衝擊</h2>
+        <p class="text-red-200 text-sm">Impact on CviCloud Business Model</p>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-red-100 leading-relaxed">騰雲合作對 CviCloud 既有商業模式定位之影響 — 需董事會與法務介入決策。</p>
+      </div>
+    </div>
+
+    <div class="bg-white/10 backdrop-blur rounded-xl p-6 border border-white/20 mb-5">
+      <div class="text-xs tracking-widest text-amber-300 mb-3">v1.2 規範下的 CviCloud 定位</div>
+      <p class="text-sm text-stone-200">瀚雲科技股份有限公司 CviCloud Technology Corporation 為瀚荃集團前店子公司，三大商模：<strong>(1) 硬體賣斷 + (2) 軟體 SaaS 訂閱 + (3) HaaS 租賃</strong>。</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-5 mb-5">
+      <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20">
+        <div class="text-xs text-amber-300 font-bold mb-2">⚠️ 衝擊 1：CviCloud 從「SaaS 業者」變「整合服務商」</div>
+        <p class="text-sm text-stone-200 mb-3">如騰雲負責軟體維運，CviCloud 實質角色：</p>
+        <ul class="text-sm text-stone-200 space-y-1">
+          <li>✗ <span class="line-through opacity-60">SaaS 平台供應商</span></li>
+          <li>✓ 硬體 + IoT 整合服務商</li>
+          <li>✓ 系統整合代理（轉售騰雲 SaaS）</li>
+        </ul>
+        <p class="text-xs text-red-200 mt-3">**對外溝通需注意**：是否仍可宣傳「自有 SaaS 平台」？</p>
+      </div>
+      <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20">
+        <div class="text-xs text-amber-300 font-bold mb-2">⚠️ 衝擊 2：客戶資料歸屬與責任</div>
+        <p class="text-sm text-stone-200 mb-3">客戶 ESG / CBAM 資料由騰雲管理時：</p>
+        <ul class="text-sm text-stone-200 space-y-1">
+          <li>· 客戶 NDA 是否准許第三方存取？</li>
+          <li>· 法律責任如何分攤？</li>
+          <li>· 資料外洩賠償歸誰？</li>
+          <li>· 客戶終止合約後，資料歸屬？</li>
+        </ul>
+        <p class="text-xs text-red-200 mt-3">**必簽**：DPA 資料處理協議 + SLA + 退出機制</p>
+      </div>
+      <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20">
+        <div class="text-xs text-amber-300 font-bold mb-2">⚠️ 衝擊 3：收入分潤模式</div>
+        <p class="text-sm text-stone-200 mb-3">原 CviCloud 三大商模收入結構需重設計：</p>
+        <ul class="text-sm text-stone-200 space-y-1">
+          <li>· 硬體賣斷 — 全歸瀚雲</li>
+          <li>· SaaS — <strong>瀚雲與騰雲分潤</strong>（X% 給瀚雲？）</li>
+          <li>· HaaS — 硬體租賃 + 軟體訂閱組合，分潤更複雜</li>
+          <li>· 客服收入 — 一線騰雲？二線瀚雲？</li>
+        </ul>
+        <p class="text-xs text-red-200 mt-3">**必設計**：SLA 連動分潤、長期客戶折扣、續約機制</p>
+      </div>
+      <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20">
+        <div class="text-xs text-amber-300 font-bold mb-2">⚠️ 衝擊 4：CviCloud 對集團 AI 平台之資料貢獻</div>
+        <p class="text-sm text-stone-200 mb-3">如客戶 ESG 資料在騰雲：</p>
+        <ul class="text-sm text-stone-200 space-y-1">
+          <li>· 集團 AI 平台無法直接訓練模型</li>
+          <li>· 集團 ESG Agent 資料源受限</li>
+          <li>· EAP ESG AI Platform 戰略價值降低</li>
+          <li>· sCMS 跨客戶 benchmark 受阻</li>
+        </ul>
+        <p class="text-xs text-red-200 mt-3">**對應**：合約中保留瀚雲對 aggregated 統計資料的存取權</p>
+      </div>
+    </div>
+
+    <div class="bg-black/30 rounded-xl p-6 border border-white/20">
+      <div class="text-xs tracking-widest text-amber-300 mb-3">RECOMMENDATION · 商業模式調整建議</div>
+      <p class="text-base text-white leading-relaxed">建議先**確認騰雲合作協議性質**：是「軟體授權代理」還是「SaaS 共同營運」還是「外包技術服務」？三種模式對 CviCloud 商業地位影響截然不同。</p>
+      <ul class="text-sm text-stone-200 mt-3 space-y-1">
+        <li>· **代理**：騰雲為瀚雲授權 SaaS，瀚雲對外仍為單一供應商 — 衝擊小</li>
+        <li>· **共同營運**：雙品牌雙簽約，分潤明確 — 衝擊中</li>
+        <li>· **技術外包**：騰雲純粹 ODM 後台維運，瀚雲為唯一面向客戶 — 衝擊小</li>
+      </ul>
+      <p class="text-sm text-amber-200 mt-3">**建議：「技術外包」模式 + Azure 主雲，最能保留 CviCloud 之 SaaS 業者品牌定位。**</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DECISIONS ===== -->
+<section id="decisions" class="bg-white py-16">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-8">
+      <div class="lg:col-span-4">
+        <div class="section-num">06</div>
+        <h2 class="font-display text-3xl font-black mt-2">11 條決策</h2>
+        <p class="text-stone-500 text-sm">11 Decisions Required</p>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-stone-700 leading-relaxed">本評估書建議於董事會核准 + IT 副總執行，分 A 組（Fabric）與 B 組（CviCloud 雲）兩組決策。</p>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-5">
+      <div>
+        <h3 class="font-bold mb-3 flex items-center gap-2"><span class="pill pill-azure">A 組</span>Azure Fabric Data Lake</h3>
+        <div class="space-y-2">
+          <div class="bg-stone-50 rounded-lg p-3 border border-stone-200"><div class="font-bold text-sm">A1. 確認採用 Azure Fabric Data Lake</div></div>
+          <div class="bg-stone-50 rounded-lg p-3 border border-stone-200"><div class="font-bold text-sm">A2. Medallion 架構（Bronze/Silver/Gold）為強制</div></div>
+          <div class="bg-stone-50 rounded-lg p-3 border border-stone-200"><div class="font-bold text-sm">A3. 跨境分區（台 / 陸 / 跨境聯邦）</div></div>
+          <div class="bg-stone-50 rounded-lg p-3 border border-stone-200"><div class="font-bold text-sm">A4. 鼎新 ERP 連接器路徑（與鼎新確認）</div></div>
+          <div class="bg-stone-50 rounded-lg p-3 border border-stone-200"><div class="font-bold text-sm">A5. Fabric 起步容量（建議 F32-F64）</div></div>
+          <div class="bg-stone-50 rounded-lg p-3 border border-stone-200"><div class="font-bold text-sm">A6. 資料字典與 owner 制度</div></div>
+        </div>
+      </div>
+      <div>
+        <h3 class="font-bold mb-3 flex items-center gap-2"><span class="pill pill-red">B 組</span>CviCloud 雲端 + 騰雲合作</h3>
+        <div class="space-y-2">
+          <div class="bg-stone-50 rounded-lg p-3 border-2" style="border-color:var(--red)"><div class="font-bold text-sm" style="color:var(--red)">B1. ★ 確認 Azure 為 CviCloud 主雲</div></div>
+          <div class="bg-stone-50 rounded-lg p-3 border border-stone-200"><div class="font-bold text-sm">B2. Vertex AI 是否作為 LLM 推理輔助</div></div>
+          <div class="bg-stone-50 rounded-lg p-3 border-2" style="border-color:var(--red)"><div class="font-bold text-sm" style="color:var(--red)">B3. ★ 與騰雲合作模式（代理 / 共營 / 外包）</div></div>
+          <div class="bg-stone-50 rounded-lg p-3 border border-stone-200"><div class="font-bold text-sm">B4. SaaS 收入分潤機制</div></div>
+          <div class="bg-stone-50 rounded-lg p-3 border border-stone-200"><div class="font-bold text-sm">B5. DPA + SLA + 退出機制法律文件</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-8 bg-amber-50 rounded-xl p-5 border border-amber-200">
+      <div class="font-bold mb-2 text-amber-700">⚠️ 立即可做的事（不需等董事會）</div>
+      <ol class="text-sm text-stone-700 space-y-1.5">
+        <li>1. 請 IT 副總與鼎新確認 ERP 連接器路徑（D+3）</li>
+        <li>2. 請法務聯繫騰雲取得「合作協議草約」（D+7）</li>
+        <li>3. 請資安建立「跨境資料傳輸白名單」（D+10）</li>
+        <li>4. 安排 Azure 與 GCP 廠商對 CviCloud 主管簡報（D+14）</li>
+        <li>5. PoC 階段先在台灣區 Fabric 跑 PoC#1，驗證連接器可行性（D+30）</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="bg-stone-900 text-stone-400 py-10">
+  <div class="max-w-7xl mx-auto px-8 grid md:grid-cols-4 gap-6 mb-6">
+    <div>
+      <div class="flex items-center gap-3 mb-3">
+        <div class="w-9 h-9 rounded-md flex items-center justify-center text-white font-bold" style="background:var(--red)">瀚</div>
+        <span class="text-white font-bold">瀚荃集團</span>
+      </div>
+      <p class="text-xs leading-relaxed">雲端架構建議書 v1.0<br />Connect the World · Conserve the Earth</p>
+    </div>
+    <div>
+      <div class="text-xs font-semibold text-stone-200 mb-3">本案議題</div>
+      <ul class="space-y-1 text-xs">
+        <li>· 議題 1：Fabric Data Lake</li>
+        <li>· 議題 2：CviCloud 雙雲</li>
+        <li>· 跨境分區設計</li>
+        <li>· 商業模式衝擊</li>
+      </ul>
+    </div>
+    <div>
+      <div class="text-xs font-semibold text-stone-200 mb-3">關聯文件</div>
+      <ul class="space-y-1 text-xs">
+        <li>· 2026 改造工作任務書</li>
+        <li>· AI PoC 評估書</li>
+        <li>· AI 轉型組企劃書</li>
+        <li>· CIS 手冊 v1.2</li>
+      </ul>
+    </div>
+    <div>
+      <div class="text-xs font-semibold text-stone-200 mb-3">主導</div>
+      <ul class="space-y-1 text-xs">
+        <li>· 楊超群 董事長兼永續長</li>
+        <li>· IT 副總 + 法務 + 資安</li>
+        <li>· CviCloud 主管</li>
+      </ul>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto px-8 pt-4 border-t border-stone-800 flex flex-col md:flex-row justify-between gap-2 text-xs">
+    <div>© 2026 CviLux Group · 內部規範文件</div>
+    <div class="text-stone-500">v1.0 · 2026-05-03 · 內含 [推論] 與 [未驗證] 標記，請依董事會核定取代</div>
+  </div>
+</footer>
+
+<script>if(window.lucide)lucide.createIcons();</script>
+</body>
+</html>
