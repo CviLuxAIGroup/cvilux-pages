@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>瀚荃集團 AI PoC 前置準備評估書 | CviLux Group AI PoC Readiness Assessment</title>
+<meta name="description" content="兩個製造 AI PoC 的前置準備條件詳細評估：產品/原物料安全庫存預測 + 生產線效率成本優化。" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  :root{--red:#E83A48;--red-d:#B0202A;--red-l:#EB6363;--g9:#3D3A39;--g7:#595757;--g5:#999899;--g2:#E1DEDD;--blue:#0085C2;--orange:#F07810;--green:#10B981;--bg:#F7F5F2;--purple:#7C3AED;--cyan:#06B6D4;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Century Gothic','Inter','Noto Sans TC',system-ui,sans-serif;color:#1F1F1F;background:var(--bg);}
+  .font-display{font-family:'Noto Sans TC','Inter',sans-serif;letter-spacing:-0.01em;}
+  .font-mono{font-family:'JetBrains Mono','Courier New',monospace;}
+  .red-bg{background:linear-gradient(135deg,#B0202A 0%,#E83A48 60%,#EB6363 100%);}
+  .magazine-cover{background:radial-gradient(ellipse at 15% 70%,rgba(232,58,72,.4),transparent 60%),linear-gradient(135deg,#1a1a1a 0%,#2a0a0e 30%,#4a0a14 60%,#b0202a 100%);}
+  .red-edge{position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--red);}
+  .pill{display:inline-flex;align-items:center;gap:.4rem;padding:.25rem .75rem;font-size:.7rem;font-weight:700;letter-spacing:.05em;border-radius:9999px;}
+  .pill-red{background:rgba(232,58,72,.1);color:var(--red);border:1px solid rgba(232,58,72,.3);}
+  .pill-blue{background:rgba(0,133,194,.1);color:var(--blue);border:1px solid rgba(0,133,194,.3);}
+  .pill-green{background:rgba(16,185,129,.1);color:#047857;border:1px solid rgba(16,185,129,.3);}
+  .pill-orange{background:rgba(240,120,16,.1);color:var(--orange);border:1px solid rgba(240,120,16,.3);}
+  .pill-purple{background:rgba(124,58,237,.1);color:var(--purple);border:1px solid rgba(124,58,237,.3);}
+  .pill-grey{background:rgba(89,87,87,.1);color:var(--g7);border:1px solid rgba(89,87,87,.3);}
+  .pill-amber{background:rgba(251,191,36,.15);color:#92400e;border:1px solid rgba(251,191,36,.4);}
+  .verify-tag{font-size:.65rem;padding:.15rem .4rem;border-radius:4px;font-weight:600;}
+  .verify-inferred{background:#fef3c7;color:#92400e;}
+  .section-num{font-size:80px;font-weight:900;color:var(--red);line-height:1;font-family:'Noto Sans TC',sans-serif;}
+  table.cis{width:100%;border-collapse:collapse;}
+  table.cis th{background:#1F1F1F;color:white;text-align:left;padding:.7rem 1rem;font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;font-weight:700;}
+  table.cis td{padding:.6rem 1rem;border-bottom:1px solid #e5e5e5;font-size:.85rem;vertical-align:top;}
+  table.cis tr:nth-child(even) td{background:#FAF8F5;}
+  .nav-link{position:relative;font-weight:500;}
+  .nav-link::after{content:'';position:absolute;left:50%;bottom:-3px;height:2px;width:0;background:var(--red);transition:.25s;transform:translateX(-50%);}
+  .nav-link:hover::after{width:100%;}
+  details>summary{list-style:none;cursor:pointer;}
+  details>summary::-webkit-details-marker{display:none;}
+  details[open] .chev{transform:rotate(90deg);}
+  .chev{transition:.2s;}
+  .check-row{display:flex;gap:.65rem;align-items:flex-start;padding:.4rem 0;}
+  .check-icon{width:1.25rem;height:1.25rem;border-radius:50%;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:bold;color:white;}
+  .req-must{background:var(--red);}
+  .req-should{background:#F59E0B;}
+  .req-nice{background:#94A3B8;}
+  .stat-box{background:white;border:1px solid #e5e5e5;border-radius:12px;padding:1.25rem;}
+  .stat-num{font-size:2.25rem;font-weight:900;line-height:1;font-family:'Noto Sans TC',sans-serif;}
+  @media print{.no-print{display:none !important;}body{background:white;}}
+  ::-webkit-scrollbar{width:10px;}
+  ::-webkit-scrollbar-thumb{background:#a0a0a0;border-radius:6px;}
+</style>
+</head>
+<body class="antialiased">
+
+<!-- ===== TOP NAV ===== -->
+<header class="no-print fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-stone-200">
+  <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="#cover" class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-md flex items-center justify-center text-white font-bold" style="background:var(--red)">瀚</div>
+      <div class="leading-tight">
+        <div class="text-sm font-bold text-stone-900 font-display">AI PoC 前置準備評估書</div>
+        <div class="text-[11px] text-stone-500 tracking-wider">AI POC READINESS ASSESSMENT · v1.0</div>
+      </div>
+    </a>
+    <nav class="hidden lg:flex items-center gap-5 text-sm text-stone-700">
+      <a class="nav-link" href="#overview">總覽</a>
+      <a class="nav-link" href="#poc1">PoC #1 庫存</a>
+      <a class="nav-link" href="#poc2">PoC #2 產線</a>
+      <a class="nav-link" href="#governance">治理</a>
+      <a class="nav-link" href="#timeline">時程</a>
+      <a class="nav-link" href="#decisions">決策</a>
+    </nav>
+    <button onclick="window.print()" class="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-md text-white text-sm font-semibold" style="background:var(--red)">列印 <i data-lucide="printer" class="w-4 h-4"></i></button>
+  </div>
+</header>
+
+<!-- ===== COVER ===== -->
+<section id="cover" class="magazine-cover text-white pt-24 pb-14 min-h-screen flex items-center">
+  <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-red-700 via-red-500 to-red-300"></div>
+  <div class="max-w-7xl mx-auto px-8 w-full">
+    <div class="grid lg:grid-cols-12 gap-10 items-center">
+      <div class="lg:col-span-7">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-12 rounded-md flex items-center justify-center font-bold text-2xl" style="background:var(--red)">瀚</div>
+          <div>
+            <div class="text-sm font-bold tracking-widest">瀚荃集團 · CVILUX GROUP</div>
+            <div class="text-xs text-red-300 tracking-wider">AI for Manufacturing Excellence</div>
+          </div>
+        </div>
+        <div class="text-[11px] text-red-200 tracking-[0.4em] mb-3">AI POC READINESS ASSESSMENT · v1.0 · 2026</div>
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-black leading-[1.05] font-display mb-6">
+          AI PoC<br />
+          <span class="text-red-300">前置準備評估書</span>
+        </h1>
+        <h2 class="text-xl md:text-2xl font-light text-red-100 leading-tight mb-8">
+          兩個製造業 AI 概念驗證的條件盤點與啟動指南
+        </h2>
+        <div class="grid md:grid-cols-2 gap-4 mb-6">
+          <div class="bg-white/10 backdrop-blur border border-white/20 rounded-xl p-4">
+            <div class="text-xs tracking-widest text-red-300 mb-1">POC #1</div>
+            <div class="font-display font-bold text-lg">產品 / 原物料<br />安全庫存預測智能助手</div>
+            <div class="text-xs text-red-200 mt-2">Smart Safety Inventory Forecasting Assistant</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur border border-white/20 rounded-xl p-4">
+            <div class="text-xs tracking-widest text-red-300 mb-1">POC #2</div>
+            <div class="font-display font-bold text-lg">生產線效率提升<br />成本合理化調整智能助手</div>
+            <div class="text-xs text-red-200 mt-2">Production Line Efficiency &amp; Cost Optimization Assistant</div>
+          </div>
+        </div>
+        <div class="grid grid-cols-4 gap-4">
+          <div><div class="text-3xl font-black text-red-300">2</div><div class="text-xs text-stone-300">PoC 並行</div></div>
+          <div><div class="text-3xl font-black text-red-300">10</div><div class="text-xs text-stone-300">評估維度</div></div>
+          <div><div class="text-3xl font-black text-red-300">90</div><div class="text-xs text-stone-300">天 PoC 期</div></div>
+          <div><div class="text-3xl font-black text-red-300">30</div><div class="text-xs text-stone-300">天啟動</div></div>
+        </div>
+      </div>
+      <div class="lg:col-span-5">
+        <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6 mb-4">
+          <div class="text-xs tracking-widest text-red-300 mb-3">EXECUTIVE NOTE · 董事長指示</div>
+          <p class="text-sm text-stone-200 leading-relaxed mb-3">
+            「啟動一個依據瀚荃集團廠累積歷史數據資料建置 (產品及原物料安全庫存預測智能助手) 和 (生產線提升效率降低成本合理化調整智能助手) AI PoC，需完成前置準備條件的更詳細評估。」
+          </p>
+          <div class="text-right pt-3 border-t border-white/10">
+            <div class="font-display font-bold">楊超群　Steve Yang</div>
+            <div class="text-xs text-red-300 mt-1">董事長兼永續長</div>
+          </div>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+          <div class="text-xs tracking-widest text-amber-300 mb-2">CORE METHOD · 評估方法</div>
+          <p class="text-sm text-stone-200 leading-relaxed">每個 PoC 從 <strong>10 個前置維度</strong> 評估：業務目標 / 資料 / 系統整合 / AI 模型 / 基礎建設 / 組織 / KPI / 風險 / 時程 / 預算。</p>
+          <p class="text-xs text-stone-400 mt-2">附 30 天啟動計畫 + 14 條決策清單供董事會核定。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 總覽 ===== -->
+<section id="overview" class="bg-white py-20">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-10">
+      <div class="lg:col-span-4">
+        <div class="text-xs tracking-[0.3em] text-stone-500 mb-2">EXECUTIVE OVERVIEW</div>
+        <h2 class="font-display text-4xl font-black mb-3">兩個 PoC 對比總覽</h2>
+        <p class="text-stone-500 text-sm">兩個 PoC 共享 70% 基礎建設（資料治理、Azure Fabric、AI 治理），但商業 KPI 與終端使用者不同；建議並行啟動以分散風險、加速學習。</p>
+      </div>
+      <div class="lg:col-span-8 grid md:grid-cols-2 gap-5">
+        <div class="bg-stone-50 rounded-xl p-5 border-2" style="border-color:var(--red)">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="pill pill-red">POC #1</span>
+            <i data-lucide="package" class="w-5 h-5" style="color:var(--red)"></i>
+          </div>
+          <h3 class="font-bold text-lg">安全庫存預測助手</h3>
+          <p class="text-xs text-stone-500 mb-3">Inventory Forecasting</p>
+          <table class="text-xs w-full">
+            <tr><td class="text-stone-500 py-1">主資料</td><td class="font-semibold">ERP / WF AIGP</td></tr>
+            <tr><td class="text-stone-500 py-1">主使用者</td><td class="font-semibold">採購、倉儲、業務</td></tr>
+            <tr><td class="text-stone-500 py-1">建置難度</td><td class="font-semibold text-emerald-700">中（資料齊全）</td></tr>
+            <tr><td class="text-stone-500 py-1">預期 ROI</td><td class="font-semibold text-emerald-700">高（呆滯 / 缺料雙降）</td></tr>
+            <tr><td class="text-stone-500 py-1">建議廠別</td><td class="font-semibold">東莞（量大、資料多）</td></tr>
+          </table>
+        </div>
+        <div class="bg-stone-50 rounded-xl p-5 border-2" style="border-color:var(--blue)">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="pill pill-blue">POC #2</span>
+            <i data-lucide="factory" class="w-5 h-5" style="color:var(--blue)"></i>
+          </div>
+          <h3 class="font-bold text-lg">產線效率優化助手</h3>
+          <p class="text-xs text-stone-500 mb-3">OEE Optimization</p>
+          <table class="text-xs w-full">
+            <tr><td class="text-stone-500 py-1">主資料</td><td class="font-semibold">MES / IoT / sCMS</td></tr>
+            <tr><td class="text-stone-500 py-1">主使用者</td><td class="font-semibold">廠長、IE、品保</td></tr>
+            <tr><td class="text-stone-500 py-1">建置難度</td><td class="font-semibold text-amber-700">中高（IoT 訊號異質）</td></tr>
+            <tr><td class="text-stone-500 py-1">預期 ROI</td><td class="font-semibold text-emerald-700">高（OEE +5pp）</td></tr>
+            <tr><td class="text-stone-500 py-1">建議產線</td><td class="font-semibold">FFC 線（200+ 設備）</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 共用 vs 獨有 -->
+    <div class="grid lg:grid-cols-3 gap-5">
+      <div class="bg-white rounded-xl p-5 border-2 border-dashed" style="border-color:var(--red)">
+        <div class="text-xs tracking-widest mb-2" style="color:var(--red)">共用基礎 70%</div>
+        <h3 class="font-bold mb-2">SHARED FOUNDATION</h3>
+        <ul class="text-xs text-stone-700 space-y-1">
+          <li>· Azure Fabric Data Lake</li>
+          <li>· 資料治理 SOP / Owner</li>
+          <li>· AI 治理委員會</li>
+          <li>· Audit Log + Human-in-loop</li>
+          <li>· Power BI 儀表板平台</li>
+          <li>· MLOps 訓練 / 推理環境</li>
+          <li>· PoC 治理流程</li>
+        </ul>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-stone-200">
+        <div class="text-xs tracking-widest mb-2" style="color:var(--red)">PoC #1 獨有 15%</div>
+        <h3 class="font-bold mb-2">INVENTORY-SPECIFIC</h3>
+        <ul class="text-xs text-stone-700 space-y-1">
+          <li>· 時序預測模型（Prophet/LSTM）</li>
+          <li>· 採購規則引擎</li>
+          <li>· 安全水位演算法</li>
+          <li>· 替代料圖譜</li>
+          <li>· 供應商 API 整合</li>
+        </ul>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-stone-200">
+        <div class="text-xs tracking-widest mb-2" style="color:var(--blue)">PoC #2 獨有 15%</div>
+        <h3 class="font-bold mb-2">OEE-SPECIFIC</h3>
+        <ul class="text-xs text-stone-700 space-y-1">
+          <li>· 邊緣運算 / IoT 閘道</li>
+          <li>· 流程挖掘 Process Mining</li>
+          <li>· 強化學習排程器</li>
+          <li>· 視覺品檢模型</li>
+          <li>· 數位雙生（後期）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================
+     POC #1：安全庫存預測
+     ==================================================================== -->
+<section id="poc1" class="py-20" style="background:linear-gradient(180deg,#FFF5F5 0%,#FFFFFF 100%);">
+  <div class="max-w-7xl mx-auto px-8">
+    <!-- header -->
+    <div class="grid lg:grid-cols-12 gap-10 mb-10">
+      <div class="lg:col-span-4">
+        <div class="section-num">01</div>
+        <h2 class="text-3xl font-black font-display mt-2">PoC #1</h2>
+        <h3 class="text-xl font-bold mt-1" style="color:var(--red)">安全庫存預測智能助手</h3>
+        <p class="text-stone-500 text-sm mt-1">Smart Safety Inventory Forecasting Assistant</p>
+      </div>
+      <div class="lg:col-span-8 bg-white p-6 rounded-xl border border-stone-200 relative overflow-hidden">
+        <div class="red-edge"></div>
+        <div class="pl-4">
+          <div class="text-xs font-bold mb-2" style="color:var(--red)">業務問題　Business Problem</div>
+          <p class="text-sm text-stone-700 leading-relaxed mb-3">
+            集團 14+ 廠跨地理（淡水 / 東莞 / 蘇州 / 重慶 / 越南 / 寮國 / 美國）面對需求波動 + 客戶等級報價 + 長前置時間零件採購；目前安全庫存以人工經驗法則設定，導致：(1) 部分料號缺料急採高溢價；(2) 部分料號呆滯佔資金。
+          </p>
+          <div class="text-xs font-bold mb-2" style="color:var(--red)">PoC 目標　PoC Goal</div>
+          <p class="text-sm text-stone-700 leading-relaxed">
+            在 <strong>1 個試點廠（建議東莞）</strong> 對 <strong>top 100 SKU</strong>（依 Pareto，覆蓋 80% 庫存價值）建立 AI 預測模型，<strong>3 個月 Shadow Mode</strong> 比對 AI 建議 vs 採購人員實際決策，KPI 達標後擴展至全廠 / 全集團。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10 維度評估 -->
+
+    <!-- 1. 資料準備 -->
+    <details class="bg-white rounded-xl border border-stone-200 mb-3 overflow-hidden" open>
+      <summary class="p-5 hover:bg-stone-50 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-4 flex-1">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-sm" style="background:var(--red)">1</div>
+          <div><div class="text-xs text-stone-500 tracking-widest">DIMENSION 1</div><h3 class="font-bold text-lg">資料準備清單　Data Requirements</h3></div>
+        </div>
+        <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+      </summary>
+      <div class="p-5 pt-0 border-t border-stone-200">
+        <p class="text-sm text-stone-600 mb-4">需 <strong>36 個月以上</strong> 歷史資料；每筆需有時間戳記、廠別、料號、單位；資料完整性 ≥ 95%。</p>
+        <table class="cis">
+          <thead><tr><th>來源系統</th><th>資料表 / 欄位</th><th>用途</th><th>必要性</th><th>取得難度</th></tr></thead>
+          <tbody>
+            <tr><td><strong>鼎新 ERP</strong></td><td>產品主檔（料號、品名、BOM、替代料、單位、ABC 分類、前置時間）</td><td>料號維度</td><td><span class="check-icon req-must inline-flex">必</span></td><td>易</td></tr>
+            <tr><td>鼎新 ERP</td><td>採購單歷史（PO 日期、料號、數量、實到日、供應商、單價）</td><td>前置時間 + 供應端波動</td><td><span class="check-icon req-must inline-flex">必</span></td><td>易</td></tr>
+            <tr><td>鼎新 ERP</td><td>庫存異動日表（日期、料號、廠別、入庫、出庫、結存、呆滯標記）</td><td>時序主資料</td><td><span class="check-icon req-must inline-flex">必</span></td><td>易</td></tr>
+            <tr><td>鼎新 ERP</td><td>銷售訂單 / 出貨記錄（客戶、料號、數量、實際出貨日）</td><td>需求預測訓練</td><td><span class="check-icon req-must inline-flex">必</span></td><td>易</td></tr>
+            <tr><td>MES</td><td>實際領料記錄（工單、料號、領用量、領用時間）</td><td>產線消耗速率</td><td><span class="check-icon req-must inline-flex">必</span></td><td>中</td></tr>
+            <tr><td>MES</td><td>不良品 / 報廢數量</td><td>耗用率修正</td><td><span class="check-icon req-should inline-flex">應</span></td><td>中</td></tr>
+            <tr><td>D365 CRM</td><td>訂單預測 / Pipeline / 客戶等級</td><td>未來需求訊號</td><td><span class="check-icon req-should inline-flex">應</span></td><td>中</td></tr>
+            <tr><td>SharePoint</td><td>採購合約（最低訂購量 MOQ、最小批量、價格階梯）</td><td>規則約束</td><td><span class="check-icon req-should inline-flex">應</span></td><td>中</td></tr>
+            <tr><td>外部</td><td>原物料市場價格（銅、鋁、塑料）</td><td>成本與替代評估</td><td><span class="check-icon req-nice inline-flex">可</span></td><td>難</td></tr>
+            <tr><td>外部</td><td>節氣 / 節假日 / 物流中斷新聞</td><td>季節性 + 風險</td><td><span class="check-icon req-nice inline-flex">可</span></td><td>難</td></tr>
+            <tr><td>內部知識</td><td>採購人員經驗規則（已知 ROP、EOQ、安全係數）</td><td>RAG 知識庫，避免冷啟動</td><td><span class="check-icon req-must inline-flex">必</span></td><td>中（需訪談）</td></tr>
+          </tbody>
+        </table>
+        <div class="mt-4 grid md:grid-cols-3 gap-3">
+          <div class="bg-stone-50 p-3 rounded-lg border border-stone-200"><div class="text-xs text-red-700 font-bold mb-1">📋 必交付清單</div><p class="text-xs text-stone-700">資料字典、欄位對照表、樣本資料 1 萬筆 / 來源</p></div>
+          <div class="bg-stone-50 p-3 rounded-lg border border-stone-200"><div class="text-xs text-red-700 font-bold mb-1">⚠️ 風險點</div><p class="text-xs text-stone-700">大陸廠資料是否能跨境傳台？需法務確認</p></div>
+          <div class="bg-stone-50 p-3 rounded-lg border border-stone-200"><div class="text-xs text-red-700 font-bold mb-1">✅ 退而求其次</div><p class="text-xs text-stone-700">先用單廠（東莞）+ Top 100 SKU 啟動，驗證後擴展</p></div>
+        </div>
+      </div>
+    </details>
+
+    <!-- 2. 資料品質 -->
+    <details class="bg-white rounded-xl border border-stone-200 mb-3 overflow-hidden">
+      <summary class="p-5 hover:bg-stone-50 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-4 flex-1">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-sm" style="background:var(--red)">2</div>
+          <div><div class="text-xs text-stone-500 tracking-widest">DIMENSION 2</div><h3 class="font-bold text-lg">資料品質要求　Data Quality Threshold</h3></div>
+        </div>
+        <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+      </summary>
+      <div class="p-5 pt-0 border-t border-stone-200">
+        <table class="cis">
+          <thead><tr><th>品質維度</th><th>閾值</th><th>檢核方法</th></tr></thead>
+          <tbody>
+            <tr><td>完整性 Completeness</td><td>欄位空值率 ≤ 5%</td><td>每張表跑空值統計</td></tr>
+            <tr><td>準確性 Accuracy</td><td>抽樣 100 筆人工核對 ≥ 95%</td><td>採購主管抽查</td></tr>
+            <tr><td>一致性 Consistency</td><td>同一料號跨表單位 / 名稱一致</td><td>跨表 join 查異</td></tr>
+            <tr><td>時效性 Timeliness</td><td>每日 02:00 前完成前一日資料同步</td><td>監控 SLA</td></tr>
+            <tr><td>唯一性 Uniqueness</td><td>主鍵無重複</td><td>SQL DISTINCT 檢查</td></tr>
+            <tr><td>歷史長度</td><td>≥ 36 個月</td><td>確認最早記錄</td></tr>
+          </tbody>
+        </table>
+        <div class="mt-4 bg-rose-50 rounded-lg p-3 border border-rose-200">
+          <p class="text-xs text-stone-700"><strong style="color:var(--red)">資料不達標則 PoC 暫停</strong>。先進「資料修補 Sprint」2-4 週由資料工程師補齊，再啟動模型訓練。</p>
+        </div>
+      </div>
+    </details>
+
+    <!-- 3. 系統整合 -->
+    <details class="bg-white rounded-xl border border-stone-200 mb-3 overflow-hidden">
+      <summary class="p-5 hover:bg-stone-50 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-4 flex-1">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-sm" style="background:var(--red)">3</div>
+          <div><div class="text-xs text-stone-500 tracking-widest">DIMENSION 3</div><h3 class="font-bold text-lg">系統整合需求　System Integration</h3></div>
+        </div>
+        <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+      </summary>
+      <div class="p-5 pt-0 border-t border-stone-200">
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <div class="text-xs font-bold mb-2" style="color:var(--red)">必備 API / 連接器</div>
+            <ul class="text-sm text-stone-700 space-y-1.5">
+              <li>· 鼎新 ERP REST API（讀取產品 / 庫存 / 採購）</li>
+              <li>· WF AIGP Webhook（事件觸發 [推論]）</li>
+              <li>· MES 領料 API</li>
+              <li>· Azure Fabric ingestion pipeline</li>
+              <li>· Power BI 儀表板嵌入</li>
+              <li>· Outlook 寄送預警 mail</li>
+              <li>· Teams Adaptive Card 推送建議</li>
+            </ul>
+          </div>
+          <div>
+            <div class="text-xs font-bold mb-2" style="color:var(--red)">資料管道</div>
+            <ul class="text-sm text-stone-700 space-y-1.5">
+              <li>· ERP → Fabric Data Lake（每日 batch）</li>
+              <li>· MES → Fabric（每小時 increment）</li>
+              <li>· 模型訓練 → MLflow 版本管理</li>
+              <li>· 模型推理 → Azure ML Endpoint</li>
+              <li>· 預測結果 → ERP 顯示欄位（Read-only）</li>
+              <li>· Audit Log → Log Analytics</li>
+            </ul>
+          </div>
+        </div>
+        <div class="mt-4 bg-amber-50 rounded-lg p-3 border border-amber-200">
+          <p class="text-xs text-stone-700"><span class="verify-tag verify-inferred">推論</span> WF AIGP API 細節須由鼎新原廠提供；建議第一階段先用 ERP 既有 API + 中介整合層，避免綁定新平台。</p>
+        </div>
+      </div>
+    </details>
+
+    <!-- 4. AI 模型 -->
+    <details class="bg-white rounded-xl border border-stone-200 mb-3 overflow-hidden">
+      <summary class="p-5 hover:bg-stone-50 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-4 flex-1">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-sm" style="background:var(--red)">4</div>
+          <div><div class="text-xs text-stone-500 tracking-widest">DIMENSION 4</div><h3 class="font-bold text-lg">AI 模型選型　Model Selection</h3></div>
+        </div>
+        <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+      </summary>
+      <div class="p-5 pt-0 border-t border-stone-200">
+        <p class="text-sm text-stone-600 mb-4">採用 <strong>3 層混合架構</strong>：時序預測（量）+ 規則引擎（約束）+ LLM 解釋（建議）。</p>
+        <table class="cis">
+          <thead><tr><th>層</th><th>模型</th><th>輸出</th><th>優點</th><th>考量</th></tr></thead>
+          <tbody>
+            <tr><td><strong>L1 量預測</strong></td><td>Prophet（基線）</td><td>每日 / 每週需求預測</td><td>季節性強、易解釋</td><td>對突發事件不敏感</td></tr>
+            <tr><td>L1 量預測</td><td>LightGBM</td><td>短期需求（1-4 週）</td><td>處理特徵多、訓練快</td><td>需特徵工程</td></tr>
+            <tr><td>L1 量預測</td><td>LSTM / TFT</td><td>長期需求（4-12 週）</td><td>學長序列依賴</td><td>需大量資料、訓練慢</td></tr>
+            <tr><td><strong>L2 安全水位</strong></td><td>規則引擎 + 凱利公式 / Newsvendor</td><td>動態 ROP / EOQ</td><td>可解釋、可調</td><td>需專家規則</td></tr>
+            <tr><td><strong>L3 解釋層</strong></td><td>LLM (Gemini / GPT-4) + RAG</td><td>「為什麼建議調高 / 調低」</td><td>提升信任、便於審核</td><td>需控幻覺</td></tr>
+          </tbody>
+        </table>
+        <div class="mt-4 grid md:grid-cols-2 gap-3">
+          <div class="bg-stone-50 p-3 rounded-lg"><strong class="text-xs text-red-700">PoC 階段建議：</strong> Prophet + LightGBM + 規則引擎 + LLM 解釋。後期再評估 Transformer / TFT。</div>
+          <div class="bg-stone-50 p-3 rounded-lg"><strong class="text-xs text-red-700">輸出格式：</strong> 每料號每日：建議安全水位、預測 4 週需求、95% 信心區間、自然語言解釋、3 個替代料推薦。</div>
+        </div>
+      </div>
+    </details>
+
+    <!-- 5. 技術基礎建設 -->
+    <details class="bg-white rounded-xl border border-stone-200 mb-3 overflow-hidden">
+      <summary class="p-5 hover:bg-stone-50 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-4 flex-1">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-sm" style="background:var(--red)">5</div>
+          <div><div class="text-xs text-stone-500 tracking-widest">DIMENSION 5</div><h3 class="font-bold text-lg">技術基礎建設　Tech Infrastructure</h3></div>
+        </div>
+        <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+      </summary>
+      <div class="p-5 pt-0 border-t border-stone-200 grid md:grid-cols-2 gap-4">
+        <div class="bg-stone-50 p-4 rounded-lg">
+          <div class="text-xs font-bold mb-2" style="color:var(--red)">已具備（沿用）</div>
+          <ul class="text-sm space-y-1">
+            <li>· Azure Fabric Data Lake</li>
+            <li>· Azure AD / Entra（身份）</li>
+            <li>· Power BI 集團授權</li>
+            <li>· M365 SharePoint</li>
+            <li>· Google Vertex AI（既有）</li>
+          </ul>
+        </div>
+        <div class="bg-stone-50 p-4 rounded-lg">
+          <div class="text-xs font-bold mb-2" style="color:var(--red)">需新增 / 升級</div>
+          <ul class="text-sm space-y-1">
+            <li>· Azure ML Workspace（PoC 環境）</li>
+            <li>· MLflow（實驗追蹤）</li>
+            <li>· Vector DB（Azure AI Search 或 pgvector）</li>
+            <li>· Azure Container Apps（推理服務）</li>
+            <li>· Azure Monitor + App Insights</li>
+            <li>· Pinecone / Chroma 用於 LLM RAG</li>
+          </ul>
+        </div>
+        <div class="md:col-span-2 bg-amber-50 p-4 rounded-lg border border-amber-200">
+          <div class="text-xs font-bold mb-2 text-amber-700">PoC 預算估算（單一廠 100 SKU · 3 個月）<span class="verify-tag verify-inferred ml-2">推論</span></div>
+          <table class="text-xs w-full">
+            <tr><td>Azure Fabric / ML / Storage（PoC 期）</td><td class="text-right font-mono">~ NT$ 80-120 萬</td></tr>
+            <tr><td>LLM API 呼叫費用（PoC 期 30 萬 token / 日）</td><td class="text-right font-mono">~ NT$ 30 萬</td></tr>
+            <tr><td>外部顧問 + 模型開發（120 人天）</td><td class="text-right font-mono">~ NT$ 240-360 萬</td></tr>
+            <tr><td>內部資源（資料工程 / IT / 採購主管時間）</td><td class="text-right font-mono">~ NT$ 80 萬機會成本</td></tr>
+            <tr class="border-t-2"><td class="font-bold pt-2">PoC 總投入估算</td><td class="text-right font-mono font-bold pt-2 text-red-700">~ NT$ 430-590 萬</td></tr>
+          </table>
+        </div>
+      </div>
+    </details>
+
+    <!-- 6. 組織與角色 -->
+    <details class="bg-white rounded-xl border border-stone-200 mb-3 overflow-hidden">
+      <summary class="p-5 hover:bg-stone-50 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-4 flex-1">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-sm" style="background:var(--red)">6</div>
+          <div><div class="text-xs text-stone-500 tracking-widest">DIMENSION 6</div><h3 class="font-bold text-lg">組織與角色　Organization & Roles</h3></div>
+        </div>
+        <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+      </summary>
+      <div class="p-5 pt-0 border-t border-stone-200">
+        <table class="cis">
+          <thead><tr><th>角色</th><th>承擔人 / 部門</th><th>投入</th><th>關鍵職責</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Sponsor 出資人</strong></td><td>楊超群 董事長 / 楊奕廣 CEO</td><td>每月 1 次決策會</td><td>資源核准、跨部門排除障礙</td></tr>
+            <tr><td><strong>PoC 主持人</strong></td><td>永續聯辦公室 / IT 副總</td><td>30%</td><td>進度、預算、KPI 對董事會</td></tr>
+            <tr><td><strong>業務 Owner</strong></td><td>採購副理 + 倉儲副理（東莞 + 淡水）</td><td>30%</td><td>規則確認、結果驗證、Shadow Mode 比對</td></tr>
+            <tr><td><strong>資料工程師</strong></td><td>內部 IT 1 名 + 顧問 1 名</td><td>100%</td><td>ETL、資料品質、Pipeline</td></tr>
+            <tr><td><strong>ML 工程師</strong></td><td>外部顧問 2 名</td><td>100%</td><td>模型訓練、調優、部署</td></tr>
+            <tr><td><strong>BI 分析師</strong></td><td>內部 1 名</td><td>50%</td><td>儀表板、視覺化</td></tr>
+            <tr><td>AI 治理委員</td><td>法務 + 資安 + 業務</td><td>每月 1 次</td><td>幻覺風險、權限、稽核</td></tr>
+            <tr><td>使用者代表</td><td>採購人員 3-5 位</td><td>每週 4 小時</td><td>Shadow Mode 評分、回饋</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <!-- 7. KPI -->
+    <details class="bg-white rounded-xl border border-stone-200 mb-3 overflow-hidden">
+      <summary class="p-5 hover:bg-stone-50 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-4 flex-1">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-sm" style="background:var(--red)">7</div>
+          <div><div class="text-xs text-stone-500 tracking-widest">DIMENSION 7</div><h3 class="font-bold text-lg">KPI 與成功標準　Success Criteria</h3></div>
+        </div>
+        <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+      </summary>
+      <div class="p-5 pt-0 border-t border-stone-200">
+        <table class="cis">
+          <thead><tr><th>類別</th><th>KPI</th><th>基線（Baseline）</th><th>PoC 目標</th><th>量產目標</th></tr></thead>
+          <tbody>
+            <tr><td rowspan="3" class="bg-red-50"><strong style="color:var(--red)">技術 KPI</strong></td><td>需求預測 MAPE（Top 100 SKU）</td><td>—（人工 ≈ 35-50%）</td><td>≤ 25%</td><td>≤ 18%</td></tr>
+            <tr><td>缺料預警提前天數</td><td>≤ 3 天（人工事後）</td><td>≥ 7 天</td><td>≥ 14 天</td></tr>
+            <tr><td>建議採納率（Shadow → Adopt）</td><td>—</td><td>≥ 60%</td><td>≥ 80%</td></tr>
+            <tr><td rowspan="4" class="bg-emerald-50"><strong class="text-emerald-700">商業 KPI</strong></td><td>缺料事件次數 / 月</td><td>baseline</td><td>−20%</td><td>−40%</td></tr>
+            <tr><td>呆滯庫存金額</td><td>baseline</td><td>−10%</td><td>−25%</td></tr>
+            <tr><td>庫存周轉天數</td><td>baseline</td><td>−5 天</td><td>−15 天</td></tr>
+            <tr><td>急採高溢價成本</td><td>baseline</td><td>−15%</td><td>−35%</td></tr>
+            <tr><td rowspan="2" class="bg-blue-50"><strong style="color:var(--blue)">使用者 KPI</strong></td><td>採購人員滿意度 (1-5)</td><td>—</td><td>≥ 3.5</td><td>≥ 4.2</td></tr>
+            <tr><td>平均查詢決策時間</td><td>baseline</td><td>−30%</td><td>−60%</td></tr>
+          </tbody>
+        </table>
+        <div class="mt-4 bg-stone-900 text-white p-4 rounded-lg">
+          <div class="text-xs tracking-widest text-amber-300 mb-2">GO / NO-GO GATE</div>
+          <p class="text-sm">PoC 結束時，<strong>技術 KPI 全部達標 + 商業 KPI 至少 2 項達標 + 使用者滿意度 ≥ 3.5</strong> 才進量產化。否則啟動「為何失敗」回顧 + 決定終止 / 延長 / 重設範圍。</p>
+        </div>
+      </div>
+    </details>
+
+    <!-- 8. 風險 -->
+    <details class="bg-white rounded-xl border border-stone-200 mb-3 overflow-hidden">
+      <summary class="p-5 hover:bg-stone-50 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-4 flex-1">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-sm" style="background:var(--red)">8</div>
+          <div><div class="text-xs text-stone-500 tracking-widest">DIMENSION 8</div><h3 class="font-bold text-lg">風險與緩解　Risks & Mitigation</h3></div>
+        </div>
+        <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+      </summary>
+      <div class="p-5 pt-0 border-t border-stone-200">
+        <table class="cis">
+          <thead><tr><th>風險</th><th>機率</th><th>影響</th><th>緩解</th></tr></thead>
+          <tbody>
+            <tr><td>歷史資料品質不足（缺值、錯誤）</td><td>高</td><td>高</td><td>Phase 0 跑資料品質報告，先修補再啟動模型；不達 95% 不上 PoC</td></tr>
+            <tr><td>採購人員不採納 AI 建議</td><td>高</td><td>高</td><td>Shadow Mode 共審 3 個月、強調 LLM 解釋層、共創規則</td></tr>
+            <tr><td>模型對突發事件（如疫情、地緣政治）失效</td><td>中</td><td>高</td><td>每週重訓練、加外部新聞訊號、保留人工覆寫權</td></tr>
+            <tr><td>跨境資料傳輸法規（PIPL）</td><td>中</td><td>高</td><td>大陸資料留陸區、僅傳 aggregated 統計；台廠 PoC 先行</td></tr>
+            <tr><td>WF AIGP 升級時程延誤</td><td>中</td><td>中</td><td>第一階段不依賴 WF AIGP，僅用既有 ERP API</td></tr>
+            <tr><td>替代料圖譜不完整</td><td>中</td><td>中</td><td>採購 + RD 合作建立、初期僅含 Top 100 料號</td></tr>
+            <tr><td>外部顧問離場後維運斷層</td><td>中</td><td>高</td><td>必交付：完整文件、模型卡、訓練腳本、知識轉移 4 週</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <!-- 9. 時程 -->
+    <details class="bg-white rounded-xl border border-stone-200 mb-3 overflow-hidden">
+      <summary class="p-5 hover:bg-stone-50 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-4 flex-1">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-sm" style="background:var(--red)">9</div>
+          <div><div class="text-xs text-stone-500 tracking-widest">DIMENSION 9</div><h3 class="font-bold text-lg">時程與里程碑　Timeline & Milestones</h3></div>
+        </div>
+        <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+      </summary>
+      <div class="p-5 pt-0 border-t border-stone-200">
+        <div class="space-y-3">
+          <div class="flex gap-4 items-start"><div class="w-24 flex-shrink-0 text-xs font-bold pt-1" style="color:var(--red)">M1 (W1-2)</div><div class="flex-1 bg-stone-50 p-3 rounded-lg"><strong>Kick-off + Phase 0 資料盤點</strong> — 召集 Sponsor、簽合約、確認 100 SKU 範圍、ERP 帳號開通、資料字典撰寫</div></div>
+          <div class="flex gap-4 items-start"><div class="w-24 flex-shrink-0 text-xs font-bold pt-1" style="color:var(--red)">M2 (W3-4)</div><div class="flex-1 bg-stone-50 p-3 rounded-lg"><strong>資料品質檢核 + 修補</strong> — 跑品質報告、補 BOM 缺失、確認替代料、訪談採購人員</div></div>
+          <div class="flex gap-4 items-start"><div class="w-24 flex-shrink-0 text-xs font-bold pt-1" style="color:var(--red)">M3 (W5-7)</div><div class="flex-1 bg-stone-50 p-3 rounded-lg"><strong>Pipeline + 模型基線</strong> — Fabric ingestion、Prophet baseline、LightGBM、初版預測上線</div></div>
+          <div class="flex gap-4 items-start"><div class="w-24 flex-shrink-0 text-xs font-bold pt-1" style="color:var(--red)">M4 (W8-9)</div><div class="flex-1 bg-stone-50 p-3 rounded-lg"><strong>規則引擎 + LLM 解釋層</strong> — ROP/EOQ 計算、LLM 解釋接入、儀表板上線</div></div>
+          <div class="flex gap-4 items-start"><div class="w-24 flex-shrink-0 text-xs font-bold pt-1" style="color:var(--red)">M5 (W10-12)</div><div class="flex-1 bg-stone-50 p-3 rounded-lg"><strong>Shadow Mode 12 週</strong> — 採購人員每日比對 AI 建議 vs 自己決策、評分、迭代</div></div>
+          <div class="flex gap-4 items-start"><div class="w-24 flex-shrink-0 text-xs font-bold pt-1" style="color:var(--red)">M6 (W13)</div><div class="flex-1 bg-stone-50 p-3 rounded-lg"><strong>Go/No-Go 評估</strong> — KPI 報告、董事會匯報、決定量產化路徑或終止</div></div>
+        </div>
+      </div>
+    </details>
+
+    <!-- 10. PoC 交付物 -->
+    <details class="bg-white rounded-xl border border-stone-200 mb-3 overflow-hidden">
+      <summary class="p-5 hover:bg-stone-50 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-4 flex-1">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-sm" style="background:var(--red)">10</div>
+          <div><div class="text-xs text-stone-500 tracking-widest">DIMENSION 10</div><h3 class="font-bold text-lg">PoC 必交付物　Deliverables</h3></div>
+        </div>
+        <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+      </summary>
+      <div class="p-5 pt-0 border-t border-stone-200 grid md:grid-cols-2 gap-3 text-sm">
+        <div class="bg-stone-50 p-3 rounded-lg">📊 Power BI 儀表板（採購視角 / 主管視角）</div>
+        <div class="bg-stone-50 p-3 rounded-lg">🔮 預測模型（Prophet + LightGBM + LLM）+ Model Card</div>
+        <div class="bg-stone-50 p-3 rounded-lg">📚 資料字典 + 欄位對照表</div>
+        <div class="bg-stone-50 p-3 rounded-lg">🔁 ETL Pipeline 程式碼 + 排程</div>
+        <div class="bg-stone-50 p-3 rounded-lg">📝 Shadow Mode 比對報告（每月一份，共 3 份）</div>
+        <div class="bg-stone-50 p-3 rounded-lg">📈 KPI 達標報告 + Go/No-Go 建議</div>
+        <div class="bg-stone-50 p-3 rounded-lg">🎓 4 週知識轉移計畫 + 維運手冊</div>
+        <div class="bg-stone-50 p-3 rounded-lg">🛡️ AI 治理紀錄（Audit Log、人工覆寫率）</div>
+      </div>
+    </details>
+
+  </div>
+</section>
+
+<!-- ====================================================================
+     POC #2：產線效率優化
+     ==================================================================== -->
+<section id="poc2" class="py-20" style="background:linear-gradient(180deg,#F0F8FF 0%,#FFFFFF 100%);">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-10">
+      <div class="lg:col-span-4">
+        <div class="section-num" style="color:var(--blue)">02</div>
+        <h2 class="text-3xl font-black font-display mt-2">PoC #2</h2>
+        <h3 class="text-xl font-bold mt-1" style="color:var(--blue)">生產線效率優化助手</h3>
+        <p class="text-stone-500 text-sm mt-1">Production Line Efficiency &amp; Cost Optimization Assistant</p>
+      </div>
+      <div class="lg:col-span-8 bg-white p-6 rounded-xl border border-stone-200 relative overflow-hidden">
+        <div class="red-edge" style="background:var(--blue)"></div>
+        <div class="pl-4">
+          <div class="text-xs font-bold mb-2" style="color:var(--blue)">業務問題　Business Problem</div>
+          <p class="text-sm text-stone-700 leading-relaxed mb-3">
+            FFC 線「200+ 潔淨室等級設備」、SMT、Connector 注塑、組包等複雜製程；目前以人工 IE 工程師 + Excel 分析瓶頸；缺乏即時 OEE（可用率 / 性能 / 品質）視覺化、缺乏跨班 / 跨機台統一比較、新人接手知識傳承困難。
+          </p>
+          <div class="text-xs font-bold mb-2" style="color:var(--blue)">PoC 目標　PoC Goal</div>
+          <p class="text-sm text-stone-700 leading-relaxed">
+            在 <strong>1 條試點線（建議東莞 FFC 高頻線）</strong> 部署 IoT + Process Mining + AI 助手，<strong>3 個月</strong> 找出 Top 5 瓶頸與改善建議，目標 <strong>OEE +5 個百分點</strong>、<strong>單位能耗 -8%</strong>。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 重要差異說明 -->
+    <div class="bg-blue-50 rounded-xl p-5 border border-blue-200 mb-8">
+      <div class="text-xs font-bold mb-2" style="color:var(--blue)">與 PoC #1 的關鍵差異</div>
+      <p class="text-sm text-stone-700">PoC #1 主要是「<strong>歷史資料 + 預測</strong>」，PoC #2 是「<strong>即時資料 + 行動建議</strong>」。後者需要邊緣運算、IoT 閘道、時序資料庫，技術投入比 PoC #1 高 30-50%，但對製造現場影響更直接。</p>
+    </div>
+
+    <!-- 縮短版：因為共用治理框架，只列 PoC #2 獨有部分 -->
+
+    <details class="bg-white rounded-xl border border-stone-200 mb-3 overflow-hidden" open>
+      <summary class="p-5 hover:bg-stone-50 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-4 flex-1">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-sm" style="background:var(--blue)">1</div>
+          <div><div class="text-xs text-stone-500 tracking-widest">DIMENSION 1</div><h3 class="font-bold text-lg">資料準備清單　Data Requirements</h3></div>
+        </div>
+        <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+      </summary>
+      <div class="p-5 pt-0 border-t border-stone-200">
+        <table class="cis">
+          <thead><tr><th>來源</th><th>資料</th><th>用途</th><th>必要性</th><th>取得難度</th></tr></thead>
+          <tbody>
+            <tr><td><strong>MES (鼎新)</strong></td><td>工單、開工 / 完工時間、產量、良品率、不良原因</td><td>OEE 計算基礎</td><td><span class="check-icon req-must inline-flex">必</span></td><td>易</td></tr>
+            <tr><td>MES</td><td>每站每機台 cycle time、調機時間、停機時間</td><td>瓶頸辨識</td><td><span class="check-icon req-must inline-flex">必</span></td><td>中</td></tr>
+            <tr><td><strong>IoT 感測器</strong></td><td>設備狀態（運轉 / 待機 / 故障）、振動、溫度、壓力</td><td>性能 / 異常偵測</td><td><span class="check-icon req-must inline-flex">必</span></td><td>難（需新增 IoT）</td></tr>
+            <tr><td>IoT</td><td>能源儀錶（單機 kWh、空壓、用水）</td><td>能耗優化</td><td><span class="check-icon req-must inline-flex">必</span></td><td>中（sCMS 已有部分）</td></tr>
+            <tr><td><strong>sCMS 智碳雲</strong></td><td>廠區能源資料（已有！）</td><td>能耗基線</td><td><span class="check-icon req-must inline-flex">必</span></td><td>易（自家系統）</td></tr>
+            <tr><td>WMS / 倉儲</td><td>物料配送時間、缺料停線記錄</td><td>外部停線歸因</td><td><span class="check-icon req-should inline-flex">應</span></td><td>中</td></tr>
+            <tr><td>HR 系統</td><td>班別、人力配置、加班</td><td>人員 / 班別比較</td><td><span class="check-icon req-should inline-flex">應</span></td><td>中</td></tr>
+            <tr><td><strong>產線高解析相機</strong></td><td>關鍵工站影像（10-20 fps）</td><td>視覺品檢 + 動作分析</td><td><span class="check-icon req-should inline-flex">應</span></td><td>難</td></tr>
+            <tr><td>品保</td><td>不良品分類 / 客訴記錄 / 8D 報告</td><td>品質根因</td><td><span class="check-icon req-should inline-flex">應</span></td><td>中</td></tr>
+            <tr><td>維修工程</td><td>設備維護記錄、PM 排程、備品庫存</td><td>預測性維護</td><td><span class="check-icon req-should inline-flex">應</span></td><td>中</td></tr>
+            <tr><td>內部知識</td><td>IE 工程師經驗、Lean / Six Sigma 過往專案</td><td>RAG 知識庫</td><td><span class="check-icon req-must inline-flex">必</span></td><td>中（需訪談）</td></tr>
+          </tbody>
+        </table>
+        <div class="mt-4 bg-blue-50 rounded-lg p-3 border border-blue-200">
+          <p class="text-xs text-stone-700">⚠️ <strong>IoT 部署是 PoC #2 的最大前置工程</strong>：若試點線無 IoT 基礎，需先評估部署 30-50 個感測器 + 邊緣閘道，此筆額外投入約 NT$ 100-180 萬 <span class="verify-tag verify-inferred">推論</span>。建議先選 IoT 已部分覆蓋的產線（如 sCMS 涵蓋之能源儀錶區）。</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="bg-white rounded-xl border border-stone-200 mb-3 overflow-hidden">
+      <summary class="p-5 hover:bg-stone-50 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-4 flex-1">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-sm" style="background:var(--blue)">2</div>
+          <div><div class="text-xs text-stone-500 tracking-widest">DIMENSION 2</div><h3 class="font-bold text-lg">AI 模型與技術選型　Model & Tech</h3></div>
+        </div>
+        <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+      </summary>
+      <div class="p-5 pt-0 border-t border-stone-200">
+        <table class="cis">
+          <thead><tr><th>層次</th><th>技術 / 模型</th><th>輸出</th></tr></thead>
+          <tbody>
+            <tr><td><strong>L0 邊緣</strong></td><td>Azure IoT Edge / Edge AI 閘道</td><td>就地預處理 + 過濾噪音</td></tr>
+            <tr><td><strong>L1 即時計算</strong></td><td>串流引擎（Azure Stream Analytics / Kafka）</td><td>每 1 分鐘 OEE / 異常偵測</td></tr>
+            <tr><td><strong>L2 流程挖掘</strong></td><td>Process Mining（PM4Py / Celonis [推論]）</td><td>實際流程 vs 標準流程偏差</td></tr>
+            <tr><td><strong>L3 異常偵測</strong></td><td>Isolation Forest / Autoencoder</td><td>機台異常、品質飄移預警</td></tr>
+            <tr><td><strong>L4 排程優化</strong></td><td>Constraint Programming + RL（可後期導入）</td><td>動態排程建議</td></tr>
+            <tr><td><strong>L5 視覺品檢</strong></td><td>YOLO + 自訂 CNN（接 PoC #2 後期）</td><td>瑕疵自動辨識</td></tr>
+            <tr><td><strong>L6 LLM 助手</strong></td><td>Gemini / GPT-4 + RAG（IE 知識）</td><td>「為什麼這條線今天 OEE 低？應該怎麼改？」</td></tr>
+          </tbody>
+        </table>
+        <div class="mt-4 bg-stone-50 p-3 rounded-lg">
+          <p class="text-sm"><strong>PoC 階段建議</strong>：先做 L0-L3（即時 OEE + 異常偵測 + 流程挖掘）+ L6（LLM 解釋助手）。L4 排程與 L5 視覺品檢列為 PoC 成功後的延伸計畫。</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="bg-white rounded-xl border border-stone-200 mb-3 overflow-hidden">
+      <summary class="p-5 hover:bg-stone-50 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-4 flex-1">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-sm" style="background:var(--blue)">3</div>
+          <div><div class="text-xs text-stone-500 tracking-widest">DIMENSION 3</div><h3 class="font-bold text-lg">KPI 與成功標準　Success Criteria</h3></div>
+        </div>
+        <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+      </summary>
+      <div class="p-5 pt-0 border-t border-stone-200">
+        <table class="cis">
+          <thead><tr><th>類別</th><th>KPI</th><th>基線</th><th>PoC 目標（單線）</th><th>量產目標（全廠）</th></tr></thead>
+          <tbody>
+            <tr><td rowspan="3" class="bg-blue-50"><strong style="color:var(--blue)">技術 KPI</strong></td><td>異常偵測準確率（False Positive Rate）</td><td>—</td><td>FPR ≤ 10%</td><td>FPR ≤ 5%</td></tr>
+            <tr><td>OEE 計算誤差（vs 人工核對）</td><td>—</td><td>≤ 3%</td><td>≤ 1%</td></tr>
+            <tr><td>瓶頸建議採納率</td><td>—</td><td>≥ 50%</td><td>≥ 70%</td></tr>
+            <tr><td rowspan="5" class="bg-emerald-50"><strong class="text-emerald-700">商業 KPI</strong></td><td>線上 OEE</td><td>baseline (估 ≈ 65-75%)</td><td><strong>+5 個百分點</strong></td><td>+10 個百分點</td></tr>
+            <tr><td>單位產品工時</td><td>baseline</td><td>−5%</td><td>−12%</td></tr>
+            <tr><td>單位產品能耗 kWh</td><td>baseline (sCMS 量測)</td><td>−8%</td><td>−15%</td></tr>
+            <tr><td>不良率</td><td>baseline</td><td>−10%</td><td>−25%</td></tr>
+            <tr><td>非計畫停機時間</td><td>baseline</td><td>−15%</td><td>−30%</td></tr>
+            <tr><td rowspan="2" class="bg-amber-50"><strong style="color:var(--orange)">使用者 KPI</strong></td><td>廠長 / IE 工程師滿意度</td><td>—</td><td>≥ 3.5 / 5</td><td>≥ 4.2 / 5</td></tr>
+            <tr><td>新人上手所需訓練時數（藉 LLM 助手）</td><td>baseline</td><td>−25%</td><td>−50%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details class="bg-white rounded-xl border border-stone-200 mb-3 overflow-hidden">
+      <summary class="p-5 hover:bg-stone-50 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-4 flex-1">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-sm" style="background:var(--blue)">4</div>
+          <div><div class="text-xs text-stone-500 tracking-widest">DIMENSION 4</div><h3 class="font-bold text-lg">獨有預算 + 時程　Budget & Timeline</h3></div>
+        </div>
+        <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+      </summary>
+      <div class="p-5 pt-0 border-t border-stone-200">
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="bg-stone-50 p-4 rounded-lg">
+            <div class="text-xs font-bold mb-2" style="color:var(--blue)">PoC 預算（單線 · 3 個月）<span class="verify-tag verify-inferred ml-2">推論</span></div>
+            <table class="text-xs w-full">
+              <tr><td>IoT 感測器 + 邊緣閘道部署（30-50 點）</td><td class="text-right font-mono">~ NT$ 100-180 萬</td></tr>
+              <tr><td>Azure IoT / Stream / Fabric / ML</td><td class="text-right font-mono">~ NT$ 80-120 萬</td></tr>
+              <tr><td>外部顧問 + 開發（150 人天）</td><td class="text-right font-mono">~ NT$ 300-450 萬</td></tr>
+              <tr><td>內部資源（廠長 / IE / 維修）</td><td class="text-right font-mono">~ NT$ 100 萬</td></tr>
+              <tr class="border-t-2"><td class="font-bold pt-2">PoC 總投入</td><td class="text-right font-mono font-bold pt-2" style="color:var(--blue)">~ NT$ 580-850 萬</td></tr>
+            </table>
+          </div>
+          <div class="bg-stone-50 p-4 rounded-lg">
+            <div class="text-xs font-bold mb-2" style="color:var(--blue)">時程里程碑（13 週）</div>
+            <ul class="text-xs space-y-1.5">
+              <li>· W1-2：Kick-off + 試點線盤點 + IoT 規格</li>
+              <li>· W3-5：IoT 部署 + sCMS 對接</li>
+              <li>· W6-7：MES 整合 + Stream Analytics</li>
+              <li>· W8-9：模型訓練 + 異常偵測</li>
+              <li>· W10-11：LLM 助手 + 儀表板</li>
+              <li>· W12：Shadow + 廠長試用</li>
+              <li>· W13：KPI 報告 + Go/No-Go</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </details>
+
+  </div>
+</section>
+
+<!-- ====================================================================
+     共用治理框架
+     ==================================================================== -->
+<section id="governance" class="bg-stone-900 text-white py-20">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-10">
+      <div class="lg:col-span-4">
+        <div class="section-num" style="color:var(--red)">03</div>
+        <h2 class="text-3xl font-black font-display mt-2">共用治理框架</h2>
+        <p class="text-stone-400 mt-1">Shared Governance Framework</p>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-stone-300 leading-relaxed">兩個 PoC 共用同一套治理機制：資料治理、AI 治理、變更管理、PoC → 量產化路徑。本框架由永續聯辦公室統籌、IT + 法務 + 資安 + AI 治理委員會共同審議。</p>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div class="bg-white/5 rounded-xl border border-white/10 p-5">
+        <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-3" style="background:rgba(232,58,72,.2)"><i data-lucide="database" class="w-5 h-5" style="color:#FCA5A5"></i></div>
+        <h3 class="font-bold mb-2">資料治理 Data Governance</h3>
+        <ul class="text-xs text-stone-300 space-y-1">
+          <li>· 每張資料表設 Owner</li>
+          <li>· 資料字典強制版本控管</li>
+          <li>· 品質閾值 + 月度報告</li>
+          <li>· 個資 / 商秘遮罩 SOP</li>
+          <li>· 跨境資料分區（PIPL）</li>
+        </ul>
+      </div>
+      <div class="bg-white/5 rounded-xl border border-white/10 p-5">
+        <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-3" style="background:rgba(0,133,194,.2)"><i data-lucide="bot" class="w-5 h-5" style="color:#7DD3FC"></i></div>
+        <h3 class="font-bold mb-2">AI 治理 AI Governance</h3>
+        <ul class="text-xs text-stone-300 space-y-1">
+          <li>· Human-in-the-loop 強制</li>
+          <li>· Model Card 必交付</li>
+          <li>· Audit Log 7 年保留</li>
+          <li>· Bias / Drift 月度檢測</li>
+          <li>· LLM 來源引用率 100%</li>
+        </ul>
+      </div>
+      <div class="bg-white/5 rounded-xl border border-white/10 p-5">
+        <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-3" style="background:rgba(16,185,129,.2)"><i data-lucide="git-pull-request" class="w-5 h-5" style="color:#6EE7B7"></i></div>
+        <h3 class="font-bold mb-2">變更管理 Change Mgmt</h3>
+        <ul class="text-xs text-stone-300 space-y-1">
+          <li>· 範圍變更需 Sponsor 簽核</li>
+          <li>· 模型升級走 CI/CD + Canary</li>
+          <li>· 規則修改業務 + IT 雙簽</li>
+          <li>· 月度進度董事會匯報</li>
+        </ul>
+      </div>
+      <div class="bg-white/5 rounded-xl border border-white/10 p-5">
+        <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-3" style="background:rgba(251,191,36,.2)"><i data-lucide="rocket" class="w-5 h-5" style="color:#FDE68A"></i></div>
+        <h3 class="font-bold mb-2">量產化 Productionization</h3>
+        <ul class="text-xs text-stone-300 space-y-1">
+          <li>· PoC 通過後 6 個月內擴展</li>
+          <li>· SLA 必達 99.5%</li>
+          <li>· 維運責任移轉給內部</li>
+          <li>· 持續模型再訓練（季度）</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- PoC → 量產化路徑 -->
+    <div class="bg-gradient-to-br from-red-900/30 to-blue-900/30 rounded-xl p-6 border border-white/20">
+      <div class="text-xs tracking-widest text-amber-300 mb-3">POC → PRODUCTION PATHWAY · 量產化路徑</div>
+      <h3 class="font-display text-2xl font-bold mb-5">從 PoC 到全集團部署的 4 個階段</h3>
+      <div class="grid md:grid-cols-4 gap-3 text-sm">
+        <div class="bg-black/30 rounded-lg p-4">
+          <div class="text-amber-300 font-bold mb-1">Stage 1 · PoC（3 個月）</div>
+          <p class="text-stone-300 text-xs">單一試點（廠 / 線）+ Top 100 對象。預算 NT$ 500-850 萬 / 個</p>
+        </div>
+        <div class="bg-black/30 rounded-lg p-4">
+          <div class="text-amber-300 font-bold mb-1">Stage 2 · Pilot Plus（3 個月）</div>
+          <p class="text-stone-300 text-xs">擴展至全試點廠所有 SKU / 全產線 OEE。預算 NT$ 800-1,500 萬</p>
+        </div>
+        <div class="bg-black/30 rounded-lg p-4">
+          <div class="text-amber-300 font-bold mb-1">Stage 3 · 集團 Roll-out（6-9 個月）</div>
+          <p class="text-stone-300 text-xs">擴展到 4 大廠（淡水 + 東莞 + 蘇州 + 越南）。預算 NT$ 2,500-4,000 萬</p>
+        </div>
+        <div class="bg-black/30 rounded-lg p-4">
+          <div class="text-amber-300 font-bold mb-1">Stage 4 · 全集團（12 個月）</div>
+          <p class="text-stone-300 text-xs">14+ 公司全覆蓋 + 持續優化。年度維運 NT$ 800-1,200 萬</p>
+        </div>
+      </div>
+      <div class="mt-5 pt-5 border-t border-white/20 text-xs text-stone-400">
+        <strong class="text-amber-300">關鍵 Gate</strong>：每階段結束 KPI 報告 → 董事會核定下階段預算與範圍；任一階段未達標可暫停 / 終止 / 重設範圍。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================
+     30 天啟動計畫
+     ==================================================================== -->
+<section id="timeline" class="py-20 red-bg text-white">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="text-center mb-10">
+      <div class="text-xs tracking-[0.4em] text-red-200 mb-3">D-30 KICK-OFF · 30 天啟動計畫</div>
+      <h2 class="text-4xl font-black font-display">兩個 PoC 同步啟動時間表</h2>
+    </div>
+
+    <div class="bg-white/10 backdrop-blur rounded-xl p-6 border border-white/20 mb-8">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-white/20">
+            <th class="text-left p-3 text-amber-300 text-xs tracking-widest">日期</th>
+            <th class="text-left p-3 text-amber-300 text-xs tracking-widest">PoC #1（庫存）</th>
+            <th class="text-left p-3 text-amber-300 text-xs tracking-widest">PoC #2（產線）</th>
+            <th class="text-left p-3 text-amber-300 text-xs tracking-widest">共用</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-white/10"><td class="p-3 font-bold">D+3</td><td class="p-3">確認試點廠（東莞）</td><td class="p-3">確認試點線（FFC 高頻線）</td><td class="p-3">董事會核准預算上限</td></tr>
+          <tr class="border-b border-white/10"><td class="p-3 font-bold">D+7</td><td class="p-3">採購 + 倉儲 owner 任命</td><td class="p-3">廠長 + IE owner 任命</td><td class="p-3">永續聯辦兼 PMO 開張</td></tr>
+          <tr class="border-b border-white/10"><td class="p-3 font-bold">D+14</td><td class="p-3">RFP 發給 3 家 ML 顧問</td><td class="p-3">RFP 發給 3 家 IoT 顧問</td><td class="p-3">AI 治理委員會成立</td></tr>
+          <tr class="border-b border-white/10"><td class="p-3 font-bold">D+21</td><td class="p-3">資料字典 v0 + 100 SKU 範圍</td><td class="p-3">IoT 點位清單 + 試算</td><td class="p-3">Azure / Fabric 環境開通</td></tr>
+          <tr><td class="p-3 font-bold">D+30</td><td class="p-3">廠商簽約 + Phase 0 動工</td><td class="p-3">廠商簽約 + IoT 採購</td><td class="p-3">兩 PoC 同時 Kick-off</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="bg-black/30 rounded-xl p-6 border border-white/20">
+      <div class="text-xs tracking-widest text-red-200 mb-3">CHAIRMAN'S DIRECTIVE · 董事長批示重點</div>
+      <p class="text-xl font-black font-display leading-tight mb-3">
+        「兩個 PoC 並行啟動、共用基礎設施、分散風險。3 個月後不論成敗，集團累積『製造業 AI 落地能力』，這比單一 PoC 結果更值得。」
+      </p>
+      <p class="text-sm text-red-200">— 楊超群　Steve Yang　董事長兼永續長</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================
+     14 條決策清單
+     ==================================================================== -->
+<section id="decisions" class="bg-white py-20">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-10">
+      <div class="lg:col-span-4">
+        <div class="section-num">14</div>
+        <h2 class="text-3xl font-black font-display mt-2">啟動會議決策清單</h2>
+        <p class="text-stone-500 mt-1">14 Critical Decisions</p>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-stone-700 leading-relaxed">下列 14 條為兩個 PoC 啟動前必須在董事長主持的啟動會議上決議；任一條未決則該 PoC 不得進入 D+30 簽約。</p>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-3">
+      <div class="bg-stone-50 rounded-xl p-4 border border-stone-200"><div class="font-bold text-sm">1. 試點廠 / 試點線</div><p class="text-xs text-stone-600 mt-1">PoC #1 是否選東莞？PoC #2 是否選 FFC 高頻線？</p></div>
+      <div class="bg-stone-50 rounded-xl p-4 border border-stone-200"><div class="font-bold text-sm">2. 試點範圍 SKU / 產線數</div><p class="text-xs text-stone-600 mt-1">PoC #1 是否 Top 100？PoC #2 是否單線？</p></div>
+      <div class="bg-stone-50 rounded-xl p-4 border border-stone-200"><div class="font-bold text-sm">3. PoC 預算上限</div><p class="text-xs text-stone-600 mt-1">兩 PoC 合計約 NT$ 1,000-1,400 萬，是否核准？</p></div>
+      <div class="bg-stone-50 rounded-xl p-4 border border-stone-200"><div class="font-bold text-sm">4. 主合作雲廠 / 平台</div><p class="text-xs text-stone-600 mt-1">是否確認以 Azure 為主、Vertex AI 輔助？</p></div>
+      <div class="bg-stone-50 rounded-xl p-4 border border-stone-200"><div class="font-bold text-sm">5. 採購 / 廠長 owner 人選</div><p class="text-xs text-stone-600 mt-1">兩個 PoC 各自指定 1 名業務主導者</p></div>
+      <div class="bg-stone-50 rounded-xl p-4 border border-stone-200"><div class="font-bold text-sm">6. 跨境資料策略</div><p class="text-xs text-stone-600 mt-1">大陸資料是否留陸區？只傳 aggregated？</p></div>
+      <div class="bg-stone-50 rounded-xl p-4 border border-stone-200"><div class="font-bold text-sm">7. AI 治理委員會組成</div><p class="text-xs text-stone-600 mt-1">永續聯辦 + IT + 法務 + 資安 + 業務代表</p></div>
+      <div class="bg-stone-50 rounded-xl p-4 border border-stone-200"><div class="font-bold text-sm">8. Human-in-the-loop 強制</div><p class="text-xs text-stone-600 mt-1">所有 AI 建議必經人工審核才執行（不直接寫 ERP）</p></div>
+      <div class="bg-stone-50 rounded-xl p-4 border border-stone-200"><div class="font-bold text-sm">9. KPI 達標標準</div><p class="text-xs text-stone-600 mt-1">兩 PoC 各自的 Go/No-Go 標準是否確認？</p></div>
+      <div class="bg-stone-50 rounded-xl p-4 border border-stone-200"><div class="font-bold text-sm">10. 知識轉移機制</div><p class="text-xs text-stone-600 mt-1">外部顧問需培訓內部 X 名於 4 週內接手</p></div>
+      <div class="bg-stone-50 rounded-xl p-4 border border-stone-200"><div class="font-bold text-sm">11. WF AIGP 對接時程</div><p class="text-xs text-stone-600 mt-1">第一階段是否依賴 WF AIGP？或先用 ERP 既有 API？</p></div>
+      <div class="bg-stone-50 rounded-xl p-4 border border-stone-200"><div class="font-bold text-sm">12. 失敗終止條件</div><p class="text-xs text-stone-600 mt-1">什麼情況可中途終止？預算止損點？</p></div>
+      <div class="bg-stone-50 rounded-xl p-4 border border-stone-200"><div class="font-bold text-sm">13. 對外宣傳策略</div><p class="text-xs text-stone-600 mt-1">PoC 階段是否對客戶 / 投資人公開？以 ESG 故事？</p></div>
+      <div class="bg-stone-50 rounded-xl p-4 border border-stone-200"><div class="font-bold text-sm">14. 量產化預先承諾</div><p class="text-xs text-stone-600 mt-1">若 PoC 成功，是否預先承諾 Stage 2 預算？</p></div>
+    </div>
+
+    <div class="mt-8 bg-amber-50 rounded-xl p-5 border border-amber-200">
+      <div class="text-xs font-bold text-amber-700 mb-2">⚠️ 強烈建議</div>
+      <p class="text-sm text-stone-700">啟動會議時間 <strong>不超過 2 小時</strong>；14 條決策以「Yes/No」形式提案，附本評估書作為決策依據；現場無法定案者列「待決事項」，3 個工作日內由 PMO 補資料再次出案。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================
+     FOOTER
+     ==================================================================== -->
+<footer class="bg-stone-900 text-stone-400 py-10">
+  <div class="max-w-7xl mx-auto px-8 grid md:grid-cols-4 gap-6 mb-6">
+    <div>
+      <div class="flex items-center gap-3 mb-3">
+        <div class="w-9 h-9 rounded-md flex items-center justify-center text-white font-bold" style="background:var(--red)">瀚</div>
+        <span class="text-white font-bold">瀚荃集團</span>
+      </div>
+      <p class="text-xs leading-relaxed">AI PoC 前置準備評估書 v1.0<br />Connect the World · Conserve the Earth</p>
+    </div>
+    <div>
+      <div class="text-xs font-semibold text-stone-200 mb-3">兩個 PoC</div>
+      <ul class="space-y-1 text-xs">
+        <li>· #1 安全庫存預測助手</li>
+        <li>· #2 產線效率優化助手</li>
+        <li>· 各 90 天 PoC 期</li>
+        <li>· 共用 70% 基礎設施</li>
+      </ul>
+    </div>
+    <div>
+      <div class="text-xs font-semibold text-stone-200 mb-3">配套文件</div>
+      <ul class="space-y-1 text-xs">
+        <li>· 2026 改造工作任務書</li>
+        <li>· 瀚荃集團 CIS 手冊 v1.1</li>
+        <li>· AI 平台架構網站</li>
+      </ul>
+    </div>
+    <div>
+      <div class="text-xs font-semibold text-stone-200 mb-3">主導</div>
+      <ul class="space-y-1 text-xs">
+        <li>· 楊超群 董事長兼永續長</li>
+        <li>· 永續聯辦公室（兼 PMO）</li>
+        <li>· AI 治理委員會</li>
+      </ul>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto px-8 pt-4 border-t border-stone-800 flex flex-col md:flex-row justify-between gap-2 text-xs">
+    <div>© 2026 CviLux Group · 內部規範文件</div>
+    <div class="text-stone-500">v1.0 · 2026-05-03 · 配合 30 天啟動計畫</div>
+  </div>
+</footer>
+
+<script>if(window.lucide)lucide.createIcons();</script>
+</body>
+</html>

@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>瀚荃集團 AI 數位營運與全球行銷平台 | CviLux Group AI Digital Operation Platform</title>
+<meta name="description" content="瀚荃集團 AI 前台營銷入口 + 企業內部協同管理入口 + 既有系統整合中介層，整合 EIP、Multi-Agent Orchestration 與品牌自動行銷引擎。" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --navy-900: #0a1f3d;
+    --navy-800: #102a52;
+    --navy-700: #18386b;
+    --teal-500: #0d9488;
+    --teal-400: #14b8a6;
+    --emerald-500: #10b981;
+    --gold-400: #fbbf24;
+    --slate-50:  #f8fafc;
+    --slate-100: #f1f5f9;
+    --slate-200: #e2e8f0;
+    --slate-700: #334155;
+    --slate-800: #1e293b;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', 'Noto Sans TC', system-ui, sans-serif;
+    color: var(--slate-800);
+    background: var(--slate-50);
+  }
+  .font-display { font-family: 'Noto Sans TC', 'Inter', sans-serif; letter-spacing: -0.01em; }
+  .gradient-hero {
+    background:
+      radial-gradient(1000px 500px at 80% -10%, rgba(20,184,166,0.25), transparent 60%),
+      radial-gradient(800px 400px at 10% 110%, rgba(251,191,36,0.18), transparent 60%),
+      linear-gradient(135deg, #0a1f3d 0%, #102a52 50%, #18386b 100%);
+  }
+  .gradient-section-dark {
+    background: linear-gradient(180deg, #0a1f3d 0%, #102a52 100%);
+  }
+  .glass {
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.10);
+  }
+  .card-hover { transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease; }
+  .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -20px rgba(13,148,136,0.35); border-color: rgba(13,148,136,0.5); }
+  .pill { display:inline-flex; align-items:center; gap:.4rem; padding:.25rem .65rem; font-size:.7rem; font-weight:600; letter-spacing:.05em; border-radius:9999px; }
+  .pill-teal { background: rgba(13,148,136,.12); color:#0d9488; border:1px solid rgba(13,148,136,.3); }
+  .pill-gold { background: rgba(251,191,36,.12); color:#b45309; border:1px solid rgba(251,191,36,.4); }
+  .pill-navy { background: rgba(16,42,82,.08); color:#102a52; border:1px solid rgba(16,42,82,.2); }
+  .pill-rose { background: rgba(244,63,94,.10); color:#be123c; border:1px solid rgba(244,63,94,.3); }
+  .pill-emerald { background: rgba(16,185,129,.12); color:#047857; border:1px solid rgba(16,185,129,.3); }
+
+  .nav-link { position: relative; font-weight: 500; }
+  .nav-link::after {
+    content:''; position:absolute; left:50%; bottom:-4px; height:2px; width:0;
+    background: linear-gradient(90deg,#14b8a6,#fbbf24); transition: all .25s ease; transform:translateX(-50%);
+  }
+  .nav-link:hover::after { width: 100%; }
+
+  .architecture-row { transition: background-color .2s ease; }
+  .architecture-row:hover { background-color: rgba(20,184,166,0.06); }
+
+  details > summary { list-style: none; cursor: pointer; }
+  details > summary::-webkit-details-marker { display: none; }
+  details[open] .chev { transform: rotate(90deg); }
+  .chev { transition: transform .2s ease; }
+
+  .agent-node {
+    background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
+    border: 1px solid rgba(20,184,166,0.4);
+    transition: all .3s ease;
+  }
+  .agent-node:hover { border-color: #fbbf24; box-shadow: 0 0 24px rgba(251,191,36,0.25); }
+
+  .matrix-cell { padding: .65rem .85rem; border:1px solid var(--slate-200); }
+  .check-good { color:#047857; }
+  .check-mid { color:#b45309; }
+  .check-bad { color:#be123c; }
+
+  .verify-tag { font-size:.65rem; padding:.15rem .4rem; border-radius:4px; vertical-align:middle; margin-right:.35rem; font-weight:600; letter-spacing:.04em; }
+  .verify-inferred { background:#fef3c7; color:#92400e; }
+  .verify-unverified { background:#fee2e2; color:#991b1b; }
+
+  .timeline-dot { width: 14px; height: 14px; border-radius: 50%; background:#14b8a6; box-shadow: 0 0 0 4px rgba(20,184,166,0.2); }
+
+  .scroll-fade {
+    mask-image: linear-gradient(180deg, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: #f1f5f9; }
+  ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 6px; }
+  ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+
+  @media print {
+    .no-print { display:none !important; }
+    body { background: white; }
+  }
+</style>
+</head>
+<body class="antialiased">
+
+<!-- ============= TOP NAV ============= -->
+<header id="top" class="no-print fixed top-0 left-0 right-0 z-50 bg-white/85 backdrop-blur-md border-b border-slate-200">
+  <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="#top" class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-teal-600 via-blue-700 to-indigo-800 flex items-center justify-center text-white font-bold text-sm shadow">瀚</div>
+      <div class="leading-tight">
+        <div class="text-sm font-bold text-slate-900 font-display">瀚荃集團 AI 數位營運平台</div>
+        <div class="text-[11px] text-slate-500 tracking-wider">CVILUX GROUP · AI DIGITAL OPERATION PLATFORM</div>
+      </div>
+    </a>
+    <nav class="hidden lg:flex items-center gap-7 text-sm text-slate-700">
+      <a class="nav-link" href="#vision">策略定位</a>
+      <a class="nav-link" href="#architecture">平台架構</a>
+      <a class="nav-link" href="#eip">EIP 整合</a>
+      <a class="nav-link" href="#agents">Multi-Agent</a>
+      <a class="nav-link" href="#marketing">品牌行銷</a>
+      <a class="nav-link" href="#internal">對內協同</a>
+      <a class="nav-link" href="#roadmap">Roadmap</a>
+      <a class="nav-link" href="#summary">EN Summary</a>
+    </nav>
+    <div class="flex items-center gap-2">
+      <a href="#contact" class="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-teal-600 to-blue-700 text-white text-sm font-semibold hover:shadow-lg hover:shadow-teal-500/30 transition">
+        Demo / 試用 <i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ============= HERO ============= -->
+<section class="gradient-hero pt-24 pb-20 text-white relative overflow-hidden">
+  <div class="absolute inset-0 opacity-[0.04]" style="background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 30px 30px;"></div>
+  <div class="max-w-7xl mx-auto px-6 relative">
+    <div class="grid lg:grid-cols-12 gap-10 items-center">
+      <div class="lg:col-span-7">
+        <div class="flex flex-wrap items-center gap-2 mb-6">
+          <span class="pill pill-teal" style="background:rgba(20,184,166,.18); color:#5eead4; border-color:rgba(20,184,166,.4);"><i data-lucide="sparkles" class="w-3.5 h-3.5"></i> AI Front-End + EIP + Multi-Agent</span>
+          <span class="pill pill-gold" style="background:rgba(251,191,36,.18); color:#fde68a; border-color:rgba(251,191,36,.4);">v2.0 · 優化版</span>
+          <span class="pill" style="background:rgba(255,255,255,.10); color:#cbd5e1; border:1px solid rgba(255,255,255,.2);">2026</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-black leading-[1.1] font-display mb-5">
+          連接世界｜減碳地球<br />
+          <span class="bg-gradient-to-r from-teal-300 via-emerald-300 to-amber-300 bg-clip-text text-transparent">Connect the World · Conserve the Earth</span>
+        </h1>
+        <p class="text-lg text-slate-200 max-w-2xl leading-relaxed mb-8">
+          瀚荃集團 AI 數位營運與全球行銷平台 v2.0：以 <strong class="text-white">EIP 對接</strong> 為共用作業中樞，串接內網與對外品牌入口；以 <strong class="text-white">Multi-Agent Orchestration</strong> 協同優化維運與自動行銷；不取代既有 ERP / D365 / M365 / EAP，只做整合中介與 AI 前台。
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a href="#architecture" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white text-slate-900 font-semibold hover:bg-amber-100 transition shadow-lg">
+            檢視 7 層架構 <i data-lucide="layers" class="w-4 h-4"></i>
+          </a>
+          <a href="#agents" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg glass text-white font-semibold hover:bg-white/20 transition">
+            Multi-Agent 編排 <i data-lucide="bot" class="w-4 h-4"></i>
+          </a>
+          <a href="#summary" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg glass text-white font-semibold hover:bg-white/20 transition">
+            English Summary <i data-lucide="globe" class="w-4 h-4"></i>
+          </a>
+        </div>
+        <div class="grid grid-cols-3 gap-6 mt-10 max-w-xl">
+          <div>
+            <div class="text-3xl font-bold text-amber-300 font-display">7</div>
+            <div class="text-xs text-slate-300 mt-1">平台架構層</div>
+          </div>
+          <div>
+            <div class="text-3xl font-bold text-amber-300 font-display">9+1</div>
+            <div class="text-xs text-slate-300 mt-1">AI Agents · 編排者</div>
+          </div>
+          <div>
+            <div class="text-3xl font-bold text-amber-300 font-display">3</div>
+            <div class="text-xs text-slate-300 mt-1">分期 Roadmap</div>
+          </div>
+        </div>
+      </div>
+      <div class="lg:col-span-5">
+        <div class="glass rounded-2xl p-6 shadow-2xl">
+          <div class="flex items-center justify-between mb-4">
+            <div class="text-xs font-semibold tracking-wider text-teal-300">PLATFORM POSITIONING</div>
+            <div class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
+          </div>
+          <div class="space-y-3">
+            <div class="flex items-start gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
+              <i data-lucide="store" class="w-5 h-5 text-amber-300 mt-0.5"></i>
+              <div>
+                <div class="text-sm font-semibold text-white">AI 前台營銷入口</div>
+                <div class="text-xs text-slate-300">對外品牌、產品搜尋、Lead 蒐集、自動化行銷</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
+              <i data-lucide="users-round" class="w-5 h-5 text-teal-300 mt-0.5"></i>
+              <div>
+                <div class="text-sm font-semibold text-white">企業內部協同管理入口</div>
+                <div class="text-xs text-slate-300">EIP 對接、文件審核、報價治理、ESG 管控</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
+              <i data-lucide="git-merge" class="w-5 h-5 text-emerald-300 mt-0.5"></i>
+              <div>
+                <div class="text-sm font-semibold text-white">既有系統整合中介層</div>
+                <div class="text-xs text-slate-300">ERP / D365 / M365 / Azure Fabric / EAP / WeCom</div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-5 pt-5 border-t border-white/10">
+            <div class="text-xs text-slate-400 leading-relaxed">
+              <span class="verify-tag verify-inferred">推論</span>
+              本平台不重做 ERP 交易核心、不重建 CRM 主檔、不重置 SharePoint 文件庫；只做 API + AI Agent 串接，避免重複維護。
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= 品牌矩陣 ============= -->
+<section class="bg-white py-16 border-b border-slate-100">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex items-end justify-between mb-10 flex-wrap gap-4">
+      <div>
+        <div class="pill pill-teal mb-3">BRAND MATRIX · 品牌矩陣</div>
+        <h2 class="text-3xl md:text-4xl font-bold font-display text-slate-900">六大品牌統一入口</h2>
+        <p class="text-slate-600 mt-2">Group · CviLux · CviCloud sCMS · EAP · Opro9 · CviMall — 統一識別、共用 EIP、跨品牌行銷協同。</p>
+      </div>
+      <a href="#marketing" class="text-sm font-semibold text-teal-700 hover:underline inline-flex items-center gap-1">看品牌自動行銷引擎 <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <!-- 集團 -->
+      <div class="card-hover rounded-2xl border border-slate-200 p-6 bg-gradient-to-br from-slate-50 to-white">
+        <div class="flex items-center justify-between mb-3">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-700 to-indigo-900 flex items-center justify-center text-white font-bold">瀚</div>
+          <span class="pill pill-navy">GROUP</span>
+        </div>
+        <h3 class="font-bold text-lg text-slate-900">瀚荃集團 CviLux Group</h3>
+        <p class="text-sm text-slate-600 mt-1">電子零組件、IoT 製造、ESG 解決方案上市集團</p>
+        <ul class="text-xs text-slate-600 mt-3 space-y-1.5">
+          <li class="flex gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-teal-600"></i>全球據點、上市資訊、ESG 治理形象</li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-teal-600"></i>AI 數位轉型總戰略入口</li>
+        </ul>
+      </div>
+      <!-- CviLux -->
+      <div class="card-hover rounded-2xl border border-slate-200 p-6 bg-gradient-to-br from-teal-50 to-white">
+        <div class="flex items-center justify-between mb-3">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-teal-500 to-emerald-700 flex items-center justify-center text-white font-bold">Cv</div>
+          <span class="pill pill-teal">B2B · COMPONENTS</span>
+        </div>
+        <h3 class="font-bold text-lg text-slate-900">CviLux 零組件平台</h3>
+        <p class="text-sm text-slate-600 mt-1">Connector / Cable & Harness / FFC·FPC / PCBA / AIoT</p>
+        <ul class="text-xs text-slate-600 mt-3 space-y-1.5">
+          <li class="flex gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-teal-600"></i>型號搜尋 / AI 圖搜圖 / Cross-reference</li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-teal-600"></i>ERP 庫存與呆滯庫存即時展示</li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-teal-600"></i>AI 報價試算 + 人工審核</li>
+        </ul>
+      </div>
+      <!-- sCMS -->
+      <div class="card-hover rounded-2xl border border-slate-200 p-6 bg-gradient-to-br from-emerald-50 to-white">
+        <div class="flex items-center justify-between mb-3">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-green-700 flex items-center justify-center text-white font-bold">sC</div>
+          <span class="pill pill-emerald">ESG · IoT</span>
+        </div>
+        <h3 class="font-bold text-lg text-slate-900">CviCloud sCMS 智碳雲</h3>
+        <p class="text-sm text-slate-600 mt-1">淨零解決方案 — IoT 設備、能源監控、碳盤查</p>
+        <ul class="text-xs text-slate-600 mt-3 space-y-1.5">
+          <li class="flex gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-teal-600"></i>CBAM / ISO 14064 / 14067 應用</li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-teal-600"></i>Demo 申請 → D365 Lead</li>
+        </ul>
+      </div>
+      <!-- EAP -->
+      <div class="card-hover rounded-2xl border border-slate-200 p-6 bg-gradient-to-br from-amber-50 to-white">
+        <div class="flex items-center justify-between mb-3">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-700 flex items-center justify-center text-white font-bold">EAP</div>
+          <span class="pill pill-gold">SaaS</span>
+        </div>
+        <h3 class="font-bold text-lg text-slate-900">瀚雲 EAP ESG AI Platform</h3>
+        <p class="text-sm text-slate-600 mt-1">多租戶 SaaS · sEMS / sCMS / sMES / sEHS / sWMS</p>
+        <ul class="text-xs text-slate-600 mt-3 space-y-1.5">
+          <li class="flex gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-teal-600"></i>模組訂閱、SaaS 試算、試用申請</li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-teal-600"></i>EAP 獨立網站 / SSO 登入入口</li>
+        </ul>
+      </div>
+      <!-- Opro9 -->
+      <div class="card-hover rounded-2xl border border-slate-200 p-6 bg-gradient-to-br from-rose-50 to-white">
+        <div class="flex items-center justify-between mb-3">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-rose-500 to-pink-700 flex items-center justify-center text-white font-bold">O9</div>
+          <span class="pill pill-rose">B2C · 3C</span>
+        </div>
+        <h3 class="font-bold text-lg text-slate-900">Opro9 品牌</h3>
+        <p class="text-sm text-slate-600 mt-1">3C 電子配件 — 蘋果生態鏈、行動配件、AIoT 配件</p>
+        <ul class="text-xs text-slate-600 mt-3 space-y-1.5">
+          <li class="flex gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-teal-600"></i>品牌故事、產品矩陣、社群導流</li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-teal-600"></i>導購 CviMall + 跨境電商</li>
+        </ul>
+      </div>
+      <!-- CviMall -->
+      <div class="card-hover rounded-2xl border border-slate-200 p-6 bg-gradient-to-br from-indigo-50 to-white">
+        <div class="flex items-center justify-between mb-3">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-700 flex items-center justify-center text-white font-bold">CM</div>
+          <span class="pill pill-navy">B2B/B2C</span>
+        </div>
+        <h3 class="font-bold text-lg text-slate-900">CviMall 商城</h3>
+        <p class="text-sm text-slate-600 mt-1">B2B 詢價 + B2C 購物 + 經銷商庫存共享</p>
+        <ul class="text-xs text-slate-600 mt-3 space-y-1.5">
+          <li class="flex gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-teal-600"></i>金流 / 物流 / 發票整合</li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-teal-600"></i>ERP 訂單回寫、呆滯庫存促銷</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= 策略定位 / 設計總原則 ============= -->
+<section id="vision" class="py-20 bg-slate-50">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-12">
+      <div class="pill pill-navy mb-3">STRATEGIC POSITIONING · 策略定位</div>
+      <h2 class="text-3xl md:text-4xl font-bold font-display text-slate-900">六大設計總原則</h2>
+      <p class="text-slate-600 mt-2 max-w-2xl mx-auto">v2.0 強化 EIP 對接與 Multi-Agent 治理，但仍堅守「不重做既有系統、AI 輔助而非自動決策」的核心原則。</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="rounded-2xl bg-white p-6 border border-slate-200 card-hover">
+        <div class="w-11 h-11 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center mb-3"><i data-lucide="layers"></i></div>
+        <h3 class="font-bold text-slate-900">1. 不重做既有系統</h3>
+        <p class="text-sm text-slate-600 mt-1.5">ERP、D365、M365、MES、EAP、EIP 皆保留原主責；本平台僅為前台 + AI Agent + 整合中介。</p>
+      </div>
+      <div class="rounded-2xl bg-white p-6 border border-slate-200 card-hover">
+        <div class="w-11 h-11 rounded-xl bg-teal-100 text-teal-700 flex items-center justify-center mb-3"><i data-lucide="door-open"></i></div>
+        <h3 class="font-bold text-slate-900">2. 網站作為入口</h3>
+        <p class="text-sm text-slate-600 mt-1.5">對外行銷 / Lead / 產品搜尋；對內 AI 查詢 / 審核 / 預警；EIP 作為單一身份與工作流主軸。</p>
+      </div>
+      <div class="rounded-2xl bg-white p-6 border border-slate-200 card-hover">
+        <div class="w-11 h-11 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center mb-3"><i data-lucide="plug"></i></div>
+        <h3 class="font-bold text-slate-900">3. API-First</h3>
+        <p class="text-sm text-slate-600 mt-1.5">所有跨系統交換經 API Gateway / EIP 連接器；不直連資料庫，避免緊耦合。</p>
+      </div>
+      <div class="rounded-2xl bg-white p-6 border border-slate-200 card-hover">
+        <div class="w-11 h-11 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center mb-3"><i data-lucide="user-check"></i></div>
+        <h3 class="font-bold text-slate-900">4. AI 輔助，不自動決策</h3>
+        <p class="text-sm text-slate-600 mt-1.5">產品建議、報價、ESG 文案皆 AI 草稿；商業重要決策（成交、發布、簽約）必經人工審核。</p>
+      </div>
+      <div class="rounded-2xl bg-white p-6 border border-slate-200 card-hover">
+        <div class="w-11 h-11 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center mb-3"><i data-lucide="shield-check"></i></div>
+        <h3 class="font-bold text-slate-900">5. 內外網分層</h3>
+        <p class="text-sm text-slate-600 mt-1.5">外網對客戶；內網對員工 + 審核 + 治理；EIP 作為內網單一登入與工作流核心。</p>
+      </div>
+      <div class="rounded-2xl bg-white p-6 border border-slate-200 card-hover">
+        <div class="w-11 h-11 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center mb-3"><i data-lucide="file-search"></i></div>
+        <h3 class="font-bold text-slate-900">6. 資料可追溯</h3>
+        <p class="text-sm text-slate-600 mt-1.5">所有文件、報價、AI 回答、Agent 決策皆保留 Log + Audit Trail，符合 ISO 27001 與內稽要求。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= 7 層平台架構 ============= -->
+<section id="architecture" class="py-20 gradient-section-dark text-white">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-12">
+      <div class="pill" style="background:rgba(20,184,166,.2); color:#5eead4; border:1px solid rgba(20,184,166,.4);">PLATFORM ARCHITECTURE · 7 層架構</div>
+      <h2 class="text-3xl md:text-4xl font-bold font-display mt-3">瀚荃集團 AI 數位營運平台 v2.0</h2>
+      <p class="text-slate-300 mt-2 max-w-3xl mx-auto">從附件 7 層架構升級為「對外網站 / 對內入口 / AI Agent / EIP 整合中介 / Integration Layer / 既有系統 / 平台資料庫 / Roadmap」分層治理。</p>
+    </div>
+
+    <!-- 層次堆疊圖 -->
+    <div class="space-y-2 max-w-5xl mx-auto">
+
+      <!-- Layer 1: 對外網站 -->
+      <details class="glass rounded-xl overflow-hidden" open>
+        <summary class="flex items-center justify-between gap-4 p-5 hover:bg-white/5 architecture-row">
+          <div class="flex items-center gap-4">
+            <span class="w-10 h-10 rounded-lg bg-amber-500/20 text-amber-300 flex items-center justify-center font-bold">1</span>
+            <div>
+              <div class="font-bold text-lg">對外網站 Front-end Public Portal</div>
+              <div class="text-xs text-slate-300">10 個對外功能模組 · 全球行銷入口</div>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="chev w-5 h-5 text-slate-300"></i>
+        </summary>
+        <div class="p-5 pt-0 grid md:grid-cols-2 lg:grid-cols-5 gap-3 text-sm">
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10">
+            <div class="text-amber-300 text-xs font-semibold mb-1">1.1 集團首頁</div>
+            <div class="text-slate-200 text-xs">集團簡介 · 全球據點 · ESG 形象 · AI 轉型定位</div>
+          </div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10">
+            <div class="text-amber-300 text-xs font-semibold mb-1">1.2 CviLux 零組件</div>
+            <div class="text-slate-200 text-xs">產品分類、型號、規格篩、AI 圖搜圖、Cross-ref、技術文件、ERP 庫存、AI 報價</div>
+          </div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10">
+            <div class="text-amber-300 text-xs font-semibold mb-1">1.3 sCMS 智碳雲</div>
+            <div class="text-slate-200 text-xs">IoT、能源監控、碳盤查、CBAM/ISO/ESG、Demo 申請</div>
+          </div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10">
+            <div class="text-amber-300 text-xs font-semibold mb-1">1.4 EAP 導流</div>
+            <div class="text-slate-200 text-xs">SaaS 介紹、模組訂閱、試算、試用、SSO 登入</div>
+          </div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10">
+            <div class="text-amber-300 text-xs font-semibold mb-1">1.5 OEM/ODM</div>
+            <div class="text-slate-200 text-xs">電子、電機、機構、AIoT、詢價表單</div>
+          </div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10">
+            <div class="text-amber-300 text-xs font-semibold mb-1">1.6 Opro9</div>
+            <div class="text-slate-200 text-xs">3C 配件、品牌故事、CviMall 導購</div>
+          </div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10">
+            <div class="text-amber-300 text-xs font-semibold mb-1">1.7 CviMall</div>
+            <div class="text-slate-200 text-xs">B2B 詢價、B2C 購物、金流、物流、ERP 回寫</div>
+          </div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10">
+            <div class="text-amber-300 text-xs font-semibold mb-1">1.8 ESG/CBAM</div>
+            <div class="text-slate-200 text-xs">成果展示、報告模板、認證、ESG eDM</div>
+          </div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10">
+            <div class="text-amber-300 text-xs font-semibold mb-1">1.9 瀚荃學苑外網</div>
+            <div class="text-slate-200 text-xs">IoT 安裝、ESG 教育、經銷商培訓、產學合作</div>
+          </div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10">
+            <div class="text-amber-300 text-xs font-semibold mb-1">1.10 Lead/Landing Page</div>
+            <div class="text-slate-200 text-xs">文件下載、Demo、報價、OEM、ESG 表單 → D365</div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Layer 2: 對內入口 -->
+      <details class="glass rounded-xl overflow-hidden">
+        <summary class="flex items-center justify-between gap-4 p-5 hover:bg-white/5 architecture-row">
+          <div class="flex items-center gap-4">
+            <span class="w-10 h-10 rounded-lg bg-teal-500/20 text-teal-300 flex items-center justify-center font-bold">2</span>
+            <div>
+              <div class="font-bold text-lg">對內入口 Internal Operation Portal · 整合 EIP</div>
+              <div class="text-xs text-slate-300">9 個內網模組 · 透過 EIP 單一登入</div>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="chev w-5 h-5 text-slate-300"></i>
+        </summary>
+        <div class="p-5 pt-0 grid md:grid-cols-3 gap-3 text-sm">
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-teal-300 text-xs font-semibold mb-1">2.1 AI Agent 工作台</div><div class="text-slate-200 text-xs">技術 / 銷售 / ESG / 報價 / ERP 摘要 / OEM 分析查詢</div></div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-teal-300 text-xs font-semibold mb-1">2.2 BU 內容維護</div><div class="text-slate-200 text-xs">產品 / 文件 / Cross-ref / 圖片 / 多語</div></div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-teal-300 text-xs font-semibold mb-1">2.3 文件審核中心</div><div class="text-slate-200 text-xs">Spec / Test / Cert / NDA / SharePoint 版本</div></div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-teal-300 text-xs font-semibold mb-1">2.4 報價管理中心</div><div class="text-slate-200 text-xs">客戶等級、AI 建議、毛利底線、版本控管、主管簽核</div></div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-teal-300 text-xs font-semibold mb-1">2.5 ERP 庫存促銷管理</div><div class="text-slate-200 text-xs">即時庫存、呆滯促銷、經銷商共享、回寫 ERP</div></div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-teal-300 text-xs font-semibold mb-1">2.6 行銷管理</div><div class="text-slate-200 text-xs">eDM / 社群 / LinkedIn·FB·YT / Lead 培育</div></div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-teal-300 text-xs font-semibold mb-1">2.7 ESG 管理</div><div class="text-slate-200 text-xs">sCMS / EAP / ISO 14064·14067 / CBAM / 客戶問卷</div></div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-teal-300 text-xs font-semibold mb-1">2.8 內部教育訓練</div><div class="text-slate-200 text-xs">課程 / 業務 / ESG / 資安 / 線上測驗 / 證書</div></div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-teal-300 text-xs font-semibold mb-1">2.9 系統監控</div><div class="text-slate-200 text-xs">Error / API / AI / Audit Log + AI 除錯建議</div></div>
+        </div>
+      </details>
+
+      <!-- Layer 3: AI Agent Layer -->
+      <details class="glass rounded-xl overflow-hidden">
+        <summary class="flex items-center justify-between gap-4 p-5 hover:bg-white/5 architecture-row">
+          <div class="flex items-center gap-4">
+            <span class="w-10 h-10 rounded-lg bg-purple-500/20 text-purple-300 flex items-center justify-center font-bold">3</span>
+            <div>
+              <div class="font-bold text-lg">AI Agent Layer · Multi-Agent Orchestration</div>
+              <div class="text-xs text-slate-300">1 個編排者 + 9 個專業 Agent · v2.0 強化</div>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="chev w-5 h-5 text-slate-300"></i>
+        </summary>
+        <div class="p-5 pt-0 text-sm">
+          <p class="text-slate-300 mb-3">原 7 個 Agent 擴充為 9 個專業 Agent，並新增 <strong class="text-amber-300">Orchestrator（編排者）</strong> 統籌任務派工。詳見「Multi-Agent Orchestration」專區。</p>
+          <a href="#agents" class="inline-flex items-center gap-2 text-amber-300 hover:underline">前往 Multi-Agent 專區 <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+        </div>
+      </details>
+
+      <!-- Layer 4: EIP 整合中介層 (新) -->
+      <details class="glass rounded-xl overflow-hidden ring-2 ring-amber-400/40">
+        <summary class="flex items-center justify-between gap-4 p-5 hover:bg-white/5 architecture-row">
+          <div class="flex items-center gap-4">
+            <span class="w-10 h-10 rounded-lg bg-amber-500/30 text-amber-200 flex items-center justify-center font-bold">4</span>
+            <div>
+              <div class="font-bold text-lg flex items-center gap-2">EIP 整合中介層 <span class="pill pill-gold">v2.0 NEW</span></div>
+              <div class="text-xs text-slate-300">員工身份、組織、工作流、簽核、訊息、行事曆統一中樞</div>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="chev w-5 h-5 text-slate-300"></i>
+        </summary>
+        <div class="p-5 pt-0 text-sm">
+          <p class="text-slate-300 mb-3">將原 Integration Layer 拆出 EIP 中介，作為內網共用作業核心；詳見「EIP 整合方案層」專區（含廠商選型矩陣）。</p>
+          <a href="#eip" class="inline-flex items-center gap-2 text-amber-300 hover:underline">前往 EIP 整合層 <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+        </div>
+      </details>
+
+      <!-- Layer 5: Integration Layer -->
+      <details class="glass rounded-xl overflow-hidden">
+        <summary class="flex items-center justify-between gap-4 p-5 hover:bg-white/5 architecture-row">
+          <div class="flex items-center gap-4">
+            <span class="w-10 h-10 rounded-lg bg-blue-500/20 text-blue-300 flex items-center justify-center font-bold">5</span>
+            <div>
+              <div class="font-bold text-lg">Integration Layer · 系統間整合</div>
+              <div class="text-xs text-slate-300">API Gateway · Identity · Data Mapping · Workflow · Log · Security</div>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="chev w-5 h-5 text-slate-300"></i>
+        </summary>
+        <div class="p-5 pt-0 grid md:grid-cols-3 gap-3 text-sm">
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-blue-300 text-xs font-semibold mb-1">5.1 API Gateway</div><div class="text-slate-200 text-xs">RESTful / Webhook / Rate Limit / API Key / 監控</div></div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-blue-300 text-xs font-semibold mb-1">5.2 Identity / Access</div><div class="text-slate-200 text-xs">Azure AD / Entra / OAuth2 / RBAC / 外部會員 / WeCom 身份</div></div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-blue-300 text-xs font-semibold mb-1">5.3 Data Mapping</div><div class="text-slate-200 text-xs">ERP / D365 / SharePoint / EAP / 報價欄位</div></div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-blue-300 text-xs font-semibold mb-1">5.4 Workflow Engine</div><div class="text-slate-200 text-xs">文件 / 報價 / Lead / 促銷 / ESG 簽核流程</div></div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-blue-300 text-xs font-semibold mb-1">5.5 Log / Monitoring</div><div class="text-slate-200 text-xs">Error / API / AI / Audit Log / Alert</div></div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-blue-300 text-xs font-semibold mb-1">5.6 Security</div><div class="text-slate-200 text-xs">HTTPS / WAF / NDA / 資料遮罩 / 跨境控管</div></div>
+        </div>
+      </details>
+
+      <!-- Layer 6: 既有系統 -->
+      <details class="glass rounded-xl overflow-hidden">
+        <summary class="flex items-center justify-between gap-4 p-5 hover:bg-white/5 architecture-row">
+          <div class="flex items-center gap-4">
+            <span class="w-10 h-10 rounded-lg bg-slate-500/30 text-slate-200 flex items-center justify-center font-bold">6</span>
+            <div>
+              <div class="font-bold text-lg">既有系統 Existing Systems</div>
+              <div class="text-xs text-slate-300">8 大系統 — 保留主責，僅讀取 / 導流 / 寫入</div>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="chev w-5 h-5 text-slate-300"></i>
+        </summary>
+        <div class="p-5 pt-0 grid md:grid-cols-2 lg:grid-cols-4 gap-3 text-sm">
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-slate-100 text-xs font-semibold mb-1">6.1 鼎新 ERP / WF AIGP</div><div class="text-slate-300 text-xs">產品主檔、成本、庫存、訂單</div></div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-slate-100 text-xs font-semibold mb-1">6.2 鼎新 MES / CMS</div><div class="text-slate-300 text-xs">生產進度、製程、產量摘要</div></div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-slate-100 text-xs font-semibold mb-1">6.3 M365 SharePoint/Teams/Outlook</div><div class="text-slate-300 text-xs">文件版本控管、協作通知、eDM</div></div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-slate-100 text-xs font-semibold mb-1">6.4 D365 CRM</div><div class="text-slate-300 text-xs">Lead / Account / Opportunity / Quote</div></div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-slate-100 text-xs font-semibold mb-1">6.5 Azure Fabric Data Lake</div><div class="text-slate-300 text-xs">資料湖、AI 訓練、分析報表</div></div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-slate-100 text-xs font-semibold mb-1">6.6 Google Vertex AI / Gemini</div><div class="text-slate-300 text-xs">LLM 推理、Agent Builder、RAG</div></div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-slate-100 text-xs font-semibold mb-1">6.7 EAP ESG AI Platform</div><div class="text-slate-300 text-xs">SaaS、多租戶、ESG 報告、CBAM</div></div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-slate-100 text-xs font-semibold mb-1">6.8 企業微信 / 微信 (Phase 3)</div><div class="text-slate-300 text-xs">陸區客戶、經銷商、Lead 回寫</div></div>
+        </div>
+      </details>
+
+      <!-- Layer 7: 平台資料庫 -->
+      <details class="glass rounded-xl overflow-hidden">
+        <summary class="flex items-center justify-between gap-4 p-5 hover:bg-white/5 architecture-row">
+          <div class="flex items-center gap-4">
+            <span class="w-10 h-10 rounded-lg bg-emerald-500/20 text-emerald-300 flex items-center justify-center font-bold">7</span>
+            <div>
+              <div class="font-bold text-lg">平台資料庫 Platform Data</div>
+              <div class="text-xs text-slate-300">10 個資料庫 — 索引、暫存、向量、Log、規則</div>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="chev w-5 h-5 text-slate-300"></i>
+        </summary>
+        <div class="p-5 pt-0 grid md:grid-cols-2 lg:grid-cols-5 gap-3 text-xs">
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-emerald-300 font-semibold mb-1">7.1 產品索引</div><div class="text-slate-300">支援搜尋與前台展示</div></div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-emerald-300 font-semibold mb-1">7.2 AI 向量</div><div class="text-slate-300">RAG 問答嵌入</div></div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-emerald-300 font-semibold mb-1">7.3 報價規則</div><div class="text-slate-300">客戶等級、折扣、毛利</div></div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-emerald-300 font-semibold mb-1">7.4 Lead 暫存</div><div class="text-slate-300">同步 D365 緩衝</div></div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-emerald-300 font-semibold mb-1">7.5 文件索引</div><div class="text-slate-300">SharePoint 索引 + 權限</div></div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-emerald-300 font-semibold mb-1">7.6 Cross-reference</div><div class="text-slate-300">替代料、相似料、競品</div></div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-emerald-300 font-semibold mb-1">7.7 圖搜圖特徵</div><div class="text-slate-300">圖片向量特徵</div></div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-emerald-300 font-semibold mb-1">7.8 eDM 行銷</div><div class="text-slate-300">活動、開信、點擊</div></div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-emerald-300 font-semibold mb-1">7.9 教育訓練</div><div class="text-slate-300">課程、測驗、證書</div></div>
+          <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-emerald-300 font-semibold mb-1">7.10 Log/Audit</div><div class="text-slate-300">稽核紀錄、保留期限</div></div>
+        </div>
+      </details>
+    </div>
+
+    <p class="text-center text-xs text-slate-400 mt-8 max-w-2xl mx-auto">
+      <span class="verify-tag verify-inferred">推論</span>
+      v2.0 與附件原 7 層的差異：<strong class="text-amber-300">新增「EIP 整合中介層」</strong>，將原 Integration Layer 中的 Identity 與 Workflow 提升至獨立治理層，呼應「共用作業系統」核心訴求。
+    </p>
+  </div>
+</section>
+
+<!-- ============= EIP 整合方案層 ============= -->
+<section id="eip" class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid lg:grid-cols-12 gap-10 mb-12">
+      <div class="lg:col-span-7">
+        <div class="pill pill-gold mb-3">EIP INTEGRATION HUB · v2.0 NEW</div>
+        <h2 class="text-3xl md:text-4xl font-bold font-display text-slate-900">EIP 整合中介層 — 內網共用作業中樞</h2>
+        <p class="text-slate-600 mt-3 leading-relaxed">
+          EIP（Enterprise Information Portal）作為瀚荃集團「共用作業系統」核心，統一員工身份、組織、簽核流程、行事曆、訊息、文件入口，並以單一介面串接 ERP、D365、M365、EAP、Azure Fabric。本平台對內入口（第 2 層）以 EIP 為登入主軸；AI Agent 工作台、報價中心、文件審核中心皆內嵌於 EIP 應用區。
+        </p>
+      </div>
+      <div class="lg:col-span-5">
+        <div class="rounded-2xl bg-gradient-to-br from-amber-50 via-white to-teal-50 border border-amber-200 p-6">
+          <div class="text-xs font-semibold text-amber-700 mb-2">EIP 在平台的 6 大角色</div>
+          <ul class="space-y-2 text-sm text-slate-700">
+            <li class="flex items-start gap-2"><i data-lucide="key-round" class="w-4 h-4 mt-0.5 text-amber-600"></i><span><b>SSO 單一登入</b> — Azure AD / Entra ID 主控</span></li>
+            <li class="flex items-start gap-2"><i data-lucide="users" class="w-4 h-4 mt-0.5 text-amber-600"></i><span><b>組織同步</b> — BU、部門、角色、主管樹</span></li>
+            <li class="flex items-start gap-2"><i data-lucide="git-branch" class="w-4 h-4 mt-0.5 text-amber-600"></i><span><b>簽核流程</b> — 文件 / 報價 / 促銷 / ESG</span></li>
+            <li class="flex items-start gap-2"><i data-lucide="calendar" class="w-4 h-4 mt-0.5 text-amber-600"></i><span><b>行事曆與會議</b> — Outlook / Teams 整合</span></li>
+            <li class="flex items-start gap-2"><i data-lucide="bell" class="w-4 h-4 mt-0.5 text-amber-600"></i><span><b>訊息中心</b> — Teams / WeCom 跨域推播</span></li>
+            <li class="flex items-start gap-2"><i data-lucide="folder-cog" class="w-4 h-4 mt-0.5 text-amber-600"></i><span><b>應用入口</b> — 各內網應用統一入口</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- EIP 廠商選型矩陣 -->
+    <div class="rounded-2xl border border-slate-200 overflow-hidden">
+      <div class="p-5 bg-slate-900 text-white flex items-center justify-between">
+        <div>
+          <div class="text-xs text-amber-300 font-semibold tracking-wider">VENDOR SELECTION MATRIX · 廠商選型比較</div>
+          <h3 class="text-xl font-bold mt-1">EIP 平台選型 · 4 大方案比較</h3>
+        </div>
+        <span class="verify-tag verify-inferred">推論</span>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="bg-slate-100 text-slate-700 text-xs">
+              <th class="matrix-cell text-left">評估面向</th>
+              <th class="matrix-cell text-center">A. M365 + Power Platform <span class="block text-[10px] text-slate-500 font-normal">SharePoint Online + Power Automate + Viva</span></th>
+              <th class="matrix-cell text-center">B. 鼎新 EIP <span class="block text-[10px] text-slate-500 font-normal">Workflow + 自家生態 (建議搭配)</span></th>
+              <th class="matrix-cell text-center">C. 自建 + Azure AD <span class="block text-[10px] text-slate-500 font-normal">React/Next.js + 自有 Workflow Engine</span></th>
+              <th class="matrix-cell text-center">D. 第三方 SaaS <span class="block text-[10px] text-slate-500 font-normal">Salesforce Experience / OutSystems / Mendix</span></th>
+            </tr>
+          </thead>
+          <tbody class="text-slate-700">
+            <tr>
+              <td class="matrix-cell font-semibold bg-slate-50">與 D365/M365 整合</td>
+              <td class="matrix-cell text-center"><span class="check-good font-bold">★★★★★</span><div class="text-[10px] text-slate-500">原生整合</div></td>
+              <td class="matrix-cell text-center"><span class="check-mid font-bold">★★★</span><div class="text-[10px] text-slate-500">需中介 API</div></td>
+              <td class="matrix-cell text-center"><span class="check-mid font-bold">★★★★</span><div class="text-[10px] text-slate-500">透過 Graph API</div></td>
+              <td class="matrix-cell text-center"><span class="check-mid font-bold">★★★</span><div class="text-[10px] text-slate-500">需連接器</div></td>
+            </tr>
+            <tr class="bg-slate-50/40">
+              <td class="matrix-cell font-semibold bg-slate-50">與鼎新 ERP/MES 整合</td>
+              <td class="matrix-cell text-center"><span class="check-mid font-bold">★★★</span><div class="text-[10px] text-slate-500">透過 Power Connector</div></td>
+              <td class="matrix-cell text-center"><span class="check-good font-bold">★★★★★</span><div class="text-[10px] text-slate-500">同生態原生</div></td>
+              <td class="matrix-cell text-center"><span class="check-mid font-bold">★★★★</span><div class="text-[10px] text-slate-500">REST API 串接</div></td>
+              <td class="matrix-cell text-center"><span class="check-bad font-bold">★★</span><div class="text-[10px] text-slate-500">需額外開發</div></td>
+            </tr>
+            <tr>
+              <td class="matrix-cell font-semibold bg-slate-50">Multi-Agent 兼容性</td>
+              <td class="matrix-cell text-center"><span class="check-good font-bold">★★★★</span><div class="text-[10px] text-slate-500">Copilot Studio + Vertex AI</div></td>
+              <td class="matrix-cell text-center"><span class="check-mid font-bold">★★★</span><div class="text-[10px] text-slate-500">透過外掛 Webhook</div></td>
+              <td class="matrix-cell text-center"><span class="check-good font-bold">★★★★★</span><div class="text-[10px] text-slate-500">完全自訂</div></td>
+              <td class="matrix-cell text-center"><span class="check-mid font-bold">★★★</span><div class="text-[10px] text-slate-500">看廠商 AI 能力</div></td>
+            </tr>
+            <tr class="bg-slate-50/40">
+              <td class="matrix-cell font-semibold bg-slate-50">建置成本（相對）</td>
+              <td class="matrix-cell text-center"><span class="check-good">中</span><div class="text-[10px] text-slate-500">授權含於 M365 E3/E5</div></td>
+              <td class="matrix-cell text-center"><span class="check-good">中</span><div class="text-[10px] text-slate-500">已採購鼎新即可加購</div></td>
+              <td class="matrix-cell text-center"><span class="check-bad">高</span><div class="text-[10px] text-slate-500">人月密集</div></td>
+              <td class="matrix-cell text-center"><span class="check-bad">高</span><div class="text-[10px] text-slate-500">SaaS 訂閱 + 顧問</div></td>
+            </tr>
+            <tr>
+              <td class="matrix-cell font-semibold bg-slate-50">維運成本（年化）</td>
+              <td class="matrix-cell text-center"><span class="check-good">低</span></td>
+              <td class="matrix-cell text-center"><span class="check-good">低</span></td>
+              <td class="matrix-cell text-center"><span class="check-bad">高</span></td>
+              <td class="matrix-cell text-center"><span class="check-mid">中高</span></td>
+            </tr>
+            <tr class="bg-slate-50/40">
+              <td class="matrix-cell font-semibold bg-slate-50">跨境（陸 / 台 / 海外）</td>
+              <td class="matrix-cell text-center"><span class="check-mid">中</span><div class="text-[10px] text-slate-500">陸區受限</div></td>
+              <td class="matrix-cell text-center"><span class="check-good">高</span><div class="text-[10px] text-slate-500">兩岸都有部署</div></td>
+              <td class="matrix-cell text-center"><span class="check-good">高</span><div class="text-[10px] text-slate-500">可分區自主部署</div></td>
+              <td class="matrix-cell text-center"><span class="check-mid">中</span></td>
+            </tr>
+            <tr>
+              <td class="matrix-cell font-semibold bg-slate-50">自訂彈性</td>
+              <td class="matrix-cell text-center"><span class="check-mid">中</span><div class="text-[10px] text-slate-500">受 Power Platform 限制</div></td>
+              <td class="matrix-cell text-center"><span class="check-mid">中</span></td>
+              <td class="matrix-cell text-center"><span class="check-good">★★★★★</span></td>
+              <td class="matrix-cell text-center"><span class="check-good">★★★★</span></td>
+            </tr>
+            <tr class="bg-amber-50">
+              <td class="matrix-cell font-semibold">建議定位</td>
+              <td class="matrix-cell text-center text-xs"><b>對內 EIP 主體</b><br /><span class="text-slate-500">員工入口 / SSO / 簽核</span></td>
+              <td class="matrix-cell text-center text-xs"><b>製造端 EIP</b><br /><span class="text-slate-500">廠端、ERP/MES 簽核</span></td>
+              <td class="matrix-cell text-center text-xs"><b>不推薦獨立採用</b><br /><span class="text-slate-500">僅作 AI 前台延伸</span></td>
+              <td class="matrix-cell text-center text-xs"><b>不推薦</b><br /><span class="text-slate-500">與 M365 重疊</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="p-4 bg-slate-50 text-xs text-slate-600 border-t border-slate-200">
+        <span class="verify-tag verify-inferred">推論</span>
+        建議採 <b>A + B 雙 EIP 混合</b>：總部 / 銷售 / ESG / R&D 採 M365 + Power Platform；製造廠端 / 生產簽核 / MES 整合採鼎新 EIP；兩者透過 Azure AD / Entra ID 統一身份，並由本平台 API Gateway 提供應用入口。實際選型需經 IT 與 BU RFP 評估與 POC 驗證。
+      </div>
+    </div>
+
+    <!-- EIP 對接資料流 -->
+    <div class="grid lg:grid-cols-2 gap-6 mt-10">
+      <div class="rounded-2xl border border-slate-200 p-6 bg-gradient-to-br from-slate-50 to-white">
+        <h3 class="font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="key-round" class="w-5 h-5 text-amber-600"></i>EIP SSO 與身份同步流程</h3>
+        <ol class="text-sm text-slate-700 space-y-3">
+          <li class="flex gap-3"><span class="flex-shrink-0 w-6 h-6 rounded-full bg-amber-100 text-amber-700 text-xs flex items-center justify-center font-bold">1</span><span>員工從 EIP 入口點擊應用 → Azure AD / Entra 觸發 OAuth2 流程</span></li>
+          <li class="flex gap-3"><span class="flex-shrink-0 w-6 h-6 rounded-full bg-amber-100 text-amber-700 text-xs flex items-center justify-center font-bold">2</span><span>本平台接收 token → 從 Graph API 同步部門、角色、主管</span></li>
+          <li class="flex gap-3"><span class="flex-shrink-0 w-6 h-6 rounded-full bg-amber-100 text-amber-700 text-xs flex items-center justify-center font-bold">3</span><span>RBAC 引擎依 Azure AD 群組決定可見模組（BU 維護 / 報價 / 文件審核）</span></li>
+          <li class="flex gap-3"><span class="flex-shrink-0 w-6 h-6 rounded-full bg-amber-100 text-amber-700 text-xs flex items-center justify-center font-bold">4</span><span>離職 / 異動 → EIP 觸發 Webhook → 平台立即撤銷權限與 Audit Log</span></li>
+          <li class="flex gap-3"><span class="flex-shrink-0 w-6 h-6 rounded-full bg-amber-100 text-amber-700 text-xs flex items-center justify-center font-bold">5</span><span>陸區（Phase 3）→ 透過 WeCom 身份對應 → 跨境身份隔離</span></li>
+        </ol>
+      </div>
+      <div class="rounded-2xl border border-slate-200 p-6 bg-gradient-to-br from-teal-50 to-white">
+        <h3 class="font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="git-branch" class="w-5 h-5 text-teal-600"></i>EIP 工作流引擎接入點</h3>
+        <ul class="text-sm text-slate-700 space-y-2.5">
+          <li class="flex gap-2"><i data-lucide="file-check" class="w-4 h-4 mt-0.5 text-teal-600"></i><b>文件審核</b>：Spec / Test / Cert / NDA 多階主管 + RD 簽核</li>
+          <li class="flex gap-2"><i data-lucide="receipt" class="w-4 h-4 mt-0.5 text-teal-600"></i><b>報價簽核</b>：超毛利底線自動升級 → BU 主管 → 業務副總</li>
+          <li class="flex gap-2"><i data-lucide="package" class="w-4 h-4 mt-0.5 text-teal-600"></i><b>呆滯庫存促銷</b>：BU + 財務 + 倉儲三方簽核</li>
+          <li class="flex gap-2"><i data-lucide="leaf" class="w-4 h-4 mt-0.5 text-teal-600"></i><b>ESG 資料審核</b>：碳盤查、CBAM、客戶問卷</li>
+          <li class="flex gap-2"><i data-lucide="users-round" class="w-4 h-4 mt-0.5 text-teal-600"></i><b>Lead 分派</b>：依產業 / 國家 / 客戶等級自動指派業務</li>
+          <li class="flex gap-2"><i data-lucide="bot" class="w-4 h-4 mt-0.5 text-teal-600"></i><b>Agent 任務簽核</b>：Multi-Agent 自動執行重要動作前的 Human-in-the-loop</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= Multi-Agent Orchestration ============= -->
+<section id="agents" class="py-20 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 text-white relative overflow-hidden">
+  <div class="absolute inset-0 opacity-[0.05]" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 36px 36px;"></div>
+  <div class="max-w-7xl mx-auto px-6 relative">
+    <div class="text-center mb-12">
+      <div class="pill" style="background:rgba(168,85,247,.18); color:#d8b4fe; border:1px solid rgba(168,85,247,.4);">MULTI-AGENT ORCHESTRATION · v2.0 核心強化</div>
+      <h2 class="text-3xl md:text-4xl font-bold font-display mt-3">智能體協同編排架構</h2>
+      <p class="text-slate-300 mt-3 max-w-3xl mx-auto">由「Orchestrator 編排者」統籌 9 個專業 Agent，依任務複雜度派工、跨系統協作、Human-in-the-loop 把關，並維持完整 Audit Trail。</p>
+    </div>
+
+    <!-- Orchestrator + 9 Agents 視覺化 -->
+    <div class="relative">
+      <!-- Orchestrator -->
+      <div class="flex justify-center mb-8">
+        <div class="agent-node rounded-2xl px-7 py-5 max-w-md text-center" style="border-color:#fbbf24; box-shadow:0 0 30px rgba(251,191,36,0.3);">
+          <div class="flex items-center justify-center gap-3 mb-2">
+            <i data-lucide="brain-circuit" class="w-7 h-7 text-amber-300"></i>
+            <span class="text-xs font-bold tracking-wider text-amber-300">ORCHESTRATOR</span>
+          </div>
+          <h3 class="text-xl font-bold">編排者 Agent</h3>
+          <p class="text-xs text-slate-300 mt-1">理解意圖 · 拆解任務 · 派工 · 整合結果 · 人工關卡</p>
+        </div>
+      </div>
+
+      <!-- Agents Grid -->
+      <div class="grid md:grid-cols-3 lg:grid-cols-3 gap-4">
+        <div class="agent-node rounded-xl p-5">
+          <div class="flex items-center gap-2 mb-2"><i data-lucide="cpu" class="w-5 h-5 text-teal-300"></i><span class="text-xs font-bold tracking-wider text-teal-300">TECHNICAL</span></div>
+          <h4 class="font-bold">技術 Agent</h4>
+          <p class="text-xs text-slate-300 mt-1.5">規格問答、認證查詢、測試報告引用、替代料工程確認</p>
+          <div class="mt-2 flex flex-wrap gap-1"><span class="text-[10px] px-1.5 py-0.5 rounded bg-teal-500/20 text-teal-200">RAG</span><span class="text-[10px] px-1.5 py-0.5 rounded bg-teal-500/20 text-teal-200">SharePoint</span></div>
+        </div>
+        <div class="agent-node rounded-xl p-5">
+          <div class="flex items-center gap-2 mb-2"><i data-lucide="users" class="w-5 h-5 text-blue-300"></i><span class="text-xs font-bold tracking-wider text-blue-300">SALES</span></div>
+          <h4 class="font-bold">銷售 Agent</h4>
+          <p class="text-xs text-slate-300 mt-1.5">Lead 分類、產品推薦、報價建議、下一步行動推薦</p>
+          <div class="mt-2 flex flex-wrap gap-1"><span class="text-[10px] px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-200">D365</span><span class="text-[10px] px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-200">CRM</span></div>
+        </div>
+        <div class="agent-node rounded-xl p-5">
+          <div class="flex items-center gap-2 mb-2"><i data-lucide="leaf" class="w-5 h-5 text-emerald-300"></i><span class="text-xs font-bold tracking-wider text-emerald-300">ESG</span></div>
+          <h4 class="font-bold">ESG Agent</h4>
+          <p class="text-xs text-slate-300 mt-1.5">CBAM 問答、ISO 14064/14067、sCMS 方案建議、客戶 ESG 問卷</p>
+          <div class="mt-2 flex flex-wrap gap-1"><span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-200">EAP</span><span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-200">CBAM</span></div>
+        </div>
+        <div class="agent-node rounded-xl p-5">
+          <div class="flex items-center gap-2 mb-2"><i data-lucide="image" class="w-5 h-5 text-purple-300"></i><span class="text-xs font-bold tracking-wider text-purple-300">IMAGE SEARCH</span></div>
+          <h4 class="font-bold">圖搜圖 AI</h4>
+          <p class="text-xs text-slate-300 mt-1.5">客戶上傳圖片辨識外型、Pin 數、類型、推薦相似料</p>
+          <div class="mt-2 flex flex-wrap gap-1"><span class="text-[10px] px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-200">Vector DB</span></div>
+        </div>
+        <div class="agent-node rounded-xl p-5">
+          <div class="flex items-center gap-2 mb-2"><i data-lucide="git-compare" class="w-5 h-5 text-cyan-300"></i><span class="text-xs font-bold tracking-wider text-cyan-300">CROSS-REF</span></div>
+          <h4 class="font-bold">替代料 Agent</h4>
+          <p class="text-xs text-slate-300 mt-1.5">規格比對、相似料 / 替代料推薦、競品對照、風險分級</p>
+          <div class="mt-2 flex flex-wrap gap-1"><span class="text-[10px] px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-200">Cross-ref DB</span></div>
+        </div>
+        <div class="agent-node rounded-xl p-5">
+          <div class="flex items-center gap-2 mb-2"><i data-lucide="calculator" class="w-5 h-5 text-rose-300"></i><span class="text-xs font-bold tracking-wider text-rose-300">QUOTE</span></div>
+          <h4 class="font-bold">報價 Agent</h4>
+          <p class="text-xs text-slate-300 mt-1.5">需求解析、價格建議、毛利檢查、異常偵測、人工審核導流</p>
+          <div class="mt-2 flex flex-wrap gap-1"><span class="text-[10px] px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-200">ERP</span><span class="text-[10px] px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-200">規則</span></div>
+        </div>
+
+        <!-- 新增 3 個 Agent -->
+        <div class="agent-node rounded-xl p-5" style="border-color:#fbbf24;">
+          <div class="flex items-center gap-2 mb-2"><i data-lucide="megaphone" class="w-5 h-5 text-amber-300"></i><span class="text-xs font-bold tracking-wider text-amber-300">MARKETING (NEW)</span></div>
+          <h4 class="font-bold">行銷自動化 Agent</h4>
+          <p class="text-xs text-slate-300 mt-1.5">內容生成、多語化、SEO、社群貼文、eDM 個人化、Lead 培育序列</p>
+          <div class="mt-2 flex flex-wrap gap-1"><span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-200">v2.0 NEW</span></div>
+        </div>
+        <div class="agent-node rounded-xl p-5" style="border-color:#fbbf24;">
+          <div class="flex items-center gap-2 mb-2"><i data-lucide="palette" class="w-5 h-5 text-amber-300"></i><span class="text-xs font-bold tracking-wider text-amber-300">BRAND VOICE (NEW)</span></div>
+          <h4 class="font-bold">品牌語調 Agent</h4>
+          <p class="text-xs text-slate-300 mt-1.5">品牌一致性審查、跨品牌（CviLux/Opro9/sCMS/EAP）語氣校準、合規詞彙</p>
+          <div class="mt-2 flex flex-wrap gap-1"><span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-200">v2.0 NEW</span></div>
+        </div>
+        <div class="agent-node rounded-xl p-5" style="border-color:#fbbf24;">
+          <div class="flex items-center gap-2 mb-2"><i data-lucide="activity" class="w-5 h-5 text-amber-300"></i><span class="text-xs font-bold tracking-wider text-amber-300">OPS (NEW)</span></div>
+          <h4 class="font-bold">營運維運 Agent</h4>
+          <p class="text-xs text-slate-300 mt-1.5">監測 API / AI / 工作流異常、自動建立修復工單、預測維護視窗</p>
+          <div class="mt-2 flex flex-wrap gap-1"><span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-200">v2.0 NEW</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 任務派工流程 -->
+    <div class="mt-16 grid lg:grid-cols-2 gap-6">
+      <div class="glass rounded-2xl p-6">
+        <div class="text-xs font-semibold tracking-wider text-amber-300 mb-2">TASK ROUTING FLOW</div>
+        <h3 class="text-xl font-bold mb-5">編排者任務派工流程</h3>
+        <ol class="space-y-4 text-sm">
+          <li class="flex gap-4">
+            <div class="flex flex-col items-center">
+              <span class="w-7 h-7 rounded-full bg-amber-400 text-slate-900 text-xs flex items-center justify-center font-bold">1</span>
+              <div class="flex-1 w-px bg-amber-400/30 my-1"></div>
+            </div>
+            <div class="pb-3">
+              <div class="font-semibold text-amber-200">意圖辨識 Intent Detection</div>
+              <div class="text-xs text-slate-300 mt-1">Orchestrator 解析使用者輸入（自然語言、圖片、表單）；判定屬於技術 / 銷售 / ESG / 行銷 / 報價 / 維運 等任務類別。</div>
+            </div>
+          </li>
+          <li class="flex gap-4">
+            <div class="flex flex-col items-center">
+              <span class="w-7 h-7 rounded-full bg-amber-400 text-slate-900 text-xs flex items-center justify-center font-bold">2</span>
+              <div class="flex-1 w-px bg-amber-400/30 my-1"></div>
+            </div>
+            <div class="pb-3">
+              <div class="font-semibold text-amber-200">任務拆解 Decomposition</div>
+              <div class="text-xs text-slate-300 mt-1">複雜任務拆為子步驟（如：客戶上傳圖片 + 詢價 + 替代料 → 圖搜圖 + 報價 + Cross-ref 三 Agent 平行執行）。</div>
+            </div>
+          </li>
+          <li class="flex gap-4">
+            <div class="flex flex-col items-center">
+              <span class="w-7 h-7 rounded-full bg-amber-400 text-slate-900 text-xs flex items-center justify-center font-bold">3</span>
+              <div class="flex-1 w-px bg-amber-400/30 my-1"></div>
+            </div>
+            <div class="pb-3">
+              <div class="font-semibold text-amber-200">並行 / 串行派工</div>
+              <div class="text-xs text-slate-300 mt-1">獨立任務並行；有依賴關係（如報價需要先取得替代料規格）改串行。</div>
+            </div>
+          </li>
+          <li class="flex gap-4">
+            <div class="flex flex-col items-center">
+              <span class="w-7 h-7 rounded-full bg-amber-400 text-slate-900 text-xs flex items-center justify-center font-bold">4</span>
+              <div class="flex-1 w-px bg-amber-400/30 my-1"></div>
+            </div>
+            <div class="pb-3">
+              <div class="font-semibold text-amber-200">Human-in-the-loop 關卡</div>
+              <div class="text-xs text-slate-300 mt-1">觸發以下情境必停下：超毛利底線報價、對外發布內容、修改 ERP 資料、跨境資料傳輸、刪除動作。</div>
+            </div>
+          </li>
+          <li class="flex gap-4">
+            <div class="flex flex-col items-center">
+              <span class="w-7 h-7 rounded-full bg-amber-400 text-slate-900 text-xs flex items-center justify-center font-bold">5</span>
+            </div>
+            <div>
+              <div class="font-semibold text-amber-200">結果整合 + Audit Log</div>
+              <div class="text-xs text-slate-300 mt-1">Orchestrator 彙整 Agent 回應 → 統一格式 → 寫入 Audit Log（含 prompt、source、決策、最終回覆、簽核者）。</div>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <div class="glass rounded-2xl p-6">
+        <div class="text-xs font-semibold tracking-wider text-teal-300 mb-2">GOVERNANCE & GUARDRAILS</div>
+        <h3 class="text-xl font-bold mb-5">Agent 治理與護欄</h3>
+        <div class="space-y-4 text-sm">
+          <div class="flex gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
+            <i data-lucide="shield-alert" class="w-5 h-5 text-rose-300 flex-shrink-0 mt-0.5"></i>
+            <div>
+              <div class="font-semibold">Hallucination 防範</div>
+              <div class="text-xs text-slate-300 mt-1">所有事實性回答必引用 SharePoint / ERP / D365 來源 ID；無來源 → 回覆「無法驗證」。</div>
+            </div>
+          </div>
+          <div class="flex gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
+            <i data-lucide="lock" class="w-5 h-5 text-amber-300 flex-shrink-0 mt-0.5"></i>
+            <div>
+              <div class="font-semibold">權限分級執行</div>
+              <div class="text-xs text-slate-300 mt-1">Agent 透過呼叫者的 Azure AD token 取得資料；不得越權；NDA 文件需二次驗證。</div>
+            </div>
+          </div>
+          <div class="flex gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
+            <i data-lucide="ban" class="w-5 h-5 text-rose-300 flex-shrink-0 mt-0.5"></i>
+            <div>
+              <div class="font-semibold">禁止動作清單</div>
+              <div class="text-xs text-slate-300 mt-1">永遠禁止：刪除 ERP/CRM 資料、自動發送外部 eDM、修改員工權限、修改安全規則、跨境輸出敏感資料。</div>
+            </div>
+          </div>
+          <div class="flex gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
+            <i data-lucide="eye" class="w-5 h-5 text-teal-300 flex-shrink-0 mt-0.5"></i>
+            <div>
+              <div class="font-semibold">可觀測性 Observability</div>
+              <div class="text-xs text-slate-300 mt-1">每次 Agent 呼叫記錄 latency、token、cost、信心分數、引用源；異常自動通報 Ops Agent。</div>
+            </div>
+          </div>
+          <div class="flex gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
+            <i data-lucide="refresh-cw" class="w-5 h-5 text-emerald-300 flex-shrink-0 mt-0.5"></i>
+            <div>
+              <div class="font-semibold">持續優化迴圈</div>
+              <div class="text-xs text-slate-300 mt-1">使用者 thumbs up/down → 建立 RLHF 樣本 → 月度評估 Agent 準確率與改善 prompt。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="text-center text-xs text-slate-400 mt-10 max-w-3xl mx-auto">
+      <span class="verify-tag verify-inferred">推論</span>
+      Multi-Agent 協同設計引用 LangGraph / OpenAI Agents SDK / Microsoft Copilot Studio Multi-Agent / Google Vertex AI Agent Builder 之公開觀察模式。實作技術選型須由 IT 評估後決定。
+    </p>
+  </div>
+</section>
+
+<!-- ============= 品牌與自動行銷引擎 ============= -->
+<section id="marketing" class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-12">
+      <div class="pill pill-rose mb-3">BRAND & AUTO-MARKETING ENGINE</div>
+      <h2 class="text-3xl md:text-4xl font-bold font-display text-slate-900">品牌統一 × 自動化行銷流水線</h2>
+      <p class="text-slate-600 mt-2 max-w-3xl mx-auto">由「行銷自動化 Agent」+「品牌語調 Agent」+「銷售 Agent」三方協作，從內容生成到 Lead 培育全流程自動化，並在發布前由人工審核。</p>
+    </div>
+
+    <!-- 自動行銷流水線 -->
+    <div class="rounded-2xl border border-slate-200 overflow-hidden">
+      <div class="bg-gradient-to-r from-rose-50 to-amber-50 p-5 border-b border-slate-200">
+        <h3 class="font-bold text-slate-900 flex items-center gap-2"><i data-lucide="workflow" class="w-5 h-5 text-rose-600"></i>7 步驟自動化行銷流水線</h3>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 divide-x divide-slate-200">
+        <div class="p-5">
+          <div class="text-2xl font-black text-rose-500 font-display">01</div>
+          <div class="font-semibold text-slate-900 text-sm mt-1">主題擷取</div>
+          <div class="text-xs text-slate-600 mt-1.5">從 ESG 成果、產品上市、展會、客戶案例、Roadmap 萃取主題</div>
+          <span class="pill pill-rose mt-3 text-[10px]">Marketing Agent</span>
+        </div>
+        <div class="p-5">
+          <div class="text-2xl font-black text-rose-500 font-display">02</div>
+          <div class="font-semibold text-slate-900 text-sm mt-1">內容生成</div>
+          <div class="text-xs text-slate-600 mt-1.5">eDM、LinkedIn 貼文、FB 短文、YT 腳本、SEO 部落格、白皮書摘要</div>
+          <span class="pill pill-rose mt-3 text-[10px]">Marketing Agent</span>
+        </div>
+        <div class="p-5">
+          <div class="text-2xl font-black text-rose-500 font-display">03</div>
+          <div class="font-semibold text-slate-900 text-sm mt-1">品牌審查</div>
+          <div class="text-xs text-slate-600 mt-1.5">語調、品牌詞彙、合規敘述、不誇大效益、CBAM/ESG 用詞精準</div>
+          <span class="pill pill-rose mt-3 text-[10px]">Brand Voice Agent</span>
+        </div>
+        <div class="p-5">
+          <div class="text-2xl font-black text-rose-500 font-display">04</div>
+          <div class="font-semibold text-slate-900 text-sm mt-1">多語化</div>
+          <div class="text-xs text-slate-600 mt-1.5">中 / 英 / 日 / 越 / 泰 / 德 — 在地化非逐字翻譯</div>
+          <span class="pill pill-rose mt-3 text-[10px]">Marketing Agent</span>
+        </div>
+        <div class="p-5">
+          <div class="text-2xl font-black text-rose-500 font-display">05</div>
+          <div class="font-semibold text-slate-900 text-sm mt-1">人工審核</div>
+          <div class="text-xs text-slate-600 mt-1.5">行銷主管 / BU / 法務（如需）三方簽核 → EIP 工作流</div>
+          <span class="pill pill-navy mt-3 text-[10px]">Human</span>
+        </div>
+        <div class="p-5">
+          <div class="text-2xl font-black text-rose-500 font-display">06</div>
+          <div class="font-semibold text-slate-900 text-sm mt-1">多通路發布</div>
+          <div class="text-xs text-slate-600 mt-1.5">eDM (Outlook + Klaviyo) / LinkedIn / FB / YT / 微信 / 對外網站</div>
+          <span class="pill pill-rose mt-3 text-[10px]">Marketing Agent</span>
+        </div>
+        <div class="p-5">
+          <div class="text-2xl font-black text-rose-500 font-display">07</div>
+          <div class="font-semibold text-slate-900 text-sm mt-1">Lead 培育 + 評分</div>
+          <div class="text-xs text-slate-600 mt-1.5">開信 / 點擊追蹤 → 評分 → 觸發後續序列 → 寫入 D365</div>
+          <span class="pill pill-rose mt-3 text-[10px]">Marketing + Sales Agent</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 自動行銷產出對應 -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
+      <div class="rounded-2xl border border-slate-200 p-6 card-hover">
+        <i data-lucide="mail" class="w-7 h-7 text-rose-600 mb-3"></i>
+        <h4 class="font-bold">eDM 自動序列</h4>
+        <p class="text-sm text-slate-600 mt-1">新產品上市、ESG 成果、CBAM 解決、sCMS Demo、EAP 試用、CviMall 促銷、經銷商庫存媒合</p>
+      </div>
+      <div class="rounded-2xl border border-slate-200 p-6 card-hover">
+        <i data-lucide="linkedin" class="w-7 h-7 text-blue-600 mb-3"></i>
+        <h4 class="font-bold">LinkedIn / FB / YT 同步</h4>
+        <p class="text-sm text-slate-600 mt-1">B2B 主走 LinkedIn、品牌走 FB、案例走 YT；Opro9 / CviMall 主走 FB / IG</p>
+      </div>
+      <div class="rounded-2xl border border-slate-200 p-6 card-hover">
+        <i data-lucide="search" class="w-7 h-7 text-amber-600 mb-3"></i>
+        <h4 class="font-bold">SEO 內容工坊</h4>
+        <p class="text-sm text-slate-600 mt-1">部落格主題規劃、關鍵字群集、內鏈、Schema、技術 SEO 監測</p>
+      </div>
+      <div class="rounded-2xl border border-slate-200 p-6 card-hover">
+        <i data-lucide="message-circle" class="w-7 h-7 text-emerald-600 mb-3"></i>
+        <h4 class="font-bold">微信 / 企業微信 (Phase 3)</h4>
+        <p class="text-sm text-slate-600 mt-1">陸區客戶與經銷商溝通、活動推播、Lead 回寫</p>
+      </div>
+      <div class="rounded-2xl border border-slate-200 p-6 card-hover">
+        <i data-lucide="gauge" class="w-7 h-7 text-purple-600 mb-3"></i>
+        <h4 class="font-bold">Lead 評分模型</h4>
+        <p class="text-sm text-slate-600 mt-1">行為分（開信、點擊、下載）+ 公司分（產業、規模、地區）→ A/B/C/D 等級</p>
+      </div>
+      <div class="rounded-2xl border border-slate-200 p-6 card-hover">
+        <i data-lucide="bar-chart-3" class="w-7 h-7 text-teal-600 mb-3"></i>
+        <h4 class="font-bold">行銷儀表板</h4>
+        <p class="text-sm text-slate-600 mt-1">CTR / OR / CR / CAC / 各品牌曝光、Pipeline 影響、ROI</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= 對內協同管理 ============= -->
+<section id="internal" class="py-20 bg-slate-50">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-12">
+      <div class="pill pill-teal mb-3">INTERNAL COLLABORATION · 對內協同</div>
+      <h2 class="text-3xl md:text-4xl font-bold font-display text-slate-900">內網作業中樞 · 整合 EIP</h2>
+      <p class="text-slate-600 mt-2 max-w-3xl mx-auto">員工從 EIP 入口進入，所有內網應用統一登入；AI Agent 工作台、文件審核、報價中心、ESG 管理皆內嵌於 EIP。</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="rounded-2xl bg-white border border-slate-200 p-6 card-hover">
+        <i data-lucide="bot" class="w-8 h-8 text-purple-600 mb-3"></i>
+        <h3 class="font-bold text-slate-900">2.1 AI Agent 工作台</h3>
+        <p class="text-sm text-slate-600 mt-1.5">員工統一介面與所有 Agent 對話：技術、銷售、ESG、報價建議、ERP 摘要、OEM 需求分析。</p>
+      </div>
+      <div class="rounded-2xl bg-white border border-slate-200 p-6 card-hover">
+        <i data-lucide="folder-edit" class="w-8 h-8 text-blue-600 mb-3"></i>
+        <h3 class="font-bold text-slate-900">2.2 BU 內容維護</h3>
+        <p class="text-sm text-slate-600 mt-1.5">產品資料、技術文件上架、Cross-reference 建立、圖片資料、多語內容。</p>
+      </div>
+      <div class="rounded-2xl bg-white border border-slate-200 p-6 card-hover">
+        <i data-lucide="clipboard-check" class="w-8 h-8 text-emerald-600 mb-3"></i>
+        <h3 class="font-bold text-slate-900">2.3 文件審核中心</h3>
+        <p class="text-sm text-slate-600 mt-1.5">Spec / Test / Cert / NDA / SharePoint 版本比對；簽核走 EIP 工作流。</p>
+      </div>
+      <div class="rounded-2xl bg-white border border-slate-200 p-6 card-hover">
+        <i data-lucide="receipt-text" class="w-8 h-8 text-amber-600 mb-3"></i>
+        <h3 class="font-bold text-slate-900">2.4 報價管理中心</h3>
+        <p class="text-sm text-slate-600 mt-1.5">客戶等級定價、AI 建議價、毛利底線、異常預警、版本控管、主管簽核。</p>
+      </div>
+      <div class="rounded-2xl bg-white border border-slate-200 p-6 card-hover">
+        <i data-lucide="package" class="w-8 h-8 text-rose-600 mb-3"></i>
+        <h3 class="font-bold text-slate-900">2.5 ERP 庫存促銷</h3>
+        <p class="text-sm text-slate-600 mt-1.5">即時庫存、呆滯庫存設定、促銷品審核、經銷商共享、仲介費率、回寫 ERP / 財務。</p>
+      </div>
+      <div class="rounded-2xl bg-white border border-slate-200 p-6 card-hover">
+        <i data-lucide="megaphone" class="w-8 h-8 text-orange-600 mb-3"></i>
+        <h3 class="font-bold text-slate-900">2.6 行銷管理</h3>
+        <p class="text-sm text-slate-600 mt-1.5">eDM 活動、社群同步、LinkedIn/FB/YT、ESG 推播、Lead 培育、開信點擊追蹤。</p>
+      </div>
+      <div class="rounded-2xl bg-white border border-slate-200 p-6 card-hover">
+        <i data-lucide="leaf" class="w-8 h-8 text-green-700 mb-3"></i>
+        <h3 class="font-bold text-slate-900">2.7 ESG 管理</h3>
+        <p class="text-sm text-slate-600 mt-1.5">sCMS 數據、EAP 報告、ISO 14064/14067、CBAM、揭露資料、客戶 ESG 問卷。</p>
+      </div>
+      <div class="rounded-2xl bg-white border border-slate-200 p-6 card-hover">
+        <i data-lucide="graduation-cap" class="w-8 h-8 text-indigo-600 mb-3"></i>
+        <h3 class="font-bold text-slate-900">2.8 內部教育訓練</h3>
+        <p class="text-sm text-slate-600 mt-1.5">員工課程、業務訓練、ESG 合規、資安、線上測驗、證書管理。</p>
+      </div>
+      <div class="rounded-2xl bg-white border border-slate-200 p-6 card-hover">
+        <i data-lucide="activity" class="w-8 h-8 text-slate-700 mb-3"></i>
+        <h3 class="font-bold text-slate-900">2.9 系統監控</h3>
+        <p class="text-sm text-slate-600 mt-1.5">Error / API / AI / Audit Log + 異常預警 + AI 除錯建議（由 Ops Agent 自動處理）。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= 既有系統角色矩陣 ============= -->
+<section class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-10">
+      <div class="pill pill-navy mb-3">EXISTING SYSTEMS · 既有系統角色矩陣</div>
+      <h2 class="text-3xl md:text-4xl font-bold font-display text-slate-900">8 大既有系統 · 主責不變</h2>
+      <p class="text-slate-600 mt-2">本平台僅讀取、導流、寫入必要資料；不取代、不重建、不重複維護。</p>
+    </div>
+
+    <div class="rounded-2xl border border-slate-200 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead class="bg-slate-100 text-slate-700 text-xs">
+            <tr>
+              <th class="matrix-cell text-left">系統</th>
+              <th class="matrix-cell text-left">原系統主責</th>
+              <th class="matrix-cell text-left">本平台整合角色</th>
+              <th class="matrix-cell text-center">EIP 接點</th>
+              <th class="matrix-cell text-center">Phase</th>
+            </tr>
+          </thead>
+          <tbody class="text-slate-700">
+            <tr><td class="matrix-cell font-semibold">鼎新 ERP / WF AIGP</td><td class="matrix-cell">訂單、成本、庫存、生產</td><td class="matrix-cell">讀取成本、庫存、呆滯庫存；正式交易回 ERP</td><td class="matrix-cell text-center"><i data-lucide="check" class="w-4 h-4 inline text-emerald-600"></i></td><td class="matrix-cell text-center">P1</td></tr>
+            <tr class="bg-slate-50/40"><td class="matrix-cell font-semibold">鼎新 MES / CMS</td><td class="matrix-cell">生產進度、製程、產量</td><td class="matrix-cell">顯示必要摘要，不重做製造流程</td><td class="matrix-cell text-center"><i data-lucide="check" class="w-4 h-4 inline text-emerald-600"></i></td><td class="matrix-cell text-center">P1</td></tr>
+            <tr><td class="matrix-cell font-semibold">M365 SharePoint</td><td class="matrix-cell">文件庫與版本控管</td><td class="matrix-cell">作為 Spec / Test / Cert / ESG 文件來源</td><td class="matrix-cell text-center"><i data-lucide="check" class="w-4 h-4 inline text-emerald-600"></i></td><td class="matrix-cell text-center">P1</td></tr>
+            <tr class="bg-slate-50/40"><td class="matrix-cell font-semibold">M365 Teams</td><td class="matrix-cell">協作通知</td><td class="matrix-cell">接收審核提醒、Error Alert</td><td class="matrix-cell text-center"><i data-lucide="check" class="w-4 h-4 inline text-emerald-600"></i></td><td class="matrix-cell text-center">P1</td></tr>
+            <tr><td class="matrix-cell font-semibold">M365 Outlook</td><td class="matrix-cell">郵件通知</td><td class="matrix-cell">支援 eDM 與客戶通知</td><td class="matrix-cell text-center"><i data-lucide="check" class="w-4 h-4 inline text-emerald-600"></i></td><td class="matrix-cell text-center">P1</td></tr>
+            <tr class="bg-slate-50/40"><td class="matrix-cell font-semibold">D365 CRM</td><td class="matrix-cell">Lead、商機、報價追蹤</td><td class="matrix-cell">接收網站 Lead 與商機資料</td><td class="matrix-cell text-center"><i data-lucide="check" class="w-4 h-4 inline text-emerald-600"></i></td><td class="matrix-cell text-center">P1</td></tr>
+            <tr><td class="matrix-cell font-semibold">Azure Fabric Data Lake</td><td class="matrix-cell">集團資料湖與分析</td><td class="matrix-cell">作為 AI 與管理報表資料來源</td><td class="matrix-cell text-center"><i data-lucide="x" class="w-4 h-4 inline text-slate-400"></i></td><td class="matrix-cell text-center">P1-2</td></tr>
+            <tr class="bg-slate-50/40"><td class="matrix-cell font-semibold">Google Vertex AI / Gemini</td><td class="matrix-cell">AI 推理能力</td><td class="matrix-cell">作為 AI Agent 能力層，非交易主系統</td><td class="matrix-cell text-center"><i data-lucide="x" class="w-4 h-4 inline text-slate-400"></i></td><td class="matrix-cell text-center">P1-2</td></tr>
+            <tr><td class="matrix-cell font-semibold">EAP ESG AI Platform</td><td class="matrix-cell">ESG SaaS 服務</td><td class="matrix-cell">主網站導流、試用申請與登入入口</td><td class="matrix-cell text-center"><i data-lucide="check" class="w-4 h-4 inline text-emerald-600"></i></td><td class="matrix-cell text-center">P2</td></tr>
+            <tr class="bg-slate-50/40"><td class="matrix-cell font-semibold">企業微信 / 微信</td><td class="matrix-cell">大陸客戶與經銷商協作</td><td class="matrix-cell">Phase 3 整合，保留接口</td><td class="matrix-cell text-center"><i data-lucide="check" class="w-4 h-4 inline text-emerald-600"></i></td><td class="matrix-cell text-center">P3</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= 資料與安全層 ============= -->
+<section class="py-20 bg-slate-50">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid lg:grid-cols-2 gap-10">
+      <div>
+        <div class="pill pill-emerald mb-3">DATA LAYER · 資料層</div>
+        <h2 class="text-3xl font-bold font-display text-slate-900 mb-3">10 個平台資料庫</h2>
+        <p class="text-slate-600 mb-5">儲存索引、暫存、向量、Log 與審核資料；不取代 ERP / CRM / SharePoint / EAP 主資料。</p>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="rounded-lg bg-white border border-slate-200 p-3"><div class="text-xs text-emerald-700 font-semibold">7.1 產品索引</div><div class="text-xs text-slate-500 mt-1">搜尋與展示</div></div>
+          <div class="rounded-lg bg-white border border-slate-200 p-3"><div class="text-xs text-emerald-700 font-semibold">7.2 AI 向量</div><div class="text-xs text-slate-500 mt-1">RAG 嵌入</div></div>
+          <div class="rounded-lg bg-white border border-slate-200 p-3"><div class="text-xs text-emerald-700 font-semibold">7.3 報價規則</div><div class="text-xs text-slate-500 mt-1">客戶等級、毛利</div></div>
+          <div class="rounded-lg bg-white border border-slate-200 p-3"><div class="text-xs text-emerald-700 font-semibold">7.4 Lead 暫存</div><div class="text-xs text-slate-500 mt-1">同步 D365</div></div>
+          <div class="rounded-lg bg-white border border-slate-200 p-3"><div class="text-xs text-emerald-700 font-semibold">7.5 文件索引</div><div class="text-xs text-slate-500 mt-1">SharePoint 索引</div></div>
+          <div class="rounded-lg bg-white border border-slate-200 p-3"><div class="text-xs text-emerald-700 font-semibold">7.6 Cross-ref</div><div class="text-xs text-slate-500 mt-1">替代料、競品</div></div>
+          <div class="rounded-lg bg-white border border-slate-200 p-3"><div class="text-xs text-emerald-700 font-semibold">7.7 圖搜圖</div><div class="text-xs text-slate-500 mt-1">特徵向量</div></div>
+          <div class="rounded-lg bg-white border border-slate-200 p-3"><div class="text-xs text-emerald-700 font-semibold">7.8 eDM 行銷</div><div class="text-xs text-slate-500 mt-1">活動 / 開信 / 點擊</div></div>
+          <div class="rounded-lg bg-white border border-slate-200 p-3"><div class="text-xs text-emerald-700 font-semibold">7.9 教育訓練</div><div class="text-xs text-slate-500 mt-1">課程 / 證書</div></div>
+          <div class="rounded-lg bg-white border border-slate-200 p-3"><div class="text-xs text-emerald-700 font-semibold">7.10 Log/Audit</div><div class="text-xs text-slate-500 mt-1">稽核紀錄</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="pill pill-rose mb-3">SECURITY · 安全與合規</div>
+        <h2 class="text-3xl font-bold font-display text-slate-900 mb-3">資安、合規與跨境治理</h2>
+        <p class="text-slate-600 mb-5">配合 ISO 27001、個資法、GDPR、PIPL 與 CBAM 內外稽要求。</p>
+        <div class="space-y-3">
+          <div class="flex gap-3 p-4 rounded-xl bg-white border border-slate-200">
+            <i data-lucide="shield" class="w-5 h-5 text-rose-600 flex-shrink-0 mt-0.5"></i>
+            <div>
+              <div class="font-semibold text-sm">基礎防護</div>
+              <div class="text-xs text-slate-500 mt-1">HTTPS、WAF、DDoS 防護、Rate Limit、Bot 偵測</div>
+            </div>
+          </div>
+          <div class="flex gap-3 p-4 rounded-xl bg-white border border-slate-200">
+            <i data-lucide="key" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+            <div>
+              <div class="font-semibold text-sm">身份與權限</div>
+              <div class="text-xs text-slate-500 mt-1">Azure AD / Entra ID + MFA、RBAC、外部會員、最小權限原則</div>
+            </div>
+          </div>
+          <div class="flex gap-3 p-4 rounded-xl bg-white border border-slate-200">
+            <i data-lucide="file-lock" class="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5"></i>
+            <div>
+              <div class="font-semibold text-sm">NDA 與資料遮罩</div>
+              <div class="text-xs text-slate-500 mt-1">敏感文件水印、欄位遮罩（成本、毛利、客戶名）、AI prompt 過濾</div>
+            </div>
+          </div>
+          <div class="flex gap-3 p-4 rounded-xl bg-white border border-slate-200">
+            <i data-lucide="globe" class="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5"></i>
+            <div>
+              <div class="font-semibold text-sm">跨境資料控管</div>
+              <div class="text-xs text-slate-500 mt-1">陸 / 台 / 海外資料分區；陸區 Phase 3 走獨立 WeCom 與本地化部署，符合 PIPL</div>
+            </div>
+          </div>
+          <div class="flex gap-3 p-4 rounded-xl bg-white border border-slate-200">
+            <i data-lucide="clipboard-list" class="w-5 h-5 text-purple-600 flex-shrink-0 mt-0.5"></i>
+            <div>
+              <div class="font-semibold text-sm">稽核與留存</div>
+              <div class="text-xs text-slate-500 mt-1">Audit Log 保留 7 年、AI 回答 Log 保留 3 年、定期內外稽報表</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= Roadmap ============= -->
+<section id="roadmap" class="py-20 gradient-section-dark text-white">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-12">
+      <div class="pill" style="background:rgba(20,184,166,.18); color:#5eead4; border:1px solid rgba(20,184,166,.4);">DEVELOPMENT ROADMAP · 分期開發</div>
+      <h2 class="text-3xl md:text-4xl font-bold font-display">三階段交付規劃</h2>
+      <p class="text-slate-300 mt-2">Phase 1 接單與轉換 · Phase 2 營運擴展 · Phase 3 大陸市場整合</p>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-6">
+      <div class="glass rounded-2xl p-6 border-t-4 border-amber-400">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="w-12 h-12 rounded-xl bg-amber-400 text-slate-900 font-bold flex items-center justify-center">P1</span>
+          <div>
+            <div class="font-bold text-lg">Phase 1 — MVP</div>
+            <div class="text-xs text-slate-300">接單與轉換優先 · 0-9 個月</div>
+          </div>
+        </div>
+        <ul class="space-y-2 text-sm">
+          <li class="flex gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-amber-300 mt-0.5"></i>多品牌網站架構 + 集團首頁</li>
+          <li class="flex gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-amber-300 mt-0.5"></i>CviLux 產品搜尋 + 圖搜圖 MVP</li>
+          <li class="flex gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-amber-300 mt-0.5"></i>SharePoint 文件串接</li>
+          <li class="flex gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-amber-300 mt-0.5"></i>D365 Lead 寫入 + ERP 庫存讀取</li>
+          <li class="flex gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-amber-300 mt-0.5"></i>EIP SSO 與 Azure AD 對接</li>
+          <li class="flex gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-amber-300 mt-0.5"></i>AI Agent RAG 基礎版（技術 / 銷售 / ESG）</li>
+          <li class="flex gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-amber-300 mt-0.5"></i>Cross-reference + 報價試算 MVP</li>
+          <li class="flex gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-amber-300 mt-0.5"></i>Error Log / Audit Log</li>
+        </ul>
+      </div>
+
+      <div class="glass rounded-2xl p-6 border-t-4 border-teal-400">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="w-12 h-12 rounded-xl bg-teal-400 text-slate-900 font-bold flex items-center justify-center">P2</span>
+          <div>
+            <div class="font-bold text-lg">Phase 2 — 營運擴展</div>
+            <div class="text-xs text-slate-300">10-18 個月</div>
+          </div>
+        </div>
+        <ul class="space-y-2 text-sm">
+          <li class="flex gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-teal-300 mt-0.5"></i>CviMall 交易閉環</li>
+          <li class="flex gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-teal-300 mt-0.5"></i>eDM 自動化 + 多通路發布</li>
+          <li class="flex gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-teal-300 mt-0.5"></i>瀚荃學苑 + 線上考試</li>
+          <li class="flex gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-teal-300 mt-0.5"></i>sCMS 導入流程 + EAP SaaS 導流</li>
+          <li class="flex gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-teal-300 mt-0.5"></i>經銷商庫存共享</li>
+          <li class="flex gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-teal-300 mt-0.5"></i>Multi-Agent Orchestrator（編排者）</li>
+          <li class="flex gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-teal-300 mt-0.5"></i>新增行銷自動化 / 品牌語調 / 營運維運 Agent</li>
+          <li class="flex gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-teal-300 mt-0.5"></i>EIP 工作流引擎全面接入</li>
+        </ul>
+      </div>
+
+      <div class="glass rounded-2xl p-6 border-t-4 border-rose-400">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="w-12 h-12 rounded-xl bg-rose-400 text-slate-900 font-bold flex items-center justify-center">P3</span>
+          <div>
+            <div class="font-bold text-lg">Phase 3 — 大陸市場整合</div>
+            <div class="text-xs text-slate-300">19-24 個月</div>
+          </div>
+        </div>
+        <ul class="space-y-2 text-sm">
+          <li class="flex gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-rose-300 mt-0.5"></i>企業微信整合 + 微信社群</li>
+          <li class="flex gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-rose-300 mt-0.5"></i>大陸 Lead 分流 + 經銷商群協作</li>
+          <li class="flex gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-rose-300 mt-0.5"></i>跨境資料合規控管（PIPL）</li>
+          <li class="flex gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-rose-300 mt-0.5"></i>陸區 EIP 獨立部署（鼎新 EIP）</li>
+          <li class="flex gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-rose-300 mt-0.5"></i>WeCom 身份對應</li>
+          <li class="flex gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-rose-300 mt-0.5"></i>跨境 Agent 協作與隔離</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-10 text-center text-xs text-slate-400">
+      <span class="verify-tag verify-inferred">推論</span>
+      時程估算為依產業類似專案規模推估，實際時程須由 IT 與 BU 依資源評估後敲定。
+    </div>
+  </div>
+</section>
+
+<!-- ============= 資料準備清單摘要 ============= -->
+<section class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-10">
+      <div class="pill pill-navy mb-3">DATA PREPARATION · 14 大優先準備項目</div>
+      <h2 class="text-3xl md:text-4xl font-bold font-display text-slate-900">開站前資料準備檢核表</h2>
+      <p class="text-slate-600 mt-2">所有資料須先確認「主系統來源」：產品庫存以 ERP 為準、客戶商機以 D365 為準、文件以 SharePoint 為準、ESG SaaS 以 EAP 為準。</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="rounded-xl border border-slate-200 p-4 bg-slate-50"><div class="text-xs font-bold text-slate-500">優先 1</div><div class="font-semibold text-slate-900 mt-1">網站基礎識別與品牌素材</div></div>
+      <div class="rounded-xl border border-slate-200 p-4 bg-slate-50"><div class="text-xs font-bold text-slate-500">優先 2</div><div class="font-semibold text-slate-900 mt-1">集團首頁與公司形象頁資料</div></div>
+      <div class="rounded-xl border border-slate-200 p-4 bg-slate-50"><div class="text-xs font-bold text-slate-500">優先 3</div><div class="font-semibold text-slate-900 mt-1">CviLux 零組件產品平台資料</div></div>
+      <div class="rounded-xl border border-slate-200 p-4 bg-slate-50"><div class="text-xs font-bold text-slate-500">優先 4</div><div class="font-semibold text-slate-900 mt-1">AI 圖搜圖與 Cross-reference</div></div>
+      <div class="rounded-xl border border-slate-200 p-4 bg-slate-50"><div class="text-xs font-bold text-slate-500">優先 5</div><div class="font-semibold text-slate-900 mt-1">ERP 庫存與報價資料</div></div>
+      <div class="rounded-xl border border-slate-200 p-4 bg-slate-50"><div class="text-xs font-bold text-slate-500">優先 6</div><div class="font-semibold text-slate-900 mt-1">Lead、CRM 與表單資料</div></div>
+      <div class="rounded-xl border border-slate-200 p-4 bg-slate-50"><div class="text-xs font-bold text-slate-500">優先 7</div><div class="font-semibold text-slate-900 mt-1">sCMS 與 EAP 資料</div></div>
+      <div class="rounded-xl border border-slate-200 p-4 bg-slate-50"><div class="text-xs font-bold text-slate-500">優先 8</div><div class="font-semibold text-slate-900 mt-1">ESG / CBAM / 合規資料</div></div>
+      <div class="rounded-xl border border-slate-200 p-4 bg-slate-50"><div class="text-xs font-bold text-slate-500">優先 9</div><div class="font-semibold text-slate-900 mt-1">CviMall 與 Opro9 資料</div></div>
+      <div class="rounded-xl border border-slate-200 p-4 bg-slate-50"><div class="text-xs font-bold text-slate-500">優先 10</div><div class="font-semibold text-slate-900 mt-1">瀚荃學苑與教育訓練</div></div>
+      <div class="rounded-xl border border-slate-200 p-4 bg-slate-50"><div class="text-xs font-bold text-slate-500">優先 11</div><div class="font-semibold text-slate-900 mt-1">eDM 與社群行銷素材</div></div>
+      <div class="rounded-xl border border-slate-200 p-4 bg-slate-50"><div class="text-xs font-bold text-slate-500">優先 12</div><div class="font-semibold text-slate-900 mt-1">AI Agent 知識庫資料</div></div>
+      <div class="rounded-xl border border-slate-200 p-4 bg-slate-50"><div class="text-xs font-bold text-slate-500">優先 13</div><div class="font-semibold text-slate-900 mt-1">內網管理與審核資料</div></div>
+      <div class="rounded-xl border border-slate-200 p-4 bg-amber-50 border-amber-200"><div class="text-xs font-bold text-amber-700">優先 14 · NEW</div><div class="font-semibold text-slate-900 mt-1">EIP API、組織同步、SSO 設定</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= ENGLISH SUMMARY ============= -->
+<section id="summary" class="py-20 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-950 text-white">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="text-center mb-10">
+      <div class="pill" style="background:rgba(251,191,36,.18); color:#fde68a; border:1px solid rgba(251,191,36,.4);">EXECUTIVE SUMMARY · ENGLISH</div>
+      <h2 class="text-3xl md:text-4xl font-bold font-display mt-3">CviLux Group AI Digital Operation & Global Marketing Platform v2.0</h2>
+    </div>
+
+    <div class="glass rounded-2xl p-8 space-y-6">
+      <div>
+        <div class="text-xs font-semibold tracking-wider text-amber-300 mb-2">PLATFORM POSITIONING</div>
+        <p class="text-slate-200 leading-relaxed">
+          A unified <strong class="text-white">AI front-end marketing portal + internal collaboration hub + integration middleware</strong> for the CviLux Group ecosystem (CviLux components, CviCloud sCMS, EAP ESG SaaS, Opro9 consumer, CviMall commerce). The platform does not replace existing ERP, D365 CRM, M365 SharePoint, MES, or EAP systems — it connects them through APIs and AI agents, eliminating duplicate maintenance.
+        </p>
+      </div>
+
+      <div>
+        <div class="text-xs font-semibold tracking-wider text-amber-300 mb-2">v2.0 KEY ENHANCEMENTS</div>
+        <ul class="space-y-2 text-slate-200 text-sm">
+          <li class="flex gap-2"><i data-lucide="zap" class="w-4 h-4 mt-0.5 text-amber-300 flex-shrink-0"></i><strong class="text-white">EIP Integration Hub</strong> — promoted to a standalone layer, with vendor selection matrix (M365 + Power Platform vs. DingNew EIP vs. Custom-build vs. Third-party SaaS).</li>
+          <li class="flex gap-2"><i data-lucide="zap" class="w-4 h-4 mt-0.5 text-amber-300 flex-shrink-0"></i><strong class="text-white">Multi-Agent Orchestration</strong> — 1 Orchestrator + 9 specialist agents (Tech, Sales, ESG, Image-Search, Cross-ref, Quote + new Marketing, Brand-Voice, Ops).</li>
+          <li class="flex gap-2"><i data-lucide="zap" class="w-4 h-4 mt-0.5 text-amber-300 flex-shrink-0"></i><strong class="text-white">Brand Auto-Marketing Engine</strong> — 7-step pipeline from topic ingestion → multilingual content → brand-voice review → human approval → multi-channel publish → lead nurture & scoring.</li>
+          <li class="flex gap-2"><i data-lucide="zap" class="w-4 h-4 mt-0.5 text-amber-300 flex-shrink-0"></i><strong class="text-white">Governance & Guardrails</strong> — RAG-only factual answers, RBAC enforcement, hard-blocked actions, observability, RLHF feedback loop.</li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="text-xs font-semibold tracking-wider text-amber-300 mb-2">DESIGN PRINCIPLES</div>
+        <p class="text-slate-200 leading-relaxed text-sm">
+          (1) Do not rebuild existing systems. (2) Portal-first approach — external for marketing, internal for collaboration. (3) API-first integration. (4) AI as advisor, not autonomous decision-maker. (5) Strict separation of external & internal layers. (6) Full audit traceability for documents, quotes, AI answers, and agent decisions.
+        </p>
+      </div>
+
+      <div>
+        <div class="text-xs font-semibold tracking-wider text-amber-300 mb-2">ROADMAP</div>
+        <p class="text-slate-200 leading-relaxed text-sm">
+          <strong class="text-white">Phase 1 (0-9m)</strong> — multi-brand site, CviLux search, SharePoint integration, D365 Lead, ERP inventory, AI agents MVP, EIP SSO. <strong class="text-white">Phase 2 (10-18m)</strong> — CviMall transactions, eDM automation, training academy, sCMS/EAP funnels, dealer inventory sharing, Multi-Agent Orchestrator. <strong class="text-white">Phase 3 (19-24m)</strong> — China market via WeCom, dealer collaboration, cross-border compliance (PIPL), regional EIP deployment.
+        </p>
+      </div>
+
+      <div>
+        <div class="text-xs font-semibold tracking-wider text-amber-300 mb-2">CORE VALUE</div>
+        <ul class="space-y-1.5 text-slate-200 text-sm list-disc list-inside marker:text-amber-300">
+          <li>Convert product data into searchable, quotable, transactable marketing assets.</li>
+          <li>Translate ESG and CBAM capabilities into competitive export advantages.</li>
+          <li>Deploy AI for sourcing, document retrieval, quoting, and lead management.</li>
+          <li>Monetize ERP slow-moving inventory through dealer and channel offers.</li>
+          <li>Convert internal documents and tacit knowledge into auditable, traceable digital assets.</li>
+        </ul>
+      </div>
+
+      <p class="text-xs text-slate-400 pt-4 border-t border-white/10">
+        <span class="verify-tag verify-inferred">Inferred</span>
+        Vendor evaluation, timeline estimates, and architectural patterns are recommendations based on the attached design document and observed industry practice. Actual implementation requires IT &amp; BU RFP evaluation and POC validation.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============= 聯絡 / Footer ============= -->
+<section id="contact" class="py-16 bg-slate-50">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid lg:grid-cols-2 gap-10 items-center">
+      <div>
+        <div class="pill pill-teal mb-3">CONTACT · 進入下一步</div>
+        <h2 class="text-3xl font-bold font-display text-slate-900">準備好啟動 AI 數位營運平台？</h2>
+        <p class="text-slate-600 mt-3">本架構文件可作為 IT RFP、BU 工作坊、董事會簡報的起點。建議下一步：(1) 內部對齊 EIP 選型；(2) 啟動 Phase 1 MVP；(3) 建立 Multi-Agent 治理委員會。</p>
+        <div class="flex flex-wrap gap-3 mt-6">
+          <a href="#top" class="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition">
+            回到頂部 <i data-lucide="arrow-up" class="w-4 h-4"></i>
+          </a>
+          <button onclick="window.print()" class="no-print inline-flex items-center gap-2 px-5 py-3 rounded-lg border border-slate-300 text-slate-700 text-sm font-semibold hover:bg-white transition">
+            列印 / 匯出 PDF <i data-lucide="printer" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+      <div class="rounded-2xl bg-white border border-slate-200 p-6">
+        <h3 class="font-bold text-slate-900 mb-4">下一步建議行動</h3>
+        <ol class="space-y-3 text-sm text-slate-700">
+          <li class="flex gap-3"><span class="w-6 h-6 rounded-full bg-teal-100 text-teal-700 text-xs flex items-center justify-center font-bold flex-shrink-0">1</span><span>召開 IT + BU + 行銷 + ESG 跨部門啟動會，確認 EIP 選型方向（A+B 雙 EIP 建議）</span></li>
+          <li class="flex gap-3"><span class="w-6 h-6 rounded-full bg-teal-100 text-teal-700 text-xs flex items-center justify-center font-bold flex-shrink-0">2</span><span>啟動 Phase 1 MVP — 6 週可上線多品牌首頁 + CviLux 產品搜尋 + D365 Lead 寫入</span></li>
+          <li class="flex gap-3"><span class="w-6 h-6 rounded-full bg-teal-100 text-teal-700 text-xs flex items-center justify-center font-bold flex-shrink-0">3</span><span>建立 Multi-Agent 治理委員會（IT + 法遵 + 資安 + BU 代表）</span></li>
+          <li class="flex gap-3"><span class="w-6 h-6 rounded-full bg-teal-100 text-teal-700 text-xs flex items-center justify-center font-bold flex-shrink-0">4</span><span>展開 14 大資料準備清單盤點，指派各 BU 資料 owner</span></li>
+          <li class="flex gap-3"><span class="w-6 h-6 rounded-full bg-teal-100 text-teal-700 text-xs flex items-center justify-center font-bold flex-shrink-0">5</span><span>啟動行銷自動化 Agent POC：先針對 CviLux 新品上市 eDM 跑一輪</span></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="bg-slate-900 text-slate-400 py-10">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid md:grid-cols-4 gap-8 mb-8">
+      <div>
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-teal-600 to-indigo-700 flex items-center justify-center text-white font-bold">瀚</div>
+          <span class="text-white font-bold">瀚荃集團</span>
+        </div>
+        <p class="text-xs leading-relaxed">連接世界｜減碳地球<br />Connect the World · Conserve the Earth</p>
+      </div>
+      <div>
+        <div class="text-xs font-semibold text-slate-200 mb-3">品牌</div>
+        <ul class="space-y-1 text-xs">
+          <li>CviLux 零組件</li>
+          <li>CviCloud sCMS</li>
+          <li>EAP ESG AI Platform</li>
+          <li>Opro9</li>
+          <li>CviMall</li>
+        </ul>
+      </div>
+      <div>
+        <div class="text-xs font-semibold text-slate-200 mb-3">平台架構</div>
+        <ul class="space-y-1 text-xs">
+          <li><a href="#architecture" class="hover:text-white">7 層平台架構</a></li>
+          <li><a href="#eip" class="hover:text-white">EIP 整合中介</a></li>
+          <li><a href="#agents" class="hover:text-white">Multi-Agent</a></li>
+          <li><a href="#marketing" class="hover:text-white">自動行銷引擎</a></li>
+          <li><a href="#roadmap" class="hover:text-white">Roadmap</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="text-xs font-semibold text-slate-200 mb-3">文件版本</div>
+        <ul class="space-y-1 text-xs">
+          <li>v2.0 · 優化版</li>
+          <li>產出日期：2026-05-03</li>
+          <li>主要強化：EIP + Multi-Agent</li>
+          <li>語言：繁體中文 + 英文摘要</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pt-6 border-t border-slate-800 flex flex-col md:flex-row justify-between gap-3 text-xs">
+      <div>© 2026 CviLux Group · AI Digital Operation & Global Marketing Platform v2.0</div>
+      <div class="text-slate-500">本文件為架構說明（含 [推論] 標記之建議）；實際實作須經 IT 與 BU RFP 與 POC 驗證。</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // 啟用 Lucide icons
+  if (window.lucide) lucide.createIcons();
+</script>
+
+</body>
+</html>

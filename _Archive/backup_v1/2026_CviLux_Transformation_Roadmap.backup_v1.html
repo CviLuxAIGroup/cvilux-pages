@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>2026 瀚荃集團改造工作任務書 | CviLux Group 2026 Transformation Roadmap</title>
+<meta name="description" content="瀚荃集團 2026 數位轉型作戰計畫 — 三軌並行（舊網站維持 / 新網站建置 / Agent 微調）+ WF AIGP + M365 整合 + 製造業 AI 延伸應用。" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+<style>
+  :root{--red:#E83A48;--red-d:#B0202A;--red-l:#EB6363;--grey-9:#3D3A39;--grey-7:#595757;--grey-5:#999899;--grey-2:#E1DEDD;--blue:#0085C2;--orange:#F07810;--green:#10B981;--bg:#F7F5F2;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Century Gothic','Inter','Noto Sans TC',system-ui,sans-serif;color:#1F1F1F;background:var(--bg);}
+  .font-display{font-family:'Noto Sans TC','Inter',sans-serif;letter-spacing:-0.01em;}
+  .red-bg{background:linear-gradient(135deg,#B0202A 0%,#E83A48 60%,#EB6363 100%);}
+  .red-edge{position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--red);}
+  .magazine-cover{background:radial-gradient(ellipse at 15% 70%,rgba(232,58,72,.4),transparent 60%),linear-gradient(135deg,#1a1a1a 0%,#2a0a0e 30%,#4a0a14 60%,#b0202a 100%);}
+  .pill{display:inline-flex;align-items:center;gap:.4rem;padding:.25rem .75rem;font-size:.7rem;font-weight:700;letter-spacing:.05em;border-radius:9999px;}
+  .pill-red{background:rgba(232,58,72,.1);color:var(--red);border:1px solid rgba(232,58,72,.3);}
+  .pill-blue{background:rgba(0,133,194,.1);color:var(--blue);border:1px solid rgba(0,133,194,.3);}
+  .pill-orange{background:rgba(240,120,16,.1);color:var(--orange);border:1px solid rgba(240,120,16,.3);}
+  .pill-green{background:rgba(16,185,129,.1);color:#047857;border:1px solid rgba(16,185,129,.3);}
+  .pill-grey{background:rgba(89,87,87,.1);color:var(--grey-7);border:1px solid rgba(89,87,87,.3);}
+  .verify-tag{font-size:.65rem;padding:.15rem .4rem;border-radius:4px;font-weight:600;}
+  .verify-inferred{background:#fef3c7;color:#92400e;}
+  .verify-unverified{background:#fee2e2;color:#991b1b;}
+  .section-num{font-size:88px;font-weight:900;color:var(--red);line-height:1;font-family:'Noto Sans TC',sans-serif;}
+  table.cis{width:100%;border-collapse:collapse;}
+  table.cis th{background:#1F1F1F;color:white;text-align:left;padding:.75rem 1rem;font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;font-weight:700;}
+  table.cis td{padding:.65rem 1rem;border-bottom:1px solid #e5e5e5;font-size:.85rem;vertical-align:top;}
+  table.cis tr:nth-child(even) td{background:#FAF8F5;}
+  .nav-link{position:relative;font-weight:500;}
+  .nav-link::after{content:'';position:absolute;left:50%;bottom:-3px;height:2px;width:0;background:var(--red);transition:.25s;transform:translateX(-50%);}
+  .nav-link:hover::after{width:100%;}
+  details>summary{list-style:none;cursor:pointer;}
+  details>summary::-webkit-details-marker{display:none;}
+  details[open] .chev{transform:rotate(90deg);}
+  .chev{transition:.2s;}
+  .phase-bar{height:6px;border-radius:3px;background:linear-gradient(90deg,var(--red) 0%,var(--red-l) 50%,#FAD6D7 100%);}
+  .timeline-dot{width:14px;height:14px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px rgba(232,58,72,.2);}
+  .track-card{transition:transform .3s,box-shadow .3s,border-color .3s;}
+  .track-card:hover{transform:translateY(-3px);box-shadow:0 16px 32px -16px rgba(232,58,72,.4);}
+  @media print{.no-print{display:none !important;}body{background:white;}.page-break{page-break-after:always;}}
+  ::-webkit-scrollbar{width:10px;}
+  ::-webkit-scrollbar-thumb{background:#a0a0a0;border-radius:6px;}
+</style>
+</head>
+<body class="antialiased">
+
+<!-- ======== TOP NAV ======== -->
+<header class="no-print fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-stone-200">
+  <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="#cover" class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-md flex items-center justify-center text-white font-bold" style="background:var(--red)">瀚</div>
+      <div class="leading-tight">
+        <div class="text-sm font-bold text-stone-900 font-display">2026 瀚荃改造任務書</div>
+        <div class="text-[11px] text-stone-500 tracking-wider">CVILUX 2026 TRANSFORMATION ROADMAP</div>
+      </div>
+    </a>
+    <nav class="hidden lg:flex items-center gap-5 text-sm text-stone-700">
+      <a class="nav-link" href="#tracks">三軌並行</a>
+      <a class="nav-link" href="#phases">7 階段</a>
+      <a class="nav-link" href="#wf-aigp">WF AIGP</a>
+      <a class="nav-link" href="#packages">5 分包</a>
+      <a class="nav-link" href="#mfg-ai">製造 AI</a>
+      <a class="nav-link" href="#decisions">決策清單</a>
+      <a class="nav-link" href="#kpi">KPI</a>
+    </nav>
+    <button onclick="window.print()" class="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-md text-white text-sm font-semibold hover:opacity-90" style="background:var(--red)">
+      列印 <i data-lucide="printer" class="w-4 h-4"></i>
+    </button>
+  </div>
+</header>
+
+<!-- ======== COVER ======== -->
+<section id="cover" class="magazine-cover text-white pt-24 pb-16 min-h-screen flex items-center">
+  <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-red-700 via-red-500 to-red-300"></div>
+  <div class="max-w-7xl mx-auto px-8 w-full">
+    <div class="grid lg:grid-cols-12 gap-10 items-center">
+      <div class="lg:col-span-7">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-12 rounded-md flex items-center justify-center font-bold text-2xl" style="background:var(--red)">瀚</div>
+          <div>
+            <div class="text-sm font-bold tracking-widest">瀚荃集團 · CVILUX GROUP</div>
+            <div class="text-xs text-red-300 tracking-wider">Connect the World · Conserve the Earth</div>
+          </div>
+        </div>
+        <div class="text-[11px] text-red-200 tracking-[0.4em] mb-3">2026 TRANSFORMATION ROADMAP · v1.0</div>
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-black leading-[1.05] font-display mb-6">
+          2026 瀚荃集團<br />
+          <span class="text-red-300">改造工作任務書</span>
+        </h1>
+        <h2 class="text-xl md:text-2xl font-light text-red-100 leading-tight mb-8">
+          數位轉型 × AI 賦能 × 既有系統升級<br />
+          <span class="text-red-200 text-base">三軌並行：舊網站維持運營 / 新網站模組化建置 / Multi-Agent 微調驗證</span>
+        </h2>
+        <p class="text-stone-300 text-base leading-relaxed max-w-2xl mb-8">
+          配合鼎新 <strong class="text-white">WF AIGP</strong> 與 <strong class="text-white">Microsoft 365 / D365 / Azure</strong> 生態系統升級，本任務書整合 7 階段 × 5 開發分包 × Multi-Agent 編排 × 製造業 AI 延伸應用模型，提供董事會、IT、各 BU 主管的單一作戰指令文件。
+        </p>
+        <div class="grid grid-cols-4 gap-4 max-w-2xl">
+          <div><div class="text-3xl font-black text-red-300">3</div><div class="text-xs text-stone-300">並行軌道</div></div>
+          <div><div class="text-3xl font-black text-red-300">7</div><div class="text-xs text-stone-300">分階段</div></div>
+          <div><div class="text-3xl font-black text-red-300">5</div><div class="text-xs text-stone-300">開發分包</div></div>
+          <div><div class="text-3xl font-black text-red-300">10</div><div class="text-xs text-stone-300">製造 AI 模型</div></div>
+        </div>
+      </div>
+      <div class="lg:col-span-5">
+        <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6 mb-4">
+          <div class="text-xs tracking-widest text-red-300 mb-3">EXECUTIVE NOTE · 董事長指示</div>
+          <p class="text-sm text-stone-200 leading-relaxed mb-3">
+            "目前網站多年拼湊而成，配合瀚荃集團升級鼎新 WF AIGP 及 Microsoft 生態系統，先分段建置新網站和多位 agentics，fine tune 後切換新網站；也推薦後續適合使用在製造業可優化生產的 AI 延伸應用模型。"
+          </p>
+          <div class="text-right pt-3 border-t border-white/10">
+            <div class="font-display font-bold">楊超群</div>
+            <div class="text-xs text-stone-400">Steve Yang</div>
+            <div class="text-xs text-red-300 mt-1">董事長兼永續長</div>
+          </div>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+          <div class="text-xs tracking-widest text-red-300 mb-2">CORE PRINCIPLE · 核心原則</div>
+          <p class="font-bold text-white text-sm leading-relaxed">「第一期不是把所有功能做完，而是先做出能接單、能寫入 CRM、能查產品、能下載文件、能串 ERP 摘要、能讓 AI 輔助業務的最小可營運版本。」</p>
+          <p class="text-xs text-stone-400 mt-3">— 引自《網站模組化分段開發實施步驟討論項目》</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== EXEC SUMMARY ======== -->
+<section class="bg-white py-16">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10">
+      <div class="lg:col-span-4">
+        <div class="text-xs tracking-[0.3em] text-stone-500 mb-2">EXECUTIVE SUMMARY</div>
+        <h2 class="font-display text-4xl font-black mb-3">執行摘要</h2>
+        <p class="text-stone-500 text-sm">本案不是重做 ERP / CRM / M365 / EAP，而是建構「AI 前台營銷與協同入口」，透過 Integration Layer 串接既有系統，避免重疊與重複維護。</p>
+      </div>
+      <div class="lg:col-span-8 space-y-3">
+        <div class="bg-stone-50 rounded-xl p-5 border border-stone-200 relative overflow-hidden">
+          <div class="red-edge"></div>
+          <div class="pl-4">
+            <div class="text-xs font-bold text-red-700 mb-1">為什麼要做？　WHY</div>
+            <p class="text-sm text-stone-700 leading-relaxed">「目前網站多年拼湊而成」— 多版本、多設計者、無統一識別、未串既有系統、無 AI 賦能；面對 ESG/CBAM、HaaS/SaaS 商模、大陸市場與全球佈局，需建構新世代企業數位前台。</p>
+          </div>
+        </div>
+        <div class="bg-stone-50 rounded-xl p-5 border border-stone-200 relative overflow-hidden">
+          <div class="red-edge"></div>
+          <div class="pl-4">
+            <div class="text-xs font-bold text-red-700 mb-1">怎麼做？　HOW</div>
+            <p class="text-sm text-stone-700 leading-relaxed"><strong>三軌並行</strong>：(1) 舊網站維持運營保住現有客戶；(2) 新網站模組化分階段建置；(3) Multi-Agent 在影子模式下微調驗證。最後在 KPI 達標時切換上線。</p>
+          </div>
+        </div>
+        <div class="bg-stone-50 rounded-xl p-5 border border-stone-200 relative overflow-hidden">
+          <div class="red-edge"></div>
+          <div class="pl-4">
+            <div class="text-xs font-bold text-red-700 mb-1">什麼時候？　WHEN</div>
+            <p class="text-sm text-stone-700 leading-relaxed">Phase 1 MVP 6 個月內可上線；完整 7 階段 24 個月；製造業 AI 延伸模型分批導入 12-36 個月。</p>
+          </div>
+        </div>
+        <div class="bg-stone-50 rounded-xl p-5 border border-stone-200 relative overflow-hidden">
+          <div class="red-edge"></div>
+          <div class="pl-4">
+            <div class="text-xs font-bold text-red-700 mb-1">誰負責？　WHO</div>
+            <p class="text-sm text-stone-700 leading-relaxed">PM 辦公室（永續聯辦下設）總調度；IT + 各 BU + Marketing + ESG 跨部門協作；A/B/C/D/E 五個分包對應外部廠商或內部團隊。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== 三軌並行 ======== -->
+<section id="tracks" class="bg-stone-50 py-20">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-10">
+      <div class="lg:col-span-4">
+        <div class="section-num">三軌</div>
+        <h2 class="text-3xl font-black font-display mt-2">並行作戰戰術</h2>
+        <p class="text-stone-500 mt-1">Three-Track Parallel Strategy</p>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-stone-700 leading-relaxed">不是「先停舊網站、再做新網站」的單線開發 — 而是讓三條軌道同時推進，舊網站保住營收、新網站確保品質、AI Agent 完成微調，三條收斂於一個切換點。</p>
+      </div>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-5 mb-10">
+      <!-- Track 1 -->
+      <div class="track-card bg-white rounded-xl p-6 border border-stone-200">
+        <div class="flex items-center justify-between mb-3">
+          <span class="pill pill-grey">TRACK 1 · KEEP</span>
+          <i data-lucide="server" class="w-5 h-5 text-stone-500"></i>
+        </div>
+        <h3 class="font-display font-black text-xl mb-2">舊網站維持運營</h3>
+        <p class="text-stone-500 text-xs mb-3">Legacy Site · Business Continuity</p>
+        <ul class="text-sm text-stone-700 space-y-1.5">
+          <li>· 凍結新功能開發</li>
+          <li>· 僅修補資安漏洞、客戶關鍵問題</li>
+          <li>· 監測流量與 Lead 轉換做為 baseline</li>
+          <li>· 與新網站雙軌期間資料同步</li>
+        </ul>
+        <div class="mt-4 pt-3 border-t border-stone-200 text-xs text-stone-500">
+          擁有人：IT 維運　·　預算：低　·　風險：低
+        </div>
+      </div>
+      <!-- Track 2 -->
+      <div class="track-card bg-white rounded-xl p-6 border-2" style="border-color:var(--red)">
+        <div class="flex items-center justify-between mb-3">
+          <span class="pill pill-red">TRACK 2 · BUILD</span>
+          <i data-lucide="construction" class="w-5 h-5" style="color:var(--red)"></i>
+        </div>
+        <h3 class="font-display font-black text-xl mb-2">新網站模組化建置</h3>
+        <p class="text-stone-500 text-xs mb-3">New Site · Modular Build</p>
+        <ul class="text-sm text-stone-700 space-y-1.5">
+          <li>· 7 階段 Phase 0-6 推進</li>
+          <li>· 串接 WF AIGP / D365 / SharePoint / ERP</li>
+          <li>· 套用 v1.1 CIS 規範（紅色系 + Century Gothic）</li>
+          <li>· 每 Phase 端到端驗收（UAT + 壓測）</li>
+        </ul>
+        <div class="mt-4 pt-3 border-t border-stone-200 text-xs text-stone-500">
+          擁有人：PM 辦公室 + 5 分包　·　預算：主預算　·　風險：中
+        </div>
+      </div>
+      <!-- Track 3 -->
+      <div class="track-card bg-white rounded-xl p-6 border border-stone-200">
+        <div class="flex items-center justify-between mb-3">
+          <span class="pill pill-blue">TRACK 3 · TUNE</span>
+          <i data-lucide="bot" class="w-5 h-5" style="color:var(--blue)"></i>
+        </div>
+        <h3 class="font-display font-black text-xl mb-2">Multi-Agent 影子微調</h3>
+        <p class="text-stone-500 text-xs mb-3">Agent Fine-Tune · Shadow Mode</p>
+        <ul class="text-sm text-stone-700 space-y-1.5">
+          <li>· 9+1 Agent 在 Shadow Mode 跑舊網站流量</li>
+          <li>· 比對 AI 建議 vs 業務實際決策，迭代 prompt</li>
+          <li>· RAG 知識庫從 SharePoint 持續吸收</li>
+          <li>· 上線前需通過幻覺率 / 引用率 / 滿意度三閾值</li>
+        </ul>
+        <div class="mt-4 pt-3 border-t border-stone-200 text-xs text-stone-500">
+          擁有人：永續聯辦 + AI 治理委員會　·　風險：中高
+        </div>
+      </div>
+    </div>
+
+    <!-- 切換點 -->
+    <div class="bg-white rounded-xl border-2 border-dashed p-6" style="border-color:var(--red);">
+      <div class="flex items-start gap-4">
+        <div class="w-14 h-14 rounded-full flex items-center justify-center text-white flex-shrink-0" style="background:var(--red)">
+          <i data-lucide="git-merge" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <div class="text-xs tracking-widest text-red-700 mb-1">CONVERGENCE POINT · 切換點</div>
+          <h3 class="font-display text-2xl font-black mb-2">三軌收斂 · 切換上線</h3>
+          <p class="text-stone-700 leading-relaxed mb-3">當三條軌道同時達標，啟動切換：(1) Phase 1 MVP 完整通過 UAT；(2) AI Agent 影子模式準確率達 85% 以上；(3) DNS 切換 + 301 重導 + 30 天並行觀察期 + 客戶通知。</p>
+          <div class="grid md:grid-cols-3 gap-3 text-sm">
+            <div class="bg-red-50 p-3 rounded-lg border border-red-200"><strong>Cut-over Day-1</strong> 內部試用</div>
+            <div class="bg-red-50 p-3 rounded-lg border border-red-200"><strong>Day-7</strong> 50% 流量切換</div>
+            <div class="bg-red-50 p-3 rounded-lg border border-red-200"><strong>Day-30</strong> 100% 切換 + 舊站歸檔</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== 7 階段 ======== -->
+<section id="phases" class="bg-white py-20">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-10">
+      <div class="lg:col-span-4">
+        <div class="section-num">7</div>
+        <h2 class="text-3xl font-black font-display mt-2">階段開發路線圖</h2>
+        <p class="text-stone-500 mt-1">7-Phase Roadmap (Phase 0-6)</p>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-stone-700 leading-relaxed">依《網站模組化分段開發實施步驟討論項目》規範，本案分為 Phase 0（盤點）→ Phase 6（兩岸整合），每階段必交付：系統架構圖、模組規格、API 文件、DB Schema、權限角色表、UI Wireframe、測試報告、UAT 清單、Runbook、維運文件。</p>
+      </div>
+    </div>
+
+    <!-- Phase Timeline -->
+    <div class="space-y-3">
+      <!-- Phase 0 -->
+      <details class="bg-stone-50 rounded-xl border border-stone-200 overflow-hidden">
+        <summary class="p-5 hover:bg-stone-100 transition flex items-center justify-between gap-4">
+          <div class="flex items-center gap-4 flex-1">
+            <div class="w-12 h-12 rounded-lg flex items-center justify-center text-white font-bold flex-shrink-0" style="background:#3D3A39">P0</div>
+            <div class="flex-1">
+              <div class="text-xs text-stone-500 tracking-widest">PHASE 0 · 1 個月</div>
+              <h3 class="font-bold text-lg">需求盤點與架構確認</h3>
+              <div class="phase-bar mt-2" style="width:14%"></div>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+        </summary>
+        <div class="p-5 pt-0 grid md:grid-cols-2 gap-5 border-t border-stone-200">
+          <div>
+            <div class="text-xs font-bold text-stone-700 mb-2">確認項目</div>
+            <ul class="text-sm text-stone-600 space-y-1">
+              <li>· 網站總架構</li><li>· 前台 / 內網分層</li><li>· 既有系統串接範圍</li>
+              <li>· API Gateway 設計</li><li>· 權限與資安規格</li><li>· 資料主系統來源</li>
+            </ul>
+          </div>
+          <div>
+            <div class="text-xs font-bold text-stone-700 mb-2">必須產出</div>
+            <ul class="text-sm text-stone-600 space-y-1">
+              <li>· 系統架構圖</li><li>· 模組清單</li><li>· API 初版清單</li>
+              <li>· 資料流圖</li><li>· 權限角色表</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <!-- Phase 1 -->
+      <details class="bg-stone-50 rounded-xl border-2 overflow-hidden" open style="border-color:var(--red)">
+        <summary class="p-5 hover:bg-stone-100 transition flex items-center justify-between gap-4">
+          <div class="flex items-center gap-4 flex-1">
+            <div class="w-12 h-12 rounded-lg flex items-center justify-center text-white font-bold flex-shrink-0" style="background:var(--red)">P1</div>
+            <div class="flex-1">
+              <div class="text-xs tracking-widest" style="color:var(--red)">PHASE 1 MVP · 5 個月　★ 第一期重點</div>
+              <h3 class="font-bold text-lg">接單與轉換能力（Lead / RFQ / 產品搜尋 / 文件下載）</h3>
+              <div class="phase-bar mt-2" style="width:28%"></div>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+        </summary>
+        <div class="p-5 pt-0 grid md:grid-cols-3 gap-5 border-t border-stone-200">
+          <div>
+            <div class="text-xs font-bold text-red-700 mb-2">必做模組</div>
+            <ul class="text-sm text-stone-600 space-y-1">
+              <li>· 官網入口</li><li>· 集團首頁</li><li>· CviLux 產品搜尋</li>
+              <li>· Product Lines 分類頁</li><li>· RFQ / Lead 表單</li>
+              <li>· SharePoint 文件索引</li><li>· D365 Lead 寫入</li>
+              <li>· ERP 庫存讀取</li><li>· AI Agent RAG 基礎版</li>
+              <li>· Error / Audit Log</li>
+            </ul>
+          </div>
+          <div>
+            <div class="text-xs font-bold text-red-700 mb-2">驗收重點</div>
+            <ul class="text-sm text-stone-600 space-y-1">
+              <li>· 客戶可搜尋產品</li>
+              <li>· 客戶可送出 RFQ</li>
+              <li>· Lead 進 D365</li>
+              <li>· SharePoint 授權下載</li>
+              <li>· ERP 庫存可讀取</li>
+              <li>· AI 回答產品 / ESG 基本問題</li>
+            </ul>
+          </div>
+          <div>
+            <div class="text-xs font-bold text-red-700 mb-2">不做（延後）</div>
+            <ul class="text-sm text-stone-600 space-y-1">
+              <li>✗ CviMall 完整交易閉環</li>
+              <li>✗ 完整企業微信整合</li>
+              <li>✗ EAP SaaS 後台</li>
+              <li>✗ Data Lake 自動治理</li>
+              <li>✗ AI 全自動報價</li>
+              <li>✗ AI 自動修改 ERP</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <!-- Phase 2 -->
+      <details class="bg-stone-50 rounded-xl border border-stone-200 overflow-hidden">
+        <summary class="p-5 hover:bg-stone-100 transition flex items-center justify-between gap-4">
+          <div class="flex items-center gap-4 flex-1">
+            <div class="w-12 h-12 rounded-lg flex items-center justify-center text-white font-bold flex-shrink-0" style="background:#0085C2">P2</div>
+            <div class="flex-1">
+              <div class="text-xs text-stone-500 tracking-widest">PHASE 2 · 4 個月</div>
+              <h3 class="font-bold text-lg">AI 強化與行銷自動化</h3>
+              <div class="phase-bar mt-2" style="width:42%"></div>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+        </summary>
+        <div class="p-5 pt-0 grid md:grid-cols-2 gap-5 border-t border-stone-200">
+          <div>
+            <div class="text-xs font-bold text-stone-700 mb-2">開發模組</div>
+            <ul class="text-sm text-stone-600 space-y-1">
+              <li>· AI 圖搜圖</li><li>· Cross-reference 替代料</li>
+              <li>· AI 報價助手 + 客戶等級規則</li>
+              <li>· eDM 行銷自動化 + 客戶分群</li>
+              <li>· RFQ 追蹤</li><li>· Power BI 儀表板</li>
+            </ul>
+          </div>
+          <div>
+            <div class="text-xs font-bold text-stone-700 mb-2">驗收重點</div>
+            <ul class="text-sm text-stone-600 space-y-1">
+              <li>· 圖搜圖回傳相似產品</li>
+              <li>· 替代料人工審核後公開</li>
+              <li>· 報價試算有毛利底線 + 主管審核</li>
+              <li>· eDM 客戶類型分群</li>
+              <li>· RFQ 開發狀態可追蹤</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <!-- Phase 3 -->
+      <details class="bg-stone-50 rounded-xl border border-stone-200 overflow-hidden">
+        <summary class="p-5 hover:bg-stone-100 transition flex items-center justify-between gap-4">
+          <div class="flex items-center gap-4 flex-1">
+            <div class="w-12 h-12 rounded-lg flex items-center justify-center text-white font-bold flex-shrink-0" style="background:#10B981">P3</div>
+            <div class="flex-1">
+              <div class="text-xs text-stone-500 tracking-widest">PHASE 3 · 3 個月</div>
+              <h3 class="font-bold text-lg">ESG / sCMS / EAP 導流與 HaaS / SaaS 商模</h3>
+              <div class="phase-bar mt-2" style="width:56%"></div>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+        </summary>
+        <div class="p-5 pt-0 grid md:grid-cols-2 gap-5 border-t border-stone-200">
+          <div>
+            <div class="text-xs font-bold text-stone-700 mb-2">開發模組</div>
+            <ul class="text-sm text-stone-600 space-y-1">
+              <li>· sCMS 智碳雲淨零方案頁</li>
+              <li>· EAP ESG AI Platform 導流</li>
+              <li>· SaaS 試算 / Demo 申請</li>
+              <li>· ESG / CBAM 報告模板下載</li>
+              <li>· ESG 客戶問卷回覆助手</li>
+            </ul>
+          </div>
+          <div>
+            <div class="text-xs font-bold text-stone-700 mb-2">注意事項</div>
+            <p class="text-sm text-stone-600">EAP 為另案開發，主網站不重做，僅做：介紹 / 導流 / 試用申請 / Demo 申請 / API 串接。</p>
+          </div>
+        </div>
+      </details>
+
+      <!-- Phase 4 -->
+      <details class="bg-stone-50 rounded-xl border border-stone-200 overflow-hidden">
+        <summary class="p-5 hover:bg-stone-100 transition flex items-center justify-between gap-4">
+          <div class="flex items-center gap-4 flex-1">
+            <div class="w-12 h-12 rounded-lg flex items-center justify-center text-white font-bold flex-shrink-0" style="background:#F07810">P4</div>
+            <div class="flex-1">
+              <div class="text-xs text-stone-500 tracking-widest">PHASE 4 · 4 個月</div>
+              <h3 class="font-bold text-lg">CviMall / Opro9 / 庫存變現</h3>
+              <div class="phase-bar mt-2" style="width:70%"></div>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+        </summary>
+        <div class="p-5 pt-0 grid md:grid-cols-2 gap-5 border-t border-stone-200">
+          <div>
+            <div class="text-xs font-bold text-stone-700 mb-2">開發模組</div>
+            <ul class="text-sm text-stone-600 space-y-1">
+              <li>· CviMall 商城入口</li>
+              <li>· B2B 詢價 / B2C 購物</li>
+              <li>· 呆滯庫存促銷區</li>
+              <li>· 經銷商庫存共享</li>
+              <li>· 仲介費 / 分潤紀錄</li>
+              <li>· ERP 訂單回寫</li>
+            </ul>
+          </div>
+          <div>
+            <div class="text-xs font-bold text-stone-700 mb-2">注意事項</div>
+            <p class="text-sm text-stone-600">第一階段 ERP 以 <strong>Read-only</strong> 為主；正式交易回寫 ERP 列為後續可控範圍，Phase 4 才啟動。</p>
+          </div>
+        </div>
+      </details>
+
+      <!-- Phase 5 -->
+      <details class="bg-stone-50 rounded-xl border border-stone-200 overflow-hidden">
+        <summary class="p-5 hover:bg-stone-100 transition flex items-center justify-between gap-4">
+          <div class="flex items-center gap-4 flex-1">
+            <div class="w-12 h-12 rounded-lg flex items-center justify-center text-white font-bold flex-shrink-0" style="background:#7C3AED">P5</div>
+            <div class="flex-1">
+              <div class="text-xs text-stone-500 tracking-widest">PHASE 5 · 3 個月</div>
+              <h3 class="font-bold text-lg">瀚荃學苑與教育訓練</h3>
+              <div class="phase-bar mt-2" style="width:84%"></div>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+        </summary>
+        <div class="p-5 pt-0 grid md:grid-cols-2 gap-5 border-t border-stone-200">
+          <div>
+            <div class="text-xs font-bold text-stone-700 mb-2">開發模組</div>
+            <ul class="text-sm text-stone-600 space-y-1">
+              <li>· 外網課程 / 內網訓練</li>
+              <li>· 題庫 / 線上考試 / 證書</li>
+              <li>· 經銷商培訓</li>
+              <li>· ESG 教育（員工 + 客戶）</li>
+              <li>· IoT / AIoT 專業認證</li>
+            </ul>
+          </div>
+          <div>
+            <div class="text-xs font-bold text-stone-700 mb-2">產學合作</div>
+            <ul class="text-sm text-stone-600 space-y-1">
+              <li>· 淡江大學合作課程</li>
+              <li>· 職訓局合作</li>
+              <li>· ESG 永續人才培育</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <!-- Phase 6 -->
+      <details class="bg-stone-50 rounded-xl border border-stone-200 overflow-hidden">
+        <summary class="p-5 hover:bg-stone-100 transition flex items-center justify-between gap-4">
+          <div class="flex items-center gap-4 flex-1">
+            <div class="w-12 h-12 rounded-lg flex items-center justify-center text-white font-bold flex-shrink-0" style="background:#1A1A1A">P6</div>
+            <div class="flex-1">
+              <div class="text-xs text-stone-500 tracking-widest">PHASE 6 · 4 個月</div>
+              <h3 class="font-bold text-lg">企業微信 / 微信整合（兩岸協作）</h3>
+              <div class="phase-bar mt-2" style="width:100%"></div>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="chev w-5 h-5 text-stone-400"></i>
+        </summary>
+        <div class="p-5 pt-0 grid md:grid-cols-2 gap-5 border-t border-stone-200">
+          <div>
+            <div class="text-xs font-bold text-stone-700 mb-2">開發模組</div>
+            <ul class="text-sm text-stone-600 space-y-1">
+              <li>· WeCom 身份整合</li>
+              <li>· 微信推播 / 大陸 Lead 分流</li>
+              <li>· 經銷商群協作</li>
+              <li>· 陸區資料分區</li>
+              <li>· 跨境資料合規控管 (PIPL)</li>
+            </ul>
+          </div>
+          <div>
+            <div class="text-xs font-bold text-stone-700 mb-2">建議</div>
+            <p class="text-sm text-stone-600">企業微信為「擴充期」，<strong>不列入第一期主開發</strong>。第一期專注國際市場行銷落地與接單營收，企業微信保留 API 接口，等 Phase 1-3 穩定後再啟動。</p>
+          </div>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ======== WF AIGP + M365 整合 ======== -->
+<section id="wf-aigp" class="bg-stone-900 text-white py-20">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-10">
+      <div class="lg:col-span-4">
+        <div class="section-num" style="color:var(--red)">WF</div>
+        <h2 class="text-3xl font-black font-display mt-2">AIGP + M365 整合</h2>
+        <p class="text-stone-400 mt-1">Digiwin WF AIGP × Microsoft Ecosystem</p>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-stone-300 leading-relaxed">鼎新 WF AIGP <span class="verify-tag verify-inferred">推論</span> 為集團 ERP 升級的 AI 賦能層；本案網站不重做 WF AIGP，僅透過 API 串接其資料與工作流。Microsoft 生態系（Azure AD / D365 / SharePoint / Power Platform / Copilot）作為內部協同主軸。</p>
+      </div>
+    </div>
+
+    <!-- 雙生態整合 -->
+    <div class="grid lg:grid-cols-2 gap-5 mb-8">
+      <div class="bg-white/5 rounded-xl border border-white/10 p-6">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background:var(--red)">
+            <i data-lucide="factory" class="w-6 h-6 text-white"></i>
+          </div>
+          <div>
+            <div class="text-xs text-red-300 tracking-widest">DIGIWIN ECOSYSTEM</div>
+            <h3 class="font-bold text-xl">鼎新 WF AIGP 生態</h3>
+          </div>
+        </div>
+        <p class="text-sm text-stone-300 mb-4">[推論] 鼎新「智能企業數位平台」WF AIGP — 在原 WF（Workflow）基礎上整合 AI 賦能，提供低代碼工作流編排、ERP/MES 串接、智能簽核、文件智能、決策建議。</p>
+        <div class="text-xs text-red-300 mb-2">主要對接點</div>
+        <ul class="text-sm space-y-1 text-stone-200">
+          <li>· ERP（產品主檔、庫存、成本、訂單）</li>
+          <li>· MES / CMS（生產進度、製程、產量）</li>
+          <li>· WF（流程簽核、表單）</li>
+          <li>· AIGP（AI 模型呼叫、智能決策）</li>
+          <li>· 與本網站串接：API + Webhook</li>
+        </ul>
+      </div>
+      <div class="bg-white/5 rounded-xl border border-white/10 p-6">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background:#0078D4">
+            <i data-lucide="cloud" class="w-6 h-6 text-white"></i>
+          </div>
+          <div>
+            <div class="text-xs text-blue-300 tracking-widest">MICROSOFT ECOSYSTEM</div>
+            <h3 class="font-bold text-xl">Microsoft 365 + Azure 生態</h3>
+          </div>
+        </div>
+        <p class="text-sm text-stone-300 mb-4">M365 / D365 / Azure / Fabric 作為集團數位協同主軸 — 統一身份、文件、客戶、資料分析、AI 服務。</p>
+        <div class="text-xs text-blue-300 mb-2">主要對接點</div>
+        <ul class="text-sm space-y-1 text-stone-200">
+          <li>· Azure AD / Entra ID（SSO + RBAC）</li>
+          <li>· D365 CRM（Lead / Opportunity / Quote）</li>
+          <li>· SharePoint（技術文件、ESG 文件）</li>
+          <li>· Teams（通知 / 審核提醒）</li>
+          <li>· Outlook（eDM / 客戶通知）</li>
+          <li>· Azure Fabric Data Lake（分析、AI 訓練）</li>
+          <li>· Copilot Studio（內部 Agent 編排）</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 雙生態如何協作 -->
+    <div class="bg-gradient-to-br from-red-900/30 to-blue-900/30 rounded-xl p-6 border border-white/20">
+      <div class="text-xs tracking-widest text-amber-300 mb-3">COLLABORATION PATTERN · 雙生態協作模式</div>
+      <h3 class="font-display text-2xl font-bold mb-4">本網站 = 雙生態的「AI 中介前台」</h3>
+      <div class="grid md:grid-cols-3 gap-4 text-sm">
+        <div class="bg-black/30 rounded-lg p-4">
+          <div class="text-amber-300 font-bold mb-1">交易主資料</div>
+          <p class="text-stone-300 text-xs">產品、庫存、成本、訂單 → <strong class="text-red-300">WF AIGP / 鼎新 ERP</strong> 為主系統，網站只讀取與導流，正式交易回寫</p>
+        </div>
+        <div class="bg-black/30 rounded-lg p-4">
+          <div class="text-amber-300 font-bold mb-1">客戶與協作</div>
+          <p class="text-stone-300 text-xs">Lead、商機、文件、訊息 → <strong class="text-blue-300">M365 / D365</strong> 為主系統，網站為前台入口</p>
+        </div>
+        <div class="bg-black/30 rounded-lg p-4">
+          <div class="text-amber-300 font-bold mb-1">AI 賦能</div>
+          <p class="text-stone-300 text-xs">前台 RAG / 圖搜 / 報價建議 走<strong class="text-amber-300">本平台 Multi-Agent</strong>；廠端流程 AI 走 <strong class="text-red-300">WF AIGP</strong>；個人生產力 AI 走 <strong class="text-blue-300">Copilot</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== 5 開發分包 ======== -->
+<section id="packages" class="bg-white py-20">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-10">
+      <div class="lg:col-span-4">
+        <div class="section-num">5</div>
+        <h2 class="text-3xl font-black font-display mt-2">開發分包</h2>
+        <p class="text-stone-500 mt-1">Five Work Packages (A-E)</p>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-stone-700 leading-relaxed">5 大分包可由不同廠商或內部團隊承擔，各有清楚邊界與交付物。建議採「主廠商 + 子分包」模式，由 PM 辦公室統籌跨包整合。</p>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="bg-stone-50 rounded-xl p-5 border border-stone-200">
+        <span class="pill pill-red">A 包</span>
+        <h3 class="font-bold mt-2 mb-1">網站前台與 CMS</h3>
+        <p class="text-stone-500 text-xs mb-3">Front-End & CMS</p>
+        <ul class="text-sm text-stone-700 space-y-1">
+          <li>· 集團首頁</li>
+          <li>· 多品牌頁</li>
+          <li>· 產品搜尋頁</li>
+          <li>· Landing Page</li>
+          <li>· SEO + Schema</li>
+        </ul>
+        <div class="mt-3 pt-3 border-t border-stone-200 text-xs text-stone-500">推薦：UI/UX + 行銷網站開發商</div>
+      </div>
+      <div class="bg-stone-50 rounded-xl p-5 border border-stone-200">
+        <span class="pill pill-blue">B 包</span>
+        <h3 class="font-bold mt-2 mb-1">Integration Layer</h3>
+        <p class="text-stone-500 text-xs mb-3">系統整合中介</p>
+        <ul class="text-sm text-stone-700 space-y-1">
+          <li>· API Gateway</li>
+          <li>· D365 串接</li>
+          <li>· SharePoint 串接</li>
+          <li>· ERP / WF AIGP 串接</li>
+          <li>· Log / Audit</li>
+        </ul>
+        <div class="mt-3 pt-3 border-t border-stone-200 text-xs text-stone-500">推薦：MS Partner 或鼎新合作夥伴</div>
+      </div>
+      <div class="bg-stone-50 rounded-xl p-5 border border-stone-200">
+        <span class="pill pill-green">C 包</span>
+        <h3 class="font-bold mt-2 mb-1">AI 功能</h3>
+        <p class="text-stone-500 text-xs mb-3">Multi-Agent + RAG</p>
+        <ul class="text-sm text-stone-700 space-y-1">
+          <li>· RAG 知識庫</li>
+          <li>· 技術 Agent / ESG Agent</li>
+          <li>· 圖搜圖</li>
+          <li>· Cross-reference</li>
+          <li>· AI 報價助手</li>
+        </ul>
+        <div class="mt-3 pt-3 border-t border-stone-200 text-xs text-stone-500">推薦：AI 顧問 + 大模型廠商</div>
+      </div>
+      <div class="bg-stone-50 rounded-xl p-5 border border-stone-200">
+        <span class="pill pill-orange">D 包</span>
+        <h3 class="font-bold mt-2 mb-1">行銷與 CRM</h3>
+        <p class="text-stone-500 text-xs mb-3">Marketing & CRM</p>
+        <ul class="text-sm text-stone-700 space-y-1">
+          <li>· RFQ 流程</li>
+          <li>· eDM / 客戶分群</li>
+          <li>· D365 Campaign</li>
+          <li>· Power BI 儀表板</li>
+        </ul>
+        <div class="mt-3 pt-3 border-t border-stone-200 text-xs text-stone-500">推薦：D365 顧問 + 行銷自動化</div>
+      </div>
+      <div class="bg-stone-50 rounded-xl p-5 border border-stone-200">
+        <span class="pill pill-grey">E 包</span>
+        <h3 class="font-bold mt-2 mb-1">ESG / EAP / sCMS</h3>
+        <p class="text-stone-500 text-xs mb-3">永續與 SaaS 導流</p>
+        <ul class="text-sm text-stone-700 space-y-1">
+          <li>· sCMS 頁面</li>
+          <li>· EAP 導流</li>
+          <li>· SaaS 試算</li>
+          <li>· ESG / CBAM 模板</li>
+        </ul>
+        <div class="mt-3 pt-3 border-t border-stone-200 text-xs text-stone-500">推薦：永續聯辦 + 內部技術</div>
+      </div>
+      <div class="bg-stone-900 text-white rounded-xl p-5">
+        <span class="pill" style="background:rgba(232,58,72,.2);color:#fca5a5;border:1px solid rgba(232,58,72,.4);">PM 辦公室</span>
+        <h3 class="font-bold mt-2 mb-1 text-amber-300">總統籌</h3>
+        <p class="text-stone-400 text-xs mb-3">Cross-package Orchestration</p>
+        <ul class="text-sm space-y-1 text-stone-300">
+          <li>· 跨包整合</li>
+          <li>· 進度與風險管理</li>
+          <li>· UAT 驗收</li>
+          <li>· 對董事會匯報</li>
+          <li>· 永續聯辦下設</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== Multi-Agent ======== -->
+<section class="bg-stone-50 py-20">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-10">
+      <div class="lg:col-span-4">
+        <div class="section-num">9+1</div>
+        <h2 class="text-3xl font-black font-display mt-2">Multi-Agent 編排</h2>
+        <p class="text-stone-500 mt-1">Agentics Fine-Tune Strategy</p>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-stone-700 leading-relaxed">沿用 enterprise-ai-platform-website 設計：1 個 Orchestrator 編排者 + 9 個專業 Agent。本案在 Phase 1 上線基礎版，Phase 2-3 補完並進入 Shadow Mode 微調。</p>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-3 mb-6">
+      <div class="bg-white rounded-xl border-2 p-4" style="border-color:#fbbf24"><div class="text-xs text-amber-700 font-bold">Orchestrator</div><div class="font-bold mt-1">編排者</div><div class="text-xs text-stone-500 mt-1">意圖辨識 + 派工 + 整合</div></div>
+      <div class="bg-white rounded-xl border border-stone-200 p-4"><div class="text-xs font-bold" style="color:var(--blue)">Tech</div><div class="font-bold mt-1">技術 Agent</div><div class="text-xs text-stone-500 mt-1">規格、認證、替代料</div></div>
+      <div class="bg-white rounded-xl border border-stone-200 p-4"><div class="text-xs font-bold text-stone-700">Sales</div><div class="font-bold mt-1">銷售 Agent</div><div class="text-xs text-stone-500 mt-1">Lead 分類、推薦、報價</div></div>
+      <div class="bg-white rounded-xl border border-stone-200 p-4"><div class="text-xs font-bold text-emerald-700">ESG</div><div class="font-bold mt-1">ESG Agent</div><div class="text-xs text-stone-500 mt-1">CBAM、ISO、客戶問卷</div></div>
+      <div class="bg-white rounded-xl border border-stone-200 p-4"><div class="text-xs font-bold text-purple-700">Image</div><div class="font-bold mt-1">圖搜圖</div><div class="text-xs text-stone-500 mt-1">外型 / Pin / 相似料</div></div>
+      <div class="bg-white rounded-xl border border-stone-200 p-4"><div class="text-xs font-bold text-cyan-700">X-Ref</div><div class="font-bold mt-1">替代料 Agent</div><div class="text-xs text-stone-500 mt-1">規格比對、風險分級</div></div>
+      <div class="bg-white rounded-xl border border-stone-200 p-4"><div class="text-xs font-bold text-rose-700">Quote</div><div class="font-bold mt-1">報價 Agent</div><div class="text-xs text-stone-500 mt-1">毛利檢查、人工關卡</div></div>
+      <div class="bg-white rounded-xl border-2 p-4" style="border-color:#fbbf24"><div class="text-xs text-amber-700 font-bold">v2.0 NEW</div><div class="font-bold mt-1">行銷 Agent</div><div class="text-xs text-stone-500 mt-1">內容生成、多語、Lead 培育</div></div>
+      <div class="bg-white rounded-xl border-2 p-4" style="border-color:#fbbf24"><div class="text-xs text-amber-700 font-bold">v2.0 NEW</div><div class="font-bold mt-1">品牌語調</div><div class="text-xs text-stone-500 mt-1">CIS 一致性審查</div></div>
+      <div class="bg-white rounded-xl border-2 p-4" style="border-color:#fbbf24"><div class="text-xs text-amber-700 font-bold">v2.0 NEW</div><div class="font-bold mt-1">營運維運</div><div class="text-xs text-stone-500 mt-1">異常監測、自動修復</div></div>
+    </div>
+
+    <!-- Fine-tune 5 階段 -->
+    <div class="bg-white rounded-xl border border-stone-200 p-6">
+      <div class="text-xs tracking-widest text-stone-500 mb-3">FINE-TUNE PIPELINE · Agent 微調 5 階段</div>
+      <div class="grid md:grid-cols-5 gap-3 text-sm">
+        <div class="border-l-4 pl-3" style="border-color:var(--red)">
+          <div class="text-xs font-bold text-red-700">Step 1</div>
+          <div class="font-bold mt-1">基礎建構</div>
+          <div class="text-xs text-stone-600 mt-1">RAG 知識庫初版、Prompt v1、來源引用機制</div>
+        </div>
+        <div class="border-l-4 pl-3" style="border-color:var(--red)">
+          <div class="text-xs font-bold text-red-700">Step 2</div>
+          <div class="font-bold mt-1">Shadow Mode</div>
+          <div class="text-xs text-stone-600 mt-1">舊網站流量平行跑，比對業務實際決策</div>
+        </div>
+        <div class="border-l-4 pl-3" style="border-color:var(--red)">
+          <div class="text-xs font-bold text-red-700">Step 3</div>
+          <div class="font-bold mt-1">Prompt 迭代</div>
+          <div class="text-xs text-stone-600 mt-1">收集 thumbs up/down、修正 hallucination、補 RAG 缺漏</div>
+        </div>
+        <div class="border-l-4 pl-3" style="border-color:var(--red)">
+          <div class="text-xs font-bold text-red-700">Step 4</div>
+          <div class="font-bold mt-1">閾值驗收</div>
+          <div class="text-xs text-stone-600 mt-1">準確率 ≥ 85% / 引用率 100% / 業務滿意度 ≥ 4/5</div>
+        </div>
+        <div class="border-l-4 pl-3" style="border-color:var(--red)">
+          <div class="text-xs font-bold text-red-700">Step 5</div>
+          <div class="font-bold mt-1">上線 + 監控</div>
+          <div class="text-xs text-stone-600 mt-1">逐步釋出流量、Ops Agent 異常監測</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== 製造業 AI 延伸應用 ======== -->
+<section id="mfg-ai" class="bg-white py-20">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-10">
+      <div class="lg:col-span-4">
+        <div class="section-num">10</div>
+        <h2 class="text-3xl font-black font-display mt-2">製造業 AI 延伸應用</h2>
+        <p class="text-stone-500 mt-1">Manufacturing AI Extension Models</p>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-stone-700 leading-relaxed">基於 WF AIGP、MES/CMS、Azure Fabric Data Lake 與本網站 Multi-Agent，推薦 10 個製造業可優化生產的 AI 延伸應用模型。建議分批導入：高 ROI / 低風險者優先。</p>
+        <p class="text-xs text-stone-500 mt-2"><span class="verify-tag verify-inferred">推論</span> 模型選擇與排序為基於業界常見實踐之建議；實際採用須由工廠主管與 IT 評估資料可得性與 ROI。</p>
+      </div>
+    </div>
+
+    <table class="cis">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>應用模型</th>
+          <th>用途</th>
+          <th>資料來源</th>
+          <th>ROI</th>
+          <th>風險</th>
+          <th>建議導入期</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1</strong></td>
+          <td><strong>預測性維護 Predictive Maintenance</strong><br /><span class="text-xs text-stone-500">設備感測器 + 時序模型</span></td>
+          <td>預測 SMT、注塑機、線材機台故障時間，降低非計畫停機</td>
+          <td>MES + IoT 感測器</td>
+          <td><span class="text-emerald-700 font-bold">高</span></td>
+          <td><span class="text-amber-700">中</span></td>
+          <td>Phase 2-3</td>
+        </tr>
+        <tr>
+          <td><strong>2</strong></td>
+          <td><strong>AI 視覺品檢 AI Visual Inspection</strong><br /><span class="text-xs text-stone-500">YOLO / 自訂 CNN</span></td>
+          <td>連接器外觀 / 線材包覆 / FFC 端子瑕疵自動辨識</td>
+          <td>產線高解析相機</td>
+          <td><span class="text-emerald-700 font-bold">高</span></td>
+          <td><span class="text-emerald-700">低</span></td>
+          <td>Phase 2</td>
+        </tr>
+        <tr>
+          <td><strong>3</strong></td>
+          <td><strong>智能產能排程 Smart Scheduling</strong><br /><span class="text-xs text-stone-500">RL + 啟發式優化</span></td>
+          <td>多工廠（東莞/蘇州/越南/寮國）跨廠訂單排程，降低交期</td>
+          <td>ERP 訂單 + MES 產能</td>
+          <td><span class="text-emerald-700 font-bold">高</span></td>
+          <td><span class="text-amber-700">中高</span></td>
+          <td>Phase 3-4</td>
+        </tr>
+        <tr>
+          <td><strong>4</strong></td>
+          <td><strong>能源優化 Energy Optimization</strong><br /><span class="text-xs text-stone-500">時序預測 + 控制策略</span></td>
+          <td>製程能耗監測 + 預測 + 動態調整，配合 ISO 50001 與 CBAM</td>
+          <td>sCMS 智碳雲 + 電錶 IoT</td>
+          <td><span class="text-emerald-700 font-bold">高</span></td>
+          <td><span class="text-emerald-700">低</span></td>
+          <td>Phase 1（自家 sCMS 已有）</td>
+        </tr>
+        <tr>
+          <td><strong>5</strong></td>
+          <td><strong>供應鏈風險預警 SC Risk</strong><br /><span class="text-xs text-stone-500">外部數據 + 異常偵測</span></td>
+          <td>供應商延遲、缺料、地緣政治風險早期預警</td>
+          <td>ERP 採購 + 外部新聞 / 法規 RSS</td>
+          <td><span class="text-amber-700">中</span></td>
+          <td><span class="text-amber-700">中</span></td>
+          <td>Phase 3</td>
+        </tr>
+        <tr>
+          <td><strong>6</strong></td>
+          <td><strong>客訴根因分析 Complaint Root-Cause</strong><br /><span class="text-xs text-stone-500">LLM + 多模態</span></td>
+          <td>客訴自動歸類 + 連結 MES 批號 + 推測根因 + 改善建議</td>
+          <td>D365 客服 + MES 批號 + 文件</td>
+          <td><span class="text-emerald-700 font-bold">高</span></td>
+          <td><span class="text-emerald-700">低</span></td>
+          <td>Phase 2</td>
+        </tr>
+        <tr>
+          <td><strong>7</strong></td>
+          <td><strong>智能工安 / 工人姿態</strong><br /><span class="text-xs text-stone-500">CV + 邊緣 AI</span></td>
+          <td>未戴安全帽、手部過近高速設備、跌倒偵測，即時告警</td>
+          <td>廠區監控攝影機</td>
+          <td><span class="text-amber-700">中</span></td>
+          <td><span class="text-amber-700">中（隱私）</span></td>
+          <td>Phase 4</td>
+        </tr>
+        <tr>
+          <td><strong>8</strong></td>
+          <td><strong>ESG 數據 AI 報表 ESG AI Reporting</strong><br /><span class="text-xs text-stone-500">LLM + 結構化擷取</span></td>
+          <td>自動生成 ISO 14064 / 14067 / CBAM 報告草稿，引用真實感測數據</td>
+          <td>sCMS + Azure Fabric</td>
+          <td><span class="text-emerald-700 font-bold">高</span></td>
+          <td><span class="text-emerald-700">低</span></td>
+          <td>Phase 3（與 sCMS 連動）</td>
+        </tr>
+        <tr>
+          <td><strong>9</strong></td>
+          <td><strong>智能採購 / 議價 Sourcing AI</strong><br /><span class="text-xs text-stone-500">LLM + 市場資料</span></td>
+          <td>同等規格替代料推薦、價格基準比對、議價建議</td>
+          <td>ERP 採購歷史 + 市場 API</td>
+          <td><span class="text-amber-700">中</span></td>
+          <td><span class="text-amber-700">中</span></td>
+          <td>Phase 4</td>
+        </tr>
+        <tr>
+          <td><strong>10</strong></td>
+          <td><strong>產品設計 AI 助手 Design Copilot</strong><br /><span class="text-xs text-stone-500">LLM + CAD/EDA 整合</span></td>
+          <td>RD 設計連接器 / FFC / Cable 時，AI 從歷史專案推薦規格、避免重蹈問題</td>
+          <td>SharePoint 設計文件 + 專利庫</td>
+          <td><span class="text-amber-700">中</span></td>
+          <td><span class="text-amber-700">中高</span></td>
+          <td>Phase 5</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- 推薦優先順序 -->
+    <div class="mt-8 grid md:grid-cols-3 gap-4">
+      <div class="bg-emerald-50 rounded-xl p-5 border border-emerald-200">
+        <div class="text-xs font-bold text-emerald-700 mb-1">★ 高優先（Phase 1-2）</div>
+        <p class="text-sm text-stone-700 mt-2 leading-relaxed">能源優化（自家 sCMS 已有現成）、AI 視覺品檢、客訴根因分析 — 高 ROI 低風險，快速證明價值。</p>
+      </div>
+      <div class="bg-amber-50 rounded-xl p-5 border border-amber-200">
+        <div class="text-xs font-bold text-amber-700 mb-1">中優先（Phase 3-4）</div>
+        <p class="text-sm text-stone-700 mt-2 leading-relaxed">預測性維護、智能排程、供應鏈風險、ESG AI 報表 — 投入較大但戰略價值高。</p>
+      </div>
+      <div class="bg-stone-100 rounded-xl p-5 border border-stone-300">
+        <div class="text-xs font-bold text-stone-700 mb-1">後期（Phase 5+）</div>
+        <p class="text-sm text-stone-700 mt-2 leading-relaxed">智能工安、智能採購、設計 Copilot — 需更多前置基礎建設與資料治理。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== 7 大討論 + 9 決策 ======== -->
+<section id="decisions" class="bg-stone-50 py-20">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-10">
+      <div class="lg:col-span-4">
+        <div class="section-num">9</div>
+        <h2 class="text-3xl font-black font-display mt-2">會議決策清單</h2>
+        <p class="text-stone-500 mt-1">9 Decisions · 7 Discussion Areas</p>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-stone-700 leading-relaxed">下列 9 條決策必須在啟動 Phase 1 前確認；7 大討論面向覆蓋架構、前台、內網、AI、整合、ESG、資安。</p>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-5">
+      <!-- 9 決策 -->
+      <div class="bg-white rounded-xl p-6 border border-stone-200">
+        <div class="text-xs tracking-widest mb-3" style="color:var(--red)">9 KEY DECISIONS · 9 條決策</div>
+        <ol class="space-y-2 text-sm">
+          <li class="flex gap-2"><span class="font-bold flex-shrink-0" style="color:var(--red)">1.</span>第一階段範圍是否確認？</li>
+          <li class="flex gap-2"><span class="font-bold flex-shrink-0" style="color:var(--red)">2.</span>系統主資料來源是否確認？</li>
+          <li class="flex gap-2"><span class="font-bold flex-shrink-0" style="color:var(--red)">3.</span>API 串接責任邊界是否確認？</li>
+          <li class="flex gap-2"><span class="font-bold flex-shrink-0" style="color:var(--red)">4.</span>AI 功能是否分 MVP 與進階版？</li>
+          <li class="flex gap-2"><span class="font-bold flex-shrink-0" style="color:var(--red)">5.</span>報價是否採「規則 + AI 建議 + 人工審核」？</li>
+          <li class="flex gap-2"><span class="font-bold flex-shrink-0" style="color:var(--red)">6.</span>ERP 是否第一期只讀不寫？</li>
+          <li class="flex gap-2"><span class="font-bold flex-shrink-0" style="color:var(--red)">7.</span>EAP 是否只導流不重做？</li>
+          <li class="flex gap-2"><span class="font-bold flex-shrink-0" style="color:var(--red)">8.</span>企業微信是否列後期？</li>
+          <li class="flex gap-2"><span class="font-bold flex-shrink-0" style="color:var(--red)">9.</span>UAT 與壓測標準、SLA 是否確認？</li>
+        </ol>
+      </div>
+      <!-- 7 討論 -->
+      <div class="bg-white rounded-xl p-6 border border-stone-200">
+        <div class="text-xs tracking-widest text-stone-500 mb-3">7 DISCUSSION AREAS · 7 大討論</div>
+        <div class="space-y-2 text-sm">
+          <div class="flex gap-2"><span class="font-bold text-stone-500 flex-shrink-0">1.</span>架構面 — API-first / Integration / Azure AD / 重做防範</div>
+          <div class="flex gap-2"><span class="font-bold text-stone-500 flex-shrink-0">2.</span>前台網站 — 多品牌 / 產品搜尋 / RFQ / 多語 / SEO</div>
+          <div class="flex gap-2"><span class="font-bold text-stone-500 flex-shrink-0">3.</span>內網管理 — BU 維護 / 文件審核 / 報價規則 / 權限</div>
+          <div class="flex gap-2"><span class="font-bold text-stone-500 flex-shrink-0">4.</span>AI 模組 — RAG 來源 / 引用 / 多語 / 圖搜訓練 / 審核</div>
+          <div class="flex gap-2"><span class="font-bold text-stone-500 flex-shrink-0">5.</span>ERP / D365 / M365 整合 — API / 頻率 / 欄位對應</div>
+          <div class="flex gap-2"><span class="font-bold text-stone-500 flex-shrink-0">6.</span>ESG / EAP — 資料連結 / 導流 / 模板 / 登入獨立性</div>
+          <div class="flex gap-2"><span class="font-bold text-stone-500 flex-shrink-0">7.</span>資安 / 稽核 — Azure AD / NDA / 跨境 / Audit Log / WAF</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== KPI ======== -->
+<section id="kpi" class="bg-white py-20">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="grid lg:grid-cols-12 gap-10 mb-10">
+      <div class="lg:col-span-4">
+        <div class="section-num">KPI</div>
+        <h2 class="text-3xl font-black font-display mt-2">驗收標準與里程碑</h2>
+        <p class="text-stone-500 mt-1">KPI & Milestones</p>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-stone-700 leading-relaxed">每個 Phase 設「上線必達」（Must）與「進階指標」（Stretch）；切換上線需三軌 KPI 同步達標。</p>
+      </div>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-5">
+      <div class="bg-stone-50 rounded-xl p-5 border border-stone-200">
+        <div class="text-xs font-bold text-red-700 mb-2">Phase 1 MVP 驗收</div>
+        <ul class="text-sm space-y-1.5 text-stone-700">
+          <li>· 平均頁面載入 ≤ 2.5s（行動 ≤ 3s）</li>
+          <li>· RFQ 表單轉換率 ≥ 1.5%</li>
+          <li>· D365 Lead 寫入成功率 ≥ 99.5%</li>
+          <li>· SharePoint 文件下載 SLA ≥ 99%</li>
+          <li>· AI 答對率（基本問題）≥ 80%</li>
+          <li>· Audit Log 完整率 100%</li>
+        </ul>
+      </div>
+      <div class="bg-stone-50 rounded-xl p-5 border border-stone-200">
+        <div class="text-xs font-bold text-blue-700 mb-2">Multi-Agent 上線閾值</div>
+        <ul class="text-sm space-y-1.5 text-stone-700">
+          <li>· 來源引用率 100%（無 hallucination）</li>
+          <li>· 業務滿意度 ≥ 4/5（thumbs up/down）</li>
+          <li>· 答對率 ≥ 85%（vs 業務實際決策）</li>
+          <li>· 平均回覆時間 ≤ 5s</li>
+          <li>· 越權拒絕率 100%（NDA / 跨境）</li>
+        </ul>
+      </div>
+      <div class="bg-stone-50 rounded-xl p-5 border border-stone-200">
+        <div class="text-xs font-bold text-emerald-700 mb-2">商業 KPI（12 個月後）</div>
+        <ul class="text-sm space-y-1.5 text-stone-700">
+          <li>· 全球 Lead +30%（vs 舊網站）</li>
+          <li>· RFQ 轉換率 +20%</li>
+          <li>· 業務人均產出 +15%</li>
+          <li>· 客戶 ESG 問卷回覆時間 -50%</li>
+          <li>· 呆滯庫存周轉 +25%</li>
+          <li>· 客訴根因解決時間 -40%</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 風險 -->
+    <div class="mt-8 bg-rose-50 rounded-xl p-6 border border-rose-200">
+      <div class="text-xs tracking-widest mb-3" style="color:var(--red)">RISK & MITIGATION · 風險與緩解</div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-3 text-sm">
+        <div class="bg-white p-3 rounded-lg border border-rose-200">
+          <div class="font-bold text-rose-700">範圍蔓延</div>
+          <div class="text-xs text-stone-600 mt-1">嚴守第一期不做清單；變更需董事會批准</div>
+        </div>
+        <div class="bg-white p-3 rounded-lg border border-rose-200">
+          <div class="font-bold text-rose-700">廠商依賴</div>
+          <div class="text-xs text-stone-600 mt-1">5 分包獨立可換、API 標準化、文件交付</div>
+        </div>
+        <div class="bg-white p-3 rounded-lg border border-rose-200">
+          <div class="font-bold text-rose-700">AI 幻覺</div>
+          <div class="text-xs text-stone-600 mt-1">強制來源引用 + Human-in-the-loop + 月度評估</div>
+        </div>
+        <div class="bg-white p-3 rounded-lg border border-rose-200">
+          <div class="font-bold text-rose-700">資料品質</div>
+          <div class="text-xs text-stone-600 mt-1">Phase 0 盤點優先；BU owner 簽字背書</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== NEXT STEPS ======== -->
+<section class="py-20 text-white red-bg">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="text-center mb-10">
+      <div class="text-xs tracking-[0.4em] text-red-200 mb-3">NEXT 30 DAYS · 30 天行動</div>
+      <h2 class="text-4xl font-black font-display">啟動會議決策事項</h2>
+      <p class="text-red-100 mt-2 text-lg">由董事長兼永續長 楊超群 召集，永續聯辦公室作為 PM 辦公室主持</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20">
+        <div class="text-3xl font-black text-red-200">D+7</div>
+        <div class="font-bold mt-2">啟動會議</div>
+        <p class="text-sm text-red-100 mt-2">召集 IT、Marketing、ESG、各 BU、AI 治理；決議 9 條決策清單</p>
+      </div>
+      <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20">
+        <div class="text-3xl font-black text-red-200">D+14</div>
+        <div class="font-bold mt-2">分包詢價</div>
+        <p class="text-sm text-red-100 mt-2">A/B/C/D/E 5 包向 3-5 家廠商發 RFP；AI 治理委員會成立</p>
+      </div>
+      <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20">
+        <div class="text-3xl font-black text-red-200">D+21</div>
+        <div class="font-bold mt-2">Phase 0 啟動</div>
+        <p class="text-sm text-red-100 mt-2">需求盤點 + 系統架構圖 + API 初版清單；資料 owner 簽字</p>
+      </div>
+      <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20">
+        <div class="text-3xl font-black text-red-200">D+30</div>
+        <div class="font-bold mt-2">Phase 1 動工</div>
+        <p class="text-sm text-red-100 mt-2">A/B 包簽約啟動；C 包 RAG 知識庫建構；舊網站凍結新功能</p>
+      </div>
+    </div>
+
+    <div class="mt-10 bg-black/30 rounded-xl p-6 border border-white/20">
+      <div class="text-xs tracking-widest text-red-200 mb-3">CHAIRMAN'S DIRECTIVE · 董事長指令</div>
+      <p class="text-xl font-black font-display leading-tight mb-3">
+        「永續聯辦公室同步擔任 2026 改造 PM 辦公室；CIS 規範 v1.1 為強制規範；Phase 1 MVP 上線目標 6 個月；製造業 AI 延伸應用模型按優先順序啟動 PoC。」
+      </p>
+      <p class="text-sm text-red-200">— 楊超群　Steve Yang　董事長兼永續長</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======== FOOTER ======== -->
+<footer class="bg-stone-900 text-stone-400 py-10">
+  <div class="max-w-7xl mx-auto px-8 grid md:grid-cols-4 gap-6 mb-6">
+    <div>
+      <div class="flex items-center gap-3 mb-3">
+        <div class="w-9 h-9 rounded-md flex items-center justify-center text-white font-bold" style="background:var(--red)">瀚</div>
+        <span class="text-white font-bold">瀚荃集團</span>
+      </div>
+      <p class="text-xs leading-relaxed">2026 改造工作任務書 v1.0<br />Connect the World · Conserve the Earth</p>
+    </div>
+    <div>
+      <div class="text-xs font-semibold text-stone-200 mb-3">引用文件</div>
+      <ul class="space-y-1 text-xs">
+        <li>· 網站模組化分段開發實施步驟討論項目（內部）</li>
+        <li>· 瀚荃集團 AI 數位營運與全球行銷平台規劃書</li>
+        <li>· 2026 集團簡介中英文版</li>
+        <li>· 集團 6 份原始 CIS 文件</li>
+        <li>· 鼎新 WF AIGP <span class="verify-tag verify-inferred">推論</span></li>
+      </ul>
+    </div>
+    <div>
+      <div class="text-xs font-semibold text-stone-200 mb-3">配套技能</div>
+      <ul class="space-y-1 text-xs">
+        <li>· hannstar-brand-cis v1.1（CIS 規範）</li>
+        <li>· enterprise-ai-platform-website（網站架構）</li>
+        <li>· cvilux-doc-organizer（文件管理）</li>
+      </ul>
+    </div>
+    <div>
+      <div class="text-xs font-semibold text-stone-200 mb-3">主導</div>
+      <ul class="space-y-1 text-xs">
+        <li>· 楊超群 董事長兼永續長</li>
+        <li>· Let's ESG 永續聯辦公室（兼 PM 辦公室）</li>
+        <li>· 楊奕廣 CEO 督導</li>
+      </ul>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto px-8 pt-4 border-t border-stone-800 flex flex-col md:flex-row justify-between gap-2 text-xs">
+    <div>© 2026 CviLux Group · 內部規範文件</div>
+    <div class="text-stone-500">v1.0 · 2026-05-03 · 後續每階段檢核更新</div>
+  </div>
+</footer>
+
+<script>if(window.lucide)lucide.createIcons();</script>
+</body>
+</html>
